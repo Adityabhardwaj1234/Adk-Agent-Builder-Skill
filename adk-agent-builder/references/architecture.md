@@ -1,6 +1,8 @@
 # Architecture and multi-agent orchestration (ADK 2.x, Python)
 
-All snippets below were instantiated against google-adk 2.12.0. Use `MODEL = "gemini-flash-latest"` or the exact id that `adk create` wrote into `agent.py`.
+All snippets below were instantiated against google-adk 2.12.0 and the import paths re-verified against the installed package. Use `MODEL = "gemini-flash-latest"` or the exact id that `adk create` wrote into `agent.py`.
+
+Companion references: `data-memory-skills.md` (state, databases, memory, ADK Skills, MCP, guardrails), `evaluation.md` (test specs and scoring), `pitfalls.md` (verified gotchas), `deployment.md` (shipping the agent).
 
 ## Contents
 1. Decision table

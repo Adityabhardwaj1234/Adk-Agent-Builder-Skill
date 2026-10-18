@@ -5,16 +5,36 @@ Pipeline
   1. introspect the app (import it in the venv) -> agent tree, tools, input/output schemas
   2. start `adk api_server` (SQLite sessions) and wait for /health   (or reuse --base-url)
   3. run every test from a JSON spec through POST /run on a fresh session per test
-       - inputs follow the agent's input schema (JSON object) or are plain text
-       - raw events, final response, tool calls, agents involved, state, latency, tokens are stored
+        - inputs follow the agent's input schema (JSON object) or are plain text
+        - raw events, final response, tool calls, agents involved, state, latency, tokens are stored
   4. evaluate deterministic expectations, classify failures, score requirements and categories
   5. write results.json, report.md, transcripts.md, raw/<test>.json, server.log, agent_schema.json
 
 Standard library only. Run it with any Python 3.10+; the app itself is imported with the venv python.
 
+Free-tier pacing (the part that makes real runs pass)
+  A free Gemini key allows only a handful of requests per minute, and a throttled
+  request surfaces from the API server as a bare ``/run HTTP 500``. Left alone,
+  that is misclassified as an agent bug and the run collapses into a wall of
+  false failures. Two flags fix that without touching the spec:
+
+    --min-interval S     sleep S seconds between tests (spreads the quota;
+                         e.g. --min-interval 13 keeps a 5 requests/minute key under its cap)
+    --retry-infra N      when a test fails for an *infrastructure* reason
+                         (network blip, quota), wait --retry-wait * 2^attempt and
+                         run it again, up to N extra times. Auth and model-name
+                         failures are never retried - they need a fix, not patience.
+
+  In addition, when a failed test spent zero tokens and the server log window for
+  that test contains quota markers (RESOURCE_EXHAUSTED / 429 / high demand), the
+  failure is reclassified from AGENT_RUNTIME_ERROR to QUOTA_OR_RATE_LIMIT. The
+  log is read from the server this script started, or from ``--server-log PATH``
+  when you pass ``--base-url`` for an already-running server.
+
 Typical use
   python testing.py --workspace ws --app my_app --init-spec          # writes introspection + skeleton spec
   python testing.py --workspace ws --app my_app --spec ws/adk_runs/spec.json
+  python testing.py --workspace ws --app my_app --spec spec.json --repeat 2 --min-interval 13 --retry-infra 2
 Exit codes: 0 all MUST tests pass, 1 test failures, 2 infrastructure blocked (network/auth/quota/model),
             3 app cannot be imported or server could not start, 4 bad spec/arguments.
 
@@ -99,6 +119,12 @@ print("@@ADKJSON@@" + json.dumps(out, default=str))
 '''
 
 INFRA_CLASSES = {"INFRA_NETWORK", "AUTH_INVALID_KEY", "QUOTA_OR_RATE_LIMIT", "MODEL_NOT_FOUND"}
+# Retried by --retry-infra: transient conditions that can heal by waiting.
+RETRYABLE_CLASSES = {"INFRA_NETWORK", "QUOTA_OR_RATE_LIMIT"}
+# Evidence that the *server* was throttled, even though the client only saw HTTP 500.
+QUOTA_LOG_MARKERS = re.compile(
+    r"RESOURCE_EXHAUSTED|429\s|quota exceeded|_ResourceExhaustedError|"
+    r"503 UNAVAILABLE|UNAVAILABLE:|high demand", re.I)
 
 
 # ------------------------------------------------------------------ helpers
@@ -189,6 +215,25 @@ def subset(small, big) -> bool:
     if isinstance(small, list):
         return isinstance(big, list) and all(any(subset(s, b) for b in big) for s in small)
     return small == big
+
+
+def log_size(path: Path | None) -> int:
+    """Byte offset of the end of a log file (0 when missing) - used to isolate one test's window."""
+    try:
+        return path.stat().st_size if path else 0
+    except OSError:
+        return 0
+
+
+def log_window(path: Path | None, offset: int) -> str:
+    if path is None:  # external --base-url mode without --server-log
+        return ""
+    try:
+        with open(path, "r", encoding="utf-8", errors="replace") as fh:
+            fh.seek(offset)
+            return fh.read()
+    except OSError:
+        return ""
 
 
 # ------------------------------------------------------------------ events
@@ -331,7 +376,10 @@ class Server:
         self.base = f"http://127.0.0.1:{port}"
         self.log_path = out / "server.log"
         self.proc = None
-        self.cmd = [venv_adk(ws), "api_server", "--port", str(port), "--session_service_uri", session_uri] + extra + [str(ws)]
+        # --no-reload: a test run never edits files, and skipping the reloader
+        # avoids an extra child process to clean up (forced off on Windows anyway).
+        self.cmd = [venv_adk(ws), "api_server", "--port", str(port), "--no-reload",
+                    "--session_service_uri", session_uri] + extra + [str(ws)]
 
     def start(self, timeout: float = 90) -> tuple[bool, str]:
         self.logf = open(self.log_path, "w")
@@ -427,6 +475,7 @@ def run_test(base: str, app: str, test: dict, input_schema, run_idx: int, timeou
     if st != 200:
         rec["http_error"] = f"create session HTTP {st}: {raw[:300]}"
         rec["run"] = parse_events([])
+        rec["run"]["http_error"] = rec["http_error"]
         rec["state"] = {}
         rec["latency_total"] = 0.0
         return rec
@@ -470,6 +519,65 @@ def run_test(base: str, app: str, test: dict, input_schema, run_idx: int, timeou
     return rec
 
 
+def execute_test_with_retries(base: str, app: str, test: dict, input_schema, run_idx: int, args,
+                             out: Path, log_path: Path | None, server: "Server | None") -> dict:
+    """Run one test (repeats handled by caller); retry transient infra failures.
+
+    The final attempt is returned and written to raw/<id>__run<i>.json. Earlier
+    attempts, when retries happened, are kept as raw/<id>__run<i>__try<n>.json so
+    the evidence for a flake is never lost.
+    """
+    attempts: list[dict] = []
+    attempt = 0
+    while True:
+        offset = log_size(log_path)
+        rec = run_test(base, app, test, input_schema, run_idx, args.timeout)
+        rec["checks"] = evaluate(test.get("expect", {}), rec["run"], rec["state"], rec["latency_total"])
+        blob = rec["http_error"] + " ".join(rec["run"]["errors"]) + " ".join(x.get("error_body", "") for x in rec["turns"])
+        failed = [c for c in rec["checks"] if not c["ok"]]
+        # Append the server log tail only when the run shows runtime/HTTP
+        # evidence. For a pure assertion failure the tail could contain another
+        # test's quota lines and misclassify a real behaviour bug as infra.
+        runtime_evidence = bool(rec["http_error"] or rec["run"]["errors"])
+        fclass = classify(blob + (server.tail(60) if (server and runtime_evidence) else ""))
+        if failed and not fclass and (rec["http_error"] or rec["run"]["errors"]):
+            fclass = "AGENT_RUNTIME_ERROR"
+
+        # Quota reclassification: the API server turns throttling into a bare
+        # HTTP 500, so only the server log tells the truth. A test that spent
+        # zero tokens while the log window says "quota" failed because of the
+        # environment, not because of the agent.
+        reclassified = False
+        if failed and fclass in (None, "AGENT_RUNTIME_ERROR") and rec["run"]["tokens"] == 0 and log_path:
+            if QUOTA_LOG_MARKERS.search(log_window(log_path, offset)):
+                fclass = "QUOTA_OR_RATE_LIMIT"
+                reclassified = True
+
+        rec["passed"] = not failed
+        rec["failure_class"] = None if not failed else (
+            "SPEC_INPUT_INVALID" if rec["http_error"].startswith("SPEC_INPUT_INVALID")
+            else fclass or ("AGENT_RUNTIME_ERROR" if (rec["http_error"] or rec["run"]["errors"]) else "ASSERTION_FAILED"))
+        rec["reclassified"] = reclassified
+        attempts.append(rec)
+
+        if rec["failure_class"] in RETRYABLE_CLASSES and attempt < args.retry_infra:
+            wait = args.retry_wait * (2 ** attempt)
+            print(f"[testing]   {test['id']}: {rec['failure_class']} - retrying in {wait:.0f}s "
+                  f"(attempt {attempt + 2}/{args.retry_infra + 1})")
+            time.sleep(wait)
+            attempt += 1
+            continue
+        break
+
+    final = attempts[-1]
+    final["attempts"] = len(attempts)
+    final["retries"] = len(attempts) - 1
+    for i, att in enumerate(attempts[:-1]):
+        (out / "raw" / f"{test['id']}__run{run_idx}__try{i + 1}.json").write_text(json.dumps(att, indent=2, default=str))
+    (out / "raw" / f"{test['id']}__run{run_idx}.json").write_text(json.dumps(final, indent=2, default=str))
+    return final
+
+
 def pctl(vals, p):
     if not vals:
         return 0.0
@@ -490,6 +598,14 @@ def main() -> int:
     ap.add_argument("--timeout", type=float, default=120, help="Seconds per /run call")
     ap.add_argument("--session-uri", default=None, help="Session service URI (default sqlite in output dir)")
     ap.add_argument("--server-arg", action="append", default=[], help="Extra arg passed to `adk api_server` (repeatable)")
+    ap.add_argument("--server-log", default=None,
+                    help="Server log to scan for quota evidence when using --base-url")
+    ap.add_argument("--min-interval", type=float, default=0.0,
+                    help="Sleep this many seconds between tests (pace free-tier keys; e.g. 13 for 5 rpm)")
+    ap.add_argument("--retry-infra", type=int, default=0,
+                    help="Retry a test that failed for a transient infra reason (network/quota), up to N extra times")
+    ap.add_argument("--retry-wait", type=float, default=30.0,
+                    help="Base wait before an infra retry; doubles per attempt (default 30s)")
     ap.add_argument("--export-evalset", action="store_true", help="Write an ADK evalset from passing runs for `adk eval`")
     ap.add_argument("--pass-threshold", type=float, default=0.9, help="Overall pass rate needed for verdict PASS")
     args = ap.parse_args()
@@ -545,7 +661,10 @@ def main() -> int:
                                                            "server_log_tail": server.tail()}, indent=2))
             return 3
         base = server.base
+    log_path = server.log_path if server else (Path(args.server_log).resolve() if args.server_log else None)
     print(f"[testing] server up at {base}")
+    if args.min_interval:
+        print(f"[testing] pacing: sleeping {args.min_interval:.0f}s between tests")
 
     code = 1
     try:
@@ -559,33 +678,19 @@ def main() -> int:
         input_schema = root_input_schema(info["tree"])
 
         results = []
-        for t in spec["tests"]:
+        for t_idx, t in enumerate(spec["tests"]):
             runs = []
             for i in range(args.repeat):
-                rec = run_test(base, app, t, input_schema, i, args.timeout)
-                rec["checks"] = evaluate(t.get("expect", {}), rec["run"], rec["state"], rec["latency_total"])
-                blob = rec["http_error"] + " ".join(rec["run"]["errors"]) + " ".join(x.get("error_body", "") for x in rec["turns"])
-                fclass = classify(blob + (server.tail(60) if (server and not all(c["ok"] for c in rec["checks"])) else ""))
-                failed = [c for c in rec["checks"] if not c["ok"]]
-                rec["passed"] = not failed
-                rec["failure_class"] = None
-                if failed:
-                    if rec["http_error"].startswith("SPEC_INPUT_INVALID"):
-                        rec["failure_class"] = "SPEC_INPUT_INVALID"
-                    elif fclass:
-                        rec["failure_class"] = fclass
-                    elif rec["http_error"] or rec["run"]["errors"]:
-                        rec["failure_class"] = "AGENT_RUNTIME_ERROR"
-                    else:
-                        rec["failure_class"] = "ASSERTION_FAILED"
+                rec = execute_test_with_retries(base, app, t, input_schema, i, args, out, log_path, server)
                 runs.append(rec)
-                (out / "raw" / f"{t['id']}__run{i}.json").write_text(json.dumps(rec, indent=2, default=str))
             n_pass = sum(r["passed"] for r in runs)
             results.append({"test_id": t["id"], "category": t.get("category", "functional"),
                             "severity": t.get("severity", "must"), "requirement_ids": t.get("requirement_ids", []),
                             "description": t.get("description", ""), "runs": len(runs), "passes": n_pass,
                             "passed": n_pass == len(runs), "flaky": 0 < n_pass < len(runs),
                             "failure_class": next((r["failure_class"] for r in runs if r["failure_class"]), None),
+                            "retries": sum(r.get("retries", 0) for r in runs),
+                            "reclassified": any(r.get("reclassified") for r in runs),
                             "failed_checks": [{"check": c["check"], "detail": c["detail"], "hint": hint_for(c["check"])}
                                               for r in runs for c in r["checks"] if not c["ok"]][:8],
                             "latency_s": [r["latency_total"] for r in runs],
@@ -594,7 +699,10 @@ def main() -> int:
                             "final_response": runs[0]["run"]["final_text"][:1200],
                             "first_user_input": runs[0]["turns"][0]["user"] if runs[0]["turns"] else ""})
             mark = "PASS" if results[-1]["passed"] else f"FAIL[{results[-1]['failure_class']}]"
-            print(f"[testing] {t['id']:<28} {mark}")
+            extra = f" (retried x{results[-1]['retries']})" if results[-1]["retries"] else ""
+            print(f"[testing] {t['id']:<28} {mark}{extra}")
+            if args.min_interval and t_idx < len(spec["tests"]) - 1:
+                time.sleep(args.min_interval)
 
         # ---- scoring
         total = len(results)
@@ -629,7 +737,10 @@ def main() -> int:
             verdict = "NEEDS_FIX"
         summary = {"verdict": verdict, "app": app, "tests_total": total, "tests_passed": passed, "pass_rate": round(rate, 3),
                    "must_total": len(must), "must_passed": must_pass,
-                   "flaky": [r["test_id"] for r in results if r["flaky"]], "by_category": by_cat,
+                   "flaky": [r["test_id"] for r in results if r["flaky"]],
+                   "retried": [r["test_id"] for r in results if r["retries"]],
+                   "quota_reclassified": [r["test_id"] for r in results if r["reclassified"]],
+                   "by_category": by_cat,
                    "requirements": req_cov,
                    "latency": {"p50_s": round(pctl(lat, 50), 2), "p95_s": round(pctl(lat, 95), 2),
                                "max_s": round(max(lat), 2) if lat else 0,
@@ -648,6 +759,11 @@ def main() -> int:
         if verdict == "INFRA_BLOCKED":
             L += ["> All failures are infrastructure problems (network / API key / quota / model name). Behaviour could not be evaluated.",
                   "> Fix: put a valid key in the app's .env, confirm the model name, retry. See failure classes below.", ""]
+        if summary["retried"]:
+            L += [f"Tests retried on infrastructure failures (finally passed): {', '.join(summary['retried'])}", ""]
+        if summary["quota_reclassified"]:
+            L += [f"Failures reclassified from AGENT_RUNTIME_ERROR to QUOTA_OR_RATE_LIMIT from server-log evidence: "
+                  f"{', '.join(summary['quota_reclassified'])}", ""]
         L += ["## Requirements", "", "| id | status | passed/tests | text |", "|---|---|---|---|"]
         for rid, v in req_cov.items():
             L.append(f"| {rid} | {v.get('status', '-')} | {v['passed']}/{v['tests']} | {v.get('text', '')} |")
