@@ -1,0 +1,537 @@
+{
+  "test_id": "T09_product_price",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "orders_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "search_products",
+        "args": {
+          "query": "Apex PureLife RO water purifier"
+        },
+        "author": "orders_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "search_products",
+        "response": {
+          "status": "ok",
+          "query": "Apex PureLife RO water purifier",
+          "count": 5,
+          "products": [
+            {
+              "sku": "APX-SKU-100512",
+              "name": "Apex PureLife RO Water Purifier",
+              "category": "Home Appliances",
+              "brand": "Apex Home",
+              "price_inr": 11499.0,
+              "mrp_inr": 14999.0,
+              "discount_pct": 23,
+              "stock_units": 8,
+              "warehouse": "WH-BLR-01",
+              "in_stock": true,
+              "rating": 4.6
+            },
+            {
+              "sku": "APX-SKU-100341",
+              "name": "Apex FreshBlend 1200W Mixer Grinder",
+              "category": "Home Appliances",
+              "brand": "Apex Home",
+              "price_inr": 4299.0,
+              "mrp_inr": 6299.0,
+              "discount_pct": 32,
+              "stock_units": 42,
+              "warehouse": "WH-BLR-02",
+              "in_stock": true,
+              "rating": 4.4
+            },
+            {
+              "sku": "APX-SKU-100688",
+              "name": "Apex GlowLED 55\" Smart TV",
+              "category": "Electronics",
+              "brand": "Apex Vision",
+              "price_inr": 27999.0,
+              "mrp_inr": 38999.0,
+              "discount_pct": 28,
+              "stock_units": 5,
+              "warehouse": "WH-BLR-01",
+              "in_stock": true,
+              "rating": 4.2
+            },
+            {
+              "sku": "APX-SKU-100744",
+              "name": "Apex CloudSoft Memory Foam Mattress (Queen)",
+              "category": "Home & Living",
+              "brand": "Apex Sleep",
+              "price_inr": 8999.0,
+              "mrp_inr": 12999.0,
+              "discount_pct": 31,
+              "stock_units": 17,
+              "warehouse": "WH-PNQ-01",
+              "in_stock": true,
+              "rating": 4.5
+            },
+            {
+              "sku": "APX-SKU-100821",
+              "name": "Apex NutriBox Organic Grocery Subscription (Monthly)",
+              "category": "Grocery",
+              "brand": "Apex Fresh",
+              "price_inr": 1249.0,
+              "mrp_inr": 1499.0,
+              "discount_pct": 17,
+              "stock_units": 999,
+              "warehouse": "WH-BLR-03",
+              "in_stock": true,
+              "rating": 4.7
+            }
+          ],
+          "message": "5 product(s) matched 'Apex PureLife RO water purifier'."
+        },
+        "author": "orders_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "orders_agent"
+    ],
+    "texts": [
+      {
+        "author": "orders_agent",
+        "text": "We do have the Apex PureLife RO Water Purifier in stock right now, with 8 units available in our warehouse. \n\nIt is currently priced at \u20b911,499, which reflects a 23% discount off its MRP of \u20b914,999. Would you like me to help you place an order for it?"
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "orders_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 7457,
+    "final_text": "We do have the Apex PureLife RO Water Purifier in stock right now, with 8 units available in our warehouse. \n\nIt is currently priced at \u20b911,499, which reflects a 23% discount off its MRP of \u20b914,999. Would you like me to help you place an order for it?",
+    "state_delta": {},
+    "n_events": 5,
+    "http_error": ""
+  },
+  "session_id": "T09_product_price-0-57190b",
+  "turns": [
+    {
+      "user": "Do you have the Apex PureLife RO water purifier in stock? What does it cost?",
+      "status": 200,
+      "latency_s": 8.71,
+      "events": [
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_2363073",
+                  "args": {
+                    "agent_name": "orders_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TjxA45v2Vn7cU67Q4P2GxM7-LOu8yfoNG-gSUuDcazy6tjo_dgQKtWudiDzrmv4cumeUBTosDDbem-K0Utfh2uaCzpB2Z4-4KAB2cWMx1PJzJWkDxGtYsNxs="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 1870,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1870
+              }
+            ],
+            "totalTokenCount": 1892
+          },
+          "invocationId": "e-f5cf990b-6342-45fa-8bd8-d4e42554f53f",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "a4368c33-4602-4691-94f1-c5a93b93011d",
+          "timestamp": 1792249978.7704678
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_2363073",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-f5cf990b-6342-45fa-8bd8-d4e42554f53f",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "orders_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "57918521-098f-4f86-8bd8-0ad56d0630fe",
+          "timestamp": 1792249982.080413
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3680537",
+                  "args": {
+                    "query": "Apex PureLife RO water purifier"
+                  },
+                  "name": "search_products"
+                },
+                "thoughtSignature": "EmAKXgFpFH0T46-7QukPNZzm32iIkUfQRAOquzjSslp0kFaOAVcxHySFWIIijTubb37scLGZvx2WDzjf9PGsj7eVjZIbkvD99tem_eLdcxIRh2JDMg7_fNy5ExzBxdX_YNg="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 21,
+            "promptTokenCount": 2437,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2437
+              }
+            ],
+            "totalTokenCount": 2458
+          },
+          "invocationId": "e-f5cf990b-6342-45fa-8bd8-d4e42554f53f",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "ceeeed8d-e33f-4f02-a836-d981e6aa09c3",
+          "timestamp": 1792249982.1045563
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3680537",
+                  "name": "search_products",
+                  "response": {
+                    "status": "ok",
+                    "query": "Apex PureLife RO water purifier",
+                    "count": 5,
+                    "products": [
+                      {
+                        "sku": "APX-SKU-100512",
+                        "name": "Apex PureLife RO Water Purifier",
+                        "category": "Home Appliances",
+                        "brand": "Apex Home",
+                        "price_inr": 11499.0,
+                        "mrp_inr": 14999.0,
+                        "discount_pct": 23,
+                        "stock_units": 8,
+                        "warehouse": "WH-BLR-01",
+                        "in_stock": true,
+                        "rating": 4.6
+                      },
+                      {
+                        "sku": "APX-SKU-100341",
+                        "name": "Apex FreshBlend 1200W Mixer Grinder",
+                        "category": "Home Appliances",
+                        "brand": "Apex Home",
+                        "price_inr": 4299.0,
+                        "mrp_inr": 6299.0,
+                        "discount_pct": 32,
+                        "stock_units": 42,
+                        "warehouse": "WH-BLR-02",
+                        "in_stock": true,
+                        "rating": 4.4
+                      },
+                      {
+                        "sku": "APX-SKU-100688",
+                        "name": "Apex GlowLED 55\" Smart TV",
+                        "category": "Electronics",
+                        "brand": "Apex Vision",
+                        "price_inr": 27999.0,
+                        "mrp_inr": 38999.0,
+                        "discount_pct": 28,
+                        "stock_units": 5,
+                        "warehouse": "WH-BLR-01",
+                        "in_stock": true,
+                        "rating": 4.2
+                      },
+                      {
+                        "sku": "APX-SKU-100744",
+                        "name": "Apex CloudSoft Memory Foam Mattress (Queen)",
+                        "category": "Home & Living",
+                        "brand": "Apex Sleep",
+                        "price_inr": 8999.0,
+                        "mrp_inr": 12999.0,
+                        "discount_pct": 31,
+                        "stock_units": 17,
+                        "warehouse": "WH-PNQ-01",
+                        "in_stock": true,
+                        "rating": 4.5
+                      },
+                      {
+                        "sku": "APX-SKU-100821",
+                        "name": "Apex NutriBox Organic Grocery Subscription (Monthly)",
+                        "category": "Grocery",
+                        "brand": "Apex Fresh",
+                        "price_inr": 1249.0,
+                        "mrp_inr": 1499.0,
+                        "discount_pct": 17,
+                        "stock_units": 999,
+                        "warehouse": "WH-BLR-03",
+                        "in_stock": true,
+                        "rating": 4.7
+                      }
+                    ],
+                    "message": "5 product(s) matched 'Apex PureLife RO water purifier'."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-f5cf990b-6342-45fa-8bd8-d4e42554f53f",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "id": "41363ce1-9256-4391-8df4-325e9304d3e6",
+          "timestamp": 1792249986.1386614
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "We do have the Apex PureLife RO Water Purifier in stock right now, with 8 units available in our warehouse. \n\nIt is currently priced at \u20b911,499, which reflects a 23% discount off its MRP of \u20b914,999. Would you like me to help you place an order for it?",
+                "thoughtSignature": "EmAKXgFpFH0TIP8T2lECtsWLvFrgiKGPhcxDy1Pn1I-190YvFvefu7v2bJ22sI_wHXIpzPPjs_8Iv2jUDHnZtFGm6_MwlRsdGsRuJ9UIl1dhXJ0RK-e_15-B_18rf7jAyPc="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 73,
+            "promptTokenCount": 3034,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3034
+              }
+            ],
+            "totalTokenCount": 3107
+          },
+          "invocationId": "e-f5cf990b-6342-45fa-8bd8-d4e42554f53f",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "id": "6fc297d7-810e-4c9c-b18a-d09a473a5e8b",
+          "timestamp": 1792249986.1605027
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "orders_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "search_products",
+            "args": {
+              "query": "Apex PureLife RO water purifier"
+            },
+            "author": "orders_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "search_products",
+            "response": {
+              "status": "ok",
+              "query": "Apex PureLife RO water purifier",
+              "count": 5,
+              "products": [
+                {
+                  "sku": "APX-SKU-100512",
+                  "name": "Apex PureLife RO Water Purifier",
+                  "category": "Home Appliances",
+                  "brand": "Apex Home",
+                  "price_inr": 11499.0,
+                  "mrp_inr": 14999.0,
+                  "discount_pct": 23,
+                  "stock_units": 8,
+                  "warehouse": "WH-BLR-01",
+                  "in_stock": true,
+                  "rating": 4.6
+                },
+                {
+                  "sku": "APX-SKU-100341",
+                  "name": "Apex FreshBlend 1200W Mixer Grinder",
+                  "category": "Home Appliances",
+                  "brand": "Apex Home",
+                  "price_inr": 4299.0,
+                  "mrp_inr": 6299.0,
+                  "discount_pct": 32,
+                  "stock_units": 42,
+                  "warehouse": "WH-BLR-02",
+                  "in_stock": true,
+                  "rating": 4.4
+                },
+                {
+                  "sku": "APX-SKU-100688",
+                  "name": "Apex GlowLED 55\" Smart TV",
+                  "category": "Electronics",
+                  "brand": "Apex Vision",
+                  "price_inr": 27999.0,
+                  "mrp_inr": 38999.0,
+                  "discount_pct": 28,
+                  "stock_units": 5,
+                  "warehouse": "WH-BLR-01",
+                  "in_stock": true,
+                  "rating": 4.2
+                },
+                {
+                  "sku": "APX-SKU-100744",
+                  "name": "Apex CloudSoft Memory Foam Mattress (Queen)",
+                  "category": "Home & Living",
+                  "brand": "Apex Sleep",
+                  "price_inr": 8999.0,
+                  "mrp_inr": 12999.0,
+                  "discount_pct": 31,
+                  "stock_units": 17,
+                  "warehouse": "WH-PNQ-01",
+                  "in_stock": true,
+                  "rating": 4.5
+                },
+                {
+                  "sku": "APX-SKU-100821",
+                  "name": "Apex NutriBox Organic Grocery Subscription (Monthly)",
+                  "category": "Grocery",
+                  "brand": "Apex Fresh",
+                  "price_inr": 1249.0,
+                  "mrp_inr": 1499.0,
+                  "discount_pct": 17,
+                  "stock_units": 999,
+                  "warehouse": "WH-BLR-03",
+                  "in_stock": true,
+                  "rating": 4.7
+                }
+              ],
+              "message": "5 product(s) matched 'Apex PureLife RO water purifier'."
+            },
+            "author": "orders_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "orders_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "orders_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 7457,
+        "final_text": "We do have the Apex PureLife RO Water Purifier in stock right now, with 8 units available in our warehouse. \n\nIt is currently priced at \u20b911,499, which reflects a 23% discount off its MRP of \u20b914,999. Would you like me to help you place an order for it?",
+        "state_delta": {},
+        "n_events": 5
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 8.71,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /11[,.]?499|purelife|in stock|stock/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called search_products",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'search_products']"
+    },
+    {
+      "check": "agent_involved orders_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'orders_agent'] transfers=['orders_agent']"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

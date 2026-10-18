@@ -1,0 +1,100 @@
+{
+  "completed": 3,
+  "expected": 5,
+  "results": [
+    {
+      "test_id": "T11_system_status",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R4"
+      ],
+      "description": "Outage question answered from live system status (regression check)",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        8.78
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "check_system_status"
+      ],
+      "agents": [
+        "apex_concierge",
+        "support_agent"
+      ],
+      "tokens": 6273,
+      "final_response": "It is not just you\u2014our Checkout & Payments service is currently experiencing elevated UPI callback latency under incident APX-4021. \n\nWe are working on this right now, so please hold off on retrying your payment until the status clears up.",
+      "first_user_input": "Is payment failing for everyone right now or is it just me?",
+      "_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "test_id": "T12_coupon_problem",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R4"
+      ],
+      "description": "Plain-language how-to question goes to the knowledge base and is answered from it (regression check)",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        9.96
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "search_knowledge_base",
+        "get_troubleshooting_guide"
+      ],
+      "agents": [
+        "apex_concierge",
+        "support_agent"
+      ],
+      "tokens": 9827,
+      "final_response": "I am sorry to hear you are having trouble applying your coupon. This is often related to error code APX-4305, which usually means the items in your cart are excluded from the coupon's terms or the coupon has expired.\n\nTo help us figure this out, could you please check the following:\n1. Does your cart contain any grocery subscriptions or items that are only available via EMI? These are typically excluded from most coupons.\n2. Please double-check the expiry date on the coupon you are trying to use.\n\nIf you are still seeing the error after checking these, please let me know, and we can look into this further.",
+      "first_user_input": "My coupon keeps getting rejected at the payment page. Why?",
+      "_model": "gemini-3.1-flash-lite"
+    },
+    {
+      "test_id": "T18_route_support",
+      "category": "multi_agent",
+      "severity": "must",
+      "requirement_ids": [
+        "R4"
+      ],
+      "description": "A technical error reaches support_agent and not the orders desk (regression check)",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        10.55
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "search_knowledge_base",
+        "search_knowledge_base",
+        "search_knowledge_base"
+      ],
+      "agents": [
+        "apex_concierge",
+        "support_agent"
+      ],
+      "tokens": 13653,
+      "final_response": "I am sorry to hear that the Apex app is crashing when you open My Orders on Android. We could not find a specific troubleshooting guide for that exact crash in our knowledge base. \n\nCould you please share a screenshot or the exact wording of any error message shown on the screen? If this persists, I would be happy to register a request for our technical support team to investigate further.",
+      "first_user_input": "The Apex app crashes with a blank screen every time I open My Orders on Android.",
+      "_retried": true,
+      "_model": "gemini-3.5-flash-lite"
+    }
+  ]
+}

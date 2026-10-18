@@ -1,0 +1,68 @@
+{
+  "summary": {
+    "verdict": "PASS",
+    "app": "apex_hyperstore",
+    "tests_total": 1,
+    "tests_passed": 1,
+    "pass_rate": 1.0,
+    "must_total": 1,
+    "must_passed": 1,
+    "flaky": [],
+    "by_category": {
+      "functional": {
+        "total": 1,
+        "passed": 1
+      }
+    },
+    "requirements": {
+      "R1": {
+        "tests": 1,
+        "passed": 1,
+        "text": "order lookup works end to end",
+        "severity": "must",
+        "status": "MET"
+      }
+    },
+    "latency": {
+      "p50_s": 14.7,
+      "p95_s": 14.7,
+      "max_s": 14.7,
+      "mean_s": 14.7
+    },
+    "tokens_total": 7793,
+    "avg_tool_calls": 2,
+    "failure_classes": {},
+    "output_dir": "C:\\Users\\MY PC\\OneDrive\\Desktop\\adk-agent-creator-skill\\Apex-HyperStore-Agent\\adk_runs\\smoke"
+  },
+  "results": [
+    {
+      "test_id": "S1",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R1"
+      ],
+      "description": "",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        14.7
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "lookup_order"
+      ],
+      "agents": [
+        "apex_concierge",
+        "orders_agent"
+      ],
+      "tokens": 7793,
+      "final_response": "Your order **APX-ORD-2026-041882** is currently **out for delivery**. We expect it to reach you today during your scheduled delivery slot between 18:00 and 21:00.\n\n**Order Summary:**\n- **Status:** Out for Delivery\n- **Expected Delivery Slot:** 17 October 2026, 18:00 \u2013 21:00\n- **Items:**\n  - 2 \u00d7 Apex NutriBox Organic Grocery Subscription (Monthly) \u2013 \u20b92,498\n  - 1 \u00d7 Apex SecureCam Wi-Fi Security Camera \u2013 \u20b93,050\n- **Total Amount:** \u20b95,548 (Paid via UPI)\n\nPlease let us know if you need any further assistance!",
+      "first_user_input": "Where is my order APX-ORD-2026-041882? Please give me the status."
+    }
+  ]
+}

@@ -1,0 +1,420 @@
+{
+  "test_id": "T06_order_status",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "orders_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "lookup_order",
+        "args": {
+          "order_id": "APX-ORD-2026-041882"
+        },
+        "author": "orders_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "lookup_order",
+        "response": {
+          "status": "ok",
+          "found": true,
+          "verified": true,
+          "order": {
+            "order_id": "APX-ORD-2026-041882",
+            "status": "out_for_delivery",
+            "placed_at": "2026-10-12T19:41:00",
+            "delivery_slot": "2026-10-17T18:00:00 to 21:00",
+            "total_inr": 5548.0,
+            "item_count": 3,
+            "payment_mode": "UPI",
+            "warehouse": "WH-BLR-03",
+            "items": [
+              {
+                "order_id": "APX-ORD-2026-041882",
+                "sku": "APX-SKU-100821",
+                "name": "Apex NutriBox Organic Grocery Subscription (Monthly)",
+                "qty": 2,
+                "unit_price_inr": 1249.0
+              },
+              {
+                "order_id": "APX-ORD-2026-041882",
+                "sku": "APX-SKU-100937",
+                "name": "Apex SecureCam Wi-Fi Security Camera",
+                "qty": 1,
+                "unit_price_inr": 3050.0
+              }
+            ]
+          },
+          "message": "Order APX-ORD-2026-041882 is out for delivery."
+        },
+        "author": "orders_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "orders_agent"
+    ],
+    "texts": [
+      {
+        "author": "orders_agent",
+        "text": "Your order APX-ORD-2026-041882 is out for delivery and is expected to arrive between 6:00 PM and 9:00 PM on October 17, 2026."
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "orders_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 7092,
+    "final_text": "Your order APX-ORD-2026-041882 is out for delivery and is expected to arrive between 6:00 PM and 9:00 PM on October 17, 2026.",
+    "state_delta": {},
+    "n_events": 5,
+    "http_error": ""
+  },
+  "session_id": "T06_order_status-0-628ac0",
+  "turns": [
+    {
+      "user": "Where is my order APX-ORD-2026-041882? Please tell me the status and delivery slot.",
+      "status": 200,
+      "latency_s": 9.22,
+      "events": [
+        {
+          "modelVersion": "gemini-2.5-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "adk-5e9d523f-e353-4bce-bd4c-7b70d9cb4297",
+                  "args": {
+                    "agent_name": "orders_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "CpIEAWkUfRM_bLwPlPVTAGSsC_a5-wRaB-s_MH2CTLd2XObqUbDZpqSbpOPR-Fkz2AzngsL0wrPDmhCJJ9hNvf9j4VKAiQmEE-gNUmneVvgZR-D9pLWBVyDo6GulHJNmveS30Y2uI4-4DozIdzgdc9gUmL0YToMVHE_dhRBCuHzGRRHXrYOqwC1yQOJ9tJn3uL1GMkCsGLI-Xdo4ntxsthsA68n4otL2C_C9N4k-APh3zdp6Up6tRnyHCEVpBP0LCAJItjoxROpzqRyF_uvTUj0Y9QWb6ZiD1hvlmAlVEA1iOgK2ZpXPghxtkxUuEnBaAN_yKszQ8u9nyn-U9z7ZGPTI-lx_nnVMVq3ysyKusf8PtbA1JrHz6fn02Ufg7ck7zFMxZaVSTwp2bueUQiFAFIkUr6NJx33-pFSEgDHPE63ONetsqnTfb6fDDmBFgEZADrfZKd1cX0gzA6AnF-M20D88zvSG74JDwWl_PprA866kw0FBexTK3FS4k5y8n8COPmaYPtG_LwdFUjqaW9SOdEx-eXOyP8WCPs6-GXEEdPJ5CGK0UGuFbmxbjk0Z8935G3CU9XUvFVkaP7nkbMeHF-ZxXNliPXoHMPARZm7IecpJlV_ZomcICqu-w19GCAZVdHD-6Rp7rjZHWPnv0z-OH3q302krs09MGIUwzLTiUZhadfPBef0yi4-4ICtHPPJcpo__9ZM="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 21,
+            "promptTokenCount": 1826,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1826
+              }
+            ],
+            "thoughtsTokenCount": 114,
+            "totalTokenCount": 1961
+          },
+          "invocationId": "e-090a42e4-f92d-4a34-a723-0c6a85ad7b84",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "ae4de3ca-e35c-4d34-b513-f5c0f41bdea3",
+          "timestamp": 1792248517.1086953
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "adk-5e9d523f-e353-4bce-bd4c-7b70d9cb4297",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-090a42e4-f92d-4a34-a723-0c6a85ad7b84",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "orders_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "dec181b5-8c79-4e6e-ab7d-d9c6e9e65574",
+          "timestamp": 1792248520.7899823
+        },
+        {
+          "modelVersion": "gemini-2.5-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "adk-1e652783-aa75-4cdf-8f61-8dfe8c39740d",
+                  "args": {
+                    "order_id": "APX-ORD-2026-041882"
+                  },
+                  "name": "lookup_order"
+                },
+                "thoughtSignature": "CpsDAWkUfRP1NFg2UWRrayvZ614FuHnnJ9LW0eR08TOYz4Xw5CZvJmRsqsLH6S1PK9iq6AkQa9c_CxS4hSmHMTmesMEJsMweM5OsHoOCxCxZBqWl5hI60WBcsaHhVPv5hlTmmozbuLk0DLSqrUo5HDy256HRVL2Xq9xj5CZfzV2NUkmnSfqDanA4aKQC785dImnszua3kEiL7YoDrQc75_Gt2VPU5yf_TUa8mOfpT5fYyqjHwfjKCIb9GVbFosKy7i5EpDc0aaFRw9MT727YDzAICCjokMSUUsrdJl3T8V-SbWgZg4l7jaDE3C5QSBRgKAmnCzPOO3CedIvRtSg6hBUVV9QLjNT9YdNaQahRrMAExhU5jBJygOr8abcrCHKL8HR8Bi2WnoM09oy4gm3ouUG8QQSxqt0Mcm6w9CpN8HUge8_sYqpRwqBMYO09Ibi6bJKF5c9Ptol8qgQt2zPeZFSINheNJPfQs6vHUQAKuh1-etkt2Mfy3QmhhHF3XB8JFTbxl9scij14oieqPx4y3ybdF2vAwzLEre3FkTNQ"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 32,
+            "promptTokenCount": 2295,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2295
+              }
+            ],
+            "thoughtsTokenCount": 88,
+            "totalTokenCount": 2415
+          },
+          "invocationId": "e-090a42e4-f92d-4a34-a723-0c6a85ad7b84",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "2bf2ad2f-d066-4ee4-93fa-397d2fe02ba0",
+          "timestamp": 1792248520.817087
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "adk-1e652783-aa75-4cdf-8f61-8dfe8c39740d",
+                  "name": "lookup_order",
+                  "response": {
+                    "status": "ok",
+                    "found": true,
+                    "verified": true,
+                    "order": {
+                      "order_id": "APX-ORD-2026-041882",
+                      "status": "out_for_delivery",
+                      "placed_at": "2026-10-12T19:41:00",
+                      "delivery_slot": "2026-10-17T18:00:00 to 21:00",
+                      "total_inr": 5548.0,
+                      "item_count": 3,
+                      "payment_mode": "UPI",
+                      "warehouse": "WH-BLR-03",
+                      "items": [
+                        {
+                          "order_id": "APX-ORD-2026-041882",
+                          "sku": "APX-SKU-100821",
+                          "name": "Apex NutriBox Organic Grocery Subscription (Monthly)",
+                          "qty": 2,
+                          "unit_price_inr": 1249.0
+                        },
+                        {
+                          "order_id": "APX-ORD-2026-041882",
+                          "sku": "APX-SKU-100937",
+                          "name": "Apex SecureCam Wi-Fi Security Camera",
+                          "qty": 1,
+                          "unit_price_inr": 3050.0
+                        }
+                      ]
+                    },
+                    "message": "Order APX-ORD-2026-041882 is out for delivery."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-090a42e4-f92d-4a34-a723-0c6a85ad7b84",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "id": "166b53f7-7067-40e6-9b36-d03f4ad58d61",
+          "timestamp": 1792248524.478923
+        },
+        {
+          "modelVersion": "gemini-2.5-flash",
+          "content": {
+            "parts": [
+              {
+                "text": "Your order APX-ORD-2026-041882 is out for delivery and is expected to arrive between 6:00 PM and 9:00 PM on October 17, 2026."
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 53,
+            "promptTokenCount": 2663,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2663
+              }
+            ],
+            "totalTokenCount": 2716
+          },
+          "invocationId": "e-090a42e4-f92d-4a34-a723-0c6a85ad7b84",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "id": "89815554-1241-442e-a884-d6e6cbf5d28a",
+          "timestamp": 1792248524.506076
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "orders_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "lookup_order",
+            "args": {
+              "order_id": "APX-ORD-2026-041882"
+            },
+            "author": "orders_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "lookup_order",
+            "response": {
+              "status": "ok",
+              "found": true,
+              "verified": true,
+              "order": {
+                "order_id": "APX-ORD-2026-041882",
+                "status": "out_for_delivery",
+                "placed_at": "2026-10-12T19:41:00",
+                "delivery_slot": "2026-10-17T18:00:00 to 21:00",
+                "total_inr": 5548.0,
+                "item_count": 3,
+                "payment_mode": "UPI",
+                "warehouse": "WH-BLR-03",
+                "items": [
+                  {
+                    "order_id": "APX-ORD-2026-041882",
+                    "sku": "APX-SKU-100821",
+                    "name": "Apex NutriBox Organic Grocery Subscription (Monthly)",
+                    "qty": 2,
+                    "unit_price_inr": 1249.0
+                  },
+                  {
+                    "order_id": "APX-ORD-2026-041882",
+                    "sku": "APX-SKU-100937",
+                    "name": "Apex SecureCam Wi-Fi Security Camera",
+                    "qty": 1,
+                    "unit_price_inr": 3050.0
+                  }
+                ]
+              },
+              "message": "Order APX-ORD-2026-041882 is out for delivery."
+            },
+            "author": "orders_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "orders_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "orders_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 7092,
+        "final_text": "Your order APX-ORD-2026-041882 is out for delivery and is expected to arrive between 6:00 PM and 9:00 PM on October 17, 2026.",
+        "state_delta": {},
+        "n_events": 5
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 9.22,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /out for delivery|APX-ORD-2026-041882/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called lookup_order",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'lookup_order']"
+    },
+    {
+      "check": "tool_args lookup_order",
+      "ok": true,
+      "detail": "calls: [{'tool': 'transfer_to_agent', 'args': {'agent_name': 'orders_agent'}, 'author': 'apex_concierge'}, {'tool': 'lookup_order', 'args': {'order_id': 'APX-ORD-2026-041882'}, 'author': 'orders_agent'}]"
+    },
+    {
+      "check": "agent_involved orders_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'orders_agent'] transfers=['orders_agent']"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

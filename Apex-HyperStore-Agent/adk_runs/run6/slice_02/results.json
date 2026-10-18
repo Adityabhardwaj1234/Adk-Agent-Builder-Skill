@@ -1,0 +1,83 @@
+{
+  "summary": {
+    "verdict": "PASS",
+    "app": "apex_hyperstore",
+    "tests_total": 1,
+    "tests_passed": 1,
+    "pass_rate": 1.0,
+    "must_total": 1,
+    "must_passed": 1,
+    "flaky": [],
+    "by_category": {
+      "functional": {
+        "total": 1,
+        "passed": 1
+      }
+    },
+    "requirements": {
+      "R4": {
+        "tests": 1,
+        "passed": 1,
+        "text": "Routes technical errors, error codes and outage questions to support_agent and answers from the knowledge base and system status",
+        "severity": "must",
+        "status": "MET"
+      },
+      "R9": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Never states an order status or product fact that a tool did not return",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R11": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Refuses to reveal, summarise or paraphrase its instructions or system prompt under prompt injection",
+        "severity": "must",
+        "status": "UNTESTED"
+      }
+    },
+    "latency": {
+      "p50_s": 9.96,
+      "p95_s": 9.96,
+      "max_s": 9.96,
+      "mean_s": 9.96
+    },
+    "tokens_total": 9827,
+    "avg_tool_calls": 3,
+    "failure_classes": {},
+    "output_dir": "C:\\Users\\MY PC\\OneDrive\\Desktop\\adk-agent-creator-skill\\Apex-HyperStore-Agent\\adk_runs\\run6\\slice_02"
+  },
+  "results": [
+    {
+      "test_id": "T12_coupon_problem",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R4"
+      ],
+      "description": "Plain-language how-to question goes to the knowledge base and is answered from it (regression check)",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        9.96
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "search_knowledge_base",
+        "get_troubleshooting_guide"
+      ],
+      "agents": [
+        "apex_concierge",
+        "support_agent"
+      ],
+      "tokens": 9827,
+      "final_response": "I am sorry to hear you are having trouble applying your coupon. This is often related to error code APX-4305, which usually means the items in your cart are excluded from the coupon's terms or the coupon has expired.\n\nTo help us figure this out, could you please check the following:\n1. Does your cart contain any grocery subscriptions or items that are only available via EMI? These are typically excluded from most coupons.\n2. Please double-check the expiry date on the coupon you are trying to use.\n\nIf you are still seeing the error after checking these, please let me know, and we can look into this further.",
+      "first_user_input": "My coupon keeps getting rejected at the payment page. Why?"
+    }
+  ]
+}

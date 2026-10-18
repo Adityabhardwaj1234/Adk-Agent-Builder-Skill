@@ -1,0 +1,757 @@
+{
+  "test_id": "T18_route_support",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "support_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "args": {
+          "query": "app crashes blank screen My Orders Android"
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "args": {
+          "query": "app crashes"
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "args": {
+          "query": "crash"
+        },
+        "author": "support_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "response": {
+          "status": "ok",
+          "query": "app crashes blank screen My Orders Android",
+          "count": 3,
+          "articles": [
+            {
+              "kb_id": "APX-KB-0102",
+              "topic": "Delivery tracking",
+              "error_code": "APX-4099",
+              "surface": "Apex app",
+              "symptom": "Tracking page shows \"Out for delivery\" for more than 24 hours and never updates.",
+              "cause": "The rider's handheld device lost connectivity in a low-network pincode; the last scan is stale.",
+              "fix_steps": "1. Pull the order with lookup_order and read its tracking_note. 2. If the slot has passed by more than 24 hours, create a service request of type delivery_delay with urgency=high. 3. Tell the customer a freshridership scan is pushed automatically every 2 hours. 4. Do not promise a refund - refunds are owned by the orders agent.",
+              "escalation_team": "Last Mile Operations",
+              "severity": "high"
+            },
+            {
+              "kb_id": "APX-KB-0103",
+              "topic": "Account access",
+              "error_code": "APX-4150",
+              "surface": "Apex app",
+              "symptom": "\"Invalid credentials (APX-4150)\" although the customer is sure the password is right.",
+              "cause": "The account got soft-locked after 5 failed attempts, or OTP is going to a stale phone number.",
+              "fix_steps": "1. Confirm the email on file with list_customer_orders. 2. Trigger \"Forgot password\" and ask the customer to read the 6-digit OTP to the agent. 3. If the lock persists after a correct OTP, create an account_access request with urgency=normal. 4. Never ask for the password itself and never read back an OTP the customer did not volunteer.",
+              "escalation_team": "Identity & Accounts Desk",
+              "severity": "medium"
+            },
+            {
+              "kb_id": "APX-KB-0105",
+              "topic": "Payments",
+              "error_code": "APX-4305",
+              "surface": "Website",
+              "symptom": "Coupon code is rejected with \"APX-4305: coupon not applicable\".",
+              "cause": "The cart contains a category that is excluded from the coupon, or the coupon expired at 23:59 IST.",
+              "fix_steps": "1. Check the coupon terms against the cart categories in search_products. 2. Grocery subscriptions and EMI-only items are usually excluded. 3. An expired coupon cannot be reactivated; offer the current running coupon from company_info.",
+              "escalation_team": "Loyalty & Coupons Desk",
+              "severity": "low"
+            }
+          ]
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "response": {
+          "status": "ok",
+          "query": "app crashes",
+          "count": 3,
+          "articles": [
+            {
+              "kb_id": "APX-KB-0105",
+              "topic": "Payments",
+              "error_code": "APX-4305",
+              "surface": "Website",
+              "symptom": "Coupon code is rejected with \"APX-4305: coupon not applicable\".",
+              "cause": "The cart contains a category that is excluded from the coupon, or the coupon expired at 23:59 IST.",
+              "fix_steps": "1. Check the coupon terms against the cart categories in search_products. 2. Grocery subscriptions and EMI-only items are usually excluded. 3. An expired coupon cannot be reactivated; offer the current running coupon from company_info.",
+              "escalation_team": "Loyalty & Coupons Desk",
+              "severity": "low"
+            },
+            {
+              "kb_id": "APX-KB-0101",
+              "topic": "Checkout",
+              "error_code": "APX-4021",
+              "surface": "Apex app / website",
+              "symptom": "\"Payment failed (APX-4021)\" at checkout although UPI request was debited.",
+              "cause": "UPI mandate succeeded at the bank but the payment-gateway callback to Apex timed out, so the order was not created.",
+              "fix_steps": "1. Ask the customer to check their bank app for a pending mandate and reverse it if present. 2. Retry checkout with the same UPI handle on a new payment attempt. 3. If the debit repeats twice, raise a payment-fraud-safe request with urgency=high and emergency_type=payment_fraud. 4. Never ask the customer to share a UPI PIN, OTP or CVV.",
+              "escalation_team": "Payments Recovery Desk",
+              "severity": "high"
+            },
+            {
+              "kb_id": "APX-KB-0102",
+              "topic": "Delivery tracking",
+              "error_code": "APX-4099",
+              "surface": "Apex app",
+              "symptom": "Tracking page shows \"Out for delivery\" for more than 24 hours and never updates.",
+              "cause": "The rider's handheld device lost connectivity in a low-network pincode; the last scan is stale.",
+              "fix_steps": "1. Pull the order with lookup_order and read its tracking_note. 2. If the slot has passed by more than 24 hours, create a service request of type delivery_delay with urgency=high. 3. Tell the customer a freshridership scan is pushed automatically every 2 hours. 4. Do not promise a refund - refunds are owned by the orders agent.",
+              "escalation_team": "Last Mile Operations",
+              "severity": "high"
+            }
+          ]
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "response": {
+          "status": "no_match",
+          "query": "crash",
+          "message": "No article matches. Ask for the exact error code shown on screen, or file a request with the support agent."
+        },
+        "author": "support_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "support_agent"
+    ],
+    "texts": [
+      {
+        "author": "support_agent",
+        "text": "I am sorry to hear that the Apex app is crashing when you open My Orders on Android. We could not find a specific troubleshooting guide for that exact crash in our knowledge base. \n\nCould you please share a screenshot or the exact wording of any error message shown on the screen? If this persists, I would be happy to register a request for our technical support team to investigate further."
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "support_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 13653,
+    "final_text": "I am sorry to hear that the Apex app is crashing when you open My Orders on Android. We could not find a specific troubleshooting guide for that exact crash in our knowledge base. \n\nCould you please share a screenshot or the exact wording of any error message shown on the screen? If this persists, I would be happy to register a request for our technical support team to investigate further.",
+    "state_delta": {},
+    "n_events": 9,
+    "http_error": ""
+  },
+  "session_id": "T18_route_support-0-434fd6",
+  "turns": [
+    {
+      "user": "The Apex app crashes with a blank screen every time I open My Orders on Android.",
+      "status": 200,
+      "latency_s": 10.55,
+      "events": [
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_481245",
+                  "args": {
+                    "agent_name": "support_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0T17FOaI8dNg3JsPWqwowThDnPSmxy2Lfxf1GDTFrPZR5CZEt1ip2Syab5jUxfr7-7ul2tVp43AcQG0MM_cEcLgMp5g8LvQ38MogSWPbNknP0hkTqnVIKtqos="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 1869,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1869
+              }
+            ],
+            "totalTokenCount": 1891
+          },
+          "invocationId": "e-52c22bb1-9ab3-490f-a265-49f4a4151564",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "88cfd4c8-729a-409f-8824-f915b3920d98",
+          "timestamp": 1792253295.021649
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_481245",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-52c22bb1-9ab3-490f-a265-49f4a4151564",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "support_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "83128c97-b675-435e-8063-730aeaa0e963",
+          "timestamp": 1792253297.8816924
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_738936",
+                  "args": {
+                    "query": "app crashes blank screen My Orders Android"
+                  },
+                  "name": "search_knowledge_base"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TwIO6xaY4froCNDO4e5suVm40sff4Hxkj40XFqaHRgTnqrD4KSwC7Dq7GAWmC2eaSE5AtlzfgpUNdmgJsLTVshBv9AjoIE1ULt7CbqgtG8Sjd105bUio8mBw="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 24,
+            "promptTokenCount": 2088,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2088
+              }
+            ],
+            "totalTokenCount": 2112
+          },
+          "invocationId": "e-52c22bb1-9ab3-490f-a265-49f4a4151564",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "d3c98f2e-43d4-495a-ad67-15e2fa134e43",
+          "timestamp": 1792253297.8999784
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_738936",
+                  "name": "search_knowledge_base",
+                  "response": {
+                    "status": "ok",
+                    "query": "app crashes blank screen My Orders Android",
+                    "count": 3,
+                    "articles": [
+                      {
+                        "kb_id": "APX-KB-0102",
+                        "topic": "Delivery tracking",
+                        "error_code": "APX-4099",
+                        "surface": "Apex app",
+                        "symptom": "Tracking page shows \"Out for delivery\" for more than 24 hours and never updates.",
+                        "cause": "The rider's handheld device lost connectivity in a low-network pincode; the last scan is stale.",
+                        "fix_steps": "1. Pull the order with lookup_order and read its tracking_note. 2. If the slot has passed by more than 24 hours, create a service request of type delivery_delay with urgency=high. 3. Tell the customer a freshridership scan is pushed automatically every 2 hours. 4. Do not promise a refund - refunds are owned by the orders agent.",
+                        "escalation_team": "Last Mile Operations",
+                        "severity": "high"
+                      },
+                      {
+                        "kb_id": "APX-KB-0103",
+                        "topic": "Account access",
+                        "error_code": "APX-4150",
+                        "surface": "Apex app",
+                        "symptom": "\"Invalid credentials (APX-4150)\" although the customer is sure the password is right.",
+                        "cause": "The account got soft-locked after 5 failed attempts, or OTP is going to a stale phone number.",
+                        "fix_steps": "1. Confirm the email on file with list_customer_orders. 2. Trigger \"Forgot password\" and ask the customer to read the 6-digit OTP to the agent. 3. If the lock persists after a correct OTP, create an account_access request with urgency=normal. 4. Never ask for the password itself and never read back an OTP the customer did not volunteer.",
+                        "escalation_team": "Identity & Accounts Desk",
+                        "severity": "medium"
+                      },
+                      {
+                        "kb_id": "APX-KB-0105",
+                        "topic": "Payments",
+                        "error_code": "APX-4305",
+                        "surface": "Website",
+                        "symptom": "Coupon code is rejected with \"APX-4305: coupon not applicable\".",
+                        "cause": "The cart contains a category that is excluded from the coupon, or the coupon expired at 23:59 IST.",
+                        "fix_steps": "1. Check the coupon terms against the cart categories in search_products. 2. Grocery subscriptions and EMI-only items are usually excluded. 3. An expired coupon cannot be reactivated; offer the current running coupon from company_info.",
+                        "escalation_team": "Loyalty & Coupons Desk",
+                        "severity": "low"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-52c22bb1-9ab3-490f-a265-49f4a4151564",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "dbc2c9b6-2bc1-4285-9852-b557a434a3fd",
+          "timestamp": 1792253300.7052078
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_5358912",
+                  "args": {
+                    "query": "app crashes"
+                  },
+                  "name": "search_knowledge_base"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TA0kD8_QC7cSNNXN8WsaMPRG_rXn6LzD7Xna13fY926KEjnSpJz7KpccEYyX7ZBz5R0K_YWZdyOP0GUrVSTF9bogpPk4wND44y3_Ny5yn2oxJlSSPwhVzljE="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 19,
+            "promptTokenCount": 2731,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2731
+              }
+            ],
+            "totalTokenCount": 2750
+          },
+          "invocationId": "e-52c22bb1-9ab3-490f-a265-49f4a4151564",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "a754d58b-4577-44e2-8b1b-28a48deec38b",
+          "timestamp": 1792253300.7283466
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_5358912",
+                  "name": "search_knowledge_base",
+                  "response": {
+                    "status": "ok",
+                    "query": "app crashes",
+                    "count": 3,
+                    "articles": [
+                      {
+                        "kb_id": "APX-KB-0105",
+                        "topic": "Payments",
+                        "error_code": "APX-4305",
+                        "surface": "Website",
+                        "symptom": "Coupon code is rejected with \"APX-4305: coupon not applicable\".",
+                        "cause": "The cart contains a category that is excluded from the coupon, or the coupon expired at 23:59 IST.",
+                        "fix_steps": "1. Check the coupon terms against the cart categories in search_products. 2. Grocery subscriptions and EMI-only items are usually excluded. 3. An expired coupon cannot be reactivated; offer the current running coupon from company_info.",
+                        "escalation_team": "Loyalty & Coupons Desk",
+                        "severity": "low"
+                      },
+                      {
+                        "kb_id": "APX-KB-0101",
+                        "topic": "Checkout",
+                        "error_code": "APX-4021",
+                        "surface": "Apex app / website",
+                        "symptom": "\"Payment failed (APX-4021)\" at checkout although UPI request was debited.",
+                        "cause": "UPI mandate succeeded at the bank but the payment-gateway callback to Apex timed out, so the order was not created.",
+                        "fix_steps": "1. Ask the customer to check their bank app for a pending mandate and reverse it if present. 2. Retry checkout with the same UPI handle on a new payment attempt. 3. If the debit repeats twice, raise a payment-fraud-safe request with urgency=high and emergency_type=payment_fraud. 4. Never ask the customer to share a UPI PIN, OTP or CVV.",
+                        "escalation_team": "Payments Recovery Desk",
+                        "severity": "high"
+                      },
+                      {
+                        "kb_id": "APX-KB-0102",
+                        "topic": "Delivery tracking",
+                        "error_code": "APX-4099",
+                        "surface": "Apex app",
+                        "symptom": "Tracking page shows \"Out for delivery\" for more than 24 hours and never updates.",
+                        "cause": "The rider's handheld device lost connectivity in a low-network pincode; the last scan is stale.",
+                        "fix_steps": "1. Pull the order with lookup_order and read its tracking_note. 2. If the slot has passed by more than 24 hours, create a service request of type delivery_delay with urgency=high. 3. Tell the customer a freshridership scan is pushed automatically every 2 hours. 4. Do not promise a refund - refunds are owned by the orders agent.",
+                        "escalation_team": "Last Mile Operations",
+                        "severity": "high"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-52c22bb1-9ab3-490f-a265-49f4a4151564",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "357e9588-7bb3-4cb8-833a-970b4bafe616",
+          "timestamp": 1792253302.3058078
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3829546",
+                  "args": {
+                    "query": "crash"
+                  },
+                  "name": "search_knowledge_base"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TZvxXH5XH6rS29D8fG24wIjRBgYXJKht4b3vA2WQQt8eCW6ABhzM3voBaiN4DxbUuS0YHDSIERw36B7B_XJsi1wiUa0d_zQrY0KjP-AEf-kqeVNCVPwsq6IM="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 18,
+            "promptTokenCount": 3367,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3367
+              }
+            ],
+            "totalTokenCount": 3385
+          },
+          "invocationId": "e-52c22bb1-9ab3-490f-a265-49f4a4151564",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "177cfead-cea7-4364-84be-9c43052a7b1b",
+          "timestamp": 1792253302.3235145
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3829546",
+                  "name": "search_knowledge_base",
+                  "response": {
+                    "status": "no_match",
+                    "query": "crash",
+                    "message": "No article matches. Ask for the exact error code shown on screen, or file a request with the support agent."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-52c22bb1-9ab3-490f-a265-49f4a4151564",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "bbb6f69b-a798-45cd-8369-c38a12a9b477",
+          "timestamp": 1792253303.3517396
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "I am sorry to hear that the Apex app is crashing when you open My Orders on Android. We could not find a specific troubleshooting guide for that exact crash in our knowledge base. \n\nCould you please share a screenshot or the exact wording of any error message shown on the screen? If this persists, I would be happy to register a request for our technical support team to investigate further.",
+                "thoughtSignature": "EmAKXgFpFH0Teu-F_vRnXufDboLv-PT2q5XHK4lpj2zxBbwH4UWi_rm4AykAsfeMAFjNw4ACn27NUJ1MYlLW7sKhUdh9pdyVOLShn3z9VSsk1HoTlaUGl0gALcAqh6DLTDc="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 78,
+            "promptTokenCount": 3437,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3437
+              }
+            ],
+            "totalTokenCount": 3515
+          },
+          "invocationId": "e-52c22bb1-9ab3-490f-a265-49f4a4151564",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "810905ca-2516-4718-be7a-5035ac804282",
+          "timestamp": 1792253303.3748014
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "support_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "args": {
+              "query": "app crashes blank screen My Orders Android"
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "args": {
+              "query": "app crashes"
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "args": {
+              "query": "crash"
+            },
+            "author": "support_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "response": {
+              "status": "ok",
+              "query": "app crashes blank screen My Orders Android",
+              "count": 3,
+              "articles": [
+                {
+                  "kb_id": "APX-KB-0102",
+                  "topic": "Delivery tracking",
+                  "error_code": "APX-4099",
+                  "surface": "Apex app",
+                  "symptom": "Tracking page shows \"Out for delivery\" for more than 24 hours and never updates.",
+                  "cause": "The rider's handheld device lost connectivity in a low-network pincode; the last scan is stale.",
+                  "fix_steps": "1. Pull the order with lookup_order and read its tracking_note. 2. If the slot has passed by more than 24 hours, create a service request of type delivery_delay with urgency=high. 3. Tell the customer a freshridership scan is pushed automatically every 2 hours. 4. Do not promise a refund - refunds are owned by the orders agent.",
+                  "escalation_team": "Last Mile Operations",
+                  "severity": "high"
+                },
+                {
+                  "kb_id": "APX-KB-0103",
+                  "topic": "Account access",
+                  "error_code": "APX-4150",
+                  "surface": "Apex app",
+                  "symptom": "\"Invalid credentials (APX-4150)\" although the customer is sure the password is right.",
+                  "cause": "The account got soft-locked after 5 failed attempts, or OTP is going to a stale phone number.",
+                  "fix_steps": "1. Confirm the email on file with list_customer_orders. 2. Trigger \"Forgot password\" and ask the customer to read the 6-digit OTP to the agent. 3. If the lock persists after a correct OTP, create an account_access request with urgency=normal. 4. Never ask for the password itself and never read back an OTP the customer did not volunteer.",
+                  "escalation_team": "Identity & Accounts Desk",
+                  "severity": "medium"
+                },
+                {
+                  "kb_id": "APX-KB-0105",
+                  "topic": "Payments",
+                  "error_code": "APX-4305",
+                  "surface": "Website",
+                  "symptom": "Coupon code is rejected with \"APX-4305: coupon not applicable\".",
+                  "cause": "The cart contains a category that is excluded from the coupon, or the coupon expired at 23:59 IST.",
+                  "fix_steps": "1. Check the coupon terms against the cart categories in search_products. 2. Grocery subscriptions and EMI-only items are usually excluded. 3. An expired coupon cannot be reactivated; offer the current running coupon from company_info.",
+                  "escalation_team": "Loyalty & Coupons Desk",
+                  "severity": "low"
+                }
+              ]
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "response": {
+              "status": "ok",
+              "query": "app crashes",
+              "count": 3,
+              "articles": [
+                {
+                  "kb_id": "APX-KB-0105",
+                  "topic": "Payments",
+                  "error_code": "APX-4305",
+                  "surface": "Website",
+                  "symptom": "Coupon code is rejected with \"APX-4305: coupon not applicable\".",
+                  "cause": "The cart contains a category that is excluded from the coupon, or the coupon expired at 23:59 IST.",
+                  "fix_steps": "1. Check the coupon terms against the cart categories in search_products. 2. Grocery subscriptions and EMI-only items are usually excluded. 3. An expired coupon cannot be reactivated; offer the current running coupon from company_info.",
+                  "escalation_team": "Loyalty & Coupons Desk",
+                  "severity": "low"
+                },
+                {
+                  "kb_id": "APX-KB-0101",
+                  "topic": "Checkout",
+                  "error_code": "APX-4021",
+                  "surface": "Apex app / website",
+                  "symptom": "\"Payment failed (APX-4021)\" at checkout although UPI request was debited.",
+                  "cause": "UPI mandate succeeded at the bank but the payment-gateway callback to Apex timed out, so the order was not created.",
+                  "fix_steps": "1. Ask the customer to check their bank app for a pending mandate and reverse it if present. 2. Retry checkout with the same UPI handle on a new payment attempt. 3. If the debit repeats twice, raise a payment-fraud-safe request with urgency=high and emergency_type=payment_fraud. 4. Never ask the customer to share a UPI PIN, OTP or CVV.",
+                  "escalation_team": "Payments Recovery Desk",
+                  "severity": "high"
+                },
+                {
+                  "kb_id": "APX-KB-0102",
+                  "topic": "Delivery tracking",
+                  "error_code": "APX-4099",
+                  "surface": "Apex app",
+                  "symptom": "Tracking page shows \"Out for delivery\" for more than 24 hours and never updates.",
+                  "cause": "The rider's handheld device lost connectivity in a low-network pincode; the last scan is stale.",
+                  "fix_steps": "1. Pull the order with lookup_order and read its tracking_note. 2. If the slot has passed by more than 24 hours, create a service request of type delivery_delay with urgency=high. 3. Tell the customer a freshridership scan is pushed automatically every 2 hours. 4. Do not promise a refund - refunds are owned by the orders agent.",
+                  "escalation_team": "Last Mile Operations",
+                  "severity": "high"
+                }
+              ]
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "response": {
+              "status": "no_match",
+              "query": "crash",
+              "message": "No article matches. Ask for the exact error code shown on screen, or file a request with the support agent."
+            },
+            "author": "support_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "support_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "support_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 13653,
+        "final_text": "I am sorry to hear that the Apex app is crashing when you open My Orders on Android. We could not find a specific troubleshooting guide for that exact crash in our knowledge base. \n\nCould you please share a screenshot or the exact wording of any error message shown on the screen? If this persists, I would be happy to register a request for our technical support team to investigate further.",
+        "state_delta": {},
+        "n_events": 9
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 10.55,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called search_knowledge_base",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'search_knowledge_base', 'search_knowledge_base', 'search_knowledge_base']"
+    },
+    {
+      "check": "agent_involved support_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'support_agent'] transfers=['support_agent']"
+    },
+    {
+      "check": "agent_excluded orders_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'support_agent']"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

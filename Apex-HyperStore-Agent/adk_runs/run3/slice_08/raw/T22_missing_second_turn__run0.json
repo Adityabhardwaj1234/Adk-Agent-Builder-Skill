@@ -1,0 +1,1161 @@
+{
+  "test_id": "T22_missing_second_turn",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "service_request_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_service_catalog",
+        "args": {},
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "check_request_readiness",
+        "args": {
+          "email": "daniel.okafor@example.com",
+          "full_name": "Daniel Okafor",
+          "request_type": "product_defect",
+          "issue_summary": "damaged TV"
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "check_request_readiness",
+        "args": {
+          "full_name": "Daniel Okafor",
+          "request_type": "product_defect",
+          "issue_summary": "The screen had a crack across it when I opened the box.",
+          "email": "daniel.okafor@example.com"
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_service_catalog",
+        "response": {
+          "status": "ok",
+          "request_types": [
+            {
+              "value": "order_issue",
+              "label": "A problem with an order"
+            },
+            {
+              "value": "delivery_delay",
+              "label": "Delivery running late or not arriving"
+            },
+            {
+              "value": "return_exchange",
+              "label": "Return or exchange of an item"
+            },
+            {
+              "value": "refund",
+              "label": "Refund not received or wrong amount"
+            },
+            {
+              "value": "product_defect",
+              "label": "Item defective, damaged or wrong"
+            },
+            {
+              "value": "billing",
+              "label": "Charges, invoice or coupon problem"
+            },
+            {
+              "value": "account_access",
+              "label": "Login, OTP or profile access"
+            },
+            {
+              "value": "loyalty",
+              "label": "Prime membership, points or coupons"
+            },
+            {
+              "value": "feedback",
+              "label": "Compliment, complaint or suggestion"
+            },
+            {
+              "value": "emergency",
+              "label": "Something urgent that needs the response desk now"
+            },
+            {
+              "value": "other",
+              "label": "Something not covered above"
+            }
+          ],
+          "urgency_levels": [
+            {
+              "value": "emergency",
+              "respond_within": "15 minutes"
+            },
+            {
+              "value": "high",
+              "respond_within": "120 minutes"
+            },
+            {
+              "value": "normal",
+              "respond_within": "24 hours"
+            },
+            {
+              "value": "low",
+              "respond_within": "72 hours"
+            }
+          ],
+          "emergency_types": [
+            {
+              "value": "none",
+              "label": "Not an emergency"
+            },
+            {
+              "value": "safety_hazard",
+              "label": "Safety hazard - electrical, fire or structural risk"
+            },
+            {
+              "value": "food_safety",
+              "label": "Food safety - spoiled, contaminated or wrong temperature"
+            },
+            {
+              "value": "payment_fraud",
+              "label": "Payment fraud - unauthorised debit or duplicate charge"
+            },
+            {
+              "value": "medical_allergy",
+              "label": "Medical or allergy reaction to a delivered product"
+            },
+            {
+              "value": "damaged_goods",
+              "label": "Damaged goods - leaking, broken or hazardous packaging"
+            },
+            {
+              "value": "access_blocked",
+              "label": "Access blocked - locked gate, no water or electricity supply"
+            },
+            {
+              "value": "no_delivery_aged",
+              "label": "No delivery and the customer is elderly, disabled or dependants alone"
+            }
+          ],
+          "channels": [
+            "web_chat",
+            "whatsapp",
+            "phone",
+            "email",
+            "store_counter"
+          ],
+          "mandatory_fields": [
+            "full_name",
+            "email",
+            "phone",
+            "request_type",
+            "issue_summary"
+          ],
+          "optional_fields": [
+            "urgency (default normal)",
+            "emergency_type (default none)",
+            "scheduled_for (default asap)",
+            "order_id"
+          ],
+          "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+          "message": "Collect all mandatory fields before calling create_support_request."
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "check_request_readiness",
+        "response": {
+          "status": "ok",
+          "ready": false,
+          "checks": [
+            {
+              "field": "full_name",
+              "ok": true,
+              "detail": "'Daniel Okafor' accepted"
+            },
+            {
+              "field": "email",
+              "ok": true,
+              "detail": "'daniel.okafor@example.com' accepted"
+            },
+            {
+              "field": "phone",
+              "ok": false,
+              "detail": "not provided yet - ask the customer for it"
+            },
+            {
+              "field": "request_type",
+              "ok": true,
+              "detail": "'product_defect' is valid"
+            },
+            {
+              "field": "issue_summary",
+              "ok": false,
+              "detail": "needs at least 12 characters describing the problem in the customer's words"
+            }
+          ],
+          "missing": [
+            "phone",
+            "issue_summary"
+          ],
+          "message": "Still needed: phone, issue_summary"
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "check_request_readiness",
+        "response": {
+          "status": "ok",
+          "ready": false,
+          "checks": [
+            {
+              "field": "full_name",
+              "ok": true,
+              "detail": "'Daniel Okafor' accepted"
+            },
+            {
+              "field": "email",
+              "ok": true,
+              "detail": "'daniel.okafor@example.com' accepted"
+            },
+            {
+              "field": "phone",
+              "ok": false,
+              "detail": "not provided yet - ask the customer for it"
+            },
+            {
+              "field": "request_type",
+              "ok": true,
+              "detail": "'product_defect' is valid"
+            },
+            {
+              "field": "issue_summary",
+              "ok": true,
+              "detail": "detailed enough"
+            }
+          ],
+          "missing": [
+            "phone"
+          ],
+          "message": "Still needed: phone"
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "service_request_agent"
+    ],
+    "texts": [
+      {
+        "author": "service_request_agent",
+        "text": "I am sorry to hear that your TV arrived damaged. To help me file this request for you, could you please provide your phone number and a brief description of the damage?"
+      },
+      {
+        "author": "service_request_agent",
+        "text": "Thank you for those details. I just need your phone number to complete the request for you."
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "service_request_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 20033,
+    "final_text": "Thank you for those details. I just need your phone number to complete the request for you.",
+    "state_delta": {},
+    "n_events": 10,
+    "http_error": ""
+  },
+  "session_id": "T22_missing_second_turn-0-d829dd",
+  "turns": [
+    {
+      "user": "I want to register a complaint about a damaged TV. I am Daniel Okafor, daniel.okafor@example.com.",
+      "status": 200,
+      "latency_s": 27.52,
+      "events": [
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_224893",
+                  "args": {
+                    "agent_name": "service_request_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EnMKcQFpFH0TjeeafbXjhkGpTLSUgR5t4_wZpc_XmG7E6uFQoqrcK09FW-oYKK30QCMpJTKAgb1jTHozr6IvuoDlWZG808kMJ_sBE8eDiAI-rYFtC9rwAFK-YL5ycJtk-7NYwONKI9LQcoOihRZaxQepDw-_"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 24,
+            "promptTokenCount": 1878,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1878
+              }
+            ],
+            "totalTokenCount": 1902
+          },
+          "invocationId": "e-cde036c3-197b-48dc-b7ca-f08b05814d5f",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "f0827199-3258-4c03-a009-01d87c5f62ea",
+          "timestamp": 1792250356.598807
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_224893",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-cde036c3-197b-48dc-b7ca-f08b05814d5f",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "service_request_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "10c96420-3aa0-4477-8a72-fc5f94e2b1f3",
+          "timestamp": 1792250359.3894448
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_655717",
+                  "args": {},
+                  "name": "list_service_catalog"
+                },
+                "thoughtSignature": "EnMKcQFpFH0TiONiUe5sva8QZG5aX8mtW1mVlq7_4jL4mNC9hwtD2OUIrQXHbzzY_3EfT_ykFNAXdvyYTS_3r9EAY5uFKkbJ445U9n9ZOaptlCSkOU3PFSsbPQrWwqhUFN6UNA5bxQo3Zu44dvkYTzEq50hY"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 12,
+            "promptTokenCount": 2885,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2885
+              }
+            ],
+            "totalTokenCount": 2897
+          },
+          "invocationId": "e-cde036c3-197b-48dc-b7ca-f08b05814d5f",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "ccc4a359-1f8e-4c06-b859-a17084fdcf74",
+          "timestamp": 1792250359.4123318
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_655717",
+                  "name": "list_service_catalog",
+                  "response": {
+                    "status": "ok",
+                    "request_types": [
+                      {
+                        "value": "order_issue",
+                        "label": "A problem with an order"
+                      },
+                      {
+                        "value": "delivery_delay",
+                        "label": "Delivery running late or not arriving"
+                      },
+                      {
+                        "value": "return_exchange",
+                        "label": "Return or exchange of an item"
+                      },
+                      {
+                        "value": "refund",
+                        "label": "Refund not received or wrong amount"
+                      },
+                      {
+                        "value": "product_defect",
+                        "label": "Item defective, damaged or wrong"
+                      },
+                      {
+                        "value": "billing",
+                        "label": "Charges, invoice or coupon problem"
+                      },
+                      {
+                        "value": "account_access",
+                        "label": "Login, OTP or profile access"
+                      },
+                      {
+                        "value": "loyalty",
+                        "label": "Prime membership, points or coupons"
+                      },
+                      {
+                        "value": "feedback",
+                        "label": "Compliment, complaint or suggestion"
+                      },
+                      {
+                        "value": "emergency",
+                        "label": "Something urgent that needs the response desk now"
+                      },
+                      {
+                        "value": "other",
+                        "label": "Something not covered above"
+                      }
+                    ],
+                    "urgency_levels": [
+                      {
+                        "value": "emergency",
+                        "respond_within": "15 minutes"
+                      },
+                      {
+                        "value": "high",
+                        "respond_within": "120 minutes"
+                      },
+                      {
+                        "value": "normal",
+                        "respond_within": "24 hours"
+                      },
+                      {
+                        "value": "low",
+                        "respond_within": "72 hours"
+                      }
+                    ],
+                    "emergency_types": [
+                      {
+                        "value": "none",
+                        "label": "Not an emergency"
+                      },
+                      {
+                        "value": "safety_hazard",
+                        "label": "Safety hazard - electrical, fire or structural risk"
+                      },
+                      {
+                        "value": "food_safety",
+                        "label": "Food safety - spoiled, contaminated or wrong temperature"
+                      },
+                      {
+                        "value": "payment_fraud",
+                        "label": "Payment fraud - unauthorised debit or duplicate charge"
+                      },
+                      {
+                        "value": "medical_allergy",
+                        "label": "Medical or allergy reaction to a delivered product"
+                      },
+                      {
+                        "value": "damaged_goods",
+                        "label": "Damaged goods - leaking, broken or hazardous packaging"
+                      },
+                      {
+                        "value": "access_blocked",
+                        "label": "Access blocked - locked gate, no water or electricity supply"
+                      },
+                      {
+                        "value": "no_delivery_aged",
+                        "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                      }
+                    ],
+                    "channels": [
+                      "web_chat",
+                      "whatsapp",
+                      "phone",
+                      "email",
+                      "store_counter"
+                    ],
+                    "mandatory_fields": [
+                      "full_name",
+                      "email",
+                      "phone",
+                      "request_type",
+                      "issue_summary"
+                    ],
+                    "optional_fields": [
+                      "urgency (default normal)",
+                      "emergency_type (default none)",
+                      "scheduled_for (default asap)",
+                      "order_id"
+                    ],
+                    "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+                    "message": "Collect all mandatory fields before calling create_support_request."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-cde036c3-197b-48dc-b7ca-f08b05814d5f",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "f6bdd3b1-6bcc-42f4-96b1-e4b170f4421a",
+          "timestamp": 1792250365.0224638
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3239068",
+                  "args": {
+                    "email": "daniel.okafor@example.com",
+                    "full_name": "Daniel Okafor",
+                    "request_type": "product_defect",
+                    "issue_summary": "damaged TV"
+                  },
+                  "name": "check_request_readiness"
+                },
+                "thoughtSignature": "EnMKcQFpFH0TSoSS-JZd3o9aPzBRocMLBrQVJfzy7f208AGicCybKxXG6azES8Yf9OaZ69VSH2PYRo-yqUdc2sRnJExerWHWu3pYcwfI6x3NllQh-fJeQoX_VySvg8RLFp3pUF0B4iWm84jw_QAW5fQYtZqR"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 55,
+            "promptTokenCount": 3509,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3509
+              }
+            ],
+            "totalTokenCount": 3564
+          },
+          "invocationId": "e-cde036c3-197b-48dc-b7ca-f08b05814d5f",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "5fbb24ae-9d9e-4a6e-9b38-8f553bc1dfa4",
+          "timestamp": 1792250365.043492
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3239068",
+                  "name": "check_request_readiness",
+                  "response": {
+                    "status": "ok",
+                    "ready": false,
+                    "checks": [
+                      {
+                        "field": "full_name",
+                        "ok": true,
+                        "detail": "'Daniel Okafor' accepted"
+                      },
+                      {
+                        "field": "email",
+                        "ok": true,
+                        "detail": "'daniel.okafor@example.com' accepted"
+                      },
+                      {
+                        "field": "phone",
+                        "ok": false,
+                        "detail": "not provided yet - ask the customer for it"
+                      },
+                      {
+                        "field": "request_type",
+                        "ok": true,
+                        "detail": "'product_defect' is valid"
+                      },
+                      {
+                        "field": "issue_summary",
+                        "ok": false,
+                        "detail": "needs at least 12 characters describing the problem in the customer's words"
+                      }
+                    ],
+                    "missing": [
+                      "phone",
+                      "issue_summary"
+                    ],
+                    "message": "Still needed: phone, issue_summary"
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-cde036c3-197b-48dc-b7ca-f08b05814d5f",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "9d413de7-9772-417f-a4f3-20f2ab789009",
+          "timestamp": 1792250382.4967303
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "I am sorry to hear that your TV arrived damaged. To help me file this request for you, could you please provide your phone number and a brief description of the damage?",
+                "thoughtSignature": "EnMKcQFpFH0TuUgbWPFE5xS1IWcAHTyZlV5QPA1SdVt3L_y1OV1GMQEJZ90roF7ElepGI4a17MPSXFPeUQW7Dax4F_bHmKpPXxia6xBcFN25dC8_QA5V2dPVuf1zwc8nV8G0V_AlM-iFQXqt2IPJaGwpUeiu"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 35,
+            "promptTokenCount": 3743,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3743
+              }
+            ],
+            "totalTokenCount": 3778
+          },
+          "invocationId": "e-cde036c3-197b-48dc-b7ca-f08b05814d5f",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "58a36bb6-e789-4b25-92eb-b022e74b70b7",
+          "timestamp": 1792250382.5162547
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "service_request_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_service_catalog",
+            "args": {},
+            "author": "service_request_agent"
+          },
+          {
+            "tool": "check_request_readiness",
+            "args": {
+              "email": "daniel.okafor@example.com",
+              "full_name": "Daniel Okafor",
+              "request_type": "product_defect",
+              "issue_summary": "damaged TV"
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_service_catalog",
+            "response": {
+              "status": "ok",
+              "request_types": [
+                {
+                  "value": "order_issue",
+                  "label": "A problem with an order"
+                },
+                {
+                  "value": "delivery_delay",
+                  "label": "Delivery running late or not arriving"
+                },
+                {
+                  "value": "return_exchange",
+                  "label": "Return or exchange of an item"
+                },
+                {
+                  "value": "refund",
+                  "label": "Refund not received or wrong amount"
+                },
+                {
+                  "value": "product_defect",
+                  "label": "Item defective, damaged or wrong"
+                },
+                {
+                  "value": "billing",
+                  "label": "Charges, invoice or coupon problem"
+                },
+                {
+                  "value": "account_access",
+                  "label": "Login, OTP or profile access"
+                },
+                {
+                  "value": "loyalty",
+                  "label": "Prime membership, points or coupons"
+                },
+                {
+                  "value": "feedback",
+                  "label": "Compliment, complaint or suggestion"
+                },
+                {
+                  "value": "emergency",
+                  "label": "Something urgent that needs the response desk now"
+                },
+                {
+                  "value": "other",
+                  "label": "Something not covered above"
+                }
+              ],
+              "urgency_levels": [
+                {
+                  "value": "emergency",
+                  "respond_within": "15 minutes"
+                },
+                {
+                  "value": "high",
+                  "respond_within": "120 minutes"
+                },
+                {
+                  "value": "normal",
+                  "respond_within": "24 hours"
+                },
+                {
+                  "value": "low",
+                  "respond_within": "72 hours"
+                }
+              ],
+              "emergency_types": [
+                {
+                  "value": "none",
+                  "label": "Not an emergency"
+                },
+                {
+                  "value": "safety_hazard",
+                  "label": "Safety hazard - electrical, fire or structural risk"
+                },
+                {
+                  "value": "food_safety",
+                  "label": "Food safety - spoiled, contaminated or wrong temperature"
+                },
+                {
+                  "value": "payment_fraud",
+                  "label": "Payment fraud - unauthorised debit or duplicate charge"
+                },
+                {
+                  "value": "medical_allergy",
+                  "label": "Medical or allergy reaction to a delivered product"
+                },
+                {
+                  "value": "damaged_goods",
+                  "label": "Damaged goods - leaking, broken or hazardous packaging"
+                },
+                {
+                  "value": "access_blocked",
+                  "label": "Access blocked - locked gate, no water or electricity supply"
+                },
+                {
+                  "value": "no_delivery_aged",
+                  "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                }
+              ],
+              "channels": [
+                "web_chat",
+                "whatsapp",
+                "phone",
+                "email",
+                "store_counter"
+              ],
+              "mandatory_fields": [
+                "full_name",
+                "email",
+                "phone",
+                "request_type",
+                "issue_summary"
+              ],
+              "optional_fields": [
+                "urgency (default normal)",
+                "emergency_type (default none)",
+                "scheduled_for (default asap)",
+                "order_id"
+              ],
+              "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+              "message": "Collect all mandatory fields before calling create_support_request."
+            },
+            "author": "service_request_agent"
+          },
+          {
+            "tool": "check_request_readiness",
+            "response": {
+              "status": "ok",
+              "ready": false,
+              "checks": [
+                {
+                  "field": "full_name",
+                  "ok": true,
+                  "detail": "'Daniel Okafor' accepted"
+                },
+                {
+                  "field": "email",
+                  "ok": true,
+                  "detail": "'daniel.okafor@example.com' accepted"
+                },
+                {
+                  "field": "phone",
+                  "ok": false,
+                  "detail": "not provided yet - ask the customer for it"
+                },
+                {
+                  "field": "request_type",
+                  "ok": true,
+                  "detail": "'product_defect' is valid"
+                },
+                {
+                  "field": "issue_summary",
+                  "ok": false,
+                  "detail": "needs at least 12 characters describing the problem in the customer's words"
+                }
+              ],
+              "missing": [
+                "phone",
+                "issue_summary"
+              ],
+              "message": "Still needed: phone, issue_summary"
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "service_request_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "service_request_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 12141,
+        "final_text": "I am sorry to hear that your TV arrived damaged. To help me file this request for you, could you please provide your phone number and a brief description of the damage?",
+        "state_delta": {},
+        "n_events": 7
+      }
+    },
+    {
+      "user": "The screen had a crack across it when I opened the box.",
+      "status": 200,
+      "latency_s": 6.45,
+      "events": [
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_1189570",
+                  "args": {
+                    "full_name": "Daniel Okafor",
+                    "request_type": "product_defect",
+                    "issue_summary": "The screen had a crack across it when I opened the box.",
+                    "email": "daniel.okafor@example.com"
+                  },
+                  "name": "check_request_readiness"
+                },
+                "thoughtSignature": "EnMKcQFpFH0T-Pahd_NtS6jxrgu1HRXyZAsLS2WM4NYwXskSvJOKXs0z740c0JTdVx7oVF6_blBCFQT06dYcUjO3E9aaRKoZ2GSqKvEzId9hwKP8erRVTd8X28hCwXy61Gg9NfdKonq7LZDcArOLP2nbKU-B"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 66,
+            "promptTokenCount": 3793,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3793
+              }
+            ],
+            "totalTokenCount": 3859
+          },
+          "invocationId": "e-6f2137a1-d805-4b2a-b69d-08426e503e4a",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "842fc574-2fdf-408c-ad5e-5c0df57115d7",
+          "timestamp": 1792250383.8232205
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_1189570",
+                  "name": "check_request_readiness",
+                  "response": {
+                    "status": "ok",
+                    "ready": false,
+                    "checks": [
+                      {
+                        "field": "full_name",
+                        "ok": true,
+                        "detail": "'Daniel Okafor' accepted"
+                      },
+                      {
+                        "field": "email",
+                        "ok": true,
+                        "detail": "'daniel.okafor@example.com' accepted"
+                      },
+                      {
+                        "field": "phone",
+                        "ok": false,
+                        "detail": "not provided yet - ask the customer for it"
+                      },
+                      {
+                        "field": "request_type",
+                        "ok": true,
+                        "detail": "'product_defect' is valid"
+                      },
+                      {
+                        "field": "issue_summary",
+                        "ok": true,
+                        "detail": "detailed enough"
+                      }
+                    ],
+                    "missing": [
+                      "phone"
+                    ],
+                    "message": "Still needed: phone"
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-6f2137a1-d805-4b2a-b69d-08426e503e4a",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "24f999f7-af6b-451b-9a23-fec29fec2f67",
+          "timestamp": 1792250387.1810312
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "Thank you for those details. I just need your phone number to complete the request for you.",
+                "thoughtSignature": "EnMKcQFpFH0T2Z4K7Pz5JK5nooNTy8MnT2tB3kbb9veMPoowPiQFof6QKCQNQMU0Kjx06XE1471cAhMqhMoTCUAx-rMr3LP63PZ5c8cWr5sB6_mzjihIma1TWgRYw9KREYOpBJiN9FfHgi-FMghMF4dKyAX1"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 19,
+            "promptTokenCount": 4014,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 4014
+              }
+            ],
+            "totalTokenCount": 4033
+          },
+          "invocationId": "e-6f2137a1-d805-4b2a-b69d-08426e503e4a",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "66184819-ff07-474e-b3dc-e64c246bba04",
+          "timestamp": 1792250387.2033257
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "check_request_readiness",
+            "args": {
+              "full_name": "Daniel Okafor",
+              "request_type": "product_defect",
+              "issue_summary": "The screen had a crack across it when I opened the box.",
+              "email": "daniel.okafor@example.com"
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "check_request_readiness",
+            "response": {
+              "status": "ok",
+              "ready": false,
+              "checks": [
+                {
+                  "field": "full_name",
+                  "ok": true,
+                  "detail": "'Daniel Okafor' accepted"
+                },
+                {
+                  "field": "email",
+                  "ok": true,
+                  "detail": "'daniel.okafor@example.com' accepted"
+                },
+                {
+                  "field": "phone",
+                  "ok": false,
+                  "detail": "not provided yet - ask the customer for it"
+                },
+                {
+                  "field": "request_type",
+                  "ok": true,
+                  "detail": "'product_defect' is valid"
+                },
+                {
+                  "field": "issue_summary",
+                  "ok": true,
+                  "detail": "detailed enough"
+                }
+              ],
+              "missing": [
+                "phone"
+              ],
+              "message": "Still needed: phone"
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "authors": [
+          "service_request_agent"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 7892,
+        "final_text": "Thank you for those details. I just need your phone number to complete the request for you.",
+        "state_delta": {},
+        "n_events": 3
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 33.97,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /phone|mobile|number|call you/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "agent_involved service_request_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'service_request_agent'] transfers=['service_request_agent']"
+    },
+    {
+      "check": "max_latency_s",
+      "ok": true,
+      "detail": "34.0s"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

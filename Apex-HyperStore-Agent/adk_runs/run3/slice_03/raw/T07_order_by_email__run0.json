@@ -1,0 +1,422 @@
+{
+  "test_id": "T07_order_by_email",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "orders_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_customer_orders",
+        "args": {
+          "email": "daniel.okafor@example.com"
+        },
+        "author": "orders_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_customer_orders",
+        "response": {
+          "status": "ok",
+          "email": "daniel.okafor@example.com",
+          "customer": {
+            "customer_id": "APX-CUS-100902",
+            "full_name": "Daniel Okafor",
+            "email": "daniel.okafor@example.com",
+            "phone": "+919845009902",
+            "city": "Chennai",
+            "loyalty_tier": "Gold",
+            "loyalty_points": 7735,
+            "joined_on": "2020-11-19"
+          },
+          "orders": [
+            {
+              "order_id": "APX-ORD-2026-041988",
+              "customer_id": "APX-CUS-100902",
+              "customer_name": "Daniel Okafor",
+              "email": "daniel.okafor@example.com",
+              "phone": "+919845009902",
+              "placed_at": "2026-10-16T08:15:00",
+              "status": "payment_captured",
+              "delivery_slot": "2026-10-19T10:00:00 to 13:00",
+              "warehouse": "WH-BLR-01",
+              "total_inr": 27999.0,
+              "item_count": 1,
+              "payment_mode": "Wallet",
+              "address": "12/3, Palm Grove Apartments, Adyar, Chennai 600020",
+              "tracking_note": "Payment captured, order awaiting stock allocation at WH-BLR-01 (low stock item)."
+            }
+          ],
+          "message": "Found 1 order(s) for daniel.okafor@example.com."
+        },
+        "author": "orders_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "orders_agent"
+    ],
+    "texts": [
+      {
+        "author": "orders_agent",
+        "text": "We found one recent order under your email address for a total of \u20b927,999 (Order ID: `APX-ORD-2026-041988`). \n\nHere are the details for that order:\n- **Status:** Payment captured, awaiting stock allocation\n- **Delivery Slot:** 2026-10-19 between 10:00 and 13:00\n- **Tracking Note:** Payment captured, order awaiting stock allocation at WH-BLR-01 (low stock item).\n\nLet us know if you have any questions or need further assistance with this order!"
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "orders_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 7380,
+    "final_text": "We found one recent order under your email address for a total of \u20b927,999 (Order ID: `APX-ORD-2026-041988`). \n\nHere are the details for that order:\n- **Status:** Payment captured, awaiting stock allocation\n- **Delivery Slot:** 2026-10-19 between 10:00 and 13:00\n- **Tracking Note:** Payment captured, order awaiting stock allocation at WH-BLR-01 (low stock item).\n\nLet us know if you have any questions or need further assistance with this order!",
+    "state_delta": {},
+    "n_events": 5,
+    "http_error": ""
+  },
+  "session_id": "T07_order_by_email-0-6f0556",
+  "turns": [
+    {
+      "user": "Hi, I cannot find my order number. My email is daniel.okafor@example.com - can you check my recent orders?",
+      "status": 200,
+      "latency_s": 9.34,
+      "events": [
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_1659484",
+                  "args": {
+                    "agent_name": "orders_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0T0gkoPHgzoq7FHnYzlZSgkSoiGbUlNIvphNce3dwFqRUzaJLNsL1tGwyruP9W1cNnCmGvAbWWawViu0kkrAQREaGY8p5bzAWY4CIb-8GIUmKXs-EcOJp4E7M="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 1880,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1880
+              }
+            ],
+            "totalTokenCount": 1902
+          },
+          "invocationId": "e-3bdce55d-085e-4334-a5a0-8e7ef932f1e1",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "efc4eef7-261b-403e-bcf5-3534fb3d8231",
+          "timestamp": 1792249961.898344
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_1659484",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-3bdce55d-085e-4334-a5a0-8e7ef932f1e1",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "orders_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "3ead81ab-422d-4c81-a062-2a9ea9acab75",
+          "timestamp": 1792249965.6810205
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_2152434",
+                  "args": {
+                    "email": "daniel.okafor@example.com"
+                  },
+                  "name": "list_customer_orders"
+                },
+                "thoughtSignature": "EmAKXgFpFH0T6sNmK3LF5MmmK2IOrmpNNh6z_MZ_oSeEmRk0PHHLIPV1wFu8rptl563v_R5-B8DjBo06q79ldSEQbMRgm8H6Ih4eVGQ0IIan-Kb_kLbLf4R-sBiDMk2PHCs="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 25,
+            "promptTokenCount": 2447,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2447
+              }
+            ],
+            "totalTokenCount": 2472
+          },
+          "invocationId": "e-3bdce55d-085e-4334-a5a0-8e7ef932f1e1",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "0fc000b7-8a4b-4708-9c7e-240202926b51",
+          "timestamp": 1792249965.7029278
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_2152434",
+                  "name": "list_customer_orders",
+                  "response": {
+                    "status": "ok",
+                    "email": "daniel.okafor@example.com",
+                    "customer": {
+                      "customer_id": "APX-CUS-100902",
+                      "full_name": "Daniel Okafor",
+                      "email": "daniel.okafor@example.com",
+                      "phone": "+919845009902",
+                      "city": "Chennai",
+                      "loyalty_tier": "Gold",
+                      "loyalty_points": 7735,
+                      "joined_on": "2020-11-19"
+                    },
+                    "orders": [
+                      {
+                        "order_id": "APX-ORD-2026-041988",
+                        "customer_id": "APX-CUS-100902",
+                        "customer_name": "Daniel Okafor",
+                        "email": "daniel.okafor@example.com",
+                        "phone": "+919845009902",
+                        "placed_at": "2026-10-16T08:15:00",
+                        "status": "payment_captured",
+                        "delivery_slot": "2026-10-19T10:00:00 to 13:00",
+                        "warehouse": "WH-BLR-01",
+                        "total_inr": 27999.0,
+                        "item_count": 1,
+                        "payment_mode": "Wallet",
+                        "address": "12/3, Palm Grove Apartments, Adyar, Chennai 600020",
+                        "tracking_note": "Payment captured, order awaiting stock allocation at WH-BLR-01 (low stock item)."
+                      }
+                    ],
+                    "message": "Found 1 order(s) for daniel.okafor@example.com."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-3bdce55d-085e-4334-a5a0-8e7ef932f1e1",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "id": "697db9f0-6498-4d3e-bf8b-9ff02faa9373",
+          "timestamp": 1792249968.8703961
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "We found one recent order under your email address for a total of \u20b927,999 (Order ID: `APX-ORD-2026-041988`). \n\nHere are the details for that order:\n- **Status:** Payment captured, awaiting stock allocation\n- **Delivery Slot:** 2026-10-19 between 10:00 and 13:00\n- **Tracking Note:** Payment captured, order awaiting stock allocation at WH-BLR-01 (low stock item).\n\nLet us know if you have any questions or need further assistance with this order!",
+                "thoughtSignature": "EmAKXgFpFH0TR8W9JKRfYDOtegMoPuzOh4d1UC1__i8EuiAxESxVR1n5-1W5Ho4HLwUIBtyrW1X8P29JEvfrW61KjMHvf3e_6DCnz80caPMBtd0kzfglYEnKdvICcPCqIF4="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 137,
+            "promptTokenCount": 2869,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2869
+              }
+            ],
+            "totalTokenCount": 3006
+          },
+          "invocationId": "e-3bdce55d-085e-4334-a5a0-8e7ef932f1e1",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "id": "28ef6c9b-d265-4999-8d36-7d187a431832",
+          "timestamp": 1792249968.8952699
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "orders_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_customer_orders",
+            "args": {
+              "email": "daniel.okafor@example.com"
+            },
+            "author": "orders_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_customer_orders",
+            "response": {
+              "status": "ok",
+              "email": "daniel.okafor@example.com",
+              "customer": {
+                "customer_id": "APX-CUS-100902",
+                "full_name": "Daniel Okafor",
+                "email": "daniel.okafor@example.com",
+                "phone": "+919845009902",
+                "city": "Chennai",
+                "loyalty_tier": "Gold",
+                "loyalty_points": 7735,
+                "joined_on": "2020-11-19"
+              },
+              "orders": [
+                {
+                  "order_id": "APX-ORD-2026-041988",
+                  "customer_id": "APX-CUS-100902",
+                  "customer_name": "Daniel Okafor",
+                  "email": "daniel.okafor@example.com",
+                  "phone": "+919845009902",
+                  "placed_at": "2026-10-16T08:15:00",
+                  "status": "payment_captured",
+                  "delivery_slot": "2026-10-19T10:00:00 to 13:00",
+                  "warehouse": "WH-BLR-01",
+                  "total_inr": 27999.0,
+                  "item_count": 1,
+                  "payment_mode": "Wallet",
+                  "address": "12/3, Palm Grove Apartments, Adyar, Chennai 600020",
+                  "tracking_note": "Payment captured, order awaiting stock allocation at WH-BLR-01 (low stock item)."
+                }
+              ],
+              "message": "Found 1 order(s) for daniel.okafor@example.com."
+            },
+            "author": "orders_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "orders_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "orders_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 7380,
+        "final_text": "We found one recent order under your email address for a total of \u20b927,999 (Order ID: `APX-ORD-2026-041988`). \n\nHere are the details for that order:\n- **Status:** Payment captured, awaiting stock allocation\n- **Delivery Slot:** 2026-10-19 between 10:00 and 13:00\n- **Tracking Note:** Payment captured, order awaiting stock allocation at WH-BLR-01 (low stock item).\n\nLet us know if you have any questions or need further assistance with this order!",
+        "state_delta": {},
+        "n_events": 5
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 9.34,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /APX-ORD-2026-041988|order/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called list_customer_orders",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'list_customer_orders']"
+    },
+    {
+      "check": "tool_args list_customer_orders",
+      "ok": true,
+      "detail": "calls: [{'tool': 'transfer_to_agent', 'args': {'agent_name': 'orders_agent'}, 'author': 'apex_concierge'}, {'tool': 'list_customer_orders', 'args': {'email': 'daniel.okafor@example.com'}, 'author': 'orders_agent'}]"
+    },
+    {
+      "check": "agent_involved orders_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'orders_agent'] transfers=['orders_agent']"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

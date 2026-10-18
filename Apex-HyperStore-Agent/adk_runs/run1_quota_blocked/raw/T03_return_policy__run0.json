@@ -1,0 +1,259 @@
+{
+  "test_id": "T03_return_policy",
+  "run": {
+    "calls": [
+      {
+        "tool": "get_company_info",
+        "args": {
+          "topic": "returns"
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "get_company_info",
+        "response": {
+          "status": "ok",
+          "topic": "returns",
+          "info": {
+            "brand": "Apex Hyperstore",
+            "topic": "returns",
+            "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+            "policies": {
+              "returns": "14-day return window from delivery for non-perishable items. Refund to the original payment method within 5 working days of pickup. Grocery/perishables, personal care and innerwear are non-returnable for hygiene reasons.",
+              "refunds": "Refunds are issued to the source account only - no cash refunds at the store. Bank settlement takes 3-5 working days after pickup scan.",
+              "cancellation": "Free cancellation any time before the order moves to 'out for delivery'. After that, refuse at doorstep or return under the 14-day policy."
+            }
+          }
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "authors": [
+      "apex_concierge"
+    ],
+    "texts": [
+      {
+        "author": "apex_concierge",
+        "text": "Here is an overview of our return and refund policy:\n\n* **Returns:** We offer a 14-day return window from delivery for non-perishable goods. For hygiene and safety reasons, groceries/perishables, personal care items, and innerwear cannot be returned.\n* **Refunds:** Refunds are credited directly to your original payment source within 3 to 5 business days following the pickup scan. Please note that we do not issue cash refunds in-store.\n* **Cancellations:** Orders can be cancelled free of charge at any time before they move to \"out for delivery.\" Once dispatched, you may refuse the package at your doorstep or initiate a return after delivery.\n\nIf you have an order you would like to return or check on, just share the order ID and we'll be glad to help!"
+      }
+    ],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 4564,
+    "final_text": "Here is an overview of our return and refund policy:\n\n* **Returns:** We offer a 14-day return window from delivery for non-perishable goods. For hygiene and safety reasons, groceries/perishables, personal care items, and innerwear cannot be returned.\n* **Refunds:** Refunds are credited directly to your original payment source within 3 to 5 business days following the pickup scan. Please note that we do not issue cash refunds in-store.\n* **Cancellations:** Orders can be cancelled free of charge at any time before they move to \"out for delivery.\" Once dispatched, you may refuse the package at your doorstep or initiate a return after delivery.\n\nIf you have an order you would like to return or check on, just share the order ID and we'll be glad to help!",
+    "state_delta": {},
+    "n_events": 3,
+    "http_error": ""
+  },
+  "session_id": "T03_return_policy-0-da65fb",
+  "turns": [
+    {
+      "user": "What is your return and refund policy?",
+      "status": 200,
+      "latency_s": 9.93,
+      "events": [
+        {
+          "modelVersion": "gemini-3.8-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_5240908",
+                  "args": {
+                    "topic": "returns"
+                  },
+                  "name": "get_company_info"
+                },
+                "thoughtSignature": "Ev4ECvsEAWkUfRNw7Gb7XwrSHlHX3-xFxRWv5W9qm3YOoq6SfZKgtAFdpIahN7UUzno3DvLpU6rvmjTDUf_r2kt7jtPuA9kbG-BBvOnNW7yxjG1_qJCnYQiJGSxevBtMvebG0zZZ_pMoI1ApnpEXZbA3BBvILpW7vlBrtA5pbNYjRoRtzys4o7pQ03BePyDu83dmVkSqunBV-qqh5bPbXVDLSzleZa1jWjdHF2oCezsSraPZcUpsHWDKI6JxS-PRodKC1stTmX4q0XkRpuH2vwwzFXVmfNnZPdsAWkg57VSptYxOHPNKLzm4z13-4se609FT0mJY6zLPCPNWqt-KzNTn_y6E5L3ToNeVOaOFYzdw5dYMBeNA4cgQ7egERqQ-dqb6bSVtrnQ47UJCyDgyng34b_nfuoqM34EfSQGrZUZQ2nAMjHkD-c75uuR2GNctm4hpsdFCH-FWYvqFSl-j00LXX2i3Flxtst3GQu6wEaFqGu_MKe3aQ5XENs-vxHeetKw2aPJifQ2SunpzqgmMm5V_y6SNDBDWVIXlwt5bMTUtJeMxGoISLH0Q0qWbZnq_UUofmXhPsta0myjOUOrHp0tNOnrfk_KxFgGO_13owJYO8E0kripGbOxf_g00a23M1gP5J6SAhTrGq00zzFUWLpxKGi23JC4f4Yd-__GYq8CvLGEWcC4ay7oU5pfRhXFu-0SZ7yqD_CC2h7I7kYJk_pXCA_fL64HeQ8ooRlPbEUalpZfX2AMw3TkO_p4CB1NpZVVsBQcV4ccw0PzI30RZrBgxjvq-uyx_rZZKbPoPf2Oy5E1Cwh-nhyehqXn7AqKqZXc1yVclmklndPzPLRpOf1I="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 18,
+            "promptTokenCount": 1860,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1860
+              }
+            ],
+            "thoughtsTokenCount": 121,
+            "totalTokenCount": 1999
+          },
+          "invocationId": "e-02d33947-163f-410e-b22b-12f37eda8318",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "e1289cbd-3342-4e7e-91d0-d82ac15697d8",
+          "timestamp": 1792248321.456391
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_5240908",
+                  "name": "get_company_info",
+                  "response": {
+                    "status": "ok",
+                    "topic": "returns",
+                    "info": {
+                      "brand": "Apex Hyperstore",
+                      "topic": "returns",
+                      "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+                      "policies": {
+                        "returns": "14-day return window from delivery for non-perishable items. Refund to the original payment method within 5 working days of pickup. Grocery/perishables, personal care and innerwear are non-returnable for hygiene reasons.",
+                        "refunds": "Refunds are issued to the source account only - no cash refunds at the store. Bank settlement takes 3-5 working days after pickup scan.",
+                        "cancellation": "Free cancellation any time before the order moves to 'out for delivery'. After that, refuse at doorstep or return under the 14-day policy."
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-02d33947-163f-410e-b22b-12f37eda8318",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "3beb277e-47ec-486a-a8a8-b4d56424e95d",
+          "timestamp": 1792248327.3232896
+        },
+        {
+          "modelVersion": "gemini-3.8-flash",
+          "content": {
+            "parts": [
+              {
+                "text": "Here is an overview of our return and refund policy:\n\n* **Returns:** We offer a 14-day return window from delivery for non-perishable goods. For hygiene and safety reasons, groceries/perishables, personal care items, and innerwear cannot be returned.\n* **Refunds:** Refunds are credited directly to your original payment source within 3 to 5 business days following the pickup scan. Please note that we do not issue cash refunds in-store.\n* **Cancellations:** Orders can be cancelled free of charge at any time before they move to \"out for delivery.\" Once dispatched, you may refuse the package at your doorstep or initiate a return after delivery.\n\nIf you have an order you would like to return or check on, just share the order ID and we'll be glad to help!",
+                "thoughtSignature": "Ep8HCpwHAWkUfRN0ETJA7C1pnHEdie2I0psvK_BWVivMA5neb7FjQWYFk9AyaTg5gdSuHYmxWpi3uocKXmq37jUFf2keG27-hsiEnH-DicnbnZxBGZcvADz-pWHU0ri30W5Fg0MnSO0KjtY4Ns1iIUkmTgeHGo-P1XWPQnbQBiBzIN-1tKYb-1b5EkWMHxzrr4JW-Y2Ioo3BXGvBSogO2cTyQl6pKj6uKEhTvMyPb6dabPvGlnWHC3bVf7JRht_xhUVFP_C7CdJL5bc7emkhYGt1lii2oX7L1Xkd_JXi1LRMBzfCNs3cuAbsuZv6-OUwkwfzuNO4V7vNorXFqw02_JhTja_l2MPPO6shGjTxEy2T321hpB4cw67q3b_G6daNdXrGFt2zCny6yi229VbpwZ7zX1YCZ4sgN1mr85_MkWvsHvUPrnp8B6fLqenmQ0B-e-Mil0zAqWugEZCuBypzDe4fjCp2YZWyRIZupjPdpif51VcBa6BVJhW140vIjFmthCmMcaYBhEZ8UbqX_rC9kbcGO0TRSoNC_QGYy7bKUko1xqI_UPvrWFpIYZpMOtkU2BjPXv67nCg2MJI-3YJmfTqS7cbWAtquO_1ShYlIErvi5ybFWAd_iH0_g__ILMsgS3D_fZFPC24FDEMII5Y1bTZBIbEbGjFJANFBWfzspV8quSGxG1Az_eOx2RQs53QQyCueKJ-HGLkz9wFq53WWS6GFIBTqRFudGSlO7mbmlf0DVNPxGKyEKCDHQSIDKpQZZSMqnsDYfEhDLJi1fZNRKU5fBOytvf8aM-wAE5OeXIxqQy5GAaQLtbZrLskPKWr_W9ZYA3ErapDrjbINMFea4JhMFUnnIRQS2tXU3tsgB79sCXD5FlihKBR70diD5Q8xgfuJ-8aIunevMKvye0GSJVSFj0EvBocCIXcZDksS1kpzMJuZg42uUO8Xt0txbj8r53hmGvlr-oksr8yAqna5H2Um0_g0wV6EnrByBVVkHSwZo5EcfIrK5oTVzN2_L7gPScBbtehlE4lAsUDyzis3LVrA4abQICYvv9aUqP2b9aUPGgXHB07iD5vfmYDKQfgO2Q4Yx8k0LsTPU30YYgLSjnGIqHUPSz3ek3R7RzPzuF_muoY4PuPcCSke-tiHQ3QJOh_36SYpwJSynYa_xQS206cKIuzdM1POPKcYbU8I4L8D7mCIuG1IB7wL6bYeqrTUQM4zuLVyVmrC5Uk1KvwB1Wja"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 172,
+            "promptTokenCount": 2197,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2197
+              }
+            ],
+            "thoughtsTokenCount": 196,
+            "totalTokenCount": 2565
+          },
+          "invocationId": "e-02d33947-163f-410e-b22b-12f37eda8318",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "17149874-dc71-41bf-b84d-9e243b62c87c",
+          "timestamp": 1792248327.3527145
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "get_company_info",
+            "args": {
+              "topic": "returns"
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "get_company_info",
+            "response": {
+              "status": "ok",
+              "topic": "returns",
+              "info": {
+                "brand": "Apex Hyperstore",
+                "topic": "returns",
+                "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+                "policies": {
+                  "returns": "14-day return window from delivery for non-perishable items. Refund to the original payment method within 5 working days of pickup. Grocery/perishables, personal care and innerwear are non-returnable for hygiene reasons.",
+                  "refunds": "Refunds are issued to the source account only - no cash refunds at the store. Bank settlement takes 3-5 working days after pickup scan.",
+                  "cancellation": "Free cancellation any time before the order moves to 'out for delivery'. After that, refuse at doorstep or return under the 14-day policy."
+                }
+              }
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "authors": [
+          "apex_concierge"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 4564,
+        "final_text": "Here is an overview of our return and refund policy:\n\n* **Returns:** We offer a 14-day return window from delivery for non-perishable goods. For hygiene and safety reasons, groceries/perishables, personal care items, and innerwear cannot be returned.\n* **Refunds:** Refunds are credited directly to your original payment source within 3 to 5 business days following the pickup scan. Please note that we do not issue cash refunds in-store.\n* **Cancellations:** Orders can be cancelled free of charge at any time before they move to \"out for delivery.\" Once dispatched, you may refuse the package at your doorstep or initiate a return after delivery.\n\nIf you have an order you would like to return or check on, just share the order ID and we'll be glad to help!",
+        "state_delta": {},
+        "n_events": 3
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 9.93,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /14[- ]day|14 days/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called get_company_info",
+      "ok": true,
+      "detail": "tools called: ['get_company_info']"
+    },
+    {
+      "check": "tool_args get_company_info",
+      "ok": true,
+      "detail": "calls: [{'tool': 'get_company_info', 'args': {'topic': 'returns'}, 'author': 'apex_concierge'}]"
+    },
+    {
+      "check": "max_tool_calls",
+      "ok": true,
+      "detail": "1 calls"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

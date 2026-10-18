@@ -1,0 +1,575 @@
+
+=== starting api_server model=gemini-3.5-flash-lite port=56987 ===
+WARNING: The --reload flag is not supported on Windows because it forces Uvicorn to use SelectorEventLoop, which does not support subprocesses (needed for executing tools). Forcing --no-reload.
+2026-10-17 21:32:21,480 - INFO - service_factory.py:333 - Using in-memory memory service
+2026-10-17 21:32:21,483 - INFO - service_factory.py:198 - Using session service URI: sqlite+aiosqlite:/C:/Users/MY PC/OneDrive/Desktop/adk-agent-creator-skill/Apex-HyperStore-Agent/adk_runs/run6/sessions.db
+2026-10-17 21:32:22,239 - INFO - service_factory.py:213 - Using DatabaseSessionService for URI: sqlite+aiosqlite:/C:/Users/MY PC/OneDrive/Desktop/adk-agent-creator-skill/Apex-HyperStore-Agent/adk_runs/run6/sessions.db
+2026-10-17 21:32:22,275 - INFO - local_storage.py:121 - Using per-agent artifact storage rooted at C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\cli\fast_api.py:304: UserWarning: [EXPERIMENTAL] InMemoryCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  credential_service = InMemoryCredentialService()
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\auth\credential_service\in_memory_credential_service.py:33: UserWarning: [EXPERIMENTAL] BaseCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  super().__init__()
+INFO:     Started server process [18552]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:56987 (Press CTRL+C to quit)
+INFO:     127.0.0.1:56990 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56993 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56994 - "GET /list-apps HTTP/1.1" 200 OK
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\routing.py:352: UserWarning: [EXPERIMENTAL] get_adk_app_info: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  return await dependant.call(**values)
+2026-10-17 21:32:24,941 - INFO - envs.py:83 - Loaded .env file for apex_hyperstore at C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.env
+2026-10-17 21:32:25,022 - INFO - agent_loader.py:189 - Found root_agent in apex_hyperstore.agent
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\utils\agent_info.py:67: UserWarning: [EXPERIMENTAL] feature FeatureName.JSON_SCHEMA_FOR_FUNC_DECL is enabled.
+  declarations = (tool._get_declaration() for tool in final_tools)
+INFO:     127.0.0.1:56995 - "GET /apps/apex_hyperstore/app-info HTTP/1.1" 200 OK
+2026-10-17 21:32:25,336 - INFO - api_server.py:1262 - New session created: T11_system_status-0-bd3c1a
+INFO:     127.0.0.1:56996 - "POST /apps/apex_hyperstore/users/tester/sessions/T11_system_status-0-bd3c1a HTTP/1.1" 200 OK
+2026-10-17 21:32:25,422 - WARNING - runners.py:515 - App "apex_hyperstore" can transfer between agents but has no context_cache_config. Every transfer swaps the system instruction and the tool set, so the request prefix changes and the whole prompt is re-sent uncached after each transfer. Set context_cache_config on the app to give each agent its own cache.
+2026-10-17 21:32:27,620 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.5-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:32:29,193 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 21:32:29,221 - INFO - agent.py:98 - tool transfer_to_agent args={'agent_name': 'support_agent'}
+2026-10-17 21:32:30,966 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.5-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:32:32,474 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 21:32:32,495 - INFO - agent.py:98 - tool check_system_status args={'service': 'Checkout & Payments'}
+2026-10-17 21:32:32,525 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.5-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:32:34,087 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 21:32:34,116 - INFO - api_server.py:2117 - Generated 5 events in agent run
+INFO:     127.0.0.1:56997 - "POST /run HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57000 - "GET /apps/apex_hyperstore/users/tester/sessions/T11_system_status-0-bd3c1a HTTP/1.1" 200 OK
+
+=== starting api_server model=gemini-3.1-flash-lite port=62744 ===
+WARNING: The --reload flag is not supported on Windows because it forces Uvicorn to use SelectorEventLoop, which does not support subprocesses (needed for executing tools). Forcing --no-reload.
+2026-10-17 21:34:05,297 - INFO - service_factory.py:333 - Using in-memory memory service
+2026-10-17 21:34:05,301 - INFO - service_factory.py:198 - Using session service URI: sqlite+aiosqlite:/C:/Users/MY PC/OneDrive/Desktop/adk-agent-creator-skill/Apex-HyperStore-Agent/adk_runs/run6/sessions.db
+2026-10-17 21:34:06,003 - INFO - service_factory.py:213 - Using DatabaseSessionService for URI: sqlite+aiosqlite:/C:/Users/MY PC/OneDrive/Desktop/adk-agent-creator-skill/Apex-HyperStore-Agent/adk_runs/run6/sessions.db
+2026-10-17 21:34:06,039 - INFO - local_storage.py:121 - Using per-agent artifact storage rooted at C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\cli\fast_api.py:304: UserWarning: [EXPERIMENTAL] InMemoryCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  credential_service = InMemoryCredentialService()
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\auth\credential_service\in_memory_credential_service.py:33: UserWarning: [EXPERIMENTAL] BaseCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  super().__init__()
+INFO:     Started server process [12564]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:62744 (Press CTRL+C to quit)
+INFO:     127.0.0.1:60449 - "GET /health HTTP/1.1" 200 OK
+2026-10-17 21:34:06,259 - ERROR - base_events.py:1833 - Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+INFO:     127.0.0.1:60452 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60453 - "GET /list-apps HTTP/1.1" 200 OK
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\routing.py:352: UserWarning: [EXPERIMENTAL] get_adk_app_info: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  return await dependant.call(**values)
+2026-10-17 21:34:09,240 - INFO - envs.py:83 - Loaded .env file for apex_hyperstore at C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.env
+2026-10-17 21:34:09,302 - INFO - agent_loader.py:189 - Found root_agent in apex_hyperstore.agent
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\utils\agent_info.py:67: UserWarning: [EXPERIMENTAL] feature FeatureName.JSON_SCHEMA_FOR_FUNC_DECL is enabled.
+  declarations = (tool._get_declaration() for tool in final_tools)
+INFO:     127.0.0.1:60454 - "GET /apps/apex_hyperstore/app-info HTTP/1.1" 200 OK
+2026-10-17 21:34:09,431 - INFO - api_server.py:1262 - New session created: T12_coupon_problem-0-39aab1
+INFO:     127.0.0.1:60455 - "POST /apps/apex_hyperstore/users/tester/sessions/T12_coupon_problem-0-39aab1 HTTP/1.1" 200 OK
+2026-10-17 21:34:09,518 - WARNING - runners.py:515 - App "apex_hyperstore" can transfer between agents but has no context_cache_config. Every transfer swaps the system instruction and the tool set, so the request prefix changes and the whole prompt is re-sent uncached after each transfer. Set context_cache_config on the app to give each agent its own cache.
+2026-10-17 21:34:11,921 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.1-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:34:13,299 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 21:34:13,322 - INFO - agent.py:98 - tool transfer_to_agent args={'agent_name': 'support_agent'}
+2026-10-17 21:34:15,171 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.1-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:34:16,761 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 21:34:16,784 - INFO - agent.py:98 - tool search_knowledge_base args={'query': 'coupon rejected at payment page'}
+2026-10-17 21:34:16,813 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.1-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:34:17,827 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 21:34:17,852 - INFO - agent.py:98 - tool get_troubleshooting_guide args={'kb_id': 'APX-KB-0105'}
+2026-10-17 21:34:17,882 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.1-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:34:19,368 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 21:34:19,391 - INFO - api_server.py:2117 - Generated 7 events in agent run
+INFO:     127.0.0.1:60456 - "POST /run HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60462 - "GET /apps/apex_hyperstore/users/tester/sessions/T12_coupon_problem-0-39aab1 HTTP/1.1" 200 OK
+
+=== starting api_server model=gemini-3.7-flash port=59232 ===
+WARNING: The --reload flag is not supported on Windows because it forces Uvicorn to use SelectorEventLoop, which does not support subprocesses (needed for executing tools). Forcing --no-reload.
+2026-10-17 21:35:47,261 - INFO - service_factory.py:333 - Using in-memory memory service
+2026-10-17 21:35:47,261 - INFO - service_factory.py:198 - Using session service URI: sqlite+aiosqlite:/C:/Users/MY PC/OneDrive/Desktop/adk-agent-creator-skill/Apex-HyperStore-Agent/adk_runs/run6/sessions.db
+2026-10-17 21:35:47,737 - INFO - service_factory.py:213 - Using DatabaseSessionService for URI: sqlite+aiosqlite:/C:/Users/MY PC/OneDrive/Desktop/adk-agent-creator-skill/Apex-HyperStore-Agent/adk_runs/run6/sessions.db
+2026-10-17 21:35:47,772 - INFO - local_storage.py:121 - Using per-agent artifact storage rooted at C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\cli\fast_api.py:304: UserWarning: [EXPERIMENTAL] InMemoryCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  credential_service = InMemoryCredentialService()
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\auth\credential_service\in_memory_credential_service.py:33: UserWarning: [EXPERIMENTAL] BaseCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  super().__init__()
+INFO:     Started server process [23024]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:59232 (Press CTRL+C to quit)
+INFO:     127.0.0.1:59238 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59241 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59242 - "GET /list-apps HTTP/1.1" 200 OK
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\routing.py:352: UserWarning: [EXPERIMENTAL] get_adk_app_info: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  return await dependant.call(**values)
+2026-10-17 21:35:50,340 - INFO - envs.py:83 - Loaded .env file for apex_hyperstore at C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.env
+2026-10-17 21:35:50,394 - INFO - agent_loader.py:189 - Found root_agent in apex_hyperstore.agent
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\utils\agent_info.py:67: UserWarning: [EXPERIMENTAL] feature FeatureName.JSON_SCHEMA_FOR_FUNC_DECL is enabled.
+  declarations = (tool._get_declaration() for tool in final_tools)
+INFO:     127.0.0.1:59243 - "GET /apps/apex_hyperstore/app-info HTTP/1.1" 200 OK
+2026-10-17 21:35:50,520 - INFO - api_server.py:1262 - New session created: T18_route_support-0-84e6b2
+INFO:     127.0.0.1:59244 - "POST /apps/apex_hyperstore/users/tester/sessions/T18_route_support-0-84e6b2 HTTP/1.1" 200 OK
+2026-10-17 21:35:50,618 - WARNING - runners.py:515 - App "apex_hyperstore" can transfer between agents but has no context_cache_config. Every transfer swaps the system instruction and the tool set, so the request prefix changes and the whole prompt is re-sent uncached after each transfer. Set context_cache_config on the app to give each agent its own cache.
+2026-10-17 21:35:52,695 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.7-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:35:53,208 - ERROR - _node_runner.py:163 - Node execution failed with exception
+Traceback (most recent call last):
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\models\google_llm.py", line 355, in generate_content_async
+    response = await self.api_client.aio.models.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\models.py", line 8507, in generate_content
+    return await self._generate_content_with_continuation(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\models.py", line 8346, in _generate_content_with_continuation
+    response = await self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\models.py", line 6944, in _generate_content
+    response = await self._api_client.async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\_api_client.py", line 1885, in async_request
+    result = await self._async_request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\_api_client.py", line 1818, in _async_request
+    return await self._async_retry(  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\asyncio\__init__.py", line 112, in __call__
+    do = await self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\asyncio\__init__.py", line 157, in iter
+    result = await action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\_utils.py", line 111, in inner
+    return call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\asyncio\__init__.py", line 116, in __call__
+    result = await fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\_api_client.py", line 1746, in _async_request_once
+    await errors.APIError.raise_for_async_response(response)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\errors.py", line 265, in raise_for_async_response
+    await cls.raise_error_async(status_code, response_json, response)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\errors.py", line 287, in raise_error_async
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\nPlease retry in 7h54m6.649020181s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.7-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '28446s'}]}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner.py", line 138, in run
+    await self._execute_node(ctx, node_input)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner.py", line 316, in _execute_node
+    await self._run_node_loop(ctx, node_input)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner.py", line 330, in _run_node_loop
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_base_node.py", line 190, in run
+    async for item in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\llm_agent.py", line 689, in _run_impl
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_llm_agent_wrapper.py", line 527, in run_llm_agent_as_node
+    async for event in run_iter:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\base_agent.py", line 359, in run_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\base_agent.py", line 460, in _run_with_lifecycle
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 164, in stream_in_scope
+    item = await _drive(owned.__anext__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 152, in _drive
+    return await step
+           ^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\base_agent.py", line 423, in _run
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\llm_agent.py", line 638, in _run_async_impl
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 343, in run_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 425, in _run_one_step_async
+    async for llm_response in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 619, in _call_llm_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\core\_model_call.py", line 316, in call_llm_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 164, in stream_in_scope
+    item = await _drive(owned.__anext__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 152, in _drive
+    return await step
+           ^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\core\_model_call.py", line 277, in _call_llm_with_tracing
+    async for llm_response in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 669, in _run_and_handle_error
+    async for response in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\core\_finalizer.py", line 397, in run_and_handle_error
+    raise model_error
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\core\_finalizer.py", line 370, in run_and_handle_error
+    async for llm_response in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\models\google_llm.py", line 381, in generate_content_async
+    raise _ResourceExhaustedError(ce) from ce
+google.adk.models.google_llm._ResourceExhaustedError: 
+On how to mitigate this issue, please refer to:
+
+https://google.github.io/adk-docs/agents/models/google-gemini/#error-code-429-resource_exhausted
+
+
+429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\nPlease retry in 7h54m6.649020181s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.7-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '28446s'}]}}
+2026-10-17 21:35:53,242 - ERROR - runners.py:900 - Root node apex_concierge failed.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\models\google_llm.py", line 355, in generate_content_async
+    response = await self.api_client.aio.models.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\models.py", line 8507, in generate_content
+    return await self._generate_content_with_continuation(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\models.py", line 8346, in _generate_content_with_continuation
+    response = await self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\models.py", line 6944, in _generate_content
+    response = await self._api_client.async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\_api_client.py", line 1885, in async_request
+    result = await self._async_request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\_api_client.py", line 1818, in _async_request
+    return await self._async_retry(  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\asyncio\__init__.py", line 112, in __call__
+    do = await self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\asyncio\__init__.py", line 157, in iter
+    result = await action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\_utils.py", line 111, in inner
+    return call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\asyncio\__init__.py", line 116, in __call__
+    result = await fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\_api_client.py", line 1746, in _async_request_once
+    await errors.APIError.raise_for_async_response(response)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\errors.py", line 265, in raise_for_async_response
+    await cls.raise_error_async(status_code, response_json, response)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\errors.py", line 287, in raise_error_async
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\nPlease retry in 7h54m6.649020181s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.7-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '28446s'}]}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\runners.py", line 889, in _cleanup_root_task
+    await task
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner_utils.py", line 271, in _drive_root_node
+    raise e.error
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner.py", line 138, in run
+    await self._execute_node(ctx, node_input)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner.py", line 316, in _execute_node
+    await self._run_node_loop(ctx, node_input)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner.py", line 330, in _run_node_loop
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_base_node.py", line 190, in run
+    async for item in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\llm_agent.py", line 689, in _run_impl
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_llm_agent_wrapper.py", line 527, in run_llm_agent_as_node
+    async for event in run_iter:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\base_agent.py", line 359, in run_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\base_agent.py", line 460, in _run_with_lifecycle
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 164, in stream_in_scope
+    item = await _drive(owned.__anext__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 152, in _drive
+    return await step
+           ^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\base_agent.py", line 423, in _run
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\llm_agent.py", line 638, in _run_async_impl
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 343, in run_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 425, in _run_one_step_async
+    async for llm_response in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 619, in _call_llm_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\core\_model_call.py", line 316, in call_llm_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 164, in stream_in_scope
+    item = await _drive(owned.__anext__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 152, in _drive
+    return await step
+           ^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\core\_model_call.py", line 277, in _call_llm_with_tracing
+    async for llm_response in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 669, in _run_and_handle_error
+    async for response in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\core\_finalizer.py", line 397, in run_and_handle_error
+    raise model_error
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\core\_finalizer.py", line 370, in run_and_handle_error
+    async for llm_response in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\models\google_llm.py", line 381, in generate_content_async
+    raise _ResourceExhaustedError(ce) from ce
+google.adk.models.google_llm._ResourceExhaustedError: 
+On how to mitigate this issue, please refer to:
+
+https://google.github.io/adk-docs/agents/models/google-gemini/#error-code-429-resource_exhausted
+
+
+429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\nPlease retry in 7h54m6.649020181s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.7-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '28446s'}]}}
+INFO:     127.0.0.1:59245 - "POST /run HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\models\google_llm.py", line 355, in generate_content_async
+    response = await self.api_client.aio.models.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\models.py", line 8507, in generate_content
+    return await self._generate_content_with_continuation(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\models.py", line 8346, in _generate_content_with_continuation
+    response = await self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\models.py", line 6944, in _generate_content
+    response = await self._api_client.async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\_api_client.py", line 1885, in async_request
+    result = await self._async_request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\_api_client.py", line 1818, in _async_request
+    return await self._async_retry(  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\asyncio\__init__.py", line 112, in __call__
+    do = await self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\asyncio\__init__.py", line 157, in iter
+    result = await action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\_utils.py", line 111, in inner
+    return call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\tenacity\asyncio\__init__.py", line 116, in __call__
+    result = await fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\_api_client.py", line 1746, in _async_request_once
+    await errors.APIError.raise_for_async_response(response)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\errors.py", line 265, in raise_for_async_response
+    await cls.raise_error_async(status_code, response_json, response)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\genai\errors.py", line 287, in raise_error_async
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\nPlease retry in 7h54m6.649020181s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.7-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '28446s'}]}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 411, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\applications.py", line 1163, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\starlette\applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\cli\api_server.py", line 543, in __call__
+    await self._app(scope, receive, send)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\cli\api_server.py", line 509, in __call__
+    await self._app(scope, receive, send)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\starlette\routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\routing.py", line 2734, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\routing.py", line 1281, in handle
+    await super().handle(scope, receive, send)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\starlette\routing.py", line 282, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\routing.py", line 158, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\routing.py", line 144, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\routing.py", line 706, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\routing.py", line 352, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\cli\api_server.py", line 2116, in run_agent
+    events = await worker_task
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\cli\api_server.py", line 2090, in worker
+    return [public_event(event) async for event in agen]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\runners.py", line 1227, in run_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\runners.py", line 605, in _run_node_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner_utils.py", line 377, in run_node_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 164, in stream_in_scope
+    item = await _drive(owned.__anext__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 152, in _drive
+    return await step
+           ^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner_utils.py", line 295, in _run
+    await runner._cleanup_root_task(  # pylint: disable=protected-access
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\runners.py", line 889, in _cleanup_root_task
+    await task
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner_utils.py", line 271, in _drive_root_node
+    raise e.error
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner.py", line 138, in run
+    await self._execute_node(ctx, node_input)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner.py", line 316, in _execute_node
+    await self._run_node_loop(ctx, node_input)
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_node_runner.py", line 330, in _run_node_loop
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_base_node.py", line 190, in run
+    async for item in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\llm_agent.py", line 689, in _run_impl
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\workflow\_llm_agent_wrapper.py", line 527, in run_llm_agent_as_node
+    async for event in run_iter:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\base_agent.py", line 359, in run_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\base_agent.py", line 460, in _run_with_lifecycle
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 164, in stream_in_scope
+    item = await _drive(owned.__anext__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 152, in _drive
+    return await step
+           ^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\base_agent.py", line 423, in _run
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\agents\llm_agent.py", line 638, in _run_async_impl
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 343, in run_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 425, in _run_one_step_async
+    async for llm_response in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 619, in _call_llm_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\core\_model_call.py", line 316, in call_llm_async
+    async for event in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 164, in stream_in_scope
+    item = await _drive(owned.__anext__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\telemetry\_instrumentation.py", line 152, in _drive
+    return await step
+           ^^^^^^^^^^
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\core\_model_call.py", line 277, in _call_llm_with_tracing
+    async for llm_response in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 669, in _run_and_handle_error
+    async for response in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\core\_finalizer.py", line 397, in run_and_handle_error
+    raise model_error
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\flows\llm_flows\core\_finalizer.py", line 370, in run_and_handle_error
+    async for llm_response in agen:
+  File "C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\models\google_llm.py", line 381, in generate_content_async
+    raise _ResourceExhaustedError(ce) from ce
+google.adk.models.google_llm._ResourceExhaustedError: 
+On how to mitigate this issue, please refer to:
+
+https://google.github.io/adk-docs/agents/models/google-gemini/#error-code-429-resource_exhausted
+
+
+429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\nPlease retry in 7h54m6.649020181s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.7-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '28446s'}]}}
+INFO:     127.0.0.1:59247 - "GET /apps/apex_hyperstore/users/tester/sessions/T18_route_support-0-84e6b2 HTTP/1.1" 200 OK
+
+=== starting api_server model=gemini-3.5-flash-lite port=59262 ===
+WARNING: The --reload flag is not supported on Windows because it forces Uvicorn to use SelectorEventLoop, which does not support subprocesses (needed for executing tools). Forcing --no-reload.
+2026-10-17 21:38:11,654 - INFO - service_factory.py:333 - Using in-memory memory service
+2026-10-17 21:38:11,654 - INFO - service_factory.py:198 - Using session service URI: sqlite+aiosqlite:/C:/Users/MY PC/OneDrive/Desktop/adk-agent-creator-skill/Apex-HyperStore-Agent/adk_runs/run6/sessions.db
+2026-10-17 21:38:12,125 - INFO - service_factory.py:213 - Using DatabaseSessionService for URI: sqlite+aiosqlite:/C:/Users/MY PC/OneDrive/Desktop/adk-agent-creator-skill/Apex-HyperStore-Agent/adk_runs/run6/sessions.db
+2026-10-17 21:38:12,149 - INFO - local_storage.py:121 - Using per-agent artifact storage rooted at C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\cli\fast_api.py:304: UserWarning: [EXPERIMENTAL] InMemoryCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  credential_service = InMemoryCredentialService()
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\auth\credential_service\in_memory_credential_service.py:33: UserWarning: [EXPERIMENTAL] BaseCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  super().__init__()
+INFO:     Started server process [20140]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:59262 (Press CTRL+C to quit)
+INFO:     127.0.0.1:59267 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59268 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59269 - "GET /list-apps HTTP/1.1" 200 OK
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\routing.py:352: UserWarning: [EXPERIMENTAL] get_adk_app_info: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  return await dependant.call(**values)
+2026-10-17 21:38:14,246 - INFO - envs.py:83 - Loaded .env file for apex_hyperstore at C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.env
+2026-10-17 21:38:14,297 - INFO - agent_loader.py:189 - Found root_agent in apex_hyperstore.agent
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\utils\agent_info.py:67: UserWarning: [EXPERIMENTAL] feature FeatureName.JSON_SCHEMA_FOR_FUNC_DECL is enabled.
+  declarations = (tool._get_declaration() for tool in final_tools)
+INFO:     127.0.0.1:59270 - "GET /apps/apex_hyperstore/app-info HTTP/1.1" 200 OK
+2026-10-17 21:38:14,530 - INFO - api_server.py:1262 - New session created: T18_route_support-0-434fd6
+INFO:     127.0.0.1:59271 - "POST /apps/apex_hyperstore/users/tester/sessions/T18_route_support-0-434fd6 HTTP/1.1" 200 OK
+2026-10-17 21:38:14,617 - WARNING - runners.py:515 - App "apex_hyperstore" can transfer between agents but has no context_cache_config. Every transfer swaps the system instruction and the tool set, so the request prefix changes and the whole prompt is re-sent uncached after each transfer. Set context_cache_config on the app to give each agent its own cache.
+2026-10-17 21:38:16,443 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.5-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:38:17,855 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 21:38:17,876 - INFO - agent.py:98 - tool transfer_to_agent args={'agent_name': 'support_agent'}
+2026-10-17 21:38:19,450 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.5-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:38:20,677 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 21:38:20,701 - INFO - agent.py:98 - tool search_knowledge_base args={'query': 'app crashes blank screen My Orders Android'}
+2026-10-17 21:38:20,728 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.5-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:38:22,281 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 21:38:22,304 - INFO - agent.py:98 - tool search_knowledge_base args={'query': 'app crashes'}
+2026-10-17 21:38:22,323 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.5-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:38:23,322 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 21:38:23,348 - INFO - agent.py:98 - tool search_knowledge_base args={'query': 'crash'}
+2026-10-17 21:38:23,374 - INFO - google_llm.py:263 - Sending out request, model: gemini-3.5-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 21:38:24,971 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 21:38:25,084 - INFO - api_server.py:2117 - Generated 9 events in agent run
+INFO:     127.0.0.1:59272 - "POST /run HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59278 - "GET /apps/apex_hyperstore/users/tester/sessions/T18_route_support-0-434fd6 HTTP/1.1" 200 OK

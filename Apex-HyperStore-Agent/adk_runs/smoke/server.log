@@ -1,0 +1,43 @@
+Help improve the ADK (CLI and Web UI) by allowing Google to collect pseudonymized usage data?
+
+What is collected: Names of subcommands and flags (no user-provided values or arguments), execution metrics (duration, exit state), environment specs (OS, Python version), and aggregated Web UI feature interactions. No personally identifiable information (PII) is collected.
+
+This is OFF by default. You can opt out at any time using the 'adk telemetry disable' command or Web UI user settings.
+
+Enable telemetry? [Y/n]: 
+WARNING: The --reload flag is not supported on Windows because it forces Uvicorn to use SelectorEventLoop, which does not support subprocesses (needed for executing tools). Forcing --no-reload.
+2026-10-17 20:10:31,368 - INFO - service_factory.py:333 - Using in-memory memory service
+2026-10-17 20:10:31,371 - INFO - service_factory.py:198 - Using session service URI: sqlite+aiosqlite:/C:/Users/MY PC/OneDrive/Desktop/adk-agent-creator-skill/Apex-HyperStore-Agent/adk_runs/smoke/sessions.db
+2026-10-17 20:10:32,275 - INFO - service_factory.py:213 - Using DatabaseSessionService for URI: sqlite+aiosqlite:/C:/Users/MY PC/OneDrive/Desktop/adk-agent-creator-skill/Apex-HyperStore-Agent/adk_runs/smoke/sessions.db
+2026-10-17 20:10:32,318 - INFO - local_storage.py:121 - Using per-agent artifact storage rooted at C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\cli\fast_api.py:304: UserWarning: [EXPERIMENTAL] InMemoryCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  credential_service = InMemoryCredentialService()
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\auth\credential_service\in_memory_credential_service.py:33: UserWarning: [EXPERIMENTAL] BaseCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  super().__init__()
+INFO:     Started server process [17748]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:50129 (Press CTRL+C to quit)
+INFO:     127.0.0.1:50135 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50138 - "GET /list-apps HTTP/1.1" 200 OK
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\fastapi\routing.py:352: UserWarning: [EXPERIMENTAL] get_adk_app_info: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  return await dependant.call(**values)
+2026-10-17 20:10:32,921 - INFO - envs.py:83 - Loaded .env file for apex_hyperstore at C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.env
+2026-10-17 20:10:32,979 - INFO - agent_loader.py:189 - Found root_agent in apex_hyperstore.agent
+C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\.venv\Lib\site-packages\google\adk\utils\agent_info.py:67: UserWarning: [EXPERIMENTAL] feature FeatureName.JSON_SCHEMA_FOR_FUNC_DECL is enabled.
+  declarations = (tool._get_declaration() for tool in final_tools)
+INFO:     127.0.0.1:50139 - "GET /apps/apex_hyperstore/app-info HTTP/1.1" 200 OK
+2026-10-17 20:10:33,273 - INFO - api_server.py:1262 - New session created: S1-0-4cb83b
+INFO:     127.0.0.1:50140 - "POST /apps/apex_hyperstore/users/tester/sessions/S1-0-4cb83b HTTP/1.1" 200 OK
+2026-10-17 20:10:33,367 - WARNING - runners.py:515 - App "apex_hyperstore" can transfer between agents but has no context_cache_config. Every transfer swaps the system instruction and the tool set, so the request prefix changes and the whole prompt is re-sent uncached after each transfer. Set context_cache_config on the app to give each agent its own cache.
+2026-10-17 20:10:36,386 - INFO - google_llm.py:263 - Sending out request, model: gemini-flash-latest, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 20:10:39,281 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 20:10:39,306 - INFO - agent.py:94 - tool transfer_to_agent args={'agent_name': 'orders_agent'}
+2026-10-17 20:10:41,580 - INFO - google_llm.py:263 - Sending out request, model: gemini-flash-latest, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 20:10:44,142 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 20:10:44,165 - INFO - agent.py:94 - tool lookup_order args={'order_id': 'APX-ORD-2026-041882'}
+2026-10-17 20:10:44,199 - INFO - google_llm.py:263 - Sending out request, model: gemini-flash-latest, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2026-10-17 20:10:47,947 - INFO - google_llm.py:360 - Response received from the model.
+2026-10-17 20:10:47,975 - INFO - api_server.py:2117 - Generated 5 events in agent run
+INFO:     127.0.0.1:50141 - "POST /run HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50156 - "GET /apps/apex_hyperstore/users/tester/sessions/S1-0-4cb83b HTTP/1.1" 200 OK

@@ -1,0 +1,125 @@
+{
+  "test_id": "T01_greeting",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [
+      "apex_concierge"
+    ],
+    "texts": [
+      {
+        "author": "apex_concierge",
+        "text": "Good morning! Welcome to Apex Hyperstore. How can we help you today?"
+      }
+    ],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 1954,
+    "final_text": "Good morning! Welcome to Apex Hyperstore. How can we help you today?",
+    "state_delta": {},
+    "n_events": 1,
+    "http_error": ""
+  },
+  "session_id": "T01_greeting-0-655a4c",
+  "turns": [
+    {
+      "user": "Hi there! Good morning.",
+      "status": 200,
+      "latency_s": 6.3,
+      "events": [
+        {
+          "modelVersion": "gemini-3.8-flash",
+          "content": {
+            "parts": [
+              {
+                "text": "Good morning! Welcome to Apex Hyperstore. How can we help you today?",
+                "thoughtSignature": "Eq4DCqsDAWkUfRPza8kT4O-P8DyhvEN_jWguYhjeOMngNCzGn0JIIMjDf2jLqvT_pzzb3PDEo9UamiWWVwOVdAabK0PEiJBzI251liNunu3-ULtH-3mRJTehwbNxNIlq2uE-7fK3diRm6RDagK_A4T8rVyLa7WQ5Req1nLNt_mEm6Q_aiRxVskGLuMTkEJaODTDDllI08Une2lb9TGmdoPDH9aa_BqgitIXpzUVOS0R3SDnv4si6cSAVKvBqwg_lMHOU6Tg9NFyToOcjrW2Ge6IL953-U1cb1JZx1MCKXhxgadBuPuehV5N1bAVD8wEwSc1zXOUDNoZYpUUKasoMI-87ScT9qZ68GjfNUjbIcoYOlwqBA73FfsIQBCFs8EDFt970xetJo7wsUq2QgGE75iwq2YvbouVVAGde0X2vFUVzLF6xbwA0Ot2-jNkHHAkKgRD9Sqww0VLY7BnOu6ybxCQnVPiTnkgK3J3YCivQC00pD7ktDoEeBki4JjTAlUTbELeEUNoFX8EwbHY5-nsPfGRGnHX25nlyvCaUYHnifa2NnTOVhnRhr47xe_B0OiSDGg=="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 16,
+            "promptTokenCount": 1858,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1858
+              }
+            ],
+            "thoughtsTokenCount": 80,
+            "totalTokenCount": 1954
+          },
+          "invocationId": "e-8c133e4a-57f5-44ed-914e-e846150a84f5",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "86471242-29c3-4c16-ba29-0d6a0cb003a9",
+          "timestamp": 1792249790.9530652
+        }
+      ],
+      "parsed": {
+        "calls": [],
+        "responses": [],
+        "authors": [
+          "apex_concierge"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 1954,
+        "final_text": "Good morning! Welcome to Apex Hyperstore. How can we help you today?",
+        "state_delta": {},
+        "n_events": 1
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 6.3,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "min_chars",
+      "ok": true,
+      "detail": "len=68"
+    },
+    {
+      "check": "agent_involved apex_concierge",
+      "ok": true,
+      "detail": "authors=['apex_concierge'] transfers=[]"
+    },
+    {
+      "check": "agent_excluded orders_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge']"
+    },
+    {
+      "check": "agent_excluded support_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge']"
+    },
+    {
+      "check": "agent_excluded service_request_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge']"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

@@ -1,0 +1,59 @@
+{
+  "test_id": "T07_order_by_email",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T07_order_by_email-0-8dbf57",
+  "turns": [
+    {
+      "user": "Hi, I cannot find my order number. My email is daniel.okafor@example.com - can you check my recent orders?",
+      "status": 500,
+      "latency_s": 2.91,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 2.91,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /APX-ORD-2026-041988|order/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_called list_customer_orders",
+      "ok": false,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "tool_args list_customer_orders",
+      "ok": false,
+      "detail": "calls: []"
+    },
+    {
+      "check": "agent_involved orders_agent",
+      "ok": false,
+      "detail": "authors=[] transfers=[]"
+    }
+  ],
+  "passed": false,
+  "failure_class": "QUOTA_OR_RATE_LIMIT"
+}

@@ -1,0 +1,49 @@
+{
+  "test_id": "T04_support_teams",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T04_support_teams-0-ce9bb7",
+  "turns": [
+    {
+      "user": "I want to complain about my delivery. Which team handles that and what is their response time?",
+      "status": 500,
+      "latency_s": 2.99,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 2.99,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /emergency response desk|last mile operations|priority support|\\d+ (minutes|hours)/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "max_tool_calls",
+      "ok": true,
+      "detail": "0 calls"
+    }
+  ],
+  "passed": false,
+  "failure_class": "QUOTA_OR_RATE_LIMIT"
+}

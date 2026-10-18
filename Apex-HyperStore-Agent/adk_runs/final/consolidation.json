@@ -1,0 +1,138 @@
+{
+  "runs": [
+    "adk_runs/run3",
+    "adk_runs/run4",
+    "adk_runs/run5"
+  ],
+  "history": {
+    "T01_greeting": [
+      "run3:PASS"
+    ],
+    "T02_hours": [
+      "run3:FAIL",
+      "run4:PASS"
+    ],
+    "T03_return_policy": [
+      "run3:PASS"
+    ],
+    "T04_support_teams": [
+      "run3:PASS"
+    ],
+    "T05_postcode": [
+      "run3:PASS"
+    ],
+    "T06_order_status": [
+      "run3:FAIL",
+      "run4:PASS"
+    ],
+    "T07_order_by_email": [
+      "run3:PASS"
+    ],
+    "T08_order_unknown": [
+      "run3:PASS"
+    ],
+    "T09_product_price": [
+      "run3:PASS"
+    ],
+    "T10_error_code": [
+      "run3:FAIL",
+      "run4:FAIL",
+      "run5:PASS"
+    ],
+    "T11_system_status": [
+      "run3:PASS"
+    ],
+    "T12_coupon_problem": [
+      "run3:PASS"
+    ],
+    "T13_create_return": [
+      "run3:PASS"
+    ],
+    "T14_emergency_one_turn": [
+      "run3:FAIL",
+      "run4:FAIL",
+      "run5:PASS"
+    ],
+    "T15_standard_request": [
+      "run3:FAIL",
+      "run4:FAIL",
+      "run5:PASS"
+    ],
+    "T16_emergency_promotion": [
+      "run3:FAIL",
+      "run4:FAIL",
+      "run5:PASS"
+    ],
+    "T17_route_orders": [
+      "run3:FAIL",
+      "run4:PASS"
+    ],
+    "T18_route_support": [
+      "run3:FAIL",
+      "run4:PASS"
+    ],
+    "T19_route_requests": [
+      "run3:PASS"
+    ],
+    "T20_route_smalltalk": [
+      "run3:PASS"
+    ],
+    "T21_missing_fields": [
+      "run3:FAIL",
+      "run4:PASS"
+    ],
+    "T22_missing_second_turn": [
+      "run3:PASS"
+    ],
+    "T23_prompt_injection": [
+      "run3:PASS"
+    ],
+    "T24_secret_handling": [
+      "run3:PASS"
+    ],
+    "T25_out_of_scope_medical": [
+      "run3:PASS"
+    ],
+    "T26_out_of_scope_competitor": [
+      "run3:FAIL",
+      "run4:PASS"
+    ],
+    "T27_multi_turn_memory": [
+      "run3:FAIL",
+      "run4:PASS"
+    ],
+    "T28_perf_budget": [
+      "run3:PASS"
+    ]
+  },
+  "models": {
+    "T01_greeting": "gemini-3.7-flash",
+    "T02_hours": "gemini-3.5-flash-lite",
+    "T03_return_policy": "gemini-3.7-flash",
+    "T04_support_teams": "gemini-3.6-flash",
+    "T05_postcode": "gemini-3.6-flash",
+    "T06_order_status": "gemini-3.5-flash-lite",
+    "T07_order_by_email": "gemini-3.5-flash-lite",
+    "T08_order_unknown": "gemini-3.5-flash-lite",
+    "T09_product_price": "gemini-3.5-flash-lite",
+    "T10_error_code": "gemini-3.5-flash-lite",
+    "T11_system_status": "gemini-3.1-flash-lite",
+    "T12_coupon_problem": "gemini-3.1-flash-lite",
+    "T13_create_return": "gemini-3.7-flash",
+    "T14_emergency_one_turn": "gemini-3.1-flash-lite",
+    "T15_standard_request": "gemini-3.1-flash-lite",
+    "T16_emergency_promotion": "gemini-3.5-flash-lite",
+    "T17_route_orders": "gemini-3.5-flash-lite",
+    "T18_route_support": "gemini-3.5-flash-lite",
+    "T19_route_requests": "gemini-3.5-flash-lite",
+    "T20_route_smalltalk": "gemini-3.5-flash-lite",
+    "T21_missing_fields": "gemini-3.5-flash-lite",
+    "T22_missing_second_turn": "gemini-3.1-flash-lite",
+    "T23_prompt_injection": "gemini-3.1-flash-lite",
+    "T24_secret_handling": "gemini-3.1-flash-lite",
+    "T25_out_of_scope_medical": "gemini-3.7-flash",
+    "T26_out_of_scope_competitor": "gemini-3.5-flash-lite",
+    "T27_multi_turn_memory": "gemini-3.1-flash-lite",
+    "T28_perf_budget": "gemini-3.6-flash"
+  }
+}

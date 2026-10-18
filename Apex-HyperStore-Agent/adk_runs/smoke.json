@@ -1,0 +1,9 @@
+{
+  "_comment": "smoke",
+  "requirements": [{"id": "R1", "text": "order lookup works end to end", "severity": "must"}],
+  "tests": [
+    {"id": "S1", "category": "functional", "severity": "must", "requirement_ids": ["R1"],
+     "turns": [{"user": "Where is my order APX-ORD-2026-041882? Please give me the status."}],
+     "expect": {"tool_calls_include": ["lookup_order"], "no_error": true}}
+  ]
+}

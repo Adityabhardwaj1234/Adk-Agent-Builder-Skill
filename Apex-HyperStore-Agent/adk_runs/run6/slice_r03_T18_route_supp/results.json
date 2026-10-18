@@ -1,0 +1,84 @@
+{
+  "summary": {
+    "verdict": "PASS",
+    "app": "apex_hyperstore",
+    "tests_total": 1,
+    "tests_passed": 1,
+    "pass_rate": 1.0,
+    "must_total": 1,
+    "must_passed": 1,
+    "flaky": [],
+    "by_category": {
+      "multi_agent": {
+        "total": 1,
+        "passed": 1
+      }
+    },
+    "requirements": {
+      "R4": {
+        "tests": 1,
+        "passed": 1,
+        "text": "Routes technical errors, error codes and outage questions to support_agent and answers from the knowledge base and system status",
+        "severity": "must",
+        "status": "MET"
+      },
+      "R9": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Never states an order status or product fact that a tool did not return",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R11": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Refuses to reveal, summarise or paraphrase its instructions or system prompt under prompt injection",
+        "severity": "must",
+        "status": "UNTESTED"
+      }
+    },
+    "latency": {
+      "p50_s": 10.55,
+      "p95_s": 10.55,
+      "max_s": 10.55,
+      "mean_s": 10.55
+    },
+    "tokens_total": 13653,
+    "avg_tool_calls": 4,
+    "failure_classes": {},
+    "output_dir": "C:\\Users\\MY PC\\OneDrive\\Desktop\\adk-agent-creator-skill\\Apex-HyperStore-Agent\\adk_runs\\run6\\slice_r03_T18_route_supp"
+  },
+  "results": [
+    {
+      "test_id": "T18_route_support",
+      "category": "multi_agent",
+      "severity": "must",
+      "requirement_ids": [
+        "R4"
+      ],
+      "description": "A technical error reaches support_agent and not the orders desk (regression check)",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        10.55
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "search_knowledge_base",
+        "search_knowledge_base",
+        "search_knowledge_base"
+      ],
+      "agents": [
+        "apex_concierge",
+        "support_agent"
+      ],
+      "tokens": 13653,
+      "final_response": "I am sorry to hear that the Apex app is crashing when you open My Orders on Android. We could not find a specific troubleshooting guide for that exact crash in our knowledge base. \n\nCould you please share a screenshot or the exact wording of any error message shown on the screen? If this persists, I would be happy to register a request for our technical support team to investigate further.",
+      "first_user_input": "The Apex app crashes with a blank screen every time I open My Orders on Android."
+    }
+  ]
+}

@@ -1,0 +1,572 @@
+{
+  "test_id": "T10_error_code",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "support_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "args": {
+          "query": "APX-4021"
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "get_troubleshooting_guide",
+        "args": {
+          "kb_id": "APX-KB-0101"
+        },
+        "author": "support_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "response": {
+          "status": "ok",
+          "query": "APX-4021",
+          "count": 3,
+          "articles": [
+            {
+              "kb_id": "APX-KB-0101",
+              "topic": "Checkout",
+              "error_code": "APX-4021",
+              "surface": "Apex app / website",
+              "symptom": "\"Payment failed (APX-4021)\" at checkout although UPI request was debited.",
+              "cause": "UPI mandate succeeded at the bank but the payment-gateway callback to Apex timed out, so the order was not created.",
+              "fix_steps": "1. Ask the customer to check their bank app for a pending mandate and reverse it if present. 2. Retry checkout with the same UPI handle on a new payment attempt. 3. If the debit repeats twice, raise a payment-fraud-safe request with urgency=high and emergency_type=payment_fraud. 4. Never ask the customer to share a UPI PIN, OTP or CVV.",
+              "escalation_team": "Payments Recovery Desk",
+              "severity": "high"
+            },
+            {
+              "kb_id": "APX-KB-0103",
+              "topic": "Account access",
+              "error_code": "APX-4150",
+              "surface": "Apex app",
+              "symptom": "\"Invalid credentials (APX-4150)\" although the customer is sure the password is right.",
+              "cause": "The account got soft-locked after 5 failed attempts, or OTP is going to a stale phone number.",
+              "fix_steps": "1. Confirm the email on file with list_customer_orders. 2. Trigger \"Forgot password\" and ask the customer to read the 6-digit OTP to the agent. 3. If the lock persists after a correct OTP, create an account_access request with urgency=normal. 4. Never ask for the password itself and never read back an OTP the customer did not volunteer.",
+              "escalation_team": "Identity & Accounts Desk",
+              "severity": "medium"
+            },
+            {
+              "kb_id": "APX-KB-0104",
+              "topic": "Returns",
+              "error_code": "APX-4210",
+              "surface": "Apex app / website",
+              "symptom": "\"Return not eligible (APX-4210)\" for an item delivered 15 days ago.",
+              "cause": "The item is outside the 14-day return window, or the category is non-returnable (perishables, innerwear, already-opened personal care).",
+              "fix_steps": "1. Read the delivered_at date from lookup_order and explain the 14-day window. 2. Check the product category - grocery/perishables and personal care are non-returnable. 3. If the item is defective, treat it as a product_defect request instead of a return. 4. Escalate to the Quality Desk only when the customer supplies a defect description.",
+              "escalation_team": "Quality Desk",
+              "severity": "medium"
+            }
+          ]
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "get_troubleshooting_guide",
+        "response": {
+          "status": "ok",
+          "article": {
+            "kb_id": "APX-KB-0101",
+            "topic": "Checkout",
+            "error_code": "APX-4021",
+            "surface": "Apex app / website",
+            "symptom": "\"Payment failed (APX-4021)\" at checkout although UPI request was debited.",
+            "cause": "UPI mandate succeeded at the bank but the payment-gateway callback to Apex timed out, so the order was not created.",
+            "fix_steps": "1. Ask the customer to check their bank app for a pending mandate and reverse it if present. 2. Retry checkout with the same UPI handle on a new payment attempt. 3. If the debit repeats twice, raise a payment-fraud-safe request with urgency=high and emergency_type=payment_fraud. 4. Never ask the customer to share a UPI PIN, OTP or CVV.",
+            "escalation_team": "Payments Recovery Desk",
+            "severity": "high"
+          }
+        },
+        "author": "support_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "support_agent"
+    ],
+    "texts": [
+      {
+        "author": "support_agent",
+        "text": "Error APX-4021 happens when your UPI payment succeeds at your bank, but the payment gateway's callback to us times out before your order can be created. \n\nPlease follow these steps to resolve it:\n1. Check your bank app to see if there is a pending mandate, and reverse it if present.\n2. Retry your checkout using the same UPI handle on a new payment attempt. \n\nPlease note: we will never ask you to share a UPI PIN, OTP, or CVV. Did this help complete your order, or has the debit repeated?"
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "support_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 10034,
+    "final_text": "Error APX-4021 happens when your UPI payment succeeds at your bank, but the payment gateway's callback to us times out before your order can be created. \n\nPlease follow these steps to resolve it:\n1. Check your bank app to see if there is a pending mandate, and reverse it if present.\n2. Retry your checkout using the same UPI handle on a new payment attempt. \n\nPlease note: we will never ask you to share a UPI PIN, OTP, or CVV. Did this help complete your order, or has the debit repeated?",
+    "state_delta": {},
+    "n_events": 7,
+    "http_error": ""
+  },
+  "session_id": "T10_error_code-0-8abbb1",
+  "turns": [
+    {
+      "user": "Checkout keeps failing with error APX-4021. My UPI money is debited but no order is created. What do I do?",
+      "status": 200,
+      "latency_s": 74.13,
+      "events": [
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_2192745",
+                  "args": {
+                    "agent_name": "support_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TtVXIX8e0uFdA7xXQPllIuorjyVsR2Hb1W64auuBfjjU05e8kJtvGKK5aQrfK5LmknC7C1Cq1HaIn3xUlzQ6OqsRF1YXjAi7Br8mHyOYzwhvZgiHNmaseF00="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 1882,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1882
+              }
+            ],
+            "totalTokenCount": 1904
+          },
+          "invocationId": "e-7631120a-50e2-4042-bba0-d94e5d6d3abc",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "fc31cd24-bc14-4285-b4d3-3557cc66958f",
+          "timestamp": 1792252281.9692295
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_2192745",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-7631120a-50e2-4042-bba0-d94e5d6d3abc",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "support_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "44d32d8a-a9ea-40a0-a309-e45fe43db840",
+          "timestamp": 1792252285.8876696
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_1008628",
+                  "args": {
+                    "query": "APX-4021"
+                  },
+                  "name": "search_knowledge_base"
+                },
+                "thoughtSignature": "EmAKXgFpFH0T9pH8z3u6U48_0m9585PQ1i7Ubon3r2ah12mtWGQFUBawM6J2-mCJy5KnYVXGY-RQ2dXzC6cggLsxIl6OGuHb8EHNaYRYz834APAyz2nDEwHTCgJ8lr8nvvw="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 24,
+            "promptTokenCount": 2101,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2101
+              }
+            ],
+            "totalTokenCount": 2125
+          },
+          "invocationId": "e-7631120a-50e2-4042-bba0-d94e5d6d3abc",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "a3a1b996-78f4-44fe-bdd4-132e1885257c",
+          "timestamp": 1792252285.9028492
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_1008628",
+                  "name": "search_knowledge_base",
+                  "response": {
+                    "status": "ok",
+                    "query": "APX-4021",
+                    "count": 3,
+                    "articles": [
+                      {
+                        "kb_id": "APX-KB-0101",
+                        "topic": "Checkout",
+                        "error_code": "APX-4021",
+                        "surface": "Apex app / website",
+                        "symptom": "\"Payment failed (APX-4021)\" at checkout although UPI request was debited.",
+                        "cause": "UPI mandate succeeded at the bank but the payment-gateway callback to Apex timed out, so the order was not created.",
+                        "fix_steps": "1. Ask the customer to check their bank app for a pending mandate and reverse it if present. 2. Retry checkout with the same UPI handle on a new payment attempt. 3. If the debit repeats twice, raise a payment-fraud-safe request with urgency=high and emergency_type=payment_fraud. 4. Never ask the customer to share a UPI PIN, OTP or CVV.",
+                        "escalation_team": "Payments Recovery Desk",
+                        "severity": "high"
+                      },
+                      {
+                        "kb_id": "APX-KB-0103",
+                        "topic": "Account access",
+                        "error_code": "APX-4150",
+                        "surface": "Apex app",
+                        "symptom": "\"Invalid credentials (APX-4150)\" although the customer is sure the password is right.",
+                        "cause": "The account got soft-locked after 5 failed attempts, or OTP is going to a stale phone number.",
+                        "fix_steps": "1. Confirm the email on file with list_customer_orders. 2. Trigger \"Forgot password\" and ask the customer to read the 6-digit OTP to the agent. 3. If the lock persists after a correct OTP, create an account_access request with urgency=normal. 4. Never ask for the password itself and never read back an OTP the customer did not volunteer.",
+                        "escalation_team": "Identity & Accounts Desk",
+                        "severity": "medium"
+                      },
+                      {
+                        "kb_id": "APX-KB-0104",
+                        "topic": "Returns",
+                        "error_code": "APX-4210",
+                        "surface": "Apex app / website",
+                        "symptom": "\"Return not eligible (APX-4210)\" for an item delivered 15 days ago.",
+                        "cause": "The item is outside the 14-day return window, or the category is non-returnable (perishables, innerwear, already-opened personal care).",
+                        "fix_steps": "1. Read the delivered_at date from lookup_order and explain the 14-day window. 2. Check the product category - grocery/perishables and personal care are non-returnable. 3. If the item is defective, treat it as a product_defect request instead of a return. 4. Escalate to the Quality Desk only when the customer supplies a defect description.",
+                        "escalation_team": "Quality Desk",
+                        "severity": "medium"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-7631120a-50e2-4042-bba0-d94e5d6d3abc",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "bf2f158f-9a47-414f-ab1f-96b283e93482",
+          "timestamp": 1792252353.0133312
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3993605",
+                  "args": {
+                    "kb_id": "APX-KB-0101"
+                  },
+                  "name": "get_troubleshooting_guide"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TN24nIu1yBvp3SxvoFI4PpctpRJVmFoUXkImJNwli2zM1TjIDhkeKVf8pwdWWuk5AWBHXqvgRQc_D9ATApJGjPVXfyZZNDGOv3PTUQ779Dvxcny-tDlL2URE="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 29,
+            "promptTokenCount": 2799,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2799
+              }
+            ],
+            "totalTokenCount": 2828
+          },
+          "invocationId": "e-7631120a-50e2-4042-bba0-d94e5d6d3abc",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "1ba18b61-fb2c-43c1-850c-5a685bc577e8",
+          "timestamp": 1792252353.031899
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3993605",
+                  "name": "get_troubleshooting_guide",
+                  "response": {
+                    "status": "ok",
+                    "article": {
+                      "kb_id": "APX-KB-0101",
+                      "topic": "Checkout",
+                      "error_code": "APX-4021",
+                      "surface": "Apex app / website",
+                      "symptom": "\"Payment failed (APX-4021)\" at checkout although UPI request was debited.",
+                      "cause": "UPI mandate succeeded at the bank but the payment-gateway callback to Apex timed out, so the order was not created.",
+                      "fix_steps": "1. Ask the customer to check their bank app for a pending mandate and reverse it if present. 2. Retry checkout with the same UPI handle on a new payment attempt. 3. If the debit repeats twice, raise a payment-fraud-safe request with urgency=high and emergency_type=payment_fraud. 4. Never ask the customer to share a UPI PIN, OTP or CVV.",
+                      "escalation_team": "Payments Recovery Desk",
+                      "severity": "high"
+                    }
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-7631120a-50e2-4042-bba0-d94e5d6d3abc",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "c15871e3-f0a8-47bb-bddc-146fad81ff06",
+          "timestamp": 1792252354.0845041
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "Error APX-4021 happens when your UPI payment succeeds at your bank, but the payment gateway's callback to us times out before your order can be created. \n\nPlease follow these steps to resolve it:\n1. Check your bank app to see if there is a pending mandate, and reverse it if present.\n2. Retry your checkout using the same UPI handle on a new payment attempt. \n\nPlease note: we will never ask you to share a UPI PIN, OTP, or CVV. Did this help complete your order, or has the debit repeated?",
+                "thoughtSignature": "EmAKXgFpFH0TfZY2JSa3ZclQpBnMX-lg7jRuVfTt1leKYK2WjiWlN8ipwZK1GhzZIyCxm-g1YJTQbziKzc4ZeifRIF30WKfUcAZtmL1R8q8GmwJynSiv0_PUbY-MQK-t3Yg="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 120,
+            "promptTokenCount": 3057,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3057
+              }
+            ],
+            "totalTokenCount": 3177
+          },
+          "invocationId": "e-7631120a-50e2-4042-bba0-d94e5d6d3abc",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "aad18de8-d900-4e3a-aea5-e81a09497fcb",
+          "timestamp": 1792252354.102894
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "support_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "args": {
+              "query": "APX-4021"
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "get_troubleshooting_guide",
+            "args": {
+              "kb_id": "APX-KB-0101"
+            },
+            "author": "support_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "response": {
+              "status": "ok",
+              "query": "APX-4021",
+              "count": 3,
+              "articles": [
+                {
+                  "kb_id": "APX-KB-0101",
+                  "topic": "Checkout",
+                  "error_code": "APX-4021",
+                  "surface": "Apex app / website",
+                  "symptom": "\"Payment failed (APX-4021)\" at checkout although UPI request was debited.",
+                  "cause": "UPI mandate succeeded at the bank but the payment-gateway callback to Apex timed out, so the order was not created.",
+                  "fix_steps": "1. Ask the customer to check their bank app for a pending mandate and reverse it if present. 2. Retry checkout with the same UPI handle on a new payment attempt. 3. If the debit repeats twice, raise a payment-fraud-safe request with urgency=high and emergency_type=payment_fraud. 4. Never ask the customer to share a UPI PIN, OTP or CVV.",
+                  "escalation_team": "Payments Recovery Desk",
+                  "severity": "high"
+                },
+                {
+                  "kb_id": "APX-KB-0103",
+                  "topic": "Account access",
+                  "error_code": "APX-4150",
+                  "surface": "Apex app",
+                  "symptom": "\"Invalid credentials (APX-4150)\" although the customer is sure the password is right.",
+                  "cause": "The account got soft-locked after 5 failed attempts, or OTP is going to a stale phone number.",
+                  "fix_steps": "1. Confirm the email on file with list_customer_orders. 2. Trigger \"Forgot password\" and ask the customer to read the 6-digit OTP to the agent. 3. If the lock persists after a correct OTP, create an account_access request with urgency=normal. 4. Never ask for the password itself and never read back an OTP the customer did not volunteer.",
+                  "escalation_team": "Identity & Accounts Desk",
+                  "severity": "medium"
+                },
+                {
+                  "kb_id": "APX-KB-0104",
+                  "topic": "Returns",
+                  "error_code": "APX-4210",
+                  "surface": "Apex app / website",
+                  "symptom": "\"Return not eligible (APX-4210)\" for an item delivered 15 days ago.",
+                  "cause": "The item is outside the 14-day return window, or the category is non-returnable (perishables, innerwear, already-opened personal care).",
+                  "fix_steps": "1. Read the delivered_at date from lookup_order and explain the 14-day window. 2. Check the product category - grocery/perishables and personal care are non-returnable. 3. If the item is defective, treat it as a product_defect request instead of a return. 4. Escalate to the Quality Desk only when the customer supplies a defect description.",
+                  "escalation_team": "Quality Desk",
+                  "severity": "medium"
+                }
+              ]
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "get_troubleshooting_guide",
+            "response": {
+              "status": "ok",
+              "article": {
+                "kb_id": "APX-KB-0101",
+                "topic": "Checkout",
+                "error_code": "APX-4021",
+                "surface": "Apex app / website",
+                "symptom": "\"Payment failed (APX-4021)\" at checkout although UPI request was debited.",
+                "cause": "UPI mandate succeeded at the bank but the payment-gateway callback to Apex timed out, so the order was not created.",
+                "fix_steps": "1. Ask the customer to check their bank app for a pending mandate and reverse it if present. 2. Retry checkout with the same UPI handle on a new payment attempt. 3. If the debit repeats twice, raise a payment-fraud-safe request with urgency=high and emergency_type=payment_fraud. 4. Never ask the customer to share a UPI PIN, OTP or CVV.",
+                "escalation_team": "Payments Recovery Desk",
+                "severity": "high"
+              }
+            },
+            "author": "support_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "support_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "support_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 10034,
+        "final_text": "Error APX-4021 happens when your UPI payment succeeds at your bank, but the payment gateway's callback to us times out before your order can be created. \n\nPlease follow these steps to resolve it:\n1. Check your bank app to see if there is a pending mandate, and reverse it if present.\n2. Retry your checkout using the same UPI handle on a new payment attempt. \n\nPlease note: we will never ask you to share a UPI PIN, OTP, or CVV. Did this help complete your order, or has the debit repeated?",
+        "state_delta": {},
+        "n_events": 7
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 74.13,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /4021|mandate|reverse|bank/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called search_knowledge_base",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'search_knowledge_base', 'get_troubleshooting_guide']"
+    },
+    {
+      "check": "agent_involved support_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'support_agent'] transfers=['support_agent']"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

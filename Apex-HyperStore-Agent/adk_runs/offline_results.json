@@ -1,0 +1,596 @@
+[
+  {
+    "group": "database",
+    "case": "schema creates all 8 tables",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "database",
+    "case": "all tables present",
+    "result": "PASS",
+    "detail": "missing=[]"
+  },
+  {
+    "group": "database",
+    "case": "seed data loaded",
+    "result": "PASS",
+    "detail": "{\"system_status\": 5, \"service_requests\": 34, \"products\": 9, \"returns\": 2, \"orders\": 4, \"customers\": 4, \"knowledge_base\": 6, \"order_items\": 5}"
+  },
+  {
+    "group": "database",
+    "case": "seeding is idempotent",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "database",
+    "case": "every seeded order has items",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "lookup_order returns verified order",
+    "result": "PASS",
+    "detail": "{\"status\": \"ok\", \"found\": true, \"verified\": true, \"order\": {\"order_id\": \"APX-ORD-2026-041882\", \"status\": \"out_for_delivery\", \"placed_at\": \"2026-10-12T19:41:00\","
+  },
+  {
+    "group": "orders",
+    "case": "lookup_order includes line items",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "lookup_order blocks wrong email",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "lookup_order works without email",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "lookup_order rejects bad ID format",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "lookup_order reports unknown ID",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "list_customer_orders finds orders",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "list_customer_orders includes profile",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "list_customer_orders rejects bad email",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "list_customer_orders handles unknown email",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "search_products finds by category words",
+    "result": "PASS",
+    "detail": "{\"status\": \"ok\", \"query\": \"water purifier\", \"count\": 1, \"products\": [{\"sku\": \"APX-SKU-100512\", \"name\": \"Apex PureLife RO Water Purifier\", \"category\": \"Home Appl"
+  },
+  {
+    "group": "orders",
+    "case": "search_products reports discount %",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "search_products flags out-of-stock",
+    "result": "PASS",
+    "detail": "{\"status\": \"ok\", \"query\": \"cooktop\", \"count\": 1, \"products\": [{\"sku\": \"APX-SKU-101268\", \"name\": \"Apex ChefPro Induction Cooktop\", \"category\": \"Kitchen\", \"brand\": \"Apex Kitchen\", \"price_inr\": 9499.0, \""
+  },
+  {
+    "group": "orders",
+    "case": "search_products no-match is not an error",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "get_product_details returns SKU",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "get_product_details rejects unknown SKU",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "returns: delivered order accepted",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "returns: wrong email refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "returns: undelivered order refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "returns: short reason refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "orders",
+    "case": "returns: bad order ID refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "support",
+    "case": "kb search ranks exact error code first",
+    "result": "PASS",
+    "detail": "{\"status\": \"ok\", \"query\": \"payment failed APX-4021\", \"count\": 3, \"articles\": [{\"kb_id\": \"APX-KB-0101\", \"topic\": \"Checkout\", \"error_code\": \"APX-4021\", \"surface\": \"Apex app / website\", \"symptom\": \"\\\"Pay"
+  },
+  {
+    "group": "support",
+    "case": "kb search matches plain-language symptom",
+    "result": "PASS",
+    "detail": "{\"status\": \"ok\", \"query\": \"my coupon will not apply at checkout\", \"count\": 3, \"articles\": [{\"kb_id\": \"APX-KB-0105\", \"topic\": \"Payments\", \"error_code\": \"APX-4305\", \"surface\": \"Website\", \"symptom\": \"Cou"
+  },
+  {
+    "group": "support",
+    "case": "kb search returns a parsed article model",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "support",
+    "case": "kb search honours top_k",
+    "result": "PASS",
+    "detail": "2"
+  },
+  {
+    "group": "support",
+    "case": "kb search no-match is not an error",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "support",
+    "case": "kb search rejects empty query",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "support",
+    "case": "guide returns step list",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "support",
+    "case": "guide rejects unknown kb_id",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "support",
+    "case": "system status lists all services",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "support",
+    "case": "system status surfaces degraded services",
+    "result": "PASS",
+    "detail": "[\"Checkout & Payments\", \"Last Mile Delivery\"]"
+  },
+  {
+    "group": "support",
+    "case": "system status filters by name",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "support",
+    "case": "system status rejects unknown service",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "catalog exposes 11 request types",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "catalog exposes 4 urgency levels",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "catalog exposes 8 emergency types",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "catalog states mandatory fields",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "catalog documents reference format",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "readiness lists every missing field",
+    "result": "PASS",
+    "detail": "[\"full_name\", \"email\", \"phone\", \"request_type\", \"issue_summary\"]"
+  },
+  {
+    "group": "requests",
+    "case": "readiness passes complete details",
+    "result": "PASS",
+    "detail": "[]"
+  },
+  {
+    "group": "requests",
+    "case": "readiness explains each bad field",
+    "result": "PASS",
+    "detail": "[\"full_name\", \"email\", \"phone\", \"request_type\", \"issue_summary\"]"
+  },
+  {
+    "group": "requests",
+    "case": "readiness accepts a spaced phone number",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "readiness flags malformed order ID",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "standard request filed",
+    "result": "PASS",
+    "detail": "{\"status\": \"ok\", \"reference_id\": \"APX-SR-2026-BGZN6J\", \"request_status\": \"open\", \"request_type\": \"refund\", \"urgency\": \"high\", \"emergency_type\": \"none\", \"full_name\": \"Rohit Malhotra\", \"email\": \"rohit.m"
+  },
+  {
+    "group": "requests",
+    "case": "standard request uses APX-SR prefix",
+    "result": "PASS",
+    "detail": "APX-SR-2026-BGZN6J"
+  },
+  {
+    "group": "requests",
+    "case": "request routed to the right team",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "high urgency gets a 2-hour SLA",
+    "result": "PASS",
+    "detail": "2026-10-17T20:39:32.147261+05:30 -> 2026-10-17 22:39 IST"
+  },
+  {
+    "group": "requests",
+    "case": "scheduled_for normalised to IST",
+    "result": "PASS",
+    "detail": "2026-10-18 11:00 IST"
+  },
+  {
+    "group": "requests",
+    "case": "phone normalised to +91 E.164",
+    "result": "PASS",
+    "detail": "+919845005518"
+  },
+  {
+    "group": "requests",
+    "case": "email normalised to lowercase",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "emergency request filed",
+    "result": "PASS",
+    "detail": "{\"status\": \"ok\", \"reference_id\": \"APX-EMG-2026-PFIT66\", \"request_status\": \"open\", \"request_type\": \"emergency\", \"urgency\": \"emergency\", \"emergency_type\": \"damaged_goods\", \"full_name\": \"Fatima Sheikh\", "
+  },
+  {
+    "group": "requests",
+    "case": "emergency uses APX-EMG prefix",
+    "result": "PASS",
+    "detail": "APX-EMG-2026-PFIT66"
+  },
+  {
+    "group": "requests",
+    "case": "emergency owned by response desk",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "emergency SLA is ~15 minutes",
+    "result": "PASS",
+    "detail": "0.0 min"
+  },
+  {
+    "group": "requests",
+    "case": "emergency request is persisted",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "emergency without a type is refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "request_type=emergency is promoted to a 15-minute SLA",
+    "result": "PASS",
+    "detail": "{\"status\": \"ok\", \"reference_id\": \"APX-EMG-2026-7LN4U9\", \"request_status\": \"open\", \"request_type\": \"emergency\", \"urgency\": \"emergency\", \"emergency_type\": \"access_blocked\", \"full_name\": \"A B\", \"email\": "
+  },
+  {
+    "group": "requests",
+    "case": "emergency_type without emergency urgency is refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "invalid email is refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "invalid phone is refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "short issue summary is refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "unknown request type is refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "malformed order ID is refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "past scheduled_for is refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "unparseable scheduled_for is refused",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "nothing is stored when validation fails",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "phone normalisation",
+    "case": "normalises '9845005518'",
+    "result": "PASS",
+    "detail": "got +919845005518, want +919845005518"
+  },
+  {
+    "group": "phone normalisation",
+    "case": "normalises '+91 98450 05518'",
+    "result": "PASS",
+    "detail": "got +919845005518, want +919845005518"
+  },
+  {
+    "group": "phone normalisation",
+    "case": "normalises '+919845005518'",
+    "result": "PASS",
+    "detail": "got +919845005518, want +919845005518"
+  },
+  {
+    "group": "phone normalisation",
+    "case": "normalises '09845005518'",
+    "result": "PASS",
+    "detail": "got +919845005518, want +919845005518"
+  },
+  {
+    "group": "phone normalisation",
+    "case": "normalises '98450 05518'",
+    "result": "PASS",
+    "detail": "got +919845005518, want +919845005518"
+  },
+  {
+    "group": "phone normalisation",
+    "case": "normalises '080-5555-0100'",
+    "result": "PASS",
+    "detail": "got +918055550100, want +918055550100"
+  },
+  {
+    "group": "phone normalisation",
+    "case": "rejects '123'",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "phone normalisation",
+    "case": "rejects 'abcdefghij'",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "phone normalisation",
+    "case": "rejects ''",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "phone normalisation",
+    "case": "rejects '12345678901234567890'",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "status round-trips the stored request",
+    "result": "PASS",
+    "detail": "{\"status\": \"ok\", \"reference_id\": \"APX-SR-2026-BGZN6J\", \"request_status\": \"open\", \"request_type\": \"refund\", \"urgency\": \"high\", \"emergency_type\": \"none\", \"full_name\": \"Rohit Malhotra\", \"email\": \"rohit.m"
+  },
+  {
+    "group": "requests",
+    "case": "status rejects malformed reference",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "status reports unknown reference",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "30 minted references are all unique",
+    "result": "PASS",
+    "detail": "30/30"
+  },
+  {
+    "group": "requests",
+    "case": "every minted reference matches the published format",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "requests",
+    "case": "every request type maps to a team",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "concierge",
+    "case": "company_info returns the returns policy",
+    "result": "PASS",
+    "detail": "{\"status\": \"ok\", \"topic\": \"returns\", \"info\": {\"brand\": \"Apex Hyperstore\", \"topic\": \"returns\", \"disclaimer\": \"Apex Hyperstore is a fictional company created for "
+  },
+  {
+    "group": "concierge",
+    "case": "company_info marks the company as fictional",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "concierge",
+    "case": "company_info handles unknown topic",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "concierge",
+    "case": "company_info default topic works",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "concierge",
+    "case": "same-day pincode is serviceable",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "concierge",
+    "case": "unserviceable pincode explained",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "concierge",
+    "case": "bad pincode rejected",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "concierge",
+    "case": "team list is populated",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "simulation",
+    "case": "emergency flow reaches the cold-chain owner",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "simulation",
+    "case": "status lookup returns the same reference",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "simulation",
+    "case": "emergency_type survives the round trip",
+    "result": "PASS",
+    "detail": ""
+  },
+  {
+    "group": "simulation",
+    "case": "order link survives the round trip",
+    "result": "PASS",
+    "detail": ""
+  }
+]

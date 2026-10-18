@@ -1,0 +1,265 @@
+{
+  "test_id": "T02_hours",
+  "run": {
+    "calls": [
+      {
+        "tool": "get_company_info",
+        "args": {
+          "topic": "hours"
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "get_company_info",
+        "response": {
+          "status": "ok",
+          "topic": "hours",
+          "info": {
+            "brand": "Apex Hyperstore",
+            "topic": "hours",
+            "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+            "hours": {
+              "chat_assistant": "24x7, every day including public holidays",
+              "hypermarkets": "09:00 to 21:30 IST, all 7 days",
+              "customer_care_desk": "08:00 to 22:00 IST, 7 days (phone is 24x7)",
+              "emergency_response_desk": "24x7 including nights and holidays",
+              "freshhub_grocery_window": "06:00 to 11:00 IST same-day slot; next day after 11:00"
+            }
+          }
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "authors": [
+      "apex_concierge"
+    ],
+    "texts": [
+      {
+        "author": "apex_concierge",
+        "text": "Our hypermarkets are open from 09:00 to 21:30 IST, all seven days of the week. \n\nCustomer care availability depends on the channel:\n- **Phone support:** Available 24x7\n- **Customer Care Desk:** 08:00 to 22:00 IST, 7 days a week\n- **Chat Assistant:** Available 24x7, every day\n\nPlease let us know if there is anything else we can help you with!"
+      }
+    ],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 4442,
+    "final_text": "Our hypermarkets are open from 09:00 to 21:30 IST, all seven days of the week. \n\nCustomer care availability depends on the channel:\n- **Phone support:** Available 24x7\n- **Customer Care Desk:** 08:00 to 22:00 IST, 7 days a week\n- **Chat Assistant:** Available 24x7, every day\n\nPlease let us know if there is anything else we can help you with!",
+    "state_delta": {},
+    "n_events": 3,
+    "http_error": ""
+  },
+  "session_id": "T02_hours-0-1193e0",
+  "turns": [
+    {
+      "user": "What time do your hypermarkets open and when is customer care available?",
+      "status": 200,
+      "latency_s": 13.56,
+      "events": [
+        {
+          "modelVersion": "gemini-3.8-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3804521",
+                  "args": {
+                    "topic": "hours"
+                  },
+                  "name": "get_company_info"
+                },
+                "thoughtSignature": "EqkECqYEAWkUfRPyhfPR64LO1oj9yZ-Js30uNcugB61MwtOWDnz1fvpyGLzUM5IruL7mrZLFRCnbZLPv3wPdpu1GujGSjH4f1_eFN8UioTCQlB-FDDQPdu8O_M_9IGTQ6CF6nFAxC3EZrvoKCuAyzHo9zFZJKXt4AZRkKlALaDp3C1MyY9B4U_vbTy0K8klvap6nI03MpTAFK9yAyr3zEX1VStTfJJ-vzUjKjojfOC7VLEnbjJlUeXjHuacw8DfbwIB08tC8Sdkz2cv1dblOcsQEf0DdmF8UJjm1Xo5TW103ATUt12RpyrhQNKY6kqnd59VZzLgIFBCpt5Fuj7D-pTLGfZXZLw6njWrlIo_3ShrWFYQ6-naHKxfGy92NEeCb9oRI6M7WCb46UZW1fptl5D6UVNALdATi1yr8lLgC7dn-8msjxYc_2ySK5w6zb2uv7FhS1LDk4bcleAcIjVV8DsvholXTZt5B110loZP65CzFQpA3eJxkq2Zw6ujmf437jLGn-ie8c_jHjdJGigBBDODQHPQwjVyt8mTm-ZQ3QooHWf_7OJjzCXY06mGKcEOD034S2cdJRm5JaDIzXhgTOCOtdqohVwJsGhNh7Tq1qF62sfX5TYkSzNI6KoYKW97PaRime37RpW1KySSnIyO4w_ifwXxNkbt_xlQ8MJoWrdTcFBCl6zgKUx4SySmi_hUpbY7-VdlwOO9MTQjpZ_CbOhRyrS5i2GOmOBqwbA=="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 18,
+            "promptTokenCount": 1866,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1866
+              }
+            ],
+            "thoughtsTokenCount": 100,
+            "totalTokenCount": 1984
+          },
+          "invocationId": "e-cf9fe9ad-24be-4888-a8ed-e58ee44966d6",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "b215918b-b20f-4811-8496-878598d8b323",
+          "timestamp": 1792248307.8306048
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3804521",
+                  "name": "get_company_info",
+                  "response": {
+                    "status": "ok",
+                    "topic": "hours",
+                    "info": {
+                      "brand": "Apex Hyperstore",
+                      "topic": "hours",
+                      "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+                      "hours": {
+                        "chat_assistant": "24x7, every day including public holidays",
+                        "hypermarkets": "09:00 to 21:30 IST, all 7 days",
+                        "customer_care_desk": "08:00 to 22:00 IST, 7 days (phone is 24x7)",
+                        "emergency_response_desk": "24x7 including nights and holidays",
+                        "freshhub_grocery_window": "06:00 to 11:00 IST same-day slot; next day after 11:00"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-cf9fe9ad-24be-4888-a8ed-e58ee44966d6",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "71da9370-01a0-4be9-9d79-a6e0aa3fb6a8",
+          "timestamp": 1792248316.9687939
+        },
+        {
+          "modelVersion": "gemini-3.8-flash",
+          "content": {
+            "parts": [
+              {
+                "text": "Our hypermarkets are open from 09:00 to 21:30 IST, all seven days of the week. \n\nCustomer care availability depends on the channel:\n- **Phone support:** Available 24x7\n- **Customer Care Desk:** 08:00 to 22:00 IST, 7 days a week\n- **Chat Assistant:** Available 24x7, every day\n\nPlease let us know if there is anything else we can help you with!",
+                "thoughtSignature": "EpIFCo8FAWkUfRP8vy7hM3aGqakGeWMC00erufg6D1oYHaaQpkjLST8rb4obtTCKT5NNhOqdh_FYjnOE6W8--FL-iVxLwM9pwUNsTRJcDn7v1zWZywj_6oDt_nHduXFBY8_F9Pw8a8nsKvmsXK0ZNKA4WXB0JpwTB2LpKI1o2u3K2M294L20ErOkKtyuPa_XfAoYREOEZgjWm5L4aqyzolbVVsDapWMN7B-j_sIgC6A0Vvy4LbALeV2pB81orMjt74C58PGwJAISuX5U727YEUKtDAXPICvxepZZEihh_sKbB6wtjeuxy3ZJYBKbn_4VJ-e6F6orK-3qCBSYFvfnTM0lzGU_ybZtvNoiQ2osamleegFEpe9wRoDcUqBLt2VY-S3ifkBeRIoM2Un5VB12s2P94KF5Qqgdkmq4WRraIdZsAfSAeVR-WVLNgytKMACzp5kgJ2DllHHYfJC4M0EXJ0IySrvwu8N_g7gAGwcPKY3U1_DDAX4-Z6i7OJPLwX7Nf2K1vsEHD0hfr2YHkKMs70toZnFgjEqTGholp8vi64mWSjKCrJu2HxsxDsBEJPxPYuhPh9aXg_HpbdaTZFq0R_vkgMCMemMLk2mod-tvUnUt2MMKnx_rldJsXpronb7ZsmqjI0idcb8PA36lf85ZAdiUJSuDPKGPXXNgi7oxDbqDvzThquKqVpr00dhiGmFPVsFrQVv4P8UGNOK975kEPuHy2Df52UrPfz975JbJvN5rZ95UGDysoK9R9t6THCXjcWhsko2nUuX1n4s8gI_M-HwnrTRKrdnLOYgJ5j3dEWKF5LkQrY62oWEPXBNkYxu97l56-lp1ktK-zBSmd5wog0_NT5YUYBBbjB7hI_miQyBmL4mKyg=="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 108,
+            "promptTokenCount": 2185,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2185
+              }
+            ],
+            "thoughtsTokenCount": 165,
+            "totalTokenCount": 2458
+          },
+          "invocationId": "e-cf9fe9ad-24be-4888-a8ed-e58ee44966d6",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "9d508ea6-f806-4dd4-a3c8-f16b7eaefcbc",
+          "timestamp": 1792248317.0011232
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "get_company_info",
+            "args": {
+              "topic": "hours"
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "get_company_info",
+            "response": {
+              "status": "ok",
+              "topic": "hours",
+              "info": {
+                "brand": "Apex Hyperstore",
+                "topic": "hours",
+                "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+                "hours": {
+                  "chat_assistant": "24x7, every day including public holidays",
+                  "hypermarkets": "09:00 to 21:30 IST, all 7 days",
+                  "customer_care_desk": "08:00 to 22:00 IST, 7 days (phone is 24x7)",
+                  "emergency_response_desk": "24x7 including nights and holidays",
+                  "freshhub_grocery_window": "06:00 to 11:00 IST same-day slot; next day after 11:00"
+                }
+              }
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "authors": [
+          "apex_concierge"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 4442,
+        "final_text": "Our hypermarkets are open from 09:00 to 21:30 IST, all seven days of the week. \n\nCustomer care availability depends on the channel:\n- **Phone support:** Available 24x7\n- **Customer Care Desk:** 08:00 to 22:00 IST, 7 days a week\n- **Chat Assistant:** Available 24x7, every day\n\nPlease let us know if there is anything else we can help you with!",
+        "state_delta": {},
+        "n_events": 3
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 13.56,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /09:00|24x7|24 x 7/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called get_company_info",
+      "ok": true,
+      "detail": "tools called: ['get_company_info']"
+    },
+    {
+      "check": "tool_args get_company_info",
+      "ok": true,
+      "detail": "calls: [{'tool': 'get_company_info', 'args': {'topic': 'hours'}, 'author': 'apex_concierge'}]"
+    },
+    {
+      "check": "max_tool_calls",
+      "ok": true,
+      "detail": "1 calls"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

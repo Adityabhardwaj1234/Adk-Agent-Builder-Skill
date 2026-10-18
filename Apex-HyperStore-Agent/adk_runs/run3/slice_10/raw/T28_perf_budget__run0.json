@@ -1,0 +1,399 @@
+{
+  "test_id": "T28_perf_budget",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "orders_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "lookup_order",
+        "args": {
+          "order_id": "APX-ORD-2026-041905",
+          "email": "rohit.malhotra@example.com"
+        },
+        "author": "orders_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "lookup_order",
+        "response": {
+          "status": "ok",
+          "found": true,
+          "verified": true,
+          "order": {
+            "order_id": "APX-ORD-2026-041905",
+            "status": "delivered",
+            "placed_at": "2026-10-14T11:07:00",
+            "delivery_slot": "2026-10-16T09:00:00 to 12:00",
+            "total_inr": 4299.0,
+            "item_count": 1,
+            "payment_mode": "Credit Card",
+            "warehouse": "WH-BLR-02",
+            "items": [
+              {
+                "order_id": "APX-ORD-2026-041905",
+                "sku": "APX-SKU-100341",
+                "name": "Apex FreshBlend 1200W Mixer Grinder",
+                "qty": 1,
+                "unit_price_inr": 4299.0
+              }
+            ]
+          },
+          "message": "Order APX-ORD-2026-041905 is delivered."
+        },
+        "author": "orders_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "orders_agent"
+    ],
+    "texts": [
+      {
+        "author": "orders_agent",
+        "text": "We have checked your order details. Your order **APX-ORD-2026-041905** has been successfully delivered.\n\nHere are the details of your order:\n- **Status:** Delivered\n- **Delivery Slot:** 16 October 2026, 09:00 AM \u2013 12:00 PM\n- **Item:** Apex FreshBlend 1200W Mixer Grinder (Qty: 1)\n- **Total Amount:** \u20b94,299\n- **Payment Mode:** Credit Card\n\nPlease let us know if you need any further assistance with this order!"
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "orders_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 7820,
+    "final_text": "We have checked your order details. Your order **APX-ORD-2026-041905** has been successfully delivered.\n\nHere are the details of your order:\n- **Status:** Delivered\n- **Delivery Slot:** 16 October 2026, 09:00 AM \u2013 12:00 PM\n- **Item:** Apex FreshBlend 1200W Mixer Grinder (Qty: 1)\n- **Total Amount:** \u20b94,299\n- **Payment Mode:** Credit Card\n\nPlease let us know if you need any further assistance with this order!",
+    "state_delta": {},
+    "n_events": 5,
+    "http_error": ""
+  },
+  "session_id": "T28_perf_budget-0-ab52f6",
+  "turns": [
+    {
+      "user": "What is the status of order APX-ORD-2026-041905? My email is rohit.malhotra@example.com.",
+      "status": 200,
+      "latency_s": 18.66,
+      "events": [
+        {
+          "modelVersion": "gemini-3.6-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_1655841",
+                  "args": {
+                    "agent_name": "orders_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EvsECvgEAWkUfRPp-ZZ6zBsASI9-S98BT1X_EZKNvBtZX90XTaXM5Tz6tq5vU8pbm8UBENXW0pC6OuXLDMWfIANmN2_0fhceLBaIAZ1OCYNlbqhhXL4EwiuNLpg2iHF20jPvebWoh12wn6gdP9KV8U78Z89fen7bpbENKPEvZW270Hp3_93yvugLQb9sg1AIagRHgiuJ8HQ0uY5o_INrwLBT7wqToYvKeqa2I1lsNDv2LTYImoi0qaAE22Zs2hpe4z80TDUET2VNUn8glfT95iWgXYBYHdwHlkLYwZzl80Rwajd2hIgoM5RDWTjaur6hs2UpCJk6V38-koPu8g61dgIHKWu_MPuMyA_dfgYTuwjV0W6szdrIU8zbfJ4CpefR59BX0_fEAVE7PeZCAmNCleyE9kQCD8TigRhnFokc0g1JeR16jjRgGiDLVVBwHWnGvgm9oX_rYkhHB0wq4PNa0wy6cYNIcL0dEJ4wbdS3PQDxn7BnC2wrTkKILP26i1nFeIndGu5Fa5_PXE_lgaA9bSzEB4gIfCijnsfTJ1uJ-C2h9ZEopLW54Puo-cq67y_xz_WvW6Jm2W5uY0QvwU1OjzNuxqG2H5UzHt9l_mGWreZZdIYs_5qZVFLmvmmWdohQd6uIzG7Xs9aHpDJOv0w0uBOUeCr0uqQsClzPz0UCRhzpte6EBIher6G4xm-SKJsk4iV8pA1dkDyopR1GIMj-cKmBz4w_9YOUK8Kg6LtJk8an2Va7XTn11i2DBl4CBZRz0E4dnrdXSWGssYQ-nhdyyhFlpcw-zSWlJgzC0JIx_uV9OYAv9mRozI63Y5NxTWySnmAd31R6UGoIS12OsDs="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 1888,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1888
+              }
+            ],
+            "thoughtsTokenCount": 133,
+            "totalTokenCount": 2043
+          },
+          "invocationId": "e-1f894e30-111a-45d8-8e7c-9c7a9537bfb3",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "f9134889-86ff-4087-ac9a-1a4aeda06b70",
+          "timestamp": 1792250486.5694551
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_1655841",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-1f894e30-111a-45d8-8e7c-9c7a9537bfb3",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "orders_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "fa83eab2-3c04-480f-874b-eca2fad82455",
+          "timestamp": 1792250490.732186
+        },
+        {
+          "modelVersion": "gemini-3.6-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3076799",
+                  "args": {
+                    "order_id": "APX-ORD-2026-041905",
+                    "email": "rohit.malhotra@example.com"
+                  },
+                  "name": "lookup_order"
+                },
+                "thoughtSignature": "ErIDCq8DAWkUfRO-Zk6qsIEZuRKnIyc2evewFM295sH8pautFD3g0EZOnystgxgD3Dju_f1BPrnEefali1hGqo8uQaVmjXvhx4gTUBc3dDksLQVukqCSEBkPPv7DNN7Pi0AoKX9Hm0DqYD6fYFmcGVQfYnIw9yLlv01wmMJ0efGgwyRW6UHcandi-6xUs6DufiNCu2Y_Ungnyo8i3PxlAaA-ErJUDtxpwi6BauaNWn2BT3CAO8bUGWCtLVVLUgFNdUQYk9vzTAJgiQkeAbaRQdxQQxzNWCJVoyaG1B22-k6_zkoVhvzNDuwfpQ-vEN6TQDgB6XW_-k6cjihayHZmBkaHECJ5-DLsZ2fPLM013Y9k_9R-L17kWTDsOAaz8lBe3-Jg83xq9v1KxenqS3rAXy3upe6DNNxCCEviFiwvxKoyGxtBqzzKlmNkBT0yQDYTcxCvgcYyP2c2dkhXtQDlSABYNe4jWPP5yo1zgSTjQYIV3xFSsp_HwCDndLSponJybEGGKy56Ny_wJX1mNcu38x7hg1C1_9fu1uj5MHs9hiGpVFVouyB2uYOhpDnbzm_rOV5fAWo="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 47,
+            "promptTokenCount": 2455,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2455
+              }
+            ],
+            "thoughtsTokenCount": 112,
+            "totalTokenCount": 2614
+          },
+          "invocationId": "e-1f894e30-111a-45d8-8e7c-9c7a9537bfb3",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "0c6d0c9b-37f5-46d9-bf9a-02462b27d085",
+          "timestamp": 1792250490.7610126
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3076799",
+                  "name": "lookup_order",
+                  "response": {
+                    "status": "ok",
+                    "found": true,
+                    "verified": true,
+                    "order": {
+                      "order_id": "APX-ORD-2026-041905",
+                      "status": "delivered",
+                      "placed_at": "2026-10-14T11:07:00",
+                      "delivery_slot": "2026-10-16T09:00:00 to 12:00",
+                      "total_inr": 4299.0,
+                      "item_count": 1,
+                      "payment_mode": "Credit Card",
+                      "warehouse": "WH-BLR-02",
+                      "items": [
+                        {
+                          "order_id": "APX-ORD-2026-041905",
+                          "sku": "APX-SKU-100341",
+                          "name": "Apex FreshBlend 1200W Mixer Grinder",
+                          "qty": 1,
+                          "unit_price_inr": 4299.0
+                        }
+                      ]
+                    },
+                    "message": "Order APX-ORD-2026-041905 is delivered."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-1f894e30-111a-45d8-8e7c-9c7a9537bfb3",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "id": "548c8075-2b2a-4478-b283-57d194d8c2fe",
+          "timestamp": 1792250498.1997852
+        },
+        {
+          "modelVersion": "gemini-3.6-flash",
+          "content": {
+            "parts": [
+              {
+                "text": "We have checked your order details. Your order **APX-ORD-2026-041905** has been successfully delivered.\n\nHere are the details of your order:\n- **Status:** Delivered\n- **Delivery Slot:** 16 October 2026, 09:00 AM \u2013 12:00 PM\n- **Item:** Apex FreshBlend 1200W Mixer Grinder (Qty: 1)\n- **Total Amount:** \u20b94,299\n- **Payment Mode:** Credit Card\n\nPlease let us know if you need any further assistance with this order!",
+                "thoughtSignature": "Er4ECrsEAWkUfROgp_slTsgCWqPr3RxcDPkQqTMZVIZM_tii_Huo-rlCtV9omHnHBTdyO4gi0ansxpbKar8ZbjuaikdYF5r3QVenTgLlKGO_PCicG94EjVycMjuR1N3wYbQLjjUyev27ai1zYwRPv5Msg_rXQKgifsBhQocgRYtklqRVpTP6rgmsz9tDE5nIAG2GI2yh8gPBna6RGqP1ELGOZVMZc_Qr9vcnY5Y3ws86EQZMrzYzwlMbqf0rddkeq_zW3O1TG3UPsyyEXVIvZjRkubw3yNNtQgK-2PBUGun8HKwddqu5C014Mxisc6R77_7FrEaTRTZFkWImhAhShf1ky7275ToplvzMJ8WqLPJ4Chuq-LO01HhIPQCpNMJvje8ZUb5aJ3rEydOJesecSyxXWd2Kg8-G5vBQEVA-GVrqRbtuWqiu1MXt6Fl4LlTa0XhnPWNJsPZLyY6qtsuclGE52VbrXlyYpFf_f_nnHKDI6Pfu5O9MBvReIesEpShX-JJaQTRmxX63FVTj0xinUlX307ZZeyKGlCVWVnrAa72SWwUn3niEB61ag-RZZAj0FKovTFJBnX0nlaUFU4EfGYPiKXTqB2x2ljWm5qUXO9UfnbiwQ9d98iY_wk_VSY_N3D5sC_3e63mIQuczZmmlk6v-zhR5SxuCLhohTdG1XcsJWsL6whg5gi3TYP3VLHzcRDlo5e2CX2AFCbpAvaZMvKn-vRTozoPZho0vL19fvs6AamxeXCGVJ7zxR-wfkUqnRQ=="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 136,
+            "promptTokenCount": 2864,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2864
+              }
+            ],
+            "thoughtsTokenCount": 163,
+            "totalTokenCount": 3163
+          },
+          "invocationId": "e-1f894e30-111a-45d8-8e7c-9c7a9537bfb3",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "id": "0c4ac54f-a066-46bb-9304-7c05ec710ac9",
+          "timestamp": 1792250498.2221644
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "orders_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "lookup_order",
+            "args": {
+              "order_id": "APX-ORD-2026-041905",
+              "email": "rohit.malhotra@example.com"
+            },
+            "author": "orders_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "lookup_order",
+            "response": {
+              "status": "ok",
+              "found": true,
+              "verified": true,
+              "order": {
+                "order_id": "APX-ORD-2026-041905",
+                "status": "delivered",
+                "placed_at": "2026-10-14T11:07:00",
+                "delivery_slot": "2026-10-16T09:00:00 to 12:00",
+                "total_inr": 4299.0,
+                "item_count": 1,
+                "payment_mode": "Credit Card",
+                "warehouse": "WH-BLR-02",
+                "items": [
+                  {
+                    "order_id": "APX-ORD-2026-041905",
+                    "sku": "APX-SKU-100341",
+                    "name": "Apex FreshBlend 1200W Mixer Grinder",
+                    "qty": 1,
+                    "unit_price_inr": 4299.0
+                  }
+                ]
+              },
+              "message": "Order APX-ORD-2026-041905 is delivered."
+            },
+            "author": "orders_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "orders_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "orders_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 7820,
+        "final_text": "We have checked your order details. Your order **APX-ORD-2026-041905** has been successfully delivered.\n\nHere are the details of your order:\n- **Status:** Delivered\n- **Delivery Slot:** 16 October 2026, 09:00 AM \u2013 12:00 PM\n- **Item:** Apex FreshBlend 1200W Mixer Grinder (Qty: 1)\n- **Total Amount:** \u20b94,299\n- **Payment Mode:** Credit Card\n\nPlease let us know if you need any further assistance with this order!",
+        "state_delta": {},
+        "n_events": 5
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 18.66,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called lookup_order",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'lookup_order']"
+    },
+    {
+      "check": "max_tool_calls",
+      "ok": true,
+      "detail": "2 calls"
+    },
+    {
+      "check": "max_latency_s",
+      "ok": true,
+      "detail": "18.7s"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

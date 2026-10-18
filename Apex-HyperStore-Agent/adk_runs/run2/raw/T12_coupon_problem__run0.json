@@ -1,0 +1,54 @@
+{
+  "test_id": "T12_coupon_problem",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T12_coupon_problem-0-ff85fe",
+  "turns": [
+    {
+      "user": "My coupon keeps getting rejected at the payment page. Why?",
+      "status": 500,
+      "latency_s": 2.55,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 2.55,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /coupon|excluded|grocery|terms/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_called search_knowledge_base",
+      "ok": false,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "agent_involved support_agent",
+      "ok": false,
+      "detail": "authors=[] transfers=[]"
+    }
+  ],
+  "passed": false,
+  "failure_class": "QUOTA_OR_RATE_LIMIT"
+}

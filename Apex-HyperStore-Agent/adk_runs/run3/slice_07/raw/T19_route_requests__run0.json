@@ -1,0 +1,892 @@
+{
+  "test_id": "T19_route_requests",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "service_request_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_service_catalog",
+        "args": {},
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "check_request_readiness",
+        "args": {
+          "request_type": "billing",
+          "issue_summary": "Customer requests a callback regarding a billing issue on their invoice."
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_service_catalog",
+        "response": {
+          "status": "ok",
+          "request_types": [
+            {
+              "value": "order_issue",
+              "label": "A problem with an order"
+            },
+            {
+              "value": "delivery_delay",
+              "label": "Delivery running late or not arriving"
+            },
+            {
+              "value": "return_exchange",
+              "label": "Return or exchange of an item"
+            },
+            {
+              "value": "refund",
+              "label": "Refund not received or wrong amount"
+            },
+            {
+              "value": "product_defect",
+              "label": "Item defective, damaged or wrong"
+            },
+            {
+              "value": "billing",
+              "label": "Charges, invoice or coupon problem"
+            },
+            {
+              "value": "account_access",
+              "label": "Login, OTP or profile access"
+            },
+            {
+              "value": "loyalty",
+              "label": "Prime membership, points or coupons"
+            },
+            {
+              "value": "feedback",
+              "label": "Compliment, complaint or suggestion"
+            },
+            {
+              "value": "emergency",
+              "label": "Something urgent that needs the response desk now"
+            },
+            {
+              "value": "other",
+              "label": "Something not covered above"
+            }
+          ],
+          "urgency_levels": [
+            {
+              "value": "emergency",
+              "respond_within": "15 minutes"
+            },
+            {
+              "value": "high",
+              "respond_within": "120 minutes"
+            },
+            {
+              "value": "normal",
+              "respond_within": "24 hours"
+            },
+            {
+              "value": "low",
+              "respond_within": "72 hours"
+            }
+          ],
+          "emergency_types": [
+            {
+              "value": "none",
+              "label": "Not an emergency"
+            },
+            {
+              "value": "safety_hazard",
+              "label": "Safety hazard - electrical, fire or structural risk"
+            },
+            {
+              "value": "food_safety",
+              "label": "Food safety - spoiled, contaminated or wrong temperature"
+            },
+            {
+              "value": "payment_fraud",
+              "label": "Payment fraud - unauthorised debit or duplicate charge"
+            },
+            {
+              "value": "medical_allergy",
+              "label": "Medical or allergy reaction to a delivered product"
+            },
+            {
+              "value": "damaged_goods",
+              "label": "Damaged goods - leaking, broken or hazardous packaging"
+            },
+            {
+              "value": "access_blocked",
+              "label": "Access blocked - locked gate, no water or electricity supply"
+            },
+            {
+              "value": "no_delivery_aged",
+              "label": "No delivery and the customer is elderly, disabled or dependants alone"
+            }
+          ],
+          "channels": [
+            "web_chat",
+            "whatsapp",
+            "phone",
+            "email",
+            "store_counter"
+          ],
+          "mandatory_fields": [
+            "full_name",
+            "email",
+            "phone",
+            "request_type",
+            "issue_summary"
+          ],
+          "optional_fields": [
+            "urgency (default normal)",
+            "emergency_type (default none)",
+            "scheduled_for (default asap)",
+            "order_id"
+          ],
+          "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+          "message": "Collect all mandatory fields before calling create_support_request."
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "check_request_readiness",
+        "response": {
+          "status": "ok",
+          "ready": false,
+          "checks": [
+            {
+              "field": "full_name",
+              "ok": false,
+              "detail": "not provided yet - ask the customer for it"
+            },
+            {
+              "field": "email",
+              "ok": false,
+              "detail": "not provided yet - ask the customer for it"
+            },
+            {
+              "field": "phone",
+              "ok": false,
+              "detail": "not provided yet - ask the customer for it"
+            },
+            {
+              "field": "request_type",
+              "ok": true,
+              "detail": "'billing' is valid"
+            },
+            {
+              "field": "issue_summary",
+              "ok": true,
+              "detail": "detailed enough"
+            }
+          ],
+          "missing": [
+            "full_name",
+            "email",
+            "phone"
+          ],
+          "message": "Still needed: full_name, email, phone"
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "service_request_agent"
+    ],
+    "texts": [
+      {
+        "author": "service_request_agent",
+        "text": "I can certainly arrange for our team to call you back about your invoice. \n\nCould you please share your full name so we can get started?"
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "service_request_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 12089,
+    "final_text": "I can certainly arrange for our team to call you back about your invoice. \n\nCould you please share your full name so we can get started?",
+    "state_delta": {},
+    "n_events": 7,
+    "http_error": ""
+  },
+  "session_id": "T19_route_requests-0-ec60b1",
+  "turns": [
+    {
+      "user": "Please have someone call me back about a billing issue on my invoice - I do not want to explain it all here.",
+      "status": 200,
+      "latency_s": 10.3,
+      "events": [
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_5501028",
+                  "args": {
+                    "agent_name": "service_request_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0Tdxo44gGKwsmHAuKbaUt9Wc0sqB4L4M1p-VcHPKd46vUkVR3wFekYXcLLD9QV8WZIRM2HMXm4wwhDiulALUc2Wu6Wv5oSVaEGDLBUwqY2o2JDRNG6HvSp8oc="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 24,
+            "promptTokenCount": 1876,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1876
+              }
+            ],
+            "totalTokenCount": 1900
+          },
+          "invocationId": "e-70dbd585-cd28-42ba-b1ad-8d1e9927f94b",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "202b1453-199f-4452-85d6-19a1913e3afa",
+          "timestamp": 1792250301.4346595
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_5501028",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-70dbd585-cd28-42ba-b1ad-8d1e9927f94b",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "service_request_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "54692677-0524-4738-9a26-d4a842dee38e",
+          "timestamp": 1792250304.6185544
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_5007258",
+                  "args": {},
+                  "name": "list_service_catalog"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TSjWLfirIufv3E72Z_DgpaxG3r_OkyqfAxmMs4lIsSvKF_c9hlnuqCu_8qzLk7Eou0JvSMkP3abmU7lgXJ4vP_VHPzvD7GnC6HHpeYLx3wTh1h50EZEt7kd4="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 12,
+            "promptTokenCount": 2883,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2883
+              }
+            ],
+            "totalTokenCount": 2895
+          },
+          "invocationId": "e-70dbd585-cd28-42ba-b1ad-8d1e9927f94b",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "ddea15bc-ff7d-4d05-9def-a3cc0acdcca3",
+          "timestamp": 1792250304.6318934
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_5007258",
+                  "name": "list_service_catalog",
+                  "response": {
+                    "status": "ok",
+                    "request_types": [
+                      {
+                        "value": "order_issue",
+                        "label": "A problem with an order"
+                      },
+                      {
+                        "value": "delivery_delay",
+                        "label": "Delivery running late or not arriving"
+                      },
+                      {
+                        "value": "return_exchange",
+                        "label": "Return or exchange of an item"
+                      },
+                      {
+                        "value": "refund",
+                        "label": "Refund not received or wrong amount"
+                      },
+                      {
+                        "value": "product_defect",
+                        "label": "Item defective, damaged or wrong"
+                      },
+                      {
+                        "value": "billing",
+                        "label": "Charges, invoice or coupon problem"
+                      },
+                      {
+                        "value": "account_access",
+                        "label": "Login, OTP or profile access"
+                      },
+                      {
+                        "value": "loyalty",
+                        "label": "Prime membership, points or coupons"
+                      },
+                      {
+                        "value": "feedback",
+                        "label": "Compliment, complaint or suggestion"
+                      },
+                      {
+                        "value": "emergency",
+                        "label": "Something urgent that needs the response desk now"
+                      },
+                      {
+                        "value": "other",
+                        "label": "Something not covered above"
+                      }
+                    ],
+                    "urgency_levels": [
+                      {
+                        "value": "emergency",
+                        "respond_within": "15 minutes"
+                      },
+                      {
+                        "value": "high",
+                        "respond_within": "120 minutes"
+                      },
+                      {
+                        "value": "normal",
+                        "respond_within": "24 hours"
+                      },
+                      {
+                        "value": "low",
+                        "respond_within": "72 hours"
+                      }
+                    ],
+                    "emergency_types": [
+                      {
+                        "value": "none",
+                        "label": "Not an emergency"
+                      },
+                      {
+                        "value": "safety_hazard",
+                        "label": "Safety hazard - electrical, fire or structural risk"
+                      },
+                      {
+                        "value": "food_safety",
+                        "label": "Food safety - spoiled, contaminated or wrong temperature"
+                      },
+                      {
+                        "value": "payment_fraud",
+                        "label": "Payment fraud - unauthorised debit or duplicate charge"
+                      },
+                      {
+                        "value": "medical_allergy",
+                        "label": "Medical or allergy reaction to a delivered product"
+                      },
+                      {
+                        "value": "damaged_goods",
+                        "label": "Damaged goods - leaking, broken or hazardous packaging"
+                      },
+                      {
+                        "value": "access_blocked",
+                        "label": "Access blocked - locked gate, no water or electricity supply"
+                      },
+                      {
+                        "value": "no_delivery_aged",
+                        "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                      }
+                    ],
+                    "channels": [
+                      "web_chat",
+                      "whatsapp",
+                      "phone",
+                      "email",
+                      "store_counter"
+                    ],
+                    "mandatory_fields": [
+                      "full_name",
+                      "email",
+                      "phone",
+                      "request_type",
+                      "issue_summary"
+                    ],
+                    "optional_fields": [
+                      "urgency (default normal)",
+                      "emergency_type (default none)",
+                      "scheduled_for (default asap)",
+                      "order_id"
+                    ],
+                    "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+                    "message": "Collect all mandatory fields before calling create_support_request."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-70dbd585-cd28-42ba-b1ad-8d1e9927f94b",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "6d1b3a80-d89e-42f9-922e-0e67bac5f851",
+          "timestamp": 1792250308.0209174
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_5117853",
+                  "args": {
+                    "request_type": "billing",
+                    "issue_summary": "Customer requests a callback regarding a billing issue on their invoice."
+                  },
+                  "name": "check_request_readiness"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TYzsc4mzC60oO1N1pbRutC1XBUsHCfBv4b-qcnmNBv-NRO3BcjW7vRWRQWh1slWT9LztKV5rrN626Un3E1OM6CCbU07yzQnfqLSYofGJeGdi6Cdt31rsR31M="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 40,
+            "promptTokenCount": 3507,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3507
+              }
+            ],
+            "totalTokenCount": 3547
+          },
+          "invocationId": "e-70dbd585-cd28-42ba-b1ad-8d1e9927f94b",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "ed6c07b1-b741-4611-92b6-219c4521b7dc",
+          "timestamp": 1792250308.0324697
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_5117853",
+                  "name": "check_request_readiness",
+                  "response": {
+                    "status": "ok",
+                    "ready": false,
+                    "checks": [
+                      {
+                        "field": "full_name",
+                        "ok": false,
+                        "detail": "not provided yet - ask the customer for it"
+                      },
+                      {
+                        "field": "email",
+                        "ok": false,
+                        "detail": "not provided yet - ask the customer for it"
+                      },
+                      {
+                        "field": "phone",
+                        "ok": false,
+                        "detail": "not provided yet - ask the customer for it"
+                      },
+                      {
+                        "field": "request_type",
+                        "ok": true,
+                        "detail": "'billing' is valid"
+                      },
+                      {
+                        "field": "issue_summary",
+                        "ok": true,
+                        "detail": "detailed enough"
+                      }
+                    ],
+                    "missing": [
+                      "full_name",
+                      "email",
+                      "phone"
+                    ],
+                    "message": "Still needed: full_name, email, phone"
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-70dbd585-cd28-42ba-b1ad-8d1e9927f94b",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "a40d8697-e281-4268-af34-69698d55f75a",
+          "timestamp": 1792250309.6403797
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "I can certainly arrange for our team to call you back about your invoice. \n\nCould you please share your full name so we can get started?",
+                "thoughtSignature": "EmAKXgFpFH0TrC4u-AZhHYEnszXiFW960v7c4P0O9UULhrRzVE9QFw3zdM7FX3RbAFYHhr679kLEOI9sMXHMR6bivi6KdL0ikmVOZpl6RnZ9N2PKDC-Em8_s_1EDxtgfcr4="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 30,
+            "promptTokenCount": 3717,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3717
+              }
+            ],
+            "totalTokenCount": 3747
+          },
+          "invocationId": "e-70dbd585-cd28-42ba-b1ad-8d1e9927f94b",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "d4ddb3b8-2482-4f54-9ec2-0f5cabf32722",
+          "timestamp": 1792250309.6630747
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "service_request_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_service_catalog",
+            "args": {},
+            "author": "service_request_agent"
+          },
+          {
+            "tool": "check_request_readiness",
+            "args": {
+              "request_type": "billing",
+              "issue_summary": "Customer requests a callback regarding a billing issue on their invoice."
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_service_catalog",
+            "response": {
+              "status": "ok",
+              "request_types": [
+                {
+                  "value": "order_issue",
+                  "label": "A problem with an order"
+                },
+                {
+                  "value": "delivery_delay",
+                  "label": "Delivery running late or not arriving"
+                },
+                {
+                  "value": "return_exchange",
+                  "label": "Return or exchange of an item"
+                },
+                {
+                  "value": "refund",
+                  "label": "Refund not received or wrong amount"
+                },
+                {
+                  "value": "product_defect",
+                  "label": "Item defective, damaged or wrong"
+                },
+                {
+                  "value": "billing",
+                  "label": "Charges, invoice or coupon problem"
+                },
+                {
+                  "value": "account_access",
+                  "label": "Login, OTP or profile access"
+                },
+                {
+                  "value": "loyalty",
+                  "label": "Prime membership, points or coupons"
+                },
+                {
+                  "value": "feedback",
+                  "label": "Compliment, complaint or suggestion"
+                },
+                {
+                  "value": "emergency",
+                  "label": "Something urgent that needs the response desk now"
+                },
+                {
+                  "value": "other",
+                  "label": "Something not covered above"
+                }
+              ],
+              "urgency_levels": [
+                {
+                  "value": "emergency",
+                  "respond_within": "15 minutes"
+                },
+                {
+                  "value": "high",
+                  "respond_within": "120 minutes"
+                },
+                {
+                  "value": "normal",
+                  "respond_within": "24 hours"
+                },
+                {
+                  "value": "low",
+                  "respond_within": "72 hours"
+                }
+              ],
+              "emergency_types": [
+                {
+                  "value": "none",
+                  "label": "Not an emergency"
+                },
+                {
+                  "value": "safety_hazard",
+                  "label": "Safety hazard - electrical, fire or structural risk"
+                },
+                {
+                  "value": "food_safety",
+                  "label": "Food safety - spoiled, contaminated or wrong temperature"
+                },
+                {
+                  "value": "payment_fraud",
+                  "label": "Payment fraud - unauthorised debit or duplicate charge"
+                },
+                {
+                  "value": "medical_allergy",
+                  "label": "Medical or allergy reaction to a delivered product"
+                },
+                {
+                  "value": "damaged_goods",
+                  "label": "Damaged goods - leaking, broken or hazardous packaging"
+                },
+                {
+                  "value": "access_blocked",
+                  "label": "Access blocked - locked gate, no water or electricity supply"
+                },
+                {
+                  "value": "no_delivery_aged",
+                  "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                }
+              ],
+              "channels": [
+                "web_chat",
+                "whatsapp",
+                "phone",
+                "email",
+                "store_counter"
+              ],
+              "mandatory_fields": [
+                "full_name",
+                "email",
+                "phone",
+                "request_type",
+                "issue_summary"
+              ],
+              "optional_fields": [
+                "urgency (default normal)",
+                "emergency_type (default none)",
+                "scheduled_for (default asap)",
+                "order_id"
+              ],
+              "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+              "message": "Collect all mandatory fields before calling create_support_request."
+            },
+            "author": "service_request_agent"
+          },
+          {
+            "tool": "check_request_readiness",
+            "response": {
+              "status": "ok",
+              "ready": false,
+              "checks": [
+                {
+                  "field": "full_name",
+                  "ok": false,
+                  "detail": "not provided yet - ask the customer for it"
+                },
+                {
+                  "field": "email",
+                  "ok": false,
+                  "detail": "not provided yet - ask the customer for it"
+                },
+                {
+                  "field": "phone",
+                  "ok": false,
+                  "detail": "not provided yet - ask the customer for it"
+                },
+                {
+                  "field": "request_type",
+                  "ok": true,
+                  "detail": "'billing' is valid"
+                },
+                {
+                  "field": "issue_summary",
+                  "ok": true,
+                  "detail": "detailed enough"
+                }
+              ],
+              "missing": [
+                "full_name",
+                "email",
+                "phone"
+              ],
+              "message": "Still needed: full_name, email, phone"
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "service_request_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "service_request_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 12089,
+        "final_text": "I can certainly arrange for our team to call you back about your invoice. \n\nCould you please share your full name so we can get started?",
+        "state_delta": {},
+        "n_events": 7
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 10.3,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_not_called create_support_request",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'list_service_catalog', 'check_request_readiness']"
+    },
+    {
+      "check": "max_tool_calls",
+      "ok": true,
+      "detail": "3 calls"
+    },
+    {
+      "check": "agent_involved service_request_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'service_request_agent'] transfers=['service_request_agent']"
+    },
+    {
+      "check": "agent_excluded orders_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'service_request_agent']"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

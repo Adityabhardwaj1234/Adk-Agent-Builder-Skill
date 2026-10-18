@@ -1,0 +1,363 @@
+{
+  "test_id": "T11_system_status",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "support_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "check_system_status",
+        "args": {
+          "service": "Checkout & Payments"
+        },
+        "author": "support_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "check_system_status",
+        "response": {
+          "status": "ok",
+          "services": [
+            {
+              "service": "Checkout & Payments",
+              "status": "degraded",
+              "incident": "Elevated UPI callback latency (APX-4021 retries). Started 2026-10-17T06:10:00.",
+              "updated_at": "2026-10-17T09:30:00"
+            }
+          ],
+          "degraded_services": [
+            "Checkout & Payments"
+          ],
+          "message": "Currently degraded: Checkout & Payments"
+        },
+        "author": "support_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "support_agent"
+    ],
+    "texts": [
+      {
+        "author": "support_agent",
+        "text": "We are currently experiencing some issues with Checkout & Payments, which may be causing the failures you are seeing. This is due to elevated UPI callback latency, tracked under incident APX-4021.\n\nOur team is working on this, and we hope to have it resolved soon. Please let me know if you would like me to raise a service request so we can notify you once the service is fully restored."
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "support_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 6076,
+    "final_text": "We are currently experiencing some issues with Checkout & Payments, which may be causing the failures you are seeing. This is due to elevated UPI callback latency, tracked under incident APX-4021.\n\nOur team is working on this, and we hope to have it resolved soon. Please let me know if you would like me to raise a service request so we can notify you once the service is fully restored.",
+    "state_delta": {},
+    "n_events": 5,
+    "http_error": ""
+  },
+  "session_id": "T11_system_status-0-dcee8e",
+  "turns": [
+    {
+      "user": "Is payment failing for everyone right now or is it just me?",
+      "status": 200,
+      "latency_s": 8.83,
+      "events": [
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_960079",
+                  "args": {
+                    "agent_name": "support_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EnMKcQFpFH0TmRILtR-ZPfYdzVG58Wk2GaC0ltH3pTFtoYfj7KMJ9JMX6FUdOtOnA7SMmEu9Agpz-ARJCfZoJpGPkuw_WsaIQdWURRV3W5gjZwQfBEiLECG_eCqok064qnkYZHVyr6RAFpo_3hS0vpbtzTaA"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 1865,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1865
+              }
+            ],
+            "totalTokenCount": 1887
+          },
+          "invocationId": "e-f572f5e6-1053-42c3-a92d-b942bf7862ce",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "7e016bdb-4680-4ab0-98ca-a6cde6e61642",
+          "timestamp": 1792250050.9255285
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_960079",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-f572f5e6-1053-42c3-a92d-b942bf7862ce",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "support_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "cdbad187-55a0-432d-8cad-df11ba4c35a2",
+          "timestamp": 1792250054.214669
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3706639",
+                  "args": {
+                    "service": "Checkout & Payments"
+                  },
+                  "name": "check_system_status"
+                },
+                "thoughtSignature": "EnMKcQFpFH0TKl-ZoVqi1wGdBIptNwi7N-RlKKs3Tcp5iDbIQKElXIrNPlscnaOlQ8ZHzoiHdEFdUaSFDyLYyToGI7EN1CQKhq4U2Cbd0vSkJ7x6tJ4TdHdxpUwJRpHm0FOdeItK4j3eC0FsiI3ua48Oqb3a"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 20,
+            "promptTokenCount": 1970,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1970
+              }
+            ],
+            "totalTokenCount": 1990
+          },
+          "invocationId": "e-f572f5e6-1053-42c3-a92d-b942bf7862ce",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "e060a075-5f90-43bf-8053-43c87aef74d5",
+          "timestamp": 1792250054.2375643
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3706639",
+                  "name": "check_system_status",
+                  "response": {
+                    "status": "ok",
+                    "services": [
+                      {
+                        "service": "Checkout & Payments",
+                        "status": "degraded",
+                        "incident": "Elevated UPI callback latency (APX-4021 retries). Started 2026-10-17T06:10:00.",
+                        "updated_at": "2026-10-17T09:30:00"
+                      }
+                    ],
+                    "degraded_services": [
+                      "Checkout & Payments"
+                    ],
+                    "message": "Currently degraded: Checkout & Payments"
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-f572f5e6-1053-42c3-a92d-b942bf7862ce",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "07f366ac-f4d5-4801-892f-8723c65a2fa9",
+          "timestamp": 1792250058.2019665
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "We are currently experiencing some issues with Checkout & Payments, which may be causing the failures you are seeing. This is due to elevated UPI callback latency, tracked under incident APX-4021.\n\nOur team is working on this, and we hope to have it resolved soon. Please let me know if you would like me to raise a service request so we can notify you once the service is fully restored.",
+                "thoughtSignature": "EnMKcQFpFH0TLnaVh_iiusqRSZH_a4_06uzzIEtaWYEQChObt7L1SI0LTFVZ90jFV0Rmeh8J93doWTXk-bCrhuUzdNQWvI1NDh01ebf0Eh7x4qYlAVhR1Pt7PmkLD7Mv6dU8E5kqJIKFaQgZCdm3KKlL_ivM"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 84,
+            "promptTokenCount": 2115,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2115
+              }
+            ],
+            "totalTokenCount": 2199
+          },
+          "invocationId": "e-f572f5e6-1053-42c3-a92d-b942bf7862ce",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "fef54605-9c53-408e-89e8-12abc3a8c501",
+          "timestamp": 1792250058.2255905
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "support_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "check_system_status",
+            "args": {
+              "service": "Checkout & Payments"
+            },
+            "author": "support_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "check_system_status",
+            "response": {
+              "status": "ok",
+              "services": [
+                {
+                  "service": "Checkout & Payments",
+                  "status": "degraded",
+                  "incident": "Elevated UPI callback latency (APX-4021 retries). Started 2026-10-17T06:10:00.",
+                  "updated_at": "2026-10-17T09:30:00"
+                }
+              ],
+              "degraded_services": [
+                "Checkout & Payments"
+              ],
+              "message": "Currently degraded: Checkout & Payments"
+            },
+            "author": "support_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "support_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "support_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 6076,
+        "final_text": "We are currently experiencing some issues with Checkout & Payments, which may be causing the failures you are seeing. This is due to elevated UPI callback latency, tracked under incident APX-4021.\n\nOur team is working on this, and we hope to have it resolved soon. Please let me know if you would like me to raise a service request so we can notify you once the service is fully restored.",
+        "state_delta": {},
+        "n_events": 5
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 8.83,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /degraded|operational|incident|callback/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called check_system_status",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'check_system_status']"
+    },
+    {
+      "check": "agent_involved support_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'support_agent'] transfers=['support_agent']"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

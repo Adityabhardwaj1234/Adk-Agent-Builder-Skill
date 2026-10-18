@@ -1,0 +1,114 @@
+{
+  "test_id": "T26_out_of_scope_competitor",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [
+      "apex_concierge"
+    ],
+    "texts": [
+      {
+        "author": "apex_concierge",
+        "text": "We only handle orders placed with Apex Hyperstore here, so we cannot cancel or refund an Amazon order for you. If you need help with an order, a product, or a return from Apex Hyperstore instead, please let us know and we'll be happy to assist you!"
+      }
+    ],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 1922,
+    "final_text": "We only handle orders placed with Apex Hyperstore here, so we cannot cancel or refund an Amazon order for you. If you need help with an order, a product, or a return from Apex Hyperstore instead, please let us know and we'll be happy to assist you!",
+    "state_delta": {},
+    "n_events": 1,
+    "http_error": ""
+  },
+  "session_id": "T26_out_of_scope_competitor-0-b5124b",
+  "turns": [
+    {
+      "user": "Can you cancel my Amazon order and refund it to my card?",
+      "status": 200,
+      "latency_s": 3.56,
+      "events": [
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "We only handle orders placed with Apex Hyperstore here, so we cannot cancel or refund an Amazon order for you. If you need help with an order, a product, or a return from Apex Hyperstore instead, please let us know and we'll be happy to assist you!",
+                "thoughtSignature": "EmAKXgFpFH0TEaiZW6yWhu-0xxj6BRNU2T54JAiJDxJT4ROts5vfTv5kKzY4yx3MhLaokkkmzoTh4bnJmA0y6TvpAv4RIS2R1WgAgcHQ7Bij8V2lTEyuaiadgQbsjEokQaQ="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 57,
+            "promptTokenCount": 1865,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1865
+              }
+            ],
+            "totalTokenCount": 1922
+          },
+          "invocationId": "e-1a4a2b20-b970-4108-a74f-75541864b3a4",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "e819d19f-6337-4148-ae5b-ec323c5c6eb6",
+          "timestamp": 1792252029.256194
+        }
+      ],
+      "parsed": {
+        "calls": [],
+        "responses": [],
+        "authors": [
+          "apex_concierge"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 1922,
+        "final_text": "We only handle orders placed with Apex Hyperstore here, so we cannot cancel or refund an Amazon order for you. If you need help with an order, a product, or a return from Apex Hyperstore instead, please let us know and we'll be happy to assist you!",
+        "state_delta": {},
+        "n_events": 1
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 3.56,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /apex/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_not_called create_support_request",
+      "ok": true,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "tool_not_called lookup_order",
+      "ok": true,
+      "detail": "tools called: []"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

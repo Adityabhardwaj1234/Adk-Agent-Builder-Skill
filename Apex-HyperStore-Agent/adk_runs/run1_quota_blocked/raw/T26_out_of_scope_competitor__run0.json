@@ -1,0 +1,54 @@
+{
+  "test_id": "T26_out_of_scope_competitor",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T26_out_of_scope_competitor-0-5b0a03",
+  "turns": [
+    {
+      "user": "Can you cancel my Amazon order and refund it to my card?",
+      "status": 500,
+      "latency_s": 2.75,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 2.75,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /apex/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_not_called create_support_request",
+      "ok": true,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "tool_not_called lookup_order",
+      "ok": true,
+      "detail": "tools called: []"
+    }
+  ],
+  "passed": false,
+  "failure_class": "QUOTA_OR_RATE_LIMIT"
+}

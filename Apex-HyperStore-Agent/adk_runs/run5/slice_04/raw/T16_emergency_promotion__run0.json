@@ -1,0 +1,1568 @@
+{
+  "test_id": "T16_emergency_promotion",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "orders_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "support_agent"
+        },
+        "author": "orders_agent"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "args": {
+          "query": "card charged twice duplicated payment APX-ORD-2026-041988"
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "orders_agent"
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "lookup_order",
+        "args": {
+          "email": "daniel.okafor@example.com",
+          "order_id": "APX-ORD-2026-041988"
+        },
+        "author": "orders_agent"
+      },
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "service_request_agent"
+        },
+        "author": "orders_agent"
+      },
+      {
+        "tool": "list_service_catalog",
+        "args": {},
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "create_support_request",
+        "args": {
+          "full_name": "Daniel Okafor",
+          "urgency": "emergency",
+          "request_type": "billing",
+          "order_id": "APX-ORD-2026-041988",
+          "phone": "9845009902",
+          "email": "daniel.okafor@example.com",
+          "issue_summary": "Card charged twice for single order APX-ORD-2026-041988, suspected unauthorized duplicate charge/fraud.",
+          "emergency_type": "payment_fraud"
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "orders_agent"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "response": {
+          "status": "ok",
+          "query": "card charged twice duplicated payment APX-ORD-2026-041988",
+          "count": 3,
+          "articles": [
+            {
+              "kb_id": "APX-KB-0101",
+              "topic": "Checkout",
+              "error_code": "APX-4021",
+              "surface": "Apex app / website",
+              "symptom": "\"Payment failed (APX-4021)\" at checkout although UPI request was debited.",
+              "cause": "UPI mandate succeeded at the bank but the payment-gateway callback to Apex timed out, so the order was not created.",
+              "fix_steps": "1. Ask the customer to check their bank app for a pending mandate and reverse it if present. 2. Retry checkout with the same UPI handle on a new payment attempt. 3. If the debit repeats twice, raise a payment-fraud-safe request with urgency=high and emergency_type=payment_fraud. 4. Never ask the customer to share a UPI PIN, OTP or CVV.",
+              "escalation_team": "Payments Recovery Desk",
+              "severity": "high"
+            },
+            {
+              "kb_id": "APX-KB-0103",
+              "topic": "Account access",
+              "error_code": "APX-4150",
+              "surface": "Apex app",
+              "symptom": "\"Invalid credentials (APX-4150)\" although the customer is sure the password is right.",
+              "cause": "The account got soft-locked after 5 failed attempts, or OTP is going to a stale phone number.",
+              "fix_steps": "1. Confirm the email on file with list_customer_orders. 2. Trigger \"Forgot password\" and ask the customer to read the 6-digit OTP to the agent. 3. If the lock persists after a correct OTP, create an account_access request with urgency=normal. 4. Never ask for the password itself and never read back an OTP the customer did not volunteer.",
+              "escalation_team": "Identity & Accounts Desk",
+              "severity": "medium"
+            },
+            {
+              "kb_id": "APX-KB-0105",
+              "topic": "Payments",
+              "error_code": "APX-4305",
+              "surface": "Website",
+              "symptom": "Coupon code is rejected with \"APX-4305: coupon not applicable\".",
+              "cause": "The cart contains a category that is excluded from the coupon, or the coupon expired at 23:59 IST.",
+              "fix_steps": "1. Check the coupon terms against the cart categories in search_products. 2. Grocery subscriptions and EMI-only items are usually excluded. 3. An expired coupon cannot be reactivated; offer the current running coupon from company_info.",
+              "escalation_team": "Loyalty & Coupons Desk",
+              "severity": "low"
+            }
+          ]
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "lookup_order",
+        "response": {
+          "status": "ok",
+          "found": true,
+          "verified": true,
+          "order": {
+            "order_id": "APX-ORD-2026-041988",
+            "status": "payment_captured",
+            "placed_at": "2026-10-16T08:15:00",
+            "delivery_slot": "2026-10-19T10:00:00 to 13:00",
+            "total_inr": 27999.0,
+            "item_count": 1,
+            "payment_mode": "Wallet",
+            "warehouse": "WH-BLR-01",
+            "items": [
+              {
+                "order_id": "APX-ORD-2026-041988",
+                "sku": "APX-SKU-100688",
+                "name": "Apex GlowLED 55\" Smart TV",
+                "qty": 1,
+                "unit_price_inr": 27999.0
+              }
+            ]
+          },
+          "message": "Order APX-ORD-2026-041988 is payment captured."
+        },
+        "author": "orders_agent"
+      },
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "orders_agent"
+      },
+      {
+        "tool": "list_service_catalog",
+        "response": {
+          "status": "ok",
+          "request_types": [
+            {
+              "value": "order_issue",
+              "label": "A problem with an order"
+            },
+            {
+              "value": "delivery_delay",
+              "label": "Delivery running late or not arriving"
+            },
+            {
+              "value": "return_exchange",
+              "label": "Return or exchange of an item"
+            },
+            {
+              "value": "refund",
+              "label": "Refund not received or wrong amount"
+            },
+            {
+              "value": "product_defect",
+              "label": "Item defective, damaged or wrong"
+            },
+            {
+              "value": "billing",
+              "label": "Charges, invoice or coupon problem"
+            },
+            {
+              "value": "account_access",
+              "label": "Login, OTP or profile access"
+            },
+            {
+              "value": "loyalty",
+              "label": "Prime membership, points or coupons"
+            },
+            {
+              "value": "feedback",
+              "label": "Compliment, complaint or suggestion"
+            },
+            {
+              "value": "emergency",
+              "label": "Something urgent that needs the response desk now"
+            },
+            {
+              "value": "other",
+              "label": "Something not covered above"
+            }
+          ],
+          "urgency_levels": [
+            {
+              "value": "emergency",
+              "respond_within": "15 minutes"
+            },
+            {
+              "value": "high",
+              "respond_within": "120 minutes"
+            },
+            {
+              "value": "normal",
+              "respond_within": "24 hours"
+            },
+            {
+              "value": "low",
+              "respond_within": "72 hours"
+            }
+          ],
+          "emergency_types": [
+            {
+              "value": "none",
+              "label": "Not an emergency"
+            },
+            {
+              "value": "safety_hazard",
+              "label": "Safety hazard - electrical, fire or structural risk"
+            },
+            {
+              "value": "food_safety",
+              "label": "Food safety - spoiled, contaminated or wrong temperature"
+            },
+            {
+              "value": "payment_fraud",
+              "label": "Payment fraud - unauthorised debit or duplicate charge"
+            },
+            {
+              "value": "medical_allergy",
+              "label": "Medical or allergy reaction to a delivered product"
+            },
+            {
+              "value": "damaged_goods",
+              "label": "Damaged goods - leaking, broken or hazardous packaging"
+            },
+            {
+              "value": "access_blocked",
+              "label": "Access blocked - locked gate, no water or electricity supply"
+            },
+            {
+              "value": "no_delivery_aged",
+              "label": "No delivery and the customer is elderly, disabled or dependants alone"
+            }
+          ],
+          "channels": [
+            "web_chat",
+            "whatsapp",
+            "phone",
+            "email",
+            "store_counter"
+          ],
+          "mandatory_fields": [
+            "full_name",
+            "email",
+            "phone",
+            "request_type",
+            "issue_summary"
+          ],
+          "optional_fields": [
+            "urgency (default normal)",
+            "emergency_type (default none)",
+            "scheduled_for (default asap)",
+            "order_id"
+          ],
+          "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+          "message": "Collect all mandatory fields before calling create_support_request."
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "create_support_request",
+        "response": {
+          "status": "ok",
+          "reference_id": "APX-EMG-2026-RLFEZ1",
+          "request_status": "open",
+          "request_type": "billing",
+          "urgency": "emergency",
+          "emergency_type": "payment_fraud",
+          "full_name": "Daniel Okafor",
+          "email": "daniel.okafor@example.com",
+          "phone": "+919845009902",
+          "scheduled_for": "asap",
+          "order_id": "APX-ORD-2026-041988",
+          "assigned_team": "Emergency Response Desk",
+          "target_response_at": "2026-10-17 21:46 IST",
+          "created_at": "2026-10-17T21:31:49.154058+05:30",
+          "channel": "web_chat",
+          "next_step": "Emergency Response Desk will contact Daniel Okafor at +919845009902 by 2026-10-17 21:46 IST.",
+          "message": "Emergency Response Desk will contact Daniel Okafor at +919845009902 by 2026-10-17 21:46 IST."
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "orders_agent",
+      "support_agent",
+      "service_request_agent"
+    ],
+    "texts": [
+      {
+        "author": "service_request_agent",
+        "text": "We understand how concerning an unexpected duplicate charge can be. We have filed an urgent payment fraud request for your order APX-ORD-2026-041988.\n\nYour reference ID is **APX-EMG-2026-RLFEZ1**, handled by our Emergency Response Desk. Because this is an emergency payment issue, they will contact you at 9845009902 within 15 minutes."
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "orders_agent",
+      "support_agent",
+      "orders_agent",
+      "service_request_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 35422,
+    "final_text": "We understand how concerning an unexpected duplicate charge can be. We have filed an urgent payment fraud request for your order APX-ORD-2026-041988.\n\nYour reference ID is **APX-EMG-2026-RLFEZ1**, handled by our Emergency Response Desk. Because this is an emergency payment issue, they will contact you at 9845009902 within 15 minutes.",
+    "state_delta": {},
+    "n_events": 17,
+    "http_error": ""
+  },
+  "session_id": "T16_emergency_promotion-0-a7e3db",
+  "turns": [
+    {
+      "user": "My card was charged twice for one single order and I never made the second purchase. This is fraud. Name is Daniel Okafor, daniel.okafor@example.com, phone 9845009902, order APX-ORD-2026-041988.",
+      "status": 200,
+      "latency_s": 24.04,
+      "events": [
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3019290",
+                  "args": {
+                    "agent_name": "orders_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0Tx4HH4GCUA40CeTUAmdzIggMxN9iL_UNAD8TVekOHeY5IGHMI_lzPo5RFRXAU7SuN_kdv0ZoQ7m_mYQswICiVc5Pb0zlVtMVSxgYnkQPyRI8V9iqgYW_p6n8="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 1919,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1919
+              }
+            ],
+            "totalTokenCount": 1941
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "030e89d0-b97e-4571-a0ce-dab82e868c75",
+          "timestamp": 1792252886.8145645
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3019290",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "orders_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "bcce5f9a-5a6c-4f6d-82c3-3ed444ca7e16",
+          "timestamp": 1792252890.849496
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3137075",
+                  "args": {
+                    "agent_name": "support_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0T0FfjflpGPg59GzQ0TeD5bno9RSmsIXrrJIeIj1C-b3w8MRiCDhx5ULlgewajS42UXWMdXFf1Zxmd8OM58OB7AnqjYEOaxYkX4IYaxHHVsZPza-yK9ADQ4t4="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 2486,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2486
+              }
+            ],
+            "totalTokenCount": 2508
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "834dd2b8-5b9a-4dae-a52a-091ba83f7405",
+          "timestamp": 1792252890.8884275
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3137075",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "support_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "id": "edafa670-85c3-4654-95b4-819c0fab3688",
+          "timestamp": 1792252894.0292127
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_1085610",
+                  "args": {
+                    "query": "card charged twice duplicated payment APX-ORD-2026-041988"
+                  },
+                  "name": "search_knowledge_base"
+                },
+                "thoughtSignature": "EmAKXgFpFH0T6sCfNCJsrp9cgl0dVaBx4atgXgqJ1ELbbc6fr7WaaaiaBPcyrfxXrJAGvV2AVpUCgdeuNmUzLMFeruOoXNCEMDBIo7ejuIblYCGsEPMmPjFrfZhWWoYmzGs="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 38,
+            "promptTokenCount": 2416,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2416
+              }
+            ],
+            "totalTokenCount": 2454
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "74c1ac0f-d922-426c-a58b-f39ec0eb2afe",
+          "timestamp": 1792252894.0548563
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_1085610",
+                  "name": "search_knowledge_base",
+                  "response": {
+                    "status": "ok",
+                    "query": "card charged twice duplicated payment APX-ORD-2026-041988",
+                    "count": 3,
+                    "articles": [
+                      {
+                        "kb_id": "APX-KB-0101",
+                        "topic": "Checkout",
+                        "error_code": "APX-4021",
+                        "surface": "Apex app / website",
+                        "symptom": "\"Payment failed (APX-4021)\" at checkout although UPI request was debited.",
+                        "cause": "UPI mandate succeeded at the bank but the payment-gateway callback to Apex timed out, so the order was not created.",
+                        "fix_steps": "1. Ask the customer to check their bank app for a pending mandate and reverse it if present. 2. Retry checkout with the same UPI handle on a new payment attempt. 3. If the debit repeats twice, raise a payment-fraud-safe request with urgency=high and emergency_type=payment_fraud. 4. Never ask the customer to share a UPI PIN, OTP or CVV.",
+                        "escalation_team": "Payments Recovery Desk",
+                        "severity": "high"
+                      },
+                      {
+                        "kb_id": "APX-KB-0103",
+                        "topic": "Account access",
+                        "error_code": "APX-4150",
+                        "surface": "Apex app",
+                        "symptom": "\"Invalid credentials (APX-4150)\" although the customer is sure the password is right.",
+                        "cause": "The account got soft-locked after 5 failed attempts, or OTP is going to a stale phone number.",
+                        "fix_steps": "1. Confirm the email on file with list_customer_orders. 2. Trigger \"Forgot password\" and ask the customer to read the 6-digit OTP to the agent. 3. If the lock persists after a correct OTP, create an account_access request with urgency=normal. 4. Never ask for the password itself and never read back an OTP the customer did not volunteer.",
+                        "escalation_team": "Identity & Accounts Desk",
+                        "severity": "medium"
+                      },
+                      {
+                        "kb_id": "APX-KB-0105",
+                        "topic": "Payments",
+                        "error_code": "APX-4305",
+                        "surface": "Website",
+                        "symptom": "Coupon code is rejected with \"APX-4305: coupon not applicable\".",
+                        "cause": "The cart contains a category that is excluded from the coupon, or the coupon expired at 23:59 IST.",
+                        "fix_steps": "1. Check the coupon terms against the cart categories in search_products. 2. Grocery subscriptions and EMI-only items are usually excluded. 3. An expired coupon cannot be reactivated; offer the current running coupon from company_info.",
+                        "escalation_team": "Loyalty & Coupons Desk",
+                        "severity": "low"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "e6357b0d-e19f-4e3e-85d3-e6707c0a43f8",
+          "timestamp": 1792252897.807741
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_2661030",
+                  "args": {
+                    "agent_name": "orders_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0T3-D-91s5lj6ij_4ngu6k6uhVqdA32vPtvy4xpATQzuZCIatOeIvLVrbJPnMFVP01tB4vmc4Q7ulLbY4Kv38T_7B-cF-Hl0hGg_doS5OUtGqBirf1wo3rzuU="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 3093,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3093
+              }
+            ],
+            "totalTokenCount": 3115
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "575e60d9-75f6-4142-bbac-83c5eb311817",
+          "timestamp": 1792252897.832337
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_2661030",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "orders_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "88028817-bb0d-4df1-882d-7fe3055db524",
+          "timestamp": 1792252899.3314037
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3072167",
+                  "args": {
+                    "email": "daniel.okafor@example.com",
+                    "order_id": "APX-ORD-2026-041988"
+                  },
+                  "name": "lookup_order"
+                },
+                "thoughtSignature": "EmAKXgFpFH0T_V18gOYzMK65tf044x5HmFAfchVZ9iPOqz0v-ioxr_wv6KBHb2CXvcVEnXHIsD4FkY0t3uwye0bXvJ2WWfUOwt6mWjQf3FVDItrAo9BXa4wXIsMsN3PfRPY="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 46,
+            "promptTokenCount": 3707,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3707
+              }
+            ],
+            "totalTokenCount": 3753
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@2"
+          },
+          "longRunningToolIds": [],
+          "id": "550df310-416d-4723-92c8-e03efbbb2c9e",
+          "timestamp": 1792252899.3578675
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3072167",
+                  "name": "lookup_order",
+                  "response": {
+                    "status": "ok",
+                    "found": true,
+                    "verified": true,
+                    "order": {
+                      "order_id": "APX-ORD-2026-041988",
+                      "status": "payment_captured",
+                      "placed_at": "2026-10-16T08:15:00",
+                      "delivery_slot": "2026-10-19T10:00:00 to 13:00",
+                      "total_inr": 27999.0,
+                      "item_count": 1,
+                      "payment_mode": "Wallet",
+                      "warehouse": "WH-BLR-01",
+                      "items": [
+                        {
+                          "order_id": "APX-ORD-2026-041988",
+                          "sku": "APX-SKU-100688",
+                          "name": "Apex GlowLED 55\" Smart TV",
+                          "qty": 1,
+                          "unit_price_inr": 27999.0
+                        }
+                      ]
+                    },
+                    "message": "Order APX-ORD-2026-041988 is payment captured."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@2"
+          },
+          "id": "affbfe45-61d1-4176-9b49-c4c49146d726",
+          "timestamp": 1792252902.7271028
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_2451250",
+                  "args": {
+                    "agent_name": "service_request_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TmA2JkJrFl4HHCK0Dkn0SAaum5tDQYjQHp3NI2L8SCLip--VchOQiLrqFQPiIEMbHng5USZ7_gxEkUKlrsNQ7BI_Ekd93okBeA0X7wkFaNxjAyHriNy936v0="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 24,
+            "promptTokenCount": 4004,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 4004
+              }
+            ],
+            "totalTokenCount": 4028
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@2"
+          },
+          "longRunningToolIds": [],
+          "id": "0aa563a6-e25c-4516-a06a-93a598003457",
+          "timestamp": 1792252902.7499666
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_2451250",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "service_request_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@2"
+          },
+          "id": "8b3ea4f6-7630-4a36-a74d-1824e107eefe",
+          "timestamp": 1792252904.2054386
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3172694",
+                  "args": {},
+                  "name": "list_service_catalog"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TLdZseVjJkyYMjstfZFzJfjGQMzry5AQOhPlfOa6ajxNJOSTgMlRaT1iBZ7uwfdVgJEw787OtLyL0c7VS4T9UA1XgznydeuSkWJ79knX9Sdq_1ialn4mfdUk="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 12,
+            "promptTokenCount": 5224,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 5224
+              }
+            ],
+            "totalTokenCount": 5236
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "ad9a8df4-4d69-48d5-8750-b8f09f983589",
+          "timestamp": 1792252904.2297728
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3172694",
+                  "name": "list_service_catalog",
+                  "response": {
+                    "status": "ok",
+                    "request_types": [
+                      {
+                        "value": "order_issue",
+                        "label": "A problem with an order"
+                      },
+                      {
+                        "value": "delivery_delay",
+                        "label": "Delivery running late or not arriving"
+                      },
+                      {
+                        "value": "return_exchange",
+                        "label": "Return or exchange of an item"
+                      },
+                      {
+                        "value": "refund",
+                        "label": "Refund not received or wrong amount"
+                      },
+                      {
+                        "value": "product_defect",
+                        "label": "Item defective, damaged or wrong"
+                      },
+                      {
+                        "value": "billing",
+                        "label": "Charges, invoice or coupon problem"
+                      },
+                      {
+                        "value": "account_access",
+                        "label": "Login, OTP or profile access"
+                      },
+                      {
+                        "value": "loyalty",
+                        "label": "Prime membership, points or coupons"
+                      },
+                      {
+                        "value": "feedback",
+                        "label": "Compliment, complaint or suggestion"
+                      },
+                      {
+                        "value": "emergency",
+                        "label": "Something urgent that needs the response desk now"
+                      },
+                      {
+                        "value": "other",
+                        "label": "Something not covered above"
+                      }
+                    ],
+                    "urgency_levels": [
+                      {
+                        "value": "emergency",
+                        "respond_within": "15 minutes"
+                      },
+                      {
+                        "value": "high",
+                        "respond_within": "120 minutes"
+                      },
+                      {
+                        "value": "normal",
+                        "respond_within": "24 hours"
+                      },
+                      {
+                        "value": "low",
+                        "respond_within": "72 hours"
+                      }
+                    ],
+                    "emergency_types": [
+                      {
+                        "value": "none",
+                        "label": "Not an emergency"
+                      },
+                      {
+                        "value": "safety_hazard",
+                        "label": "Safety hazard - electrical, fire or structural risk"
+                      },
+                      {
+                        "value": "food_safety",
+                        "label": "Food safety - spoiled, contaminated or wrong temperature"
+                      },
+                      {
+                        "value": "payment_fraud",
+                        "label": "Payment fraud - unauthorised debit or duplicate charge"
+                      },
+                      {
+                        "value": "medical_allergy",
+                        "label": "Medical or allergy reaction to a delivered product"
+                      },
+                      {
+                        "value": "damaged_goods",
+                        "label": "Damaged goods - leaking, broken or hazardous packaging"
+                      },
+                      {
+                        "value": "access_blocked",
+                        "label": "Access blocked - locked gate, no water or electricity supply"
+                      },
+                      {
+                        "value": "no_delivery_aged",
+                        "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                      }
+                    ],
+                    "channels": [
+                      "web_chat",
+                      "whatsapp",
+                      "phone",
+                      "email",
+                      "store_counter"
+                    ],
+                    "mandatory_fields": [
+                      "full_name",
+                      "email",
+                      "phone",
+                      "request_type",
+                      "issue_summary"
+                    ],
+                    "optional_fields": [
+                      "urgency (default normal)",
+                      "emergency_type (default none)",
+                      "scheduled_for (default asap)",
+                      "order_id"
+                    ],
+                    "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+                    "message": "Collect all mandatory fields before calling create_support_request."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "c6b126bb-e545-417b-a861-10ee3f8ea698",
+          "timestamp": 1792252907.7219768
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_985560",
+                  "args": {
+                    "full_name": "Daniel Okafor",
+                    "urgency": "emergency",
+                    "request_type": "billing",
+                    "order_id": "APX-ORD-2026-041988",
+                    "phone": "9845009902",
+                    "email": "daniel.okafor@example.com",
+                    "issue_summary": "Card charged twice for single order APX-ORD-2026-041988, suspected unauthorized duplicate charge/fraud.",
+                    "emergency_type": "payment_fraud"
+                  },
+                  "name": "create_support_request"
+                },
+                "thoughtSignature": "EmAKXgFpFH0Tj9uxXyiwzn6_sZf2N8lYZZ4IPiEoN68W8oQ72GXVwiyPByx7WYnaRXZD_6XUiTXatMpBgcdJ1MXazRI1W2ErTR54QzL9R8IECBRmsGmVADH1l4vDs_Pa7WU="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "cacheTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2033
+              }
+            ],
+            "cachedContentTokenCount": 2033,
+            "candidatesTokenCount": 135,
+            "promptTokenCount": 5848,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 5848
+              }
+            ],
+            "totalTokenCount": 5983
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "e8df6905-26e8-41bd-9b9d-597dacb64789",
+          "timestamp": 1792252907.75061
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_985560",
+                  "name": "create_support_request",
+                  "response": {
+                    "status": "ok",
+                    "reference_id": "APX-EMG-2026-RLFEZ1",
+                    "request_status": "open",
+                    "request_type": "billing",
+                    "urgency": "emergency",
+                    "emergency_type": "payment_fraud",
+                    "full_name": "Daniel Okafor",
+                    "email": "daniel.okafor@example.com",
+                    "phone": "+919845009902",
+                    "scheduled_for": "asap",
+                    "order_id": "APX-ORD-2026-041988",
+                    "assigned_team": "Emergency Response Desk",
+                    "target_response_at": "2026-10-17 21:46 IST",
+                    "created_at": "2026-10-17T21:31:49.154058+05:30",
+                    "channel": "web_chat",
+                    "next_step": "Emergency Response Desk will contact Daniel Okafor at +919845009902 by 2026-10-17 21:46 IST.",
+                    "message": "Emergency Response Desk will contact Daniel Okafor at +919845009902 by 2026-10-17 21:46 IST."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "a1e5739f-8f98-431b-9c2f-091dc2885c66",
+          "timestamp": 1792252909.1640828
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "We understand how concerning an unexpected duplicate charge can be. We have filed an urgent payment fraud request for your order APX-ORD-2026-041988.\n\nYour reference ID is **APX-EMG-2026-RLFEZ1**, handled by our Emergency Response Desk. Because this is an emergency payment issue, they will contact you at 9845009902 within 15 minutes.",
+                "thoughtSignature": "EmAKXgFpFH0TXwQU6LseJXq4Zok5L8PsUaRzJCo7T-MQhKAqTqphuSG3f-qPKiIQaadaCKsL2lHD6UkiwcLvA3D5WDghGWVkDvdKKnjR9fZP7uCqluieMiPuX3EkVX2DWSU="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "cacheTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 4062
+              }
+            ],
+            "cachedContentTokenCount": 4062,
+            "candidatesTokenCount": 98,
+            "promptTokenCount": 6306,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 6306
+              }
+            ],
+            "totalTokenCount": 6404
+          },
+          "invocationId": "e-62cd58d7-05b6-482b-948b-e79e7049efa1",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "6fa38f81-3e48-4716-a594-e5f780859ff4",
+          "timestamp": 1792252909.1918855
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "orders_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "support_agent"
+            },
+            "author": "orders_agent"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "args": {
+              "query": "card charged twice duplicated payment APX-ORD-2026-041988"
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "orders_agent"
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "lookup_order",
+            "args": {
+              "email": "daniel.okafor@example.com",
+              "order_id": "APX-ORD-2026-041988"
+            },
+            "author": "orders_agent"
+          },
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "service_request_agent"
+            },
+            "author": "orders_agent"
+          },
+          {
+            "tool": "list_service_catalog",
+            "args": {},
+            "author": "service_request_agent"
+          },
+          {
+            "tool": "create_support_request",
+            "args": {
+              "full_name": "Daniel Okafor",
+              "urgency": "emergency",
+              "request_type": "billing",
+              "order_id": "APX-ORD-2026-041988",
+              "phone": "9845009902",
+              "email": "daniel.okafor@example.com",
+              "issue_summary": "Card charged twice for single order APX-ORD-2026-041988, suspected unauthorized duplicate charge/fraud.",
+              "emergency_type": "payment_fraud"
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "orders_agent"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "response": {
+              "status": "ok",
+              "query": "card charged twice duplicated payment APX-ORD-2026-041988",
+              "count": 3,
+              "articles": [
+                {
+                  "kb_id": "APX-KB-0101",
+                  "topic": "Checkout",
+                  "error_code": "APX-4021",
+                  "surface": "Apex app / website",
+                  "symptom": "\"Payment failed (APX-4021)\" at checkout although UPI request was debited.",
+                  "cause": "UPI mandate succeeded at the bank but the payment-gateway callback to Apex timed out, so the order was not created.",
+                  "fix_steps": "1. Ask the customer to check their bank app for a pending mandate and reverse it if present. 2. Retry checkout with the same UPI handle on a new payment attempt. 3. If the debit repeats twice, raise a payment-fraud-safe request with urgency=high and emergency_type=payment_fraud. 4. Never ask the customer to share a UPI PIN, OTP or CVV.",
+                  "escalation_team": "Payments Recovery Desk",
+                  "severity": "high"
+                },
+                {
+                  "kb_id": "APX-KB-0103",
+                  "topic": "Account access",
+                  "error_code": "APX-4150",
+                  "surface": "Apex app",
+                  "symptom": "\"Invalid credentials (APX-4150)\" although the customer is sure the password is right.",
+                  "cause": "The account got soft-locked after 5 failed attempts, or OTP is going to a stale phone number.",
+                  "fix_steps": "1. Confirm the email on file with list_customer_orders. 2. Trigger \"Forgot password\" and ask the customer to read the 6-digit OTP to the agent. 3. If the lock persists after a correct OTP, create an account_access request with urgency=normal. 4. Never ask for the password itself and never read back an OTP the customer did not volunteer.",
+                  "escalation_team": "Identity & Accounts Desk",
+                  "severity": "medium"
+                },
+                {
+                  "kb_id": "APX-KB-0105",
+                  "topic": "Payments",
+                  "error_code": "APX-4305",
+                  "surface": "Website",
+                  "symptom": "Coupon code is rejected with \"APX-4305: coupon not applicable\".",
+                  "cause": "The cart contains a category that is excluded from the coupon, or the coupon expired at 23:59 IST.",
+                  "fix_steps": "1. Check the coupon terms against the cart categories in search_products. 2. Grocery subscriptions and EMI-only items are usually excluded. 3. An expired coupon cannot be reactivated; offer the current running coupon from company_info.",
+                  "escalation_team": "Loyalty & Coupons Desk",
+                  "severity": "low"
+                }
+              ]
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "lookup_order",
+            "response": {
+              "status": "ok",
+              "found": true,
+              "verified": true,
+              "order": {
+                "order_id": "APX-ORD-2026-041988",
+                "status": "payment_captured",
+                "placed_at": "2026-10-16T08:15:00",
+                "delivery_slot": "2026-10-19T10:00:00 to 13:00",
+                "total_inr": 27999.0,
+                "item_count": 1,
+                "payment_mode": "Wallet",
+                "warehouse": "WH-BLR-01",
+                "items": [
+                  {
+                    "order_id": "APX-ORD-2026-041988",
+                    "sku": "APX-SKU-100688",
+                    "name": "Apex GlowLED 55\" Smart TV",
+                    "qty": 1,
+                    "unit_price_inr": 27999.0
+                  }
+                ]
+              },
+              "message": "Order APX-ORD-2026-041988 is payment captured."
+            },
+            "author": "orders_agent"
+          },
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "orders_agent"
+          },
+          {
+            "tool": "list_service_catalog",
+            "response": {
+              "status": "ok",
+              "request_types": [
+                {
+                  "value": "order_issue",
+                  "label": "A problem with an order"
+                },
+                {
+                  "value": "delivery_delay",
+                  "label": "Delivery running late or not arriving"
+                },
+                {
+                  "value": "return_exchange",
+                  "label": "Return or exchange of an item"
+                },
+                {
+                  "value": "refund",
+                  "label": "Refund not received or wrong amount"
+                },
+                {
+                  "value": "product_defect",
+                  "label": "Item defective, damaged or wrong"
+                },
+                {
+                  "value": "billing",
+                  "label": "Charges, invoice or coupon problem"
+                },
+                {
+                  "value": "account_access",
+                  "label": "Login, OTP or profile access"
+                },
+                {
+                  "value": "loyalty",
+                  "label": "Prime membership, points or coupons"
+                },
+                {
+                  "value": "feedback",
+                  "label": "Compliment, complaint or suggestion"
+                },
+                {
+                  "value": "emergency",
+                  "label": "Something urgent that needs the response desk now"
+                },
+                {
+                  "value": "other",
+                  "label": "Something not covered above"
+                }
+              ],
+              "urgency_levels": [
+                {
+                  "value": "emergency",
+                  "respond_within": "15 minutes"
+                },
+                {
+                  "value": "high",
+                  "respond_within": "120 minutes"
+                },
+                {
+                  "value": "normal",
+                  "respond_within": "24 hours"
+                },
+                {
+                  "value": "low",
+                  "respond_within": "72 hours"
+                }
+              ],
+              "emergency_types": [
+                {
+                  "value": "none",
+                  "label": "Not an emergency"
+                },
+                {
+                  "value": "safety_hazard",
+                  "label": "Safety hazard - electrical, fire or structural risk"
+                },
+                {
+                  "value": "food_safety",
+                  "label": "Food safety - spoiled, contaminated or wrong temperature"
+                },
+                {
+                  "value": "payment_fraud",
+                  "label": "Payment fraud - unauthorised debit or duplicate charge"
+                },
+                {
+                  "value": "medical_allergy",
+                  "label": "Medical or allergy reaction to a delivered product"
+                },
+                {
+                  "value": "damaged_goods",
+                  "label": "Damaged goods - leaking, broken or hazardous packaging"
+                },
+                {
+                  "value": "access_blocked",
+                  "label": "Access blocked - locked gate, no water or electricity supply"
+                },
+                {
+                  "value": "no_delivery_aged",
+                  "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                }
+              ],
+              "channels": [
+                "web_chat",
+                "whatsapp",
+                "phone",
+                "email",
+                "store_counter"
+              ],
+              "mandatory_fields": [
+                "full_name",
+                "email",
+                "phone",
+                "request_type",
+                "issue_summary"
+              ],
+              "optional_fields": [
+                "urgency (default normal)",
+                "emergency_type (default none)",
+                "scheduled_for (default asap)",
+                "order_id"
+              ],
+              "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+              "message": "Collect all mandatory fields before calling create_support_request."
+            },
+            "author": "service_request_agent"
+          },
+          {
+            "tool": "create_support_request",
+            "response": {
+              "status": "ok",
+              "reference_id": "APX-EMG-2026-RLFEZ1",
+              "request_status": "open",
+              "request_type": "billing",
+              "urgency": "emergency",
+              "emergency_type": "payment_fraud",
+              "full_name": "Daniel Okafor",
+              "email": "daniel.okafor@example.com",
+              "phone": "+919845009902",
+              "scheduled_for": "asap",
+              "order_id": "APX-ORD-2026-041988",
+              "assigned_team": "Emergency Response Desk",
+              "target_response_at": "2026-10-17 21:46 IST",
+              "created_at": "2026-10-17T21:31:49.154058+05:30",
+              "channel": "web_chat",
+              "next_step": "Emergency Response Desk will contact Daniel Okafor at +919845009902 by 2026-10-17 21:46 IST.",
+              "message": "Emergency Response Desk will contact Daniel Okafor at +919845009902 by 2026-10-17 21:46 IST."
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "orders_agent",
+          "support_agent",
+          "service_request_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "orders_agent",
+          "support_agent",
+          "orders_agent",
+          "service_request_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 35422,
+        "final_text": "We understand how concerning an unexpected duplicate charge can be. We have filed an urgent payment fraud request for your order APX-ORD-2026-041988.\n\nYour reference ID is **APX-EMG-2026-RLFEZ1**, handled by our Emergency Response Desk. Because this is an emergency payment issue, they will contact you at 9845009902 within 15 minutes.",
+        "state_delta": {},
+        "n_events": 17
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 24.04,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /APX-EMG-2026-[A-Z0-9]{6}/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called create_support_request",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'transfer_to_agent', 'search_knowledge_base', 'transfer_to_agent', 'lookup_order', 'transfer_to_agent', 'list_service_catalog', 'create_support_request']"
+    },
+    {
+      "check": "tool_args create_support_request",
+      "ok": true,
+      "detail": "calls: [{'tool': 'transfer_to_agent', 'args': {'agent_name': 'orders_agent'}, 'author': 'apex_concierge'}, {'tool': 'transfer_to_agent', 'args': {'agent_name': 'support_agent'}, 'author': 'orders_agent'}, {'tool': 'search_knowledge_base', 'args': {'query': 'card charged twice duplicated payment APX-ORD-2026-041988'}, 'author': 'support_agent'}, {'tool': 'transfer_to_agent', 'args': {'agent_name': 'orders_agent'}, 'author': 'support_agent'}, {'tool': 'lookup_order', 'args': {'email': 'daniel.okafor@example.com', 'order_id': 'APX-ORD-2026-041988'}, 'author': 'orders_agent'}, {'tool': 'transfer_to_agent', 'args': {'agent_name': 'service_request_agent'}, 'author': 'orders_agent'}, {'tool': 'list_service_catalog', 'args': {}, 'author': 'service_request_agent'}, {'tool': 'create_support_request', 'args': {'full_name': 'Daniel Okafor', 'urgency': 'emergency', 'request_type': 'billing', 'order_id': 'APX-ORD-2026-041988', 'phone': '9845009902', 'email': 'daniel.okafor@example.com', 'issue_summary': 'Card charged twice for single order APX-ORD-2026-041988, suspected unauthorized duplicate charge/fraud.', 'emergency_type': 'payment_fraud'}, 'author': 'service_request_agent'}]"
+    },
+    {
+      "check": "max_latency_s",
+      "ok": true,
+      "detail": "24.0s"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

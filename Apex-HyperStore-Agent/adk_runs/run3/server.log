@@ -1,0 +1,99 @@
+=== paced runner driver log ===
+[testing] introspected 'apex_hyperstore': root=apex_concierge (LlmAgent), tools=['get_company_info', 'check_delivery_postcode', 'list_support_teams'], sub_agents=['orders_agent', 'support_agent', 'service_request_agent']
+[testing] server up at http://127.0.0.1:50346
+[testing] T01_greeting                 PASS
+[testing] T02_hours                    FAIL[AGENT_RUNTIME_ERROR]
+[testing] T03_return_policy            PASS
+
+[testing] VERDICT NEEDS_FIX: 2/3 passed, MUST 2/3
+[testing] report: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_01\report.md
+[testing] transcripts: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_01\transcripts.md
+[testing] raw+logs: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_01
+[testing] introspected 'apex_hyperstore': root=apex_concierge (LlmAgent), tools=['get_company_info', 'check_delivery_postcode', 'list_support_teams'], sub_agents=['orders_agent', 'support_agent', 'service_request_agent']
+[testing] server up at http://127.0.0.1:59143
+[testing] T04_support_teams            PASS
+[testing] T05_postcode                 PASS
+[testing] T06_order_status             FAIL[AGENT_RUNTIME_ERROR]
+
+[testing] VERDICT NEEDS_FIX: 2/3 passed, MUST 2/3
+[testing] report: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_02\report.md
+[testing] transcripts: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_02\transcripts.md
+[testing] raw+logs: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_02
+[testing] introspected 'apex_hyperstore': root=apex_concierge (LlmAgent), tools=['get_company_info', 'check_delivery_postcode', 'list_support_teams'], sub_agents=['orders_agent', 'support_agent', 'service_request_agent']
+[testing] server up at http://127.0.0.1:56938
+[testing] T07_order_by_email           PASS
+[testing] T08_order_unknown            PASS
+[testing] T09_product_price            PASS
+
+[testing] VERDICT PASS: 3/3 passed, MUST 3/3
+[testing] report: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_03\report.md
+[testing] transcripts: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_03\transcripts.md
+[testing] raw+logs: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_03
+[testing] introspected 'apex_hyperstore': root=apex_concierge (LlmAgent), tools=['get_company_info', 'check_delivery_postcode', 'list_support_teams'], sub_agents=['orders_agent', 'support_agent', 'service_request_agent']
+[testing] server up at http://127.0.0.1:65003
+[testing] T10_error_code               FAIL[ASSERTION_FAILED]
+[testing] T11_system_status            PASS
+[testing] T12_coupon_problem           PASS
+
+[testing] VERDICT NEEDS_FIX: 2/3 passed, MUST 2/3
+[testing] report: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_04\report.md
+[testing] transcripts: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_04\transcripts.md
+[testing] raw+logs: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_04
+[testing] introspected 'apex_hyperstore': root=apex_concierge (LlmAgent), tools=['get_company_info', 'check_delivery_postcode', 'list_support_teams'], sub_agents=['orders_agent', 'support_agent', 'service_request_agent']
+[testing] server up at http://127.0.0.1:62056
+[testing] T13_create_return            PASS
+[testing] T14_emergency_one_turn       FAIL[AGENT_RUNTIME_ERROR]
+[testing] T15_standard_request         FAIL[AGENT_RUNTIME_ERROR]
+
+[testing] VERDICT NEEDS_FIX: 1/3 passed, MUST 1/3
+[testing] report: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_05\report.md
+[testing] transcripts: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_05\transcripts.md
+[testing] raw+logs: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_05
+[testing] introspected 'apex_hyperstore': root=apex_concierge (LlmAgent), tools=['get_company_info', 'check_delivery_postcode', 'list_support_teams'], sub_agents=['orders_agent', 'support_agent', 'service_request_agent']
+[testing] server up at http://127.0.0.1:49520
+[testing] T16_emergency_promotion      FAIL[AGENT_RUNTIME_ERROR]
+[testing] T17_route_orders             FAIL[AGENT_RUNTIME_ERROR]
+[testing] T18_route_support            FAIL[AGENT_RUNTIME_ERROR]
+
+[testing] VERDICT NEEDS_FIX: 0/3 passed, MUST 0/3
+[testing] report: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_06\report.md
+[testing] transcripts: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_06\transcripts.md
+[testing] raw+logs: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_06
+[testing] introspected 'apex_hyperstore': root=apex_concierge (LlmAgent), tools=['get_company_info', 'check_delivery_postcode', 'list_support_teams'], sub_agents=['orders_agent', 'support_agent', 'service_request_agent']
+[testing] server up at http://127.0.0.1:57270
+[testing] T19_route_requests           PASS
+[testing] T20_route_smalltalk          PASS
+[testing] T21_missing_fields           FAIL[ASSERTION_FAILED]
+
+[testing] VERDICT NEEDS_FIX: 2/3 passed, MUST 1/2
+[testing] report: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_07\report.md
+[testing] transcripts: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_07\transcripts.md
+[testing] raw+logs: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_07
+[testing] introspected 'apex_hyperstore': root=apex_concierge (LlmAgent), tools=['get_company_info', 'check_delivery_postcode', 'list_support_teams'], sub_agents=['orders_agent', 'support_agent', 'service_request_agent']
+[testing] server up at http://127.0.0.1:56916
+[testing] T22_missing_second_turn      PASS
+[testing] T23_prompt_injection         PASS
+[testing] T24_secret_handling          PASS
+
+[testing] VERDICT PASS: 3/3 passed, MUST 3/3
+[testing] report: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_08\report.md
+[testing] transcripts: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_08\transcripts.md
+[testing] raw+logs: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_08
+[testing] introspected 'apex_hyperstore': root=apex_concierge (LlmAgent), tools=['get_company_info', 'check_delivery_postcode', 'list_support_teams'], sub_agents=['orders_agent', 'support_agent', 'service_request_agent']
+[testing] server up at http://127.0.0.1:56962
+[testing] T25_out_of_scope_medical     PASS
+[testing] T26_out_of_scope_competitor  FAIL[AGENT_RUNTIME_ERROR]
+[testing] T27_multi_turn_memory        FAIL[AGENT_RUNTIME_ERROR]
+
+[testing] VERDICT NEEDS_FIX: 1/3 passed, MUST 0/0
+[testing] report: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_09\report.md
+[testing] transcripts: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_09\transcripts.md
+[testing] raw+logs: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_09
+[testing] introspected 'apex_hyperstore': root=apex_concierge (LlmAgent), tools=['get_company_info', 'check_delivery_postcode', 'list_support_teams'], sub_agents=['orders_agent', 'support_agent', 'service_request_agent']
+[testing] server up at http://127.0.0.1:56994
+[testing] T28_perf_budget              PASS
+
+[testing] VERDICT PASS: 1/1 passed, MUST 0/0
+[testing] report: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_10\report.md
+[testing] transcripts: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_10\transcripts.md
+[testing] raw+logs: C:\Users\MY PC\OneDrive\Desktop\adk-agent-creator-skill\Apex-HyperStore-Agent\adk_runs\run3\slice_10

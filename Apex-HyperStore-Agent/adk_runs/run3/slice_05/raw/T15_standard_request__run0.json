@@ -1,0 +1,907 @@
+{
+  "test_id": "T15_standard_request",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "service_request_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_service_catalog",
+        "args": {},
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "check_request_readiness",
+        "args": {
+          "issue_summary": "Complaint about a delayed delivery",
+          "request_type": "delivery_delay"
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_service_catalog",
+        "response": {
+          "status": "ok",
+          "request_types": [
+            {
+              "value": "order_issue",
+              "label": "A problem with an order"
+            },
+            {
+              "value": "delivery_delay",
+              "label": "Delivery running late or not arriving"
+            },
+            {
+              "value": "return_exchange",
+              "label": "Return or exchange of an item"
+            },
+            {
+              "value": "refund",
+              "label": "Refund not received or wrong amount"
+            },
+            {
+              "value": "product_defect",
+              "label": "Item defective, damaged or wrong"
+            },
+            {
+              "value": "billing",
+              "label": "Charges, invoice or coupon problem"
+            },
+            {
+              "value": "account_access",
+              "label": "Login, OTP or profile access"
+            },
+            {
+              "value": "loyalty",
+              "label": "Prime membership, points or coupons"
+            },
+            {
+              "value": "feedback",
+              "label": "Compliment, complaint or suggestion"
+            },
+            {
+              "value": "emergency",
+              "label": "Something urgent that needs the response desk now"
+            },
+            {
+              "value": "other",
+              "label": "Something not covered above"
+            }
+          ],
+          "urgency_levels": [
+            {
+              "value": "emergency",
+              "respond_within": "15 minutes"
+            },
+            {
+              "value": "high",
+              "respond_within": "120 minutes"
+            },
+            {
+              "value": "normal",
+              "respond_within": "24 hours"
+            },
+            {
+              "value": "low",
+              "respond_within": "72 hours"
+            }
+          ],
+          "emergency_types": [
+            {
+              "value": "none",
+              "label": "Not an emergency"
+            },
+            {
+              "value": "safety_hazard",
+              "label": "Safety hazard - electrical, fire or structural risk"
+            },
+            {
+              "value": "food_safety",
+              "label": "Food safety - spoiled, contaminated or wrong temperature"
+            },
+            {
+              "value": "payment_fraud",
+              "label": "Payment fraud - unauthorised debit or duplicate charge"
+            },
+            {
+              "value": "medical_allergy",
+              "label": "Medical or allergy reaction to a delivered product"
+            },
+            {
+              "value": "damaged_goods",
+              "label": "Damaged goods - leaking, broken or hazardous packaging"
+            },
+            {
+              "value": "access_blocked",
+              "label": "Access blocked - locked gate, no water or electricity supply"
+            },
+            {
+              "value": "no_delivery_aged",
+              "label": "No delivery and the customer is elderly, disabled or dependants alone"
+            }
+          ],
+          "channels": [
+            "web_chat",
+            "whatsapp",
+            "phone",
+            "email",
+            "store_counter"
+          ],
+          "mandatory_fields": [
+            "full_name",
+            "email",
+            "phone",
+            "request_type",
+            "issue_summary"
+          ],
+          "optional_fields": [
+            "urgency (default normal)",
+            "emergency_type (default none)",
+            "scheduled_for (default asap)",
+            "order_id"
+          ],
+          "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+          "message": "Collect all mandatory fields before calling create_support_request."
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "check_request_readiness",
+        "response": {
+          "status": "ok",
+          "ready": false,
+          "checks": [
+            {
+              "field": "full_name",
+              "ok": false,
+              "detail": "not provided yet - ask the customer for it"
+            },
+            {
+              "field": "email",
+              "ok": false,
+              "detail": "not provided yet - ask the customer for it"
+            },
+            {
+              "field": "phone",
+              "ok": false,
+              "detail": "not provided yet - ask the customer for it"
+            },
+            {
+              "field": "request_type",
+              "ok": true,
+              "detail": "'delivery_delay' is valid"
+            },
+            {
+              "field": "issue_summary",
+              "ok": true,
+              "detail": "detailed enough"
+            }
+          ],
+          "missing": [
+            "full_name",
+            "email",
+            "phone"
+          ],
+          "message": "Still needed: full_name, email, phone"
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "service_request_agent"
+    ],
+    "texts": [
+      {
+        "author": "service_request_agent",
+        "text": "We are sorry to hear that your delivery has been delayed, and we are happy to help file a complaint for you. \n\nCould you please share your full name to get started?"
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "service_request_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 12978,
+    "final_text": "We are sorry to hear that your delivery has been delayed, and we are happy to help file a complaint for you. \n\nCould you please share your full name to get started?",
+    "state_delta": {},
+    "n_events": 7,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T15_standard_request-0-28103b",
+  "turns": [
+    {
+      "user": "I want to raise a complaint about a delayed delivery.",
+      "status": 200,
+      "latency_s": 16.94,
+      "events": [
+        {
+          "modelVersion": "gemini-3.8-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_678472",
+                  "args": {
+                    "agent_name": "service_request_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "Es4JCssJAWkUfROZaIntphINm8B3ff7OdLmc3mAVvsicWPPghDl6OnRYllstPP6UiNLSZtZMnRRnT4XkWqAAxqlI6L_OAtJgJLYY7nxXvvJ6GdrRwqrgDvDUToFQWXCSL7yNA5gn60aqIp_mq6LzykmWhkB_s86L4--sf3h85sp3N6V3ZxINnIJWez5Gnxxsy3dze1ikAHcojhjVItoEZG9ZrS1yXZAY9cmYFYcjj7S_HS34-KoZMdz2oRy1bd_OSI1yw2AWczPrV412nda5NO4iDRqQTDROtu28gVclJbG8BvGvhgEVSYZ8u2lb2MTXAc4fpjmQoE59HgMnwcG22-xrixK4XBF7IwhlH_86d0fknZdZImNwCxC6j5-wU22P50U0jQdwNVQdVhNeLUVpBVHmwkjtWBD6ZGSs-mwSe40Sgte-HubclXhIIGbHObfc8JczAhBu_NcR7FpUkb7O-gOzGessFxa9NZRb_VY75LTIkX6govzFzw1j8gwb_LZHp9_KAWiGAU6NAVL4lPV-jbbwCjYf1OY9HwxOtIYWYJxOXOoaE_b_b-gD95wnpakQwQ9J95IV2Ktn1dJ_JRKhLXX70vWoQf1soaCd3FXXkK5zCZ-ZdcC0YdU35rn7r1rsjLDdTgqEe4cLSfyfG0feW_T6SM552l4sLPKTz5PHZWrcuFu5Pq5vXDFaAI8XOqX6CiwQ0FhNbX02e2ECmjnMbWxLWVA0pS7_0F-5Ut8Ouqj7zcVrS--LpZR_5tmwfAyJHqf0jW_1n-mxXVMBa2fSk6M_pantpLhkRNCszMPzTUKBqgAbV3W9qMXfeO7S-ca4PWdKtbaT7zExjNENaOsCaU8wF5UFC6npn4zDJdgG8vL2MuPTphHno6oT2BLA4fPSpdT782I-7YnYZJNsH860NkLvwVVb6dYcLPxKXx0Qffo_VnZi8a0dHnusWWK_cI8esgwTi6QFjQYfpH5uRrRMuGkRQdnpT_6anX9PaxC1Xb6PVrhCKqhOCA6lJMzbefUEYrhR5D5_FuPfXN9bi6p8ZILJrsdXO-2Pvfbbooqd-DIDHwOQbsN3Zn8fU37kcCUWkVMB5YmelaaoDJ1d-etTk5IZL20pS_Uy43vnjgzI4ipH9aKdb0_73iwprmJ-3K6LdAlbIuuIyHtqboKJ8Nxi6tkrq3o2XsR55A_W5DJayAskrejnV_yoaYZXpi60qZ9zHp8HJXAHVBzg3ZEUJMQ0YrM6w8Kz5s9vIhqIs2PxAr_zGfIju5c42Z8fJizyFnOtsAf9X-GY0UeDo8TNT35mEIz-b0vuL6pzum_jpXBD7thtkIpmT4W8GYHxphG15t4rt1fmYnyLgkwSqFxPHfmJlXKz-bcRGXc6LqyvoLgghcnbbShc3QsWj4uZQRDKOzUuM_b3-keyAsYxjzeja2AS3HXsiW0gHwxdp4vdb1BJuKnwt-sBAKh35HPpaFTXpRhHRGtBsdPwQxiyBhba6UK3g957nSqgdGFdo5YAwwQ9EHYcAn_Tne1cuyyiSVciPyLiV3KADg1LgNDvoDEoLxXM0FiKnfhRZiRk8_XL5MiPCKeuxZHBOJcnVNLIsQm_tGcut2v7eLBbZJPRgH_oTXX-KPhpq9LGpAek6I1HAXy0m7D4"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 24,
+            "promptTokenCount": 1863,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1863
+              }
+            ],
+            "thoughtsTokenCount": 255,
+            "totalTokenCount": 2142
+          },
+          "invocationId": "e-f47b8c9a-b41e-40d1-8bb1-00033a5baef7",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "fdf7c42e-4783-4af8-90a4-fff901ec9a64",
+          "timestamp": 1792250151.2278345
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_678472",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-f47b8c9a-b41e-40d1-8bb1-00033a5baef7",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "service_request_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "b9fc25eb-1320-4733-8d36-bb55b30864aa",
+          "timestamp": 1792250157.907602
+        },
+        {
+          "modelVersion": "gemini-3.8-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_5099101",
+                  "args": {},
+                  "name": "list_service_catalog"
+                },
+                "thoughtSignature": "EuwFCukFAWkUfRPVPcb28w9IkfW8qYtoibfn8lIm7SP9MFOZp2AVyh7owLELyK9F0A1FFbJscH62cXyo66VWrWkVKN_qc1htuGrv0Ua59j9iBO-rDsENB9yZGNQRe7KgQSbNzolsPQjipbFnp2WEMaJfzv6VULKOEBb3nP_txiS5MMz3ym-WvneVw86SVEkHxb7I6vWXnDI04k0kjzlTxUMgatrbLiSxKZ0aK18Je7A8cNGwEt5I7Ig7QJb9RP3Rum52eSeaUoKCrWmqgpuf6PYd9ry2Z9anXzia3WbeFhAjrzdl_aaCQTNxaa9DWj-12yY0PJZ3c54UaecNvjMvSwf9xw3BrfBYnC07My9RYEWnKk4ng1Zermr3UHBehLU8L6QsiuasF0xKbHR3nBWgGXXAZWXW7H0GkX5G0dDwdP5lRhJSyHwkiGV03uDtDRRaVHw-V-e--7E0UwXsJ7dcIIFnNFsiJRRQxa3MCTsh0yC-l1Rc13Mz0plAVvFfplTNuFoSZ3Vk3n0EYymkPyBNV1NfQlBMqpvLpp9P1g3LZJfSverJBTu42rTiAS37WSQNRNWJdFmKA6t98m95EB5cK0SIvzO__iXdXhWsWNMdBGycvb8GB8F75utLr1vE88MzH8NrEuYuVw47q5jHkToPR1J90iGbmw-L8skDZmn6IpwdbZkwBnMTXl-cYl93PtIm327G_fTlKly-9ghr67htNkRC1N_htvzD-TrxMtH_sZFq0SnjOHibv-EO7IRu1379Vf5N5Ksz3DxojGhD5_dms59kePA8e9TR-Q76wCinyckx84tUlvgpjiYB70JeA8XJ41kGCdK5OEAFDBCRUVGzHEwjeZLOHqZ5We4ixgLbVv_kWS5dhVIxHp23-m05KiZIv8RT8b-v2fIlohUhsicjkSTWTa81hZEaVuS10J-AVotLcr2fh6msEFQUTfcNSUCf3jkdIF9hXUbEBBPrhF6jmBT7CY1PLMQ0umgy4KMhEw=="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 12,
+            "promptTokenCount": 2870,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2870
+              }
+            ],
+            "thoughtsTokenCount": 155,
+            "totalTokenCount": 3037
+          },
+          "invocationId": "e-f47b8c9a-b41e-40d1-8bb1-00033a5baef7",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "cbf77f8c-a8f8-4f63-bcde-e9d81971b505",
+          "timestamp": 1792250157.9313684
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_5099101",
+                  "name": "list_service_catalog",
+                  "response": {
+                    "status": "ok",
+                    "request_types": [
+                      {
+                        "value": "order_issue",
+                        "label": "A problem with an order"
+                      },
+                      {
+                        "value": "delivery_delay",
+                        "label": "Delivery running late or not arriving"
+                      },
+                      {
+                        "value": "return_exchange",
+                        "label": "Return or exchange of an item"
+                      },
+                      {
+                        "value": "refund",
+                        "label": "Refund not received or wrong amount"
+                      },
+                      {
+                        "value": "product_defect",
+                        "label": "Item defective, damaged or wrong"
+                      },
+                      {
+                        "value": "billing",
+                        "label": "Charges, invoice or coupon problem"
+                      },
+                      {
+                        "value": "account_access",
+                        "label": "Login, OTP or profile access"
+                      },
+                      {
+                        "value": "loyalty",
+                        "label": "Prime membership, points or coupons"
+                      },
+                      {
+                        "value": "feedback",
+                        "label": "Compliment, complaint or suggestion"
+                      },
+                      {
+                        "value": "emergency",
+                        "label": "Something urgent that needs the response desk now"
+                      },
+                      {
+                        "value": "other",
+                        "label": "Something not covered above"
+                      }
+                    ],
+                    "urgency_levels": [
+                      {
+                        "value": "emergency",
+                        "respond_within": "15 minutes"
+                      },
+                      {
+                        "value": "high",
+                        "respond_within": "120 minutes"
+                      },
+                      {
+                        "value": "normal",
+                        "respond_within": "24 hours"
+                      },
+                      {
+                        "value": "low",
+                        "respond_within": "72 hours"
+                      }
+                    ],
+                    "emergency_types": [
+                      {
+                        "value": "none",
+                        "label": "Not an emergency"
+                      },
+                      {
+                        "value": "safety_hazard",
+                        "label": "Safety hazard - electrical, fire or structural risk"
+                      },
+                      {
+                        "value": "food_safety",
+                        "label": "Food safety - spoiled, contaminated or wrong temperature"
+                      },
+                      {
+                        "value": "payment_fraud",
+                        "label": "Payment fraud - unauthorised debit or duplicate charge"
+                      },
+                      {
+                        "value": "medical_allergy",
+                        "label": "Medical or allergy reaction to a delivered product"
+                      },
+                      {
+                        "value": "damaged_goods",
+                        "label": "Damaged goods - leaking, broken or hazardous packaging"
+                      },
+                      {
+                        "value": "access_blocked",
+                        "label": "Access blocked - locked gate, no water or electricity supply"
+                      },
+                      {
+                        "value": "no_delivery_aged",
+                        "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                      }
+                    ],
+                    "channels": [
+                      "web_chat",
+                      "whatsapp",
+                      "phone",
+                      "email",
+                      "store_counter"
+                    ],
+                    "mandatory_fields": [
+                      "full_name",
+                      "email",
+                      "phone",
+                      "request_type",
+                      "issue_summary"
+                    ],
+                    "optional_fields": [
+                      "urgency (default normal)",
+                      "emergency_type (default none)",
+                      "scheduled_for (default asap)",
+                      "order_id"
+                    ],
+                    "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+                    "message": "Collect all mandatory fields before calling create_support_request."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-f47b8c9a-b41e-40d1-8bb1-00033a5baef7",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "2c512b1c-20d2-4224-97e5-8c3a4ba84094",
+          "timestamp": 1792250162.8963053
+        },
+        {
+          "modelVersion": "gemini-3.8-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_829442",
+                  "args": {
+                    "issue_summary": "Complaint about a delayed delivery",
+                    "request_type": "delivery_delay"
+                  },
+                  "name": "check_request_readiness"
+                },
+                "thoughtSignature": "EpACCo0CAWkUfROF8K2yPams9lILrsBJTgg-flxnwhmijh9zzjLVo2JqbUa-YD8vkiyRbGIjvVveRdsuBXrxIuz91VdspK3jtZgrzMKM5s2t18hXXNKFIkyNCUlz5YmYCdvpgwG3fIlbjEBE9V4K36Deee_dUXWY0s295xl4IQUM0Bek6a7yu9KY6c_qKKyosyFzEOXUWboY_f_7PDN7b1FBnxQ-FY8UWTX8NfGoXSV23bFH5CrfmWXr1N7hGSNfAGbYJq-YAKJuE6kJDwWhpP7e6Uu4g1o8r7PnQYiNfjvD6UWFki33XOfGdchA8UhbFBcwBXPwFwHEogmQ4xeSzxjL8sL6gYrOA9vtl3qSU-bdq2Y="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 35,
+            "promptTokenCount": 3649,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3649
+              }
+            ],
+            "thoughtsTokenCount": 42,
+            "totalTokenCount": 3726
+          },
+          "invocationId": "e-f47b8c9a-b41e-40d1-8bb1-00033a5baef7",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "96d79ddd-9699-4cec-993f-199a56be187f",
+          "timestamp": 1792250162.9175875
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_829442",
+                  "name": "check_request_readiness",
+                  "response": {
+                    "status": "ok",
+                    "ready": false,
+                    "checks": [
+                      {
+                        "field": "full_name",
+                        "ok": false,
+                        "detail": "not provided yet - ask the customer for it"
+                      },
+                      {
+                        "field": "email",
+                        "ok": false,
+                        "detail": "not provided yet - ask the customer for it"
+                      },
+                      {
+                        "field": "phone",
+                        "ok": false,
+                        "detail": "not provided yet - ask the customer for it"
+                      },
+                      {
+                        "field": "request_type",
+                        "ok": true,
+                        "detail": "'delivery_delay' is valid"
+                      },
+                      {
+                        "field": "issue_summary",
+                        "ok": true,
+                        "detail": "detailed enough"
+                      }
+                    ],
+                    "missing": [
+                      "full_name",
+                      "email",
+                      "phone"
+                    ],
+                    "message": "Still needed: full_name, email, phone"
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-f47b8c9a-b41e-40d1-8bb1-00033a5baef7",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "c0dcab50-9ad1-4793-a0c2-2d6d5c51ef3e",
+          "timestamp": 1792250165.343989
+        },
+        {
+          "modelVersion": "gemini-3.8-flash",
+          "content": {
+            "parts": [
+              {
+                "text": "We are sorry to hear that your delivery has been delayed, and we are happy to help file a complaint for you. \n\nCould you please share your full name to get started?",
+                "thoughtSignature": "ErcFCrQFAWkUfROWSb8cdo6iNl7HJPh_IPTaNYl1rK7rO-D6WEMu4ubVJ_2erxBuYoRrpj8ShmwV2oOhKdJ01WI9wB-SIxCypvq2EG9SHTnOaPDIC7_Kl6NDlsTYJMYU7rf4GQKuK31FnOkEkdLRdGo4N29yjzKFPg2o18X-ot9AG7W9cRqP9iJaTHBY4MP-OJauOyiJL2HXj2gP13W2_MZ1BMYo0-p4c_8ITgtbhnYXJ9Wr4Gon2nR0g5gowc4RE3_bfAIqTHfs21TCDLzZ5iYowzHs2nq3J-JMsRYqnHRvlbzS8RGKXATEIz6VsAH9k48rKdmjdMnPCrHfiq2CpwH-knL6BqiAxVOa96HOOZIhznyd7XIx32-nINfd4QdUT4EtMs7iqJ49EctjkEqjNpslfC5QCSsKM6dGAOQvDV53_ZaVconFWjs-CZU5lGu9RSbJZ4xv4yUpnCPDNcEk8RphkwQR7uWlAR3WSgWSUDj8jUHitZZYtWOhIKv2bx4Fwv532F-rpYQh1Zue0l2JEJYlPULtsYfm-8l4GHnO9rbnP8MJZpO6EAP4ROj1ZwF7sqTq5p50zd1WEHSQe9KrMwqDS-jKDnn_qXqBQaZTRB2i5Nl40uOIYzt7hlWlvPHDc0WKBs1vbzCM6phJB8D840tf0JNmR9IxzlTkrjBwAqTNW7A5kmv_kF6hk6v9tGRyn9plyan2t0CrATIRU-4dQ1D5eVh3iMX1jLCmCVe-vlQB29lms7dOQ96kVNZ0vc7zV5FPYQjZMqL-_9Wi2Ai-rBoRjO5I8wrjgI-GJG7sRBbVD6gXYHwqfPkh9XY1fY8L3m6p1tlhLxIkrPLDSWD3LJzsu9sqLCc5_wrb27qWWVi28mvp83_pCE59r_e6v2ULvSaY6TAkKzPZ6gAuStsh8l3mwpprj6E_Wo8="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 37,
+            "promptTokenCount": 3898,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3898
+              }
+            ],
+            "thoughtsTokenCount": 138,
+            "totalTokenCount": 4073
+          },
+          "invocationId": "e-f47b8c9a-b41e-40d1-8bb1-00033a5baef7",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "5aaaab2b-facc-4479-a375-b09a918cd065",
+          "timestamp": 1792250165.3639736
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "service_request_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_service_catalog",
+            "args": {},
+            "author": "service_request_agent"
+          },
+          {
+            "tool": "check_request_readiness",
+            "args": {
+              "issue_summary": "Complaint about a delayed delivery",
+              "request_type": "delivery_delay"
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_service_catalog",
+            "response": {
+              "status": "ok",
+              "request_types": [
+                {
+                  "value": "order_issue",
+                  "label": "A problem with an order"
+                },
+                {
+                  "value": "delivery_delay",
+                  "label": "Delivery running late or not arriving"
+                },
+                {
+                  "value": "return_exchange",
+                  "label": "Return or exchange of an item"
+                },
+                {
+                  "value": "refund",
+                  "label": "Refund not received or wrong amount"
+                },
+                {
+                  "value": "product_defect",
+                  "label": "Item defective, damaged or wrong"
+                },
+                {
+                  "value": "billing",
+                  "label": "Charges, invoice or coupon problem"
+                },
+                {
+                  "value": "account_access",
+                  "label": "Login, OTP or profile access"
+                },
+                {
+                  "value": "loyalty",
+                  "label": "Prime membership, points or coupons"
+                },
+                {
+                  "value": "feedback",
+                  "label": "Compliment, complaint or suggestion"
+                },
+                {
+                  "value": "emergency",
+                  "label": "Something urgent that needs the response desk now"
+                },
+                {
+                  "value": "other",
+                  "label": "Something not covered above"
+                }
+              ],
+              "urgency_levels": [
+                {
+                  "value": "emergency",
+                  "respond_within": "15 minutes"
+                },
+                {
+                  "value": "high",
+                  "respond_within": "120 minutes"
+                },
+                {
+                  "value": "normal",
+                  "respond_within": "24 hours"
+                },
+                {
+                  "value": "low",
+                  "respond_within": "72 hours"
+                }
+              ],
+              "emergency_types": [
+                {
+                  "value": "none",
+                  "label": "Not an emergency"
+                },
+                {
+                  "value": "safety_hazard",
+                  "label": "Safety hazard - electrical, fire or structural risk"
+                },
+                {
+                  "value": "food_safety",
+                  "label": "Food safety - spoiled, contaminated or wrong temperature"
+                },
+                {
+                  "value": "payment_fraud",
+                  "label": "Payment fraud - unauthorised debit or duplicate charge"
+                },
+                {
+                  "value": "medical_allergy",
+                  "label": "Medical or allergy reaction to a delivered product"
+                },
+                {
+                  "value": "damaged_goods",
+                  "label": "Damaged goods - leaking, broken or hazardous packaging"
+                },
+                {
+                  "value": "access_blocked",
+                  "label": "Access blocked - locked gate, no water or electricity supply"
+                },
+                {
+                  "value": "no_delivery_aged",
+                  "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                }
+              ],
+              "channels": [
+                "web_chat",
+                "whatsapp",
+                "phone",
+                "email",
+                "store_counter"
+              ],
+              "mandatory_fields": [
+                "full_name",
+                "email",
+                "phone",
+                "request_type",
+                "issue_summary"
+              ],
+              "optional_fields": [
+                "urgency (default normal)",
+                "emergency_type (default none)",
+                "scheduled_for (default asap)",
+                "order_id"
+              ],
+              "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+              "message": "Collect all mandatory fields before calling create_support_request."
+            },
+            "author": "service_request_agent"
+          },
+          {
+            "tool": "check_request_readiness",
+            "response": {
+              "status": "ok",
+              "ready": false,
+              "checks": [
+                {
+                  "field": "full_name",
+                  "ok": false,
+                  "detail": "not provided yet - ask the customer for it"
+                },
+                {
+                  "field": "email",
+                  "ok": false,
+                  "detail": "not provided yet - ask the customer for it"
+                },
+                {
+                  "field": "phone",
+                  "ok": false,
+                  "detail": "not provided yet - ask the customer for it"
+                },
+                {
+                  "field": "request_type",
+                  "ok": true,
+                  "detail": "'delivery_delay' is valid"
+                },
+                {
+                  "field": "issue_summary",
+                  "ok": true,
+                  "detail": "detailed enough"
+                }
+              ],
+              "missing": [
+                "full_name",
+                "email",
+                "phone"
+              ],
+              "message": "Still needed: full_name, email, phone"
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "service_request_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "service_request_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 12978,
+        "final_text": "We are sorry to hear that your delivery has been delayed, and we are happy to help file a complaint for you. \n\nCould you please share your full name to get started?",
+        "state_delta": {},
+        "n_events": 7
+      }
+    },
+    {
+      "user": "My details are Rohit Malhotra, rohit.malhotra@example.com, 9845005518. Order APX-ORD-2026-041940 was due yesterday morning and still has not arrived.",
+      "status": 500,
+      "latency_s": 9.37,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 26.32,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /APX-SR-2026-[A-Z0-9]{6}/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_called create_support_request",
+      "ok": false,
+      "detail": "tools called: ['transfer_to_agent', 'list_service_catalog', 'check_request_readiness']"
+    },
+    {
+      "check": "tool_args create_support_request",
+      "ok": false,
+      "detail": "calls: [{'tool': 'transfer_to_agent', 'args': {'agent_name': 'service_request_agent'}, 'author': 'apex_concierge'}, {'tool': 'list_service_catalog', 'args': {}, 'author': 'service_request_agent'}, {'tool': 'check_request_readiness', 'args': {'issue_summary': 'Complaint about a delayed delivery', 'request_type': 'delivery_delay'}, 'author': 'service_request_agent'}]"
+    },
+    {
+      "check": "agent_involved service_request_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'service_request_agent'] transfers=['service_request_agent']"
+    },
+    {
+      "check": "max_latency_s",
+      "ok": true,
+      "detail": "26.3s"
+    }
+  ],
+  "passed": false,
+  "failure_class": "AGENT_RUNTIME_ERROR"
+}

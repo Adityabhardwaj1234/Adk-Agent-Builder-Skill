@@ -1,0 +1,59 @@
+{
+  "test_id": "T02_hours",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T02_hours-0-6c3a28",
+  "turns": [
+    {
+      "user": "What time do your hypermarkets open and when is customer care available?",
+      "status": 500,
+      "latency_s": 4.54,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 4.54,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /09:00|24x7|24 x 7/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_called get_company_info",
+      "ok": false,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "tool_args get_company_info",
+      "ok": false,
+      "detail": "calls: []"
+    },
+    {
+      "check": "max_tool_calls",
+      "ok": true,
+      "detail": "0 calls"
+    }
+  ],
+  "passed": false,
+  "failure_class": "AGENT_RUNTIME_ERROR"
+}

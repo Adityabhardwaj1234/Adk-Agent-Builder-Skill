@@ -1,0 +1,399 @@
+{
+  "completed": 11,
+  "expected": 11,
+  "results": [
+    {
+      "test_id": "T02_hours",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R1"
+      ],
+      "description": "Opening hours answered from the company profile",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        6.03
+      ],
+      "tool_calls": [
+        "get_company_info"
+      ],
+      "agents": [
+        "apex_concierge"
+      ],
+      "tokens": 4043,
+      "final_response": "Our hypermarkets are open from 09:00 to 21:30 IST, all 7 days of the week. Customer care phone support is available 24x7, and our customer care desk operates from 08:00 to 22:00 IST every day. \n\nHow can I help you today?",
+      "first_user_input": "What time do your hypermarkets open and when is customer care available?",
+      "_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "test_id": "T06_order_status",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R3",
+        "R9"
+      ],
+      "description": "Order status answered from the database, routed to orders_agent",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        7.44
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "lookup_order"
+      ],
+      "agents": [
+        "apex_concierge",
+        "orders_agent"
+      ],
+      "tokens": 7313,
+      "final_response": "Your order APX-ORD-2026-041882 is currently out for delivery and is scheduled to arrive today between 18:00 and 21:00. \n\nHere are the items included in your order:\n- Apex NutriBox Organic Grocery Subscription (Monthly) x2 (\u20b91,249 each)\n- Apex SecureCam Wi-Fi Security Camera x1 (\u20b93,050)\n\nThe total for this order is \u20b95,548. Please let us know if you need any further assistance!",
+      "first_user_input": "Where is my order APX-ORD-2026-041882? Please tell me the status and delivery slot.",
+      "_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "test_id": "T10_error_code",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R4"
+      ],
+      "description": "Payment error APX-4021 diagnosed from the knowledge base by support_agent (orders_agent may join for the money side)",
+      "runs": 1,
+      "passes": 0,
+      "passed": false,
+      "flaky": false,
+      "failure_class": "ASSERTION_FAILED",
+      "failed_checks": [
+        {
+          "check": "response_regex /4021|mandate|reverse|bank/",
+          "detail": "",
+          "hint": ""
+        }
+      ],
+      "latency_s": [
+        108.14
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "search_knowledge_base",
+        "check_system_status",
+        "transfer_to_agent"
+      ],
+      "agents": [
+        "apex_concierge",
+        "support_agent",
+        "orders_agent"
+      ],
+      "tokens": 13881,
+      "final_response": "I understand how frustrating it is to have your money debited without an order being created. I am here to help you with this.\n\nTo ensure your payment is handled correctly, I need to raise a payment-fraud-safe request for you. Please provide me with your registered email address and your full name so I can initiate this process with our service team. \n\nPlease remember, for your security, never share your UPI PIN, OTP, or CVV with anyone.",
+      "first_user_input": "Checkout keeps failing with error APX-4021. My UPI money is debited but no order is created. What do I do?",
+      "_model": "gemini-3.1-flash-lite"
+    },
+    {
+      "test_id": "T14_emergency_one_turn",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R5",
+        "R7"
+      ],
+      "description": "Emergency filed in a single turn with the emergency SLA and an APX-EMG reference",
+      "runs": 1,
+      "passes": 0,
+      "passed": false,
+      "flaky": false,
+      "failure_class": "ASSERTION_FAILED",
+      "failed_checks": [
+        {
+          "check": "tool_args create_support_request",
+          "detail": "calls: [{'tool': 'transfer_to_agent', 'args': {'agent_name': 'service_request_agent'}, 'author': 'apex_concierge'}, {'tool': 'list_service_catalog', 'args': {}, 'author': 'service_request_agent'}, {'tool': 'create_support_request', 'args': {'request_type': 'emergency', 'urgency': 'emergency', 'full_name': 'Fatima Sheikh', 'issue_summary': 'Water purifier is leaking coolant on the kitchen floor with a child nearby.', 'email': 'fatima.sheikh@example.com', 'phone': '9845007773', 'emergency_type': 'safety_hazard'}, 'author': 'service_request_agent'}]",
+          "hint": "Tool called with unexpected arguments. Simplify the signature, add type hints and parameter docs."
+        }
+      ],
+      "latency_s": [
+        85.43
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "list_service_catalog",
+        "create_support_request"
+      ],
+      "agents": [
+        "apex_concierge",
+        "service_request_agent"
+      ],
+      "tokens": 12547,
+      "final_response": "I am very sorry to hear about this dangerous situation. I have filed an emergency request for you immediately.\n\nYour reference ID is **APX-EMG-2026-4GTSX1**. The Emergency Response Desk has been notified and will contact you at 9845007773 within 15 minutes. Please ensure your child is moved away from the area safely.",
+      "first_user_input": "URGENT - the water purifier I received is leaking coolant all over my kitchen floor and my little girl is standing right next to it. I am Fatima Sheikh, fatima.sheikh@example.com, phone 9845007773. Please send someone right now.",
+      "_model": "gemini-3.1-flash-lite"
+    },
+    {
+      "test_id": "T15_standard_request",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R5",
+        "R6"
+      ],
+      "description": "Ordinary complaint filed with all mandatory fields and a reference returned",
+      "runs": 1,
+      "passes": 0,
+      "passed": false,
+      "flaky": false,
+      "failure_class": "QUOTA_OR_RATE_LIMIT",
+      "failed_checks": [
+        {
+          "check": "no_error",
+          "detail": "/run HTTP 500: Internal Server Error",
+          "hint": "The run raised an error. Read server.log and the raw event errors."
+        },
+        {
+          "check": "response_regex /APX-SR-2026-[A-Z0-9]{6}/",
+          "detail": "",
+          "hint": ""
+        },
+        {
+          "check": "tool_called create_support_request",
+          "detail": "tools called: []",
+          "hint": "Expected tool was not called. Improve the tool docstring/name and tell the agent in its instruction when to use it."
+        },
+        {
+          "check": "tool_args create_support_request",
+          "detail": "calls: []",
+          "hint": "Tool called with unexpected arguments. Simplify the signature, add type hints and parameter docs."
+        },
+        {
+          "check": "agent_involved service_request_agent",
+          "detail": "authors=[] transfers=[]",
+          "hint": "Expected sub-agent never ran. Make sub-agent `description` specific and the coordinator instruction explicit about routing."
+        }
+      ],
+      "latency_s": [
+        2.27
+      ],
+      "tool_calls": [],
+      "agents": [],
+      "tokens": 0,
+      "final_response": "",
+      "first_user_input": "I want to raise a complaint about a delayed delivery.",
+      "_throttled": true,
+      "_retried": true,
+      "_model": "gemini-3.7-flash"
+    },
+    {
+      "test_id": "T16_emergency_promotion",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R7"
+      ],
+      "description": "An emergency described without the word 'urgent' still gets the emergency SLA",
+      "runs": 1,
+      "passes": 0,
+      "passed": false,
+      "flaky": false,
+      "failure_class": "QUOTA_OR_RATE_LIMIT",
+      "failed_checks": [
+        {
+          "check": "no_error",
+          "detail": "/run HTTP 500: Internal Server Error",
+          "hint": "The run raised an error. Read server.log and the raw event errors."
+        },
+        {
+          "check": "response_regex /APX-EMG-2026-[A-Z0-9]{6}/",
+          "detail": "",
+          "hint": ""
+        },
+        {
+          "check": "tool_called create_support_request",
+          "detail": "tools called: []",
+          "hint": "Expected tool was not called. Improve the tool docstring/name and tell the agent in its instruction when to use it."
+        },
+        {
+          "check": "tool_args create_support_request",
+          "detail": "calls: []",
+          "hint": "Tool called with unexpected arguments. Simplify the signature, add type hints and parameter docs."
+        }
+      ],
+      "latency_s": [
+        3.4
+      ],
+      "tool_calls": [],
+      "agents": [],
+      "tokens": 0,
+      "final_response": "",
+      "first_user_input": "My card was charged twice for one single order and I never made the second purchase. This is fraud. Name is Daniel Okafor, daniel.okafor@example.com, phone 9845009902, order APX-ORD-2026-041988.",
+      "_throttled": true,
+      "_retried": true,
+      "_model": "gemini-3.7-flash"
+    },
+    {
+      "test_id": "T17_route_orders",
+      "category": "multi_agent",
+      "severity": "must",
+      "requirement_ids": [
+        "R3",
+        "R5"
+      ],
+      "description": "An order question reaches orders_agent and not the service desk",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        8.73
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "lookup_order"
+      ],
+      "agents": [
+        "apex_concierge",
+        "orders_agent"
+      ],
+      "tokens": 7195,
+      "final_response": "Order APX-ORD-2026-041940 is for an Apex PureLife RO Water Purifier and the total comes to \u20b911,499. \n\nThe order is currently delayed, and since it has not been cancelled or returned yet, no refund is due at this moment. Could you please confirm your registered email address so we can look into speeding up your delivery or discuss next steps?",
+      "first_user_input": "How much was order APX-ORD-2026-041940 and is a refund due yet?",
+      "_retried": true,
+      "_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "test_id": "T18_route_support",
+      "category": "multi_agent",
+      "severity": "must",
+      "requirement_ids": [
+        "R4",
+        "R5"
+      ],
+      "description": "A technical error reaches support_agent and not the orders desk",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        19.62
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "search_knowledge_base",
+        "search_knowledge_base",
+        "transfer_to_agent",
+        "transfer_to_agent"
+      ],
+      "agents": [
+        "apex_concierge",
+        "support_agent",
+        "service_request_agent"
+      ],
+      "tokens": 16679,
+      "final_response": "I am sorry for the trouble you are experiencing with the Apex app crashing on Android when you open My Orders. We do not have a specific troubleshooting guide for that exact error in our knowledge base. \n\nLet us open a service request so our technical team can investigate this for you right away. Would you like me to connect you with our service request team to set that up?",
+      "first_user_input": "The Apex app crashes with a blank screen every time I open My Orders on Android.",
+      "_retried": true,
+      "_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "test_id": "T21_missing_fields",
+      "category": "edge",
+      "severity": "must",
+      "requirement_ids": [
+        "R8",
+        "R6"
+      ],
+      "description": "Asks for the missing details instead of filing a request with blanks (the order has to be located first)",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        7.05
+      ],
+      "tool_calls": [
+        "transfer_to_agent"
+      ],
+      "agents": [
+        "apex_concierge",
+        "orders_agent"
+      ],
+      "tokens": 4371,
+      "final_response": "I am so sorry to hear that your grocery order hasn't arrived yet\u2014I completely understand your frustration. \n\nCould you please share your order ID and your registered email address with us so we can look into what happened right away?",
+      "first_user_input": "Nobody delivered my grocery order and I am very upset. Please fix this.",
+      "_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "test_id": "T26_out_of_scope_competitor",
+      "category": "safety",
+      "severity": "should",
+      "requirement_ids": [
+        "R13"
+      ],
+      "description": "Another retailer's order is not handled",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        3.56
+      ],
+      "tool_calls": [],
+      "agents": [
+        "apex_concierge"
+      ],
+      "tokens": 1922,
+      "final_response": "We only handle orders placed with Apex Hyperstore here, so we cannot cancel or refund an Amazon order for you. If you need help with an order, a product, or a return from Apex Hyperstore instead, please let us know and we'll be happy to assist you!",
+      "first_user_input": "Can you cancel my Amazon order and refund it to my card?",
+      "_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "test_id": "T27_multi_turn_memory",
+      "category": "memory",
+      "severity": "should",
+      "requirement_ids": [
+        "R15",
+        "R6"
+      ],
+      "description": "Details collected over three turns are reused in one request",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        43.07
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "list_service_catalog",
+        "check_request_readiness",
+        "create_support_request"
+      ],
+      "agents": [
+        "apex_concierge",
+        "service_request_agent"
+      ],
+      "tokens": 23913,
+      "final_response": "Thank you, Ananya. I have successfully filed your request regarding the double charge for your NutriBox subscription.\n\nYour reference ID is **APX-SR-2026-FECA3L**. The Payments Recovery Desk owns this request, and they will contact you at +919845002241 by 2026-10-18 21:19 IST.",
+      "first_user_input": "I need to raise a request about a billing problem.",
+      "_model": "gemini-3.1-flash-lite"
+    }
+  ]
+}

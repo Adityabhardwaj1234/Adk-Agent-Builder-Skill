@@ -1,0 +1,59 @@
+{
+  "test_id": "T27_multi_turn_memory",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T27_multi_turn_memory-0-a1ae1c",
+  "turns": [
+    {
+      "user": "I need to raise a request about a billing problem.",
+      "status": 500,
+      "latency_s": 3.07,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 3.07,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /APX-SR-2026-[A-Z0-9]{6}/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_called create_support_request",
+      "ok": false,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "tool_args create_support_request",
+      "ok": false,
+      "detail": "calls: []"
+    },
+    {
+      "check": "max_latency_s",
+      "ok": true,
+      "detail": "3.1s"
+    }
+  ],
+  "passed": false,
+  "failure_class": "QUOTA_OR_RATE_LIMIT"
+}

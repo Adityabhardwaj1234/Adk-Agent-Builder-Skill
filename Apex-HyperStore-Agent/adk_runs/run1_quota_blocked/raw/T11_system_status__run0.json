@@ -1,0 +1,54 @@
+{
+  "test_id": "T11_system_status",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T11_system_status-0-416935",
+  "turns": [
+    {
+      "user": "Is payment failing for everyone right now or is it just me?",
+      "status": 500,
+      "latency_s": 2.52,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 2.52,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /degraded|operational|incident|callback/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_called check_system_status",
+      "ok": false,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "agent_involved support_agent",
+      "ok": false,
+      "detail": "authors=[] transfers=[]"
+    }
+  ],
+  "passed": false,
+  "failure_class": "QUOTA_OR_RATE_LIMIT"
+}

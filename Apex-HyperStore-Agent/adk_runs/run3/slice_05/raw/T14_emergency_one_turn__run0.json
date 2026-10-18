@@ -1,0 +1,64 @@
+{
+  "test_id": "T14_emergency_one_turn",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T14_emergency_one_turn-0-d22972",
+  "turns": [
+    {
+      "user": "URGENT - the water purifier I received is leaking coolant all over my kitchen floor and my little girl is standing right next to it. I am Fatima Sheikh, fatima.sheikh@example.com, phone 9845007773. Please send someone right now.",
+      "status": 500,
+      "latency_s": 9.39,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 9.39,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /APX-EMG-2026-[A-Z0-9]{6}/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_called create_support_request",
+      "ok": false,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "tool_args create_support_request",
+      "ok": false,
+      "detail": "calls: []"
+    },
+    {
+      "check": "agent_involved service_request_agent",
+      "ok": false,
+      "detail": "authors=[] transfers=[]"
+    },
+    {
+      "check": "max_latency_s",
+      "ok": true,
+      "detail": "9.4s"
+    }
+  ],
+  "passed": false,
+  "failure_class": "AGENT_RUNTIME_ERROR"
+}

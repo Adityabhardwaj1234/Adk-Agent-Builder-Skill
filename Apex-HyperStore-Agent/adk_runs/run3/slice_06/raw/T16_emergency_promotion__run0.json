@@ -1,0 +1,59 @@
+{
+  "test_id": "T16_emergency_promotion",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T16_emergency_promotion-0-5e673a",
+  "turns": [
+    {
+      "user": "My card was charged twice for one single order and I never made the second purchase. This is fraud. Name is Daniel Okafor, daniel.okafor@example.com, phone 9845009902, order APX-ORD-2026-041988.",
+      "status": 500,
+      "latency_s": 27.74,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 27.74,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /APX-EMG-2026-[A-Z0-9]{6}/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_called create_support_request",
+      "ok": false,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "tool_args create_support_request",
+      "ok": false,
+      "detail": "calls: []"
+    },
+    {
+      "check": "max_latency_s",
+      "ok": true,
+      "detail": "27.7s"
+    }
+  ],
+  "passed": false,
+  "failure_class": "AGENT_RUNTIME_ERROR"
+}

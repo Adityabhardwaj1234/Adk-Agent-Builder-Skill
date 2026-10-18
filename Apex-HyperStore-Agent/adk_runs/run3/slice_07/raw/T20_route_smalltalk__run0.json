@@ -1,0 +1,114 @@
+{
+  "test_id": "T20_route_smalltalk",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [
+      "apex_concierge"
+    ],
+    "texts": [
+      {
+        "author": "apex_concierge",
+        "text": "That is wonderful to hear! We will make sure to pass along your kind words to our delivery team. \n\nIs there anything else we can help you with today?"
+      }
+    ],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 1902,
+    "final_text": "That is wonderful to hear! We will make sure to pass along your kind words to our delivery team. \n\nIs there anything else we can help you with today?",
+    "state_delta": {},
+    "n_events": 1,
+    "http_error": ""
+  },
+  "session_id": "T20_route_smalltalk-0-2db360",
+  "turns": [
+    {
+      "user": "Hello! Just saying thanks, your delivery boy was very polite yesterday. Cheers.",
+      "status": 200,
+      "latency_s": 3.09,
+      "events": [
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "That is wonderful to hear! We will make sure to pass along your kind words to our delivery team. \n\nIs there anything else we can help you with today?",
+                "thoughtSignature": "EmAKXgFpFH0Tg9sshi5HutnGJ2Fvp9fdLOPTip_texdqiO8rq6lLk_GcmxB00O3d8QARMSALyfTLyT1Q55jLKNSHxn4hs6eCleF3nusmfPbisOKRAifi4PvcfjT5xpbPP0c="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 34,
+            "promptTokenCount": 1868,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1868
+              }
+            ],
+            "totalTokenCount": 1902
+          },
+          "invocationId": "e-6551f026-5488-4e42-84af-a09c19ffbb46",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "6d2d47d8-8cf0-4c6e-b79a-7cf8a560f801",
+          "timestamp": 1792250311.462136
+        }
+      ],
+      "parsed": {
+        "calls": [],
+        "responses": [],
+        "authors": [
+          "apex_concierge"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 1902,
+        "final_text": "That is wonderful to hear! We will make sure to pass along your kind words to our delivery team. \n\nIs there anything else we can help you with today?",
+        "state_delta": {},
+        "n_events": 1
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 3.09,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "agent_excluded orders_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge']"
+    },
+    {
+      "check": "agent_excluded support_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge']"
+    },
+    {
+      "check": "agent_excluded service_request_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge']"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

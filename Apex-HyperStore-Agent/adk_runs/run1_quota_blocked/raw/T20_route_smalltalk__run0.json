@@ -1,0 +1,54 @@
+{
+  "test_id": "T20_route_smalltalk",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T20_route_smalltalk-0-c0999f",
+  "turns": [
+    {
+      "user": "Hello! Just saying thanks, your delivery boy was very polite yesterday. Cheers.",
+      "status": 500,
+      "latency_s": 2.86,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 2.86,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "agent_excluded orders_agent",
+      "ok": true,
+      "detail": "authors=[]"
+    },
+    {
+      "check": "agent_excluded support_agent",
+      "ok": true,
+      "detail": "authors=[]"
+    },
+    {
+      "check": "agent_excluded service_request_agent",
+      "ok": true,
+      "detail": "authors=[]"
+    }
+  ],
+  "passed": false,
+  "failure_class": "QUOTA_OR_RATE_LIMIT"
+}

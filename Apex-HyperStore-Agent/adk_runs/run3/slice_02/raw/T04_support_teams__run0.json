@@ -1,0 +1,327 @@
+{
+  "test_id": "T04_support_teams",
+  "run": {
+    "calls": [
+      {
+        "tool": "list_support_teams",
+        "args": {},
+        "author": "apex_concierge"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "list_support_teams",
+        "response": {
+          "status": "ok",
+          "teams": [
+            {
+              "team": "Emergency Response Desk",
+              "owns": "safety hazards, food safety, payment fraud, burst pipe/wrong-address-with-damaged-goods, access blockage",
+              "sla": "15 minutes",
+              "hours": "24x7"
+            },
+            {
+              "team": "Payments Recovery Desk",
+              "owns": "failed or duplicated UPI/card payments, refund delays",
+              "sla": "2 hours",
+              "hours": "08:00-22:00 IST"
+            },
+            {
+              "team": "Last Mile Operations",
+              "owns": "delayed, lost or damaged delivery",
+              "sla": "2 hours",
+              "hours": "24x7"
+            },
+            {
+              "team": "Identity & Accounts Desk",
+              "owns": "login locks, OTP issues, address change",
+              "sla": "24 hours",
+              "hours": "08:00-22:00 IST"
+            },
+            {
+              "team": "Quality Desk",
+              "owns": "defective or wrong items, food safety follow-up",
+              "sla": "24 hours",
+              "hours": "08:00-22:00 IST"
+            },
+            {
+              "team": "Loyalty & Coupons Desk",
+              "owns": "Prime membership, missing points, coupon disputes",
+              "sla": "72 hours",
+              "hours": "09:00-19:00 IST"
+            }
+          ],
+          "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic."
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "authors": [
+      "apex_concierge"
+    ],
+    "texts": [
+      {
+        "author": "apex_concierge",
+        "text": "Our **Last Mile Operations** team handles all complaints regarding delayed, lost, or damaged deliveries. They operate 24/7 and have a response time SLA of **2 hours**.\n\nIf you would like to file a complaint now, please let me know your order number or contact details, and I can connect you with our service request team to register it right away."
+      }
+    ],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 5133,
+    "final_text": "Our **Last Mile Operations** team handles all complaints regarding delayed, lost, or damaged deliveries. They operate 24/7 and have a response time SLA of **2 hours**.\n\nIf you would like to file a complaint now, please let me know your order number or contact details, and I can connect you with our service request team to register it right away.",
+    "state_delta": {},
+    "n_events": 3,
+    "http_error": ""
+  },
+  "session_id": "T04_support_teams-0-5336e2",
+  "turns": [
+    {
+      "user": "I want to complain about my delivery. Which team handles that and what is their response time?",
+      "status": 200,
+      "latency_s": 15.92,
+      "events": [
+        {
+          "modelVersion": "gemini-3.6-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_2210797",
+                  "args": {},
+                  "name": "list_support_teams"
+                },
+                "thoughtSignature": "EqAJCp0JAWkUfRMTPGwhZTDtBPm8TDcPZ87TKnBj_1y0kq9QKExR2eKekNSR-0pO4dYY60aF919cL-BbwmSEWphaxasXYI8jtrjcOPyBx-3PvKNw4wAG5ovRDl1THuG0nOhsx4v_x_DoIIeKcm_aEgRJ4JwdlVltzGr7wgSfIfUVPfyp4DFOXwFzyPbCh1nTol7QXCKrjir-NpOVMxxBrkXDgT3eSNe3lUqhWP2twn0jm261yu8Yeh_nJkpBfAaGTpq-f59SVVnxCq6pJt0SU4tJGq87f9DHwl6wKd7FaF96bc-sXhwAbeEvSNos3RufCqbDf0eKxwUPCzecfmh4pD6EciR5nCSqsPwS_aulzIr3lTC7lpOfM1fImAFLJg6IAePj1LM8vN538E0yY-GDnOJeSpRGLcHZ92ifyDBfwe2IHrh05gb29aNSOxq1ShBjsavQEljzPzKrPbPtymc3JGC0k6lji7yFaNUhlFZs5_lsgEJilWQN5C95zUPeuKeiZjcK-5Vf78YCoNguheUUI0E5_scAPw1oE-9-C4aTvl05aCsfVkkClmZT59jICbBrnU97nL1FQOKGr8_Qa1EJhRW7lbRYgSZJUK7-gkKjZD4rEqUjqeJB1gT1_8bvbL-I3flC78BuMLPjP77Q1sDe0bhxyPWTWfCyfhsDWWrGDtaZ2VwlAOcg86bbEgPaaWrWu9Hy1k29yyo4Mm5k_4GQ7NSkwVTVeeiX7Ici5FLWGwY3gUJUsDNYupy1kmocepDwpxzyALbXkWwDcJC8FPTY9RE6vw-qudhBgexS8cONC4CxX3MFGJvzt1iGLem1jasbVf-DzJ2DbExz5eFkJQiLmIqYsFiPEBxn3pFxK9N6_jHHPmdW7Epga_-SIl78fHoZhqhBPgWZFRh8W7dJRgH0UFjHSpuUXc4UDUNyx2p5V3a28ts042XOi3VVo45CyCekCb_-2BGwNBP7XAsgT61YGtuJ5D-P4qsQag8QEyHK5YhTXvbAgVOwJYjH0MoE6qwGENGPJ1rwBWIBx3yMWqmuz7z23U9ibVp57TAZOpmGgwnl_3ucwfs5NkQAal44q61f0HVik80NIvBZiySlNXoAvMghJRtVljCPXq021O7f0KUCodqDT9CiU4mUky3BNau8SRHYATg0DYVEiWseaCi4-Mi3-gOMTTS4M19Oldx2AFZOachF1N_8RdGbm9rIGwZgFvSMFiDo7sdSPaJUkBWHoEpX_qo5x294TmElSqODBWsGCuVrmfqKpMrXDtEbSMJN4YdEyOF-eMT_WBlzbaiikMQmlI7Bfj1gkWBvFKdkb8tyseTJV6W2RGRurknnZc-D0EvahhfP8buCOMR2Ww7CZrxuRqyi-VsiSliLeDbmosr_GoW5XYATlRroEhHYo5WbF1v6vEmrlFgUYepcquxthXLoYRdzYut7PvPKmhnFzob8TDkc1g66hfCpsMvTnpIhK76XZ58W7dzDGG56QvPSEv2JCkoBkGXlEZrMsuFccjfSKyqhQxRLoZIXnsVmlUKZGFCak9_FLdlz4ytammlG1R1lopyX_igrH8IKX5qn1Bq0SuY="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 12,
+            "promptTokenCount": 1871,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1871
+              }
+            ],
+            "thoughtsTokenCount": 250,
+            "totalTokenCount": 2133
+          },
+          "invocationId": "e-e8a61064-2257-472f-9f19-7ac86698ae4e",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "8377a0ef-ba98-428a-b163-3be65479967c",
+          "timestamp": 1792249880.70966
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_2210797",
+                  "name": "list_support_teams",
+                  "response": {
+                    "status": "ok",
+                    "teams": [
+                      {
+                        "team": "Emergency Response Desk",
+                        "owns": "safety hazards, food safety, payment fraud, burst pipe/wrong-address-with-damaged-goods, access blockage",
+                        "sla": "15 minutes",
+                        "hours": "24x7"
+                      },
+                      {
+                        "team": "Payments Recovery Desk",
+                        "owns": "failed or duplicated UPI/card payments, refund delays",
+                        "sla": "2 hours",
+                        "hours": "08:00-22:00 IST"
+                      },
+                      {
+                        "team": "Last Mile Operations",
+                        "owns": "delayed, lost or damaged delivery",
+                        "sla": "2 hours",
+                        "hours": "24x7"
+                      },
+                      {
+                        "team": "Identity & Accounts Desk",
+                        "owns": "login locks, OTP issues, address change",
+                        "sla": "24 hours",
+                        "hours": "08:00-22:00 IST"
+                      },
+                      {
+                        "team": "Quality Desk",
+                        "owns": "defective or wrong items, food safety follow-up",
+                        "sla": "24 hours",
+                        "hours": "08:00-22:00 IST"
+                      },
+                      {
+                        "team": "Loyalty & Coupons Desk",
+                        "owns": "Prime membership, missing points, coupon disputes",
+                        "sla": "72 hours",
+                        "hours": "09:00-19:00 IST"
+                      }
+                    ],
+                    "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-e8a61064-2257-472f-9f19-7ac86698ae4e",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "f45de952-d6c0-47ee-8137-cd77d0581ed7",
+          "timestamp": 1792249892.058587
+        },
+        {
+          "modelVersion": "gemini-3.6-flash",
+          "content": {
+            "parts": [
+              {
+                "text": "Our **Last Mile Operations** team handles all complaints regarding delayed, lost, or damaged deliveries. They operate 24/7 and have a response time SLA of **2 hours**.\n\nIf you would like to file a complaint now, please let me know your order number or contact details, and I can connect you with our service request team to register it right away.",
+                "thoughtSignature": "EogQCoUQAWkUfRNsff850gu2eqSM4K2azWrsGODbWHkzyG6a6UXyUTMnWmlRV966uA4BB6SvolYCqaJqApVF_onhWtA4MsZbXLc5YFWi_cu6A95F0Z2bHxj1NweYV-TP7kKVo_DXXQvTuRdayek1vF-LOpbuGwm0LSmC2w1ljO5Igzrt0Btbt2meqKKKZtmgpMY8ZOd1kzwE9tlggEGe6xnBrq5XP1ET1Dk8P6GA6qgyhy1ah2uoGZfKewQJ3487IsGhclOvrDJdfBXSQgqNn_FTKVA75Rjzhx142eMtyU2orM0njD6CAbR2PP6P_2IpB3lEmxXoP9zvmX-iLQvEbda7ezMSuqpQbOgghxR7C0EgvPQozDhLeOfp0rALygXYo7uSGylnzkGwAE8J_syuozf1n4tgfs6sU0zj9xz3LGs_VZCOcAxJudLvSPylss3RzeMk87eYNaI1JXfmonQ2TLXaYKWROhoO7lHMyjOxtxjoieU3p083y2m0L6NL88G2GNVW-CyH7MYNm6AiECWkfo8WXrgKZac5ZpOtMPR6f--txsoabcXY8iG2F-cd6P_7PDdDWFlHZLjFXXYZUj0KegP2tampfbgBuZlKPy2mkzW3FZqhi9BEdToQyTjz83vOF1xEgN94-18RXOJ9Z57hHeBAPo2VwYONTMnlJDY4ChlLV0sS1uqWnU-WVqcP2biVhLW2eaSnGM53ipAwM7WpharOkxbKdZkVrmBIaYVS1ls9YDKQEOrVtS3ynlUuEMENvat61VNSo5x970YYPZKkWWPQDJAFPxENKrPnbhaXDU2C4TqkZhTSpe1ovMA6hCR2d5KC2S2KTwkL8HspYyWoaUYnDJlFjw0K-oc8jMwKg2Wck1vFEl0HJmJLBMrDR_vVWQVpJkJrsRh9I6IFIMLZpDMLRpbwpWGRODfBNAqmmmV2rffNT38rbzy9JC5Mvw6YxVMJGUcFwLlwEFS1LRP37FZAfBxN5tNnCKt5HmOVqocmgpXnh6e3KmaAnpcL-Nac-C5PaL4fNtpIvRu3Cg38UHCJDCojZT4AzUmHbpAUYijd5OsJmffIEXAs0Vdo4FC084TkCgLbxzwgcOs0RNtu6lF-LMYtV-Z86X8CIXpBrlIhd6W0XUl27XTqHRWj488f4hmsaz7T_eGLoQx6GlM6Z-5a1jsBe0TD2ZkMzYMmag6KMJ4qhH3G6QxtlGw2z2DD8fkAvIaFdvAP0Pq7nF_5IXOMDluktd3hykbp5YEvbtqFFDCXKxzJLSIWHPHOR8jHSSe1B65axNVczsucGVkrsznZ7eVrnDAWHtxfIA5Uy2xablmLaHnXFQMadsL-lTDn7u1j35KCKwwmxRUpf8HOznqRXhBwkig00fDycI7QrBadnyphNxuLHYFipnSaxylNutf1a6fcpbDmW3k76Zs5JBHn8M6c37bgp8cQmwqRv4n43DjWkP3pd6PTxRP7vSXIJByeM-infBf2S6i2lQYk6jp1SysyvOANxhOTI7YKWPlWEyfrwPOOA6l4krNy-OPh1GotoPe2xVAPbXIBhO2F2h3n7_y0GM8Iy9AKIy33TLdpmaLCr9G4TOB4TfoM-GQV5g14XKcY5OT5-uIodnbJgc3nuSp2JhMN2Ehkzy3E3SGDxzRuduuqtPlfIkTLTK_dMiST8gymspUhelxk1tV-oroDTcZU9eXy7mJ_lphOoXenWmVf5ReD81ceFnxYBZpL2PQElncre0npapOaYcxfFnKDnaIWQsYeJsgpdJYfTp8KBWA732dNH4pEqhwxJS8pKTdMuF_Hat4CrSGgF0ZmD7NAGRCSAseb5U_kgi9uk6u9WWg68qP-X0vlDZ7Y8z7EuXjwtxg08Ehny2Nb1BbA2ucbM-ilYQueMILDxh15rm7H6TyxrTIDm7FgQlKtRlysybyNSq8xvQDwgSA1Jzay-w2kDB8bPR-zYgL9KyNMjbVaAs3LY6h0_sHv3pFGmUuRRdoZJAhj1VVmskC5drqVgfAOrjt30es9J0FRJFf9n6gwL47nj14Qwkx6mu3mYM88WrEA5C4Wzsi2-5VJdc4XLyna3ZXrJ1FpBKHRYItqRk4AkkykM88SR0-ng61MJf7OL9a7wETOMCWoCtZfPuZBnNDIbwwxIFkGCgj9Skix1H_5EQ6ECvfFhVU2IG0oP5Fvcl4n9caWJdH2fw-DeRUzkiHfmAzs9TbanQToJnq5EiWQsd1WeIURCmrYY-DUKHsb0f3Sbqv_OA1cKcx6dph1yJyylTDQjOOJ76NxF8ObWrel3lQeewu0o0f9Ha1Ezq2suncngB7QKZb-H0nWO2eiF1OhM7KPH_QFyilSuDJCmVoNbZbNUxm6ID1JVlbH_Yor43kDB6REFgHj6_ZjXvPbAEUgi7JNOm7njdvO9cDniC9-UaXuVWqUsFdnf0x5DWjNAb_2s0WPwHoMCVV_kXZZifApWW8QCQdfKERuW-1fqn79f-Uz9z07fZQ6YaieyYL_hvKIjjlnQc-rBIR7aXijKnfrqrIvqQaLpzzV94P8qD6kBMmSzFsY4q1q_EtUZtkPWMDx9duoSBDzFMO2Yk7VSgTFC8OJDdOGnlKt0ByGrD3wedAi47zbydCE-8wI-Z25HGI4jKJVcC3CIbgDco1Rh_DmrmERBlVWNnUrA-7p88pBeOoQoAVbpkPmYgOPjdyXHvQby41nQxLO4_zMUiYjrrL-SXfLTgAfHOMrMNbF666VlSuGmwQzRM9BLA=="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 75,
+            "promptTokenCount": 2462,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2462
+              }
+            ],
+            "thoughtsTokenCount": 463,
+            "totalTokenCount": 3000
+          },
+          "invocationId": "e-e8a61064-2257-472f-9f19-7ac86698ae4e",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "0e400659-5938-4353-a061-d6e5932eedc3",
+          "timestamp": 1792249892.080795
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "list_support_teams",
+            "args": {},
+            "author": "apex_concierge"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "list_support_teams",
+            "response": {
+              "status": "ok",
+              "teams": [
+                {
+                  "team": "Emergency Response Desk",
+                  "owns": "safety hazards, food safety, payment fraud, burst pipe/wrong-address-with-damaged-goods, access blockage",
+                  "sla": "15 minutes",
+                  "hours": "24x7"
+                },
+                {
+                  "team": "Payments Recovery Desk",
+                  "owns": "failed or duplicated UPI/card payments, refund delays",
+                  "sla": "2 hours",
+                  "hours": "08:00-22:00 IST"
+                },
+                {
+                  "team": "Last Mile Operations",
+                  "owns": "delayed, lost or damaged delivery",
+                  "sla": "2 hours",
+                  "hours": "24x7"
+                },
+                {
+                  "team": "Identity & Accounts Desk",
+                  "owns": "login locks, OTP issues, address change",
+                  "sla": "24 hours",
+                  "hours": "08:00-22:00 IST"
+                },
+                {
+                  "team": "Quality Desk",
+                  "owns": "defective or wrong items, food safety follow-up",
+                  "sla": "24 hours",
+                  "hours": "08:00-22:00 IST"
+                },
+                {
+                  "team": "Loyalty & Coupons Desk",
+                  "owns": "Prime membership, missing points, coupon disputes",
+                  "sla": "72 hours",
+                  "hours": "09:00-19:00 IST"
+                }
+              ],
+              "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic."
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "authors": [
+          "apex_concierge"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 5133,
+        "final_text": "Our **Last Mile Operations** team handles all complaints regarding delayed, lost, or damaged deliveries. They operate 24/7 and have a response time SLA of **2 hours**.\n\nIf you would like to file a complaint now, please let me know your order number or contact details, and I can connect you with our service request team to register it right away.",
+        "state_delta": {},
+        "n_events": 3
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 15.92,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /emergency response desk|last mile operations|priority support|\\d+ (minutes|hours)/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "max_tool_calls",
+      "ok": true,
+      "detail": "1 calls"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

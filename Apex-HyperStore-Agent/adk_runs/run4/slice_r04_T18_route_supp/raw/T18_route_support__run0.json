@@ -1,0 +1,755 @@
+{
+  "test_id": "T18_route_support",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "support_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "args": {
+          "query": "app crashes blank screen My Orders Android"
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "args": {
+          "query": "crash"
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "service_request_agent"
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "support_agent"
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "response": {
+          "status": "ok",
+          "query": "app crashes blank screen My Orders Android",
+          "count": 3,
+          "articles": [
+            {
+              "kb_id": "APX-KB-0102",
+              "topic": "Delivery tracking",
+              "error_code": "APX-4099",
+              "surface": "Apex app",
+              "symptom": "Tracking page shows \"Out for delivery\" for more than 24 hours and never updates.",
+              "cause": "The rider's handheld device lost connectivity in a low-network pincode; the last scan is stale.",
+              "fix_steps": "1. Pull the order with lookup_order and read its tracking_note. 2. If the slot has passed by more than 24 hours, create a service request of type delivery_delay with urgency=high. 3. Tell the customer a freshridership scan is pushed automatically every 2 hours. 4. Do not promise a refund - refunds are owned by the orders agent.",
+              "escalation_team": "Last Mile Operations",
+              "severity": "high"
+            },
+            {
+              "kb_id": "APX-KB-0103",
+              "topic": "Account access",
+              "error_code": "APX-4150",
+              "surface": "Apex app",
+              "symptom": "\"Invalid credentials (APX-4150)\" although the customer is sure the password is right.",
+              "cause": "The account got soft-locked after 5 failed attempts, or OTP is going to a stale phone number.",
+              "fix_steps": "1. Confirm the email on file with list_customer_orders. 2. Trigger \"Forgot password\" and ask the customer to read the 6-digit OTP to the agent. 3. If the lock persists after a correct OTP, create an account_access request with urgency=normal. 4. Never ask for the password itself and never read back an OTP the customer did not volunteer.",
+              "escalation_team": "Identity & Accounts Desk",
+              "severity": "medium"
+            },
+            {
+              "kb_id": "APX-KB-0105",
+              "topic": "Payments",
+              "error_code": "APX-4305",
+              "surface": "Website",
+              "symptom": "Coupon code is rejected with \"APX-4305: coupon not applicable\".",
+              "cause": "The cart contains a category that is excluded from the coupon, or the coupon expired at 23:59 IST.",
+              "fix_steps": "1. Check the coupon terms against the cart categories in search_products. 2. Grocery subscriptions and EMI-only items are usually excluded. 3. An expired coupon cannot be reactivated; offer the current running coupon from company_info.",
+              "escalation_team": "Loyalty & Coupons Desk",
+              "severity": "low"
+            }
+          ]
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "search_knowledge_base",
+        "response": {
+          "status": "no_match",
+          "query": "crash",
+          "message": "No article matches. Ask for the exact error code shown on screen, or file a request with the support agent."
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "support_agent"
+      },
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "support_agent",
+      "service_request_agent"
+    ],
+    "texts": [
+      {
+        "author": "support_agent",
+        "text": "I am sorry for the trouble you are experiencing with the Apex app crashing on Android when you open My Orders. We do not have a specific troubleshooting guide for that exact error in our knowledge base. \n\nLet us open a service request so our technical team can investigate this for you right away. Would you like me to connect you with our service request team to set that up?"
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "support_agent",
+      "service_request_agent",
+      "support_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 16679,
+    "final_text": "I am sorry for the trouble you are experiencing with the Apex app crashing on Android when you open My Orders. We do not have a specific troubleshooting guide for that exact error in our knowledge base. \n\nLet us open a service request so our technical team can investigate this for you right away. Would you like me to connect you with our service request team to set that up?",
+    "state_delta": {},
+    "n_events": 11,
+    "http_error": ""
+  },
+  "session_id": "T18_route_support-0-06b06a",
+  "turns": [
+    {
+      "user": "The Apex app crashes with a blank screen every time I open My Orders on Android.",
+      "status": 200,
+      "latency_s": 19.62,
+      "events": [
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_2820438",
+                  "args": {
+                    "agent_name": "support_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TvTl4BltzmoR3dQ9p0qKpgpRTHsFjhYAfibI0s2_phJvLLYF4Q9PJl-8sJU4Id1RCiM22RElrfFz655UjG5COcAzP0ccYcEgpGRylVTqTM0TCRvDVyvqL6LE="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 1869,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1869
+              }
+            ],
+            "totalTokenCount": 1891
+          },
+          "invocationId": "e-27725e2a-0877-4fe6-8d4b-99fb0efd633f",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "fb222177-fc3a-4faa-a8a4-d50e7bbd1813",
+          "timestamp": 1792251821.224283
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_2820438",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-27725e2a-0877-4fe6-8d4b-99fb0efd633f",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "support_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "7dd7ce92-8ff3-44ce-95e9-463995e9686b",
+          "timestamp": 1792251824.5222313
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_564656",
+                  "args": {
+                    "query": "app crashes blank screen My Orders Android"
+                  },
+                  "name": "search_knowledge_base"
+                },
+                "thoughtSignature": "EmAKXgFpFH0Tw3BUBqD9Yb2HLlmZB4OlI8sn8jXCWPXOjvc2rdtKPiAjn3tdSmIKyRUaEwS10-SmuzMy3sHpv99Ms4T5rgtWScx19TvzLcQvDufJLMSCRDYPfE7cHfGZQAU="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 24,
+            "promptTokenCount": 1974,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1974
+              }
+            ],
+            "totalTokenCount": 1998
+          },
+          "invocationId": "e-27725e2a-0877-4fe6-8d4b-99fb0efd633f",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "46fa1460-5741-4375-a2b3-3bae39b41b1c",
+          "timestamp": 1792251824.5406284
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_564656",
+                  "name": "search_knowledge_base",
+                  "response": {
+                    "status": "ok",
+                    "query": "app crashes blank screen My Orders Android",
+                    "count": 3,
+                    "articles": [
+                      {
+                        "kb_id": "APX-KB-0102",
+                        "topic": "Delivery tracking",
+                        "error_code": "APX-4099",
+                        "surface": "Apex app",
+                        "symptom": "Tracking page shows \"Out for delivery\" for more than 24 hours and never updates.",
+                        "cause": "The rider's handheld device lost connectivity in a low-network pincode; the last scan is stale.",
+                        "fix_steps": "1. Pull the order with lookup_order and read its tracking_note. 2. If the slot has passed by more than 24 hours, create a service request of type delivery_delay with urgency=high. 3. Tell the customer a freshridership scan is pushed automatically every 2 hours. 4. Do not promise a refund - refunds are owned by the orders agent.",
+                        "escalation_team": "Last Mile Operations",
+                        "severity": "high"
+                      },
+                      {
+                        "kb_id": "APX-KB-0103",
+                        "topic": "Account access",
+                        "error_code": "APX-4150",
+                        "surface": "Apex app",
+                        "symptom": "\"Invalid credentials (APX-4150)\" although the customer is sure the password is right.",
+                        "cause": "The account got soft-locked after 5 failed attempts, or OTP is going to a stale phone number.",
+                        "fix_steps": "1. Confirm the email on file with list_customer_orders. 2. Trigger \"Forgot password\" and ask the customer to read the 6-digit OTP to the agent. 3. If the lock persists after a correct OTP, create an account_access request with urgency=normal. 4. Never ask for the password itself and never read back an OTP the customer did not volunteer.",
+                        "escalation_team": "Identity & Accounts Desk",
+                        "severity": "medium"
+                      },
+                      {
+                        "kb_id": "APX-KB-0105",
+                        "topic": "Payments",
+                        "error_code": "APX-4305",
+                        "surface": "Website",
+                        "symptom": "Coupon code is rejected with \"APX-4305: coupon not applicable\".",
+                        "cause": "The cart contains a category that is excluded from the coupon, or the coupon expired at 23:59 IST.",
+                        "fix_steps": "1. Check the coupon terms against the cart categories in search_products. 2. Grocery subscriptions and EMI-only items are usually excluded. 3. An expired coupon cannot be reactivated; offer the current running coupon from company_info.",
+                        "escalation_team": "Loyalty & Coupons Desk",
+                        "severity": "low"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-27725e2a-0877-4fe6-8d4b-99fb0efd633f",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "ae8b4717-09ac-4bbd-bf09-e6f54edb497d",
+          "timestamp": 1792251827.791492
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_2369840",
+                  "args": {
+                    "query": "crash"
+                  },
+                  "name": "search_knowledge_base"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TmPNQpsHbM-9-0Q-PZuGIN0IQHLOP_O3-pGw3002SWYjRhDYEcnUDQOppRILTRQF1ZlalrDsJuM2tZ0uhxMu9Fl2E1XeEpwUpYDccan9aBCwEsxOI62mu19s="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 18,
+            "promptTokenCount": 2617,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2617
+              }
+            ],
+            "totalTokenCount": 2635
+          },
+          "invocationId": "e-27725e2a-0877-4fe6-8d4b-99fb0efd633f",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "244aaf44-9b05-44bb-bcaa-f4aa0a17e3ca",
+          "timestamp": 1792251827.8122408
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_2369840",
+                  "name": "search_knowledge_base",
+                  "response": {
+                    "status": "no_match",
+                    "query": "crash",
+                    "message": "No article matches. Ask for the exact error code shown on screen, or file a request with the support agent."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-27725e2a-0877-4fe6-8d4b-99fb0efd633f",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "74840600-d19b-4e27-9209-99d89c0ece58",
+          "timestamp": 1792251828.935208
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_1730814",
+                  "args": {
+                    "agent_name": "service_request_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TdjVRkdsc_sVyNmmVSVffnra2Tdpgbssc4Xf1ILdgWjFbcGASvqN3Ejr_nv1fkzAOXUaBMFUFXKwhcKIoozIcOtSiGzruTs_6dVP1tpwSE-NkCXKV3b8u59k="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 24,
+            "promptTokenCount": 2687,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2687
+              }
+            ],
+            "totalTokenCount": 2711
+          },
+          "invocationId": "e-27725e2a-0877-4fe6-8d4b-99fb0efd633f",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "9db0f803-3a83-4bb3-81f0-d2af53bb11a4",
+          "timestamp": 1792251828.9582517
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_1730814",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-27725e2a-0877-4fe6-8d4b-99fb0efd633f",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "service_request_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@1"
+          },
+          "id": "9dfb5ecb-f4a8-43c5-8185-556d98129cce",
+          "timestamp": 1792251830.3651538
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_730199",
+                  "args": {
+                    "agent_name": "support_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TsYWOlEpmRW71l1plmE34qGyavUN-hkj33dkCc92jJ_BVkHbyZHHjTeT8TsdGnSgw2J2qHGcLxAF_IwbNmooJDhsn6V6gAe45S_xZuTs2nNqGVpSOZwK2Rv8="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 4343,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 4343
+              }
+            ],
+            "totalTokenCount": 4365
+          },
+          "invocationId": "e-27725e2a-0877-4fe6-8d4b-99fb0efd633f",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "1c90c1b2-04ff-4a81-aa34-c6cc1966fb7e",
+          "timestamp": 1792251830.3903322
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_730199",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-27725e2a-0877-4fe6-8d4b-99fb0efd633f",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "support_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "35dc818c-71e7-4ddf-a0a6-4a628bca422b",
+          "timestamp": 1792251834.2253458
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "I am sorry for the trouble you are experiencing with the Apex app crashing on Android when you open My Orders. We do not have a specific troubleshooting guide for that exact error in our knowledge base. \n\nLet us open a service request so our technical team can investigate this for you right away. Would you like me to connect you with our service request team to set that up?",
+                "thoughtSignature": "EmAKXgFpFH0TI1uSAGMFcgiEmBZnKd9rfbwLM6_j3ToiTjDg4Ddn4QxdVdA0gawYLn3y1tK-UCHq_V5nSJMJEU3qUuGlwzK4ezya4HdT7D8oruY0itvU54nBq1ZKGL2NBYA="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 76,
+            "promptTokenCount": 3003,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3003
+              }
+            ],
+            "totalTokenCount": 3079
+          },
+          "invocationId": "e-27725e2a-0877-4fe6-8d4b-99fb0efd633f",
+          "author": "support_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/support_agent@2"
+          },
+          "id": "f3603d28-debe-42c5-b3f6-20a32e109dcc",
+          "timestamp": 1792251834.2456179
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "support_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "args": {
+              "query": "app crashes blank screen My Orders Android"
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "args": {
+              "query": "crash"
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "service_request_agent"
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "support_agent"
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "response": {
+              "status": "ok",
+              "query": "app crashes blank screen My Orders Android",
+              "count": 3,
+              "articles": [
+                {
+                  "kb_id": "APX-KB-0102",
+                  "topic": "Delivery tracking",
+                  "error_code": "APX-4099",
+                  "surface": "Apex app",
+                  "symptom": "Tracking page shows \"Out for delivery\" for more than 24 hours and never updates.",
+                  "cause": "The rider's handheld device lost connectivity in a low-network pincode; the last scan is stale.",
+                  "fix_steps": "1. Pull the order with lookup_order and read its tracking_note. 2. If the slot has passed by more than 24 hours, create a service request of type delivery_delay with urgency=high. 3. Tell the customer a freshridership scan is pushed automatically every 2 hours. 4. Do not promise a refund - refunds are owned by the orders agent.",
+                  "escalation_team": "Last Mile Operations",
+                  "severity": "high"
+                },
+                {
+                  "kb_id": "APX-KB-0103",
+                  "topic": "Account access",
+                  "error_code": "APX-4150",
+                  "surface": "Apex app",
+                  "symptom": "\"Invalid credentials (APX-4150)\" although the customer is sure the password is right.",
+                  "cause": "The account got soft-locked after 5 failed attempts, or OTP is going to a stale phone number.",
+                  "fix_steps": "1. Confirm the email on file with list_customer_orders. 2. Trigger \"Forgot password\" and ask the customer to read the 6-digit OTP to the agent. 3. If the lock persists after a correct OTP, create an account_access request with urgency=normal. 4. Never ask for the password itself and never read back an OTP the customer did not volunteer.",
+                  "escalation_team": "Identity & Accounts Desk",
+                  "severity": "medium"
+                },
+                {
+                  "kb_id": "APX-KB-0105",
+                  "topic": "Payments",
+                  "error_code": "APX-4305",
+                  "surface": "Website",
+                  "symptom": "Coupon code is rejected with \"APX-4305: coupon not applicable\".",
+                  "cause": "The cart contains a category that is excluded from the coupon, or the coupon expired at 23:59 IST.",
+                  "fix_steps": "1. Check the coupon terms against the cart categories in search_products. 2. Grocery subscriptions and EMI-only items are usually excluded. 3. An expired coupon cannot be reactivated; offer the current running coupon from company_info.",
+                  "escalation_team": "Loyalty & Coupons Desk",
+                  "severity": "low"
+                }
+              ]
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "search_knowledge_base",
+            "response": {
+              "status": "no_match",
+              "query": "crash",
+              "message": "No article matches. Ask for the exact error code shown on screen, or file a request with the support agent."
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "support_agent"
+          },
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "support_agent",
+          "service_request_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "support_agent",
+          "service_request_agent",
+          "support_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 16679,
+        "final_text": "I am sorry for the trouble you are experiencing with the Apex app crashing on Android when you open My Orders. We do not have a specific troubleshooting guide for that exact error in our knowledge base. \n\nLet us open a service request so our technical team can investigate this for you right away. Would you like me to connect you with our service request team to set that up?",
+        "state_delta": {},
+        "n_events": 11
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 19.62,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called search_knowledge_base",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'search_knowledge_base', 'search_knowledge_base', 'transfer_to_agent', 'transfer_to_agent']"
+    },
+    {
+      "check": "agent_involved support_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'support_agent', 'service_request_agent'] transfers=['support_agent', 'service_request_agent', 'support_agent']"
+    },
+    {
+      "check": "agent_excluded orders_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'support_agent', 'service_request_agent']"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

@@ -1,0 +1,245 @@
+{
+  "test_id": "T05_postcode",
+  "run": {
+    "calls": [
+      {
+        "tool": "check_delivery_postcode",
+        "args": {
+          "postcode": "560066"
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "check_delivery_postcode",
+        "response": {
+          "status": "ok",
+          "postcode": "560066",
+          "serviceable": true,
+          "tier": "same_day",
+          "slots": [
+            "today 18:00-21:00",
+            "tomorrow 09:00-12:00"
+          ],
+          "message": "Pincode 560066 is same-day serviceable. Grocery window is 06:00-11:00 IST."
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "authors": [
+      "apex_concierge"
+    ],
+    "texts": [
+      {
+        "author": "apex_concierge",
+        "text": "Yes, we deliver to pincode 560066! This area is eligible for same-day delivery.\n\nHere are the currently available delivery slots:\n* **Today:** 18:00 \u2013 21:00 IST\n* **Tomorrow:** 09:00 \u2013 12:00 IST\n\n*Note: For same-day grocery delivery, orders must be placed within the 06:00 \u2013 11:00 IST window.* Let me know if you need help with anything else!"
+      }
+    ],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 4542,
+    "final_text": "Yes, we deliver to pincode 560066! This area is eligible for same-day delivery.\n\nHere are the currently available delivery slots:\n* **Today:** 18:00 \u2013 21:00 IST\n* **Tomorrow:** 09:00 \u2013 12:00 IST\n\n*Note: For same-day grocery delivery, orders must be placed within the 06:00 \u2013 11:00 IST window.* Let me know if you need help with anything else!",
+    "state_delta": {},
+    "n_events": 3,
+    "http_error": ""
+  },
+  "session_id": "T05_postcode-0-bc420d",
+  "turns": [
+    {
+      "user": "Do you deliver to pincode 560066? And what slots do I get?",
+      "status": 200,
+      "latency_s": 7.19,
+      "events": [
+        {
+          "modelVersion": "gemini-3.6-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_909086",
+                  "args": {
+                    "postcode": "560066"
+                  },
+                  "name": "check_delivery_postcode"
+                },
+                "thoughtSignature": "EvUFCvIFAWkUfRPYPfTyAMsxwq_YdZJ52NRqYarGdSSMvZ-33G9McXZxNOudPdb0p8kNMmawJ1w1uWeQcYY-QJAl9RUO0uew6uaGfnPfGRMiSXmwHouNtkhJGpK7yIxmvi1o5e9MS28p6VI9gtdYfY1DouWzkMlBtLyDQKIi78ofr5MRd_oAbNgmcZqiEFFfd_H2vQAZNVNob9QR2wACZ1pGEVnxl1y0RF4UlhMw4isrXxxVrkC_7hKJJXchBFVEt_QAv58TjQfAOdfIhf30FhzBp7j2zR2MOw2WOE0RyFHQ2K4j1DFIqPmtuBUXJ8Ve6atrruhvEz9O4uydBvSgGadYHrXP-MyoGQ9k1tzNKQkFWwORfDzNt2BsRGxZsGJxTRUUV5Dut88fZ9P6joJEYQF-_BbFbMggrRRhV4S5e5sxPBjVqg3eKCQLKs11ELIK1zAMK3ashFpkN9J68HqV-z-HGrE6S5_uMJ1ZsujEHnb2MnJa6phlkEmxisq53imV-i3RjScCyQFLmNgffTlaSVEo-pBAurykvqzMzccXkjw1-0yr5o-erX5mxJOuhG10ZkOIwvJLXi__-CZEsJIyImftX8QuGO94wS4Sl9-rSGhTN0X5cIJ8KGwIgje_RQ4uuIV1eZyaCAHWQpUTp9dFsgli8IHTq2E_Jj-vsKNhSMLAeE8RSgcB48b8kbRzzM2JPT7sgZpKF39s3M_FfJpdnwYeF9BRWNDukDGxFoiWmexBVUXTKSy_RAHJsrWWtVZNr4qJ5TUwvG62PQ6J3dr9v_gaeOLO84hq-jak1IMvuQ9g38xLKbfTGPyuI0kk4w3eTutFy3QC3e6gBS1nFzvvd2_topA0RxZe4tLuI7yhQWZCJqmEDyaFYvMZm1jLlBNZzebaT1M3kPbUlSsd7QtDA0W6vAn0OJXOtnau8WlVTKs1GkDtNhwdS5GlC4qp4nVvzRG-oVFeZuLf4_si1Q4Tasu3I3xZqZuXDYzJANdXjrDOBk-eNA-dyA=="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 25,
+            "promptTokenCount": 1873,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1873
+              }
+            ],
+            "thoughtsTokenCount": 164,
+            "totalTokenCount": 2062
+          },
+          "invocationId": "e-6fb29ecd-02cd-4a4f-8ca0-a7b62b0b3db5",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "399e3daa-3eb7-4fbf-98ae-99fa02f0efda",
+          "timestamp": 1792249896.1638582
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_909086",
+                  "name": "check_delivery_postcode",
+                  "response": {
+                    "status": "ok",
+                    "postcode": "560066",
+                    "serviceable": true,
+                    "tier": "same_day",
+                    "slots": [
+                      "today 18:00-21:00",
+                      "tomorrow 09:00-12:00"
+                    ],
+                    "message": "Pincode 560066 is same-day serviceable. Grocery window is 06:00-11:00 IST."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-6fb29ecd-02cd-4a4f-8ca0-a7b62b0b3db5",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "8473f750-5d6c-4b49-a7db-68fde5a57811",
+          "timestamp": 1792249900.393403
+        },
+        {
+          "modelVersion": "gemini-3.6-flash",
+          "content": {
+            "parts": [
+              {
+                "text": "Yes, we deliver to pincode 560066! This area is eligible for same-day delivery.\n\nHere are the currently available delivery slots:\n* **Today:** 18:00 \u2013 21:00 IST\n* **Tomorrow:** 09:00 \u2013 12:00 IST\n\n*Note: For same-day grocery delivery, orders must be placed within the 06:00 \u2013 11:00 IST window.* Let me know if you need help with anything else!",
+                "thoughtSignature": "ErwECrkEAWkUfRPa5WOMJDihuJ3QpDzVnr6qnk0z6MRPHw0CmVGWHIMUHBlpi7hpWpA4Jz0zEJRwQKAXijQ_Gi2aZY6HU2fOJoxnplgbwEtAoxYW25EcX5-ejUAK-GrdwekaINjp6JAR70sN3wC1xViTTfb9UbL3EmTQdUCShVjwFq6hu7bife5v4LenSvdEO_EG-ajTqoVUMnZb9Rk2KOt9NMp-eBXjN16oOESGcEA0kJWCI2pRhfxWN6rQKabSvHbWj4eEwfURm8xJoJyEFLTn3d-zQq8VQC3YQ8tnSXlZ8D4jv84UZCUQ0SEeiffqy83fX2wBVXruvxHdbumUt8phOYeEMSxQ0aNzht7VtVy5oSJfY4eKPCb_wuz1EDhhhwmE_ZlvCUxlpzaaLn-QdR8qu7N_A7U7651nhPzTnFbVeIgurH4cI_XP9_dl0hcVFD2bTbOAlMVIJwDm-g7u-hX9GTUkZtVkH0CQTVFeIVL8fJmpAWRA_KHWzgSopP12H5YExZKw891cnJ9Qt4llpYItaNcRBikZ-gYxt7kyqGJVUnnNBuqmPO5cUyylhBGsQF_0SSgNF9dz4RqoiWpGvhnXrmeE42hBjYX1Pt-KwKWLNsbeAUNwMCjm1WBfw_t-b1jwWhiOp-xIe2JBq8T5DXUoFCjgO_fQOMFWC1XgOHNUq3YrsrGKoIsakAtE4i7XHOefkOhDPYmzNkmxmbuwYVPJm9eSqAVwQHSa6T2JHqLgltt3HmN5ppmC8ELNuSQ="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 116,
+            "promptTokenCount": 2176,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2176
+              }
+            ],
+            "thoughtsTokenCount": 188,
+            "totalTokenCount": 2480
+          },
+          "invocationId": "e-6fb29ecd-02cd-4a4f-8ca0-a7b62b0b3db5",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "ae6e6ed4-b3d6-4a45-a9e5-858be33e75ee",
+          "timestamp": 1792249900.4123878
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "check_delivery_postcode",
+            "args": {
+              "postcode": "560066"
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "check_delivery_postcode",
+            "response": {
+              "status": "ok",
+              "postcode": "560066",
+              "serviceable": true,
+              "tier": "same_day",
+              "slots": [
+                "today 18:00-21:00",
+                "tomorrow 09:00-12:00"
+              ],
+              "message": "Pincode 560066 is same-day serviceable. Grocery window is 06:00-11:00 IST."
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "authors": [
+          "apex_concierge"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 4542,
+        "final_text": "Yes, we deliver to pincode 560066! This area is eligible for same-day delivery.\n\nHere are the currently available delivery slots:\n* **Today:** 18:00 \u2013 21:00 IST\n* **Tomorrow:** 09:00 \u2013 12:00 IST\n\n*Note: For same-day grocery delivery, orders must be placed within the 06:00 \u2013 11:00 IST window.* Let me know if you need help with anything else!",
+        "state_delta": {},
+        "n_events": 3
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 7.19,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /same[- ]day|560066/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called check_delivery_postcode",
+      "ok": true,
+      "detail": "tools called: ['check_delivery_postcode']"
+    },
+    {
+      "check": "tool_args check_delivery_postcode",
+      "ok": true,
+      "detail": "calls: [{'tool': 'check_delivery_postcode', 'args': {'postcode': '560066'}, 'author': 'apex_concierge'}]"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

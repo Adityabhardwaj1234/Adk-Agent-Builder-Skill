@@ -1,0 +1,263 @@
+{
+  "test_id": "T02_hours",
+  "run": {
+    "calls": [
+      {
+        "tool": "get_company_info",
+        "args": {
+          "topic": "hours"
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "get_company_info",
+        "response": {
+          "status": "ok",
+          "topic": "hours",
+          "info": {
+            "brand": "Apex Hyperstore",
+            "topic": "hours",
+            "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+            "hours": {
+              "chat_assistant": "24x7, every day including public holidays",
+              "hypermarkets": "09:00 to 21:30 IST, all 7 days",
+              "customer_care_desk": "08:00 to 22:00 IST, 7 days (phone is 24x7)",
+              "emergency_response_desk": "24x7 including nights and holidays",
+              "freshhub_grocery_window": "06:00 to 11:00 IST same-day slot; next day after 11:00"
+            }
+          }
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "authors": [
+      "apex_concierge"
+    ],
+    "texts": [
+      {
+        "author": "apex_concierge",
+        "text": "Our hypermarkets are open from 09:00 to 21:30 IST, all 7 days of the week. Customer care phone support is available 24x7, and our customer care desk operates from 08:00 to 22:00 IST every day. \n\nHow can I help you today?"
+      }
+    ],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 4043,
+    "final_text": "Our hypermarkets are open from 09:00 to 21:30 IST, all 7 days of the week. Customer care phone support is available 24x7, and our customer care desk operates from 08:00 to 22:00 IST every day. \n\nHow can I help you today?",
+    "state_delta": {},
+    "n_events": 3,
+    "http_error": ""
+  },
+  "session_id": "T02_hours-0-c8e4b4",
+  "turns": [
+    {
+      "user": "What time do your hypermarkets open and when is customer care available?",
+      "status": 200,
+      "latency_s": 6.03,
+      "events": [
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_2732217",
+                  "args": {
+                    "topic": "hours"
+                  },
+                  "name": "get_company_info"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TnreHRoVpW7IQys5BLm-XscAVzV4f4hT1XQxFRcS6s_r-uc2nZu7qPhzaiZJR7WfWyJjQWW2CUKABH43k6POZ3Vg11cKNgpfFhNDEeW5THWnyuklqU0RY34c="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 18,
+            "promptTokenCount": 1866,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1866
+              }
+            ],
+            "totalTokenCount": 1884
+          },
+          "invocationId": "e-fdfc547a-5e97-4cb9-8568-2c2c296ec7f8",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "0c89dbf8-242c-4e30-b2ac-2dcf940c163f",
+          "timestamp": 1792250665.1994407
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_2732217",
+                  "name": "get_company_info",
+                  "response": {
+                    "status": "ok",
+                    "topic": "hours",
+                    "info": {
+                      "brand": "Apex Hyperstore",
+                      "topic": "hours",
+                      "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+                      "hours": {
+                        "chat_assistant": "24x7, every day including public holidays",
+                        "hypermarkets": "09:00 to 21:30 IST, all 7 days",
+                        "customer_care_desk": "08:00 to 22:00 IST, 7 days (phone is 24x7)",
+                        "emergency_response_desk": "24x7 including nights and holidays",
+                        "freshhub_grocery_window": "06:00 to 11:00 IST same-day slot; next day after 11:00"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-fdfc547a-5e97-4cb9-8568-2c2c296ec7f8",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "62872f3e-1374-47ba-bbe0-b33114edb655",
+          "timestamp": 1792250669.2242036
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "Our hypermarkets are open from 09:00 to 21:30 IST, all 7 days of the week. Customer care phone support is available 24x7, and our customer care desk operates from 08:00 to 22:00 IST every day. \n\nHow can I help you today?",
+                "thoughtSignature": "EmAKXgFpFH0TjBYy1LJcAmODFV1bHDd9dXFtyzMOjI_43UTobhfd5URxufcj5WrBNkVB6J6eDb9vORzJHeoNDf5ukcb9K3uG0aAXqXctFcpgw-Q4n7jy3j1SX1Dazz58uhg="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 74,
+            "promptTokenCount": 2085,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2085
+              }
+            ],
+            "totalTokenCount": 2159
+          },
+          "invocationId": "e-fdfc547a-5e97-4cb9-8568-2c2c296ec7f8",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "9d49e5d1-0227-4960-b28b-3f4c281aa3e6",
+          "timestamp": 1792250669.2536595
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "get_company_info",
+            "args": {
+              "topic": "hours"
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "get_company_info",
+            "response": {
+              "status": "ok",
+              "topic": "hours",
+              "info": {
+                "brand": "Apex Hyperstore",
+                "topic": "hours",
+                "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+                "hours": {
+                  "chat_assistant": "24x7, every day including public holidays",
+                  "hypermarkets": "09:00 to 21:30 IST, all 7 days",
+                  "customer_care_desk": "08:00 to 22:00 IST, 7 days (phone is 24x7)",
+                  "emergency_response_desk": "24x7 including nights and holidays",
+                  "freshhub_grocery_window": "06:00 to 11:00 IST same-day slot; next day after 11:00"
+                }
+              }
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "authors": [
+          "apex_concierge"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 4043,
+        "final_text": "Our hypermarkets are open from 09:00 to 21:30 IST, all 7 days of the week. Customer care phone support is available 24x7, and our customer care desk operates from 08:00 to 22:00 IST every day. \n\nHow can I help you today?",
+        "state_delta": {},
+        "n_events": 3
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 6.03,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /09:00|24x7|24 x 7/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called get_company_info",
+      "ok": true,
+      "detail": "tools called: ['get_company_info']"
+    },
+    {
+      "check": "tool_args get_company_info",
+      "ok": true,
+      "detail": "calls: [{'tool': 'get_company_info', 'args': {'topic': 'hours'}, 'author': 'apex_concierge'}]"
+    },
+    {
+      "check": "max_tool_calls",
+      "ok": true,
+      "detail": "1 calls"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

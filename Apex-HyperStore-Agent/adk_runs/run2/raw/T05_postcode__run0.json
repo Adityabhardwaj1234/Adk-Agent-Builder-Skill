@@ -1,0 +1,108 @@
+{
+  "test_id": "T05_postcode",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [
+      "apex_concierge"
+    ],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [
+      "MODEL_RETURNED_NO_CONTENT: The model returned no content (finish_reason=STOP with empty parts)."
+    ],
+    "tokens": 1817,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 1,
+    "http_error": ""
+  },
+  "session_id": "T05_postcode-0-fd58b7",
+  "turns": [
+    {
+      "user": "Do you deliver to pincode 560066? And what slots do I get?",
+      "status": 200,
+      "latency_s": 3.54,
+      "events": [
+        {
+          "modelVersion": "gemini-2.5-flash",
+          "content": {
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "errorCode": "MODEL_RETURNED_NO_CONTENT",
+          "errorMessage": "The model returned no content (finish_reason=STOP with empty parts).",
+          "usageMetadata": {
+            "promptTokenCount": 1817,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1817
+              }
+            ],
+            "totalTokenCount": 1817
+          },
+          "invocationId": "e-74dc3f47-ed22-47eb-bcd0-9c6b99cd2abe",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "a19b9d21-2e13-408f-9e4e-4c7b98da516b",
+          "timestamp": 1792248513.3924215
+        }
+      ],
+      "parsed": {
+        "calls": [],
+        "responses": [],
+        "authors": [
+          "apex_concierge"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [
+          "MODEL_RETURNED_NO_CONTENT: The model returned no content (finish_reason=STOP with empty parts)."
+        ],
+        "tokens": 1817,
+        "final_text": "",
+        "state_delta": {},
+        "n_events": 1
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 3.54,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "MODEL_RETURNED_NO_CONTENT: The model returned no content (finish_reason=STOP with empty parts)."
+    },
+    {
+      "check": "response_regex /same[- ]day|560066/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_called check_delivery_postcode",
+      "ok": false,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "tool_args check_delivery_postcode",
+      "ok": false,
+      "detail": "calls: []"
+    }
+  ],
+  "passed": false,
+  "failure_class": "QUOTA_OR_RATE_LIMIT"
+}

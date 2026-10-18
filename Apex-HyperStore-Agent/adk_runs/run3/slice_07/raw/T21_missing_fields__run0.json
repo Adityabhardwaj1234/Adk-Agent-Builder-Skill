@@ -1,0 +1,231 @@
+{
+  "test_id": "T21_missing_fields",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "orders_agent"
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "orders_agent"
+    ],
+    "texts": [
+      {
+        "author": "orders_agent",
+        "text": "I understand you're frustrated that your grocery order hasn't arrived yet, and we want to get this sorted out for you right away. Could you please share your order ID and your registered email address so we can look into the delivery status?"
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "orders_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 4373,
+    "final_text": "I understand you're frustrated that your grocery order hasn't arrived yet, and we want to get this sorted out for you right away. Could you please share your order ID and your registered email address so we can look into the delivery status?",
+    "state_delta": {},
+    "n_events": 3,
+    "http_error": ""
+  },
+  "session_id": "T21_missing_fields-0-8a580b",
+  "turns": [
+    {
+      "user": "Nobody delivered my grocery order and I am very upset. Please fix this.",
+      "status": 200,
+      "latency_s": 5.93,
+      "events": [
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_5590313",
+                  "args": {
+                    "agent_name": "orders_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0ToXUPGGts9h89jixytdhU4CzPxVHqnygqeRVBKAcOm_LoGRLMj3ZpXCvr0j0SJC5vobbMemjApcoWGFWHyMCxWcBVi0HCNmV0l33iTaLzY-sIEjXObgNoNuI="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 1867,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1867
+              }
+            ],
+            "totalTokenCount": 1889
+          },
+          "invocationId": "e-2c8f3723-52cb-4726-8732-21acc5a3cbfd",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "93e5f0cc-32ee-487a-ae64-68671f4456a2",
+          "timestamp": 1792250314.5696182
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_5590313",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-2c8f3723-52cb-4726-8732-21acc5a3cbfd",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "orders_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "0b3f6a5a-8157-4114-b63d-6c84cacf1f00",
+          "timestamp": 1792250317.2583313
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "I understand you're frustrated that your grocery order hasn't arrived yet, and we want to get this sorted out for you right away. Could you please share your order ID and your registered email address so we can look into the delivery status?",
+                "thoughtSignature": "EmAKXgFpFH0T20UeeldA8_vTMydXJpqlTCuQrcWwTvUHjIXqdGvuiTmI2ctFYRI-SSpBE7hy2ZYXltG1gBOuxECB9oip6ng5BZ0MmRXHmMVUWVepjlGw_BYxeBYt3icDWPQ="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 50,
+            "promptTokenCount": 2434,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2434
+              }
+            ],
+            "totalTokenCount": 2484
+          },
+          "invocationId": "e-2c8f3723-52cb-4726-8732-21acc5a3cbfd",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "id": "4ff39166-5cc6-414a-92b8-3e4f89c13f3e",
+          "timestamp": 1792250317.2788644
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "orders_agent"
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "orders_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "orders_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 4373,
+        "final_text": "I understand you're frustrated that your grocery order hasn't arrived yet, and we want to get this sorted out for you right away. Could you please share your order ID and your registered email address so we can look into the delivery status?",
+        "state_delta": {},
+        "n_events": 3
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 5.93,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /email|e-mail|name|phone/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_not_called create_support_request",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent']"
+    },
+    {
+      "check": "max_tool_calls",
+      "ok": true,
+      "detail": "1 calls"
+    },
+    {
+      "check": "agent_involved service_request_agent",
+      "ok": false,
+      "detail": "authors=['apex_concierge', 'orders_agent'] transfers=['orders_agent']"
+    }
+  ],
+  "passed": false,
+  "failure_class": "ASSERTION_FAILED"
+}

@@ -1,0 +1,59 @@
+{
+  "test_id": "T06_order_status",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T06_order_status-0-879cc2",
+  "turns": [
+    {
+      "user": "Where is my order APX-ORD-2026-041882? Please tell me the status and delivery slot.",
+      "status": 500,
+      "latency_s": 2.77,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 2.77,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /out for delivery|APX-ORD-2026-041882/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_called lookup_order",
+      "ok": false,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "tool_args lookup_order",
+      "ok": false,
+      "detail": "calls: []"
+    },
+    {
+      "check": "agent_involved orders_agent",
+      "ok": false,
+      "detail": "authors=[] transfers=[]"
+    }
+  ],
+  "passed": false,
+  "failure_class": "QUOTA_OR_RATE_LIMIT"
+}

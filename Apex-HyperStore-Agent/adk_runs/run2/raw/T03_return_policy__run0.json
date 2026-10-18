@@ -1,0 +1,264 @@
+{
+  "test_id": "T03_return_policy",
+  "run": {
+    "calls": [
+      {
+        "tool": "get_company_info",
+        "args": {
+          "topic": "returns"
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "get_company_info",
+        "response": {
+          "status": "ok",
+          "topic": "returns",
+          "info": {
+            "brand": "Apex Hyperstore",
+            "topic": "returns",
+            "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+            "policies": {
+              "returns": "14-day return window from delivery for non-perishable items. Refund to the original payment method within 5 working days of pickup. Grocery/perishables, personal care and innerwear are non-returnable for hygiene reasons.",
+              "refunds": "Refunds are issued to the source account only - no cash refunds at the store. Bank settlement takes 3-5 working days after pickup scan.",
+              "cancellation": "Free cancellation any time before the order moves to 'out for delivery'. After that, refuse at doorstep or return under the 14-day policy."
+            }
+          }
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "authors": [
+      "apex_concierge"
+    ],
+    "texts": [
+      {
+        "author": "apex_concierge",
+        "text": "At Apex Hyperstore, we offer a 14-day return window from delivery for non-perishable items. The refund will be issued to your original payment method within 5 working days of the pickup. Please note that groceries, perishables, personal care, and innerwear are non-returnable for hygiene reasons. Refunds are issued to the source account only and bank settlement takes 3-5 working days after the pickup scan."
+      }
+    ],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 3994,
+    "final_text": "At Apex Hyperstore, we offer a 14-day return window from delivery for non-perishable items. The refund will be issued to your original payment method within 5 working days of the pickup. Please note that groceries, perishables, personal care, and innerwear are non-returnable for hygiene reasons. Refunds are issued to the source account only and bank settlement takes 3-5 working days after the pickup scan.",
+    "state_delta": {},
+    "n_events": 3,
+    "http_error": ""
+  },
+  "session_id": "T03_return_policy-0-368a2c",
+  "turns": [
+    {
+      "user": "What is your return and refund policy?",
+      "status": 200,
+      "latency_s": 6.06,
+      "events": [
+        {
+          "modelVersion": "gemini-2.5-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "adk-8be5fb8d-986d-4ad4-a167-f1d2ebd2817c",
+                  "args": {
+                    "topic": "returns"
+                  },
+                  "name": "get_company_info"
+                },
+                "thoughtSignature": "CskCAWkUfRMedJCQxqHkfXy82F8Rwj_puptrWV5zw4c2GAdZNd11jI5MWLNbI0Q9eEicTxWzrcXkg1iIBHS5u6JasDODPWqTfOs48neDei-WWWbfNngI-TozktRowk3FLTcKcKvTyBQlSJSF7QC_1yzLq9UHap4ZV4zwzNLGtxtUe77x92ZNdM8jHTaRRhpo7XGvSyYYXysBkbWja_kPthpGcAbpo3ElbWA7gZghkkp5RWmVlAhQ9ROPBH4uty7_eNI9Cg3ELelWZM9cLNSWteiXHH47Cykaa0kC4rOz3WR5u0ktw0pWXd9IdJaahxEoAkfzUBrQjmSBBGe2RYDHWOTZSbZigOHjRwx66T6B5vi0S87aA9agtxHSRexxbUEkdSrBA3n7OZm5hgyAbmZCvp44S37foCyrK4H5xDuiEP11P50n8icuf8WbKeA="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 17,
+            "promptTokenCount": 1804,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1804
+              }
+            ],
+            "thoughtsTokenCount": 65,
+            "totalTokenCount": 1886
+          },
+          "invocationId": "e-eb7f7d58-98c5-4e8e-a6e9-f833cda48460",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "1b83ec7b-e82a-4956-85af-5f1139973302",
+          "timestamp": 1792248504.2289376
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "adk-8be5fb8d-986d-4ad4-a167-f1d2ebd2817c",
+                  "name": "get_company_info",
+                  "response": {
+                    "status": "ok",
+                    "topic": "returns",
+                    "info": {
+                      "brand": "Apex Hyperstore",
+                      "topic": "returns",
+                      "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+                      "policies": {
+                        "returns": "14-day return window from delivery for non-perishable items. Refund to the original payment method within 5 working days of pickup. Grocery/perishables, personal care and innerwear are non-returnable for hygiene reasons.",
+                        "refunds": "Refunds are issued to the source account only - no cash refunds at the store. Bank settlement takes 3-5 working days after pickup scan.",
+                        "cancellation": "Free cancellation any time before the order moves to 'out for delivery'. After that, refuse at doorstep or return under the 14-day policy."
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-eb7f7d58-98c5-4e8e-a6e9-f833cda48460",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "da1c0701-b626-49af-8408-8895d6e65463",
+          "timestamp": 1792248508.1267035
+        },
+        {
+          "modelVersion": "gemini-2.5-flash",
+          "content": {
+            "parts": [
+              {
+                "text": "At Apex Hyperstore, we offer a 14-day return window from delivery for non-perishable items. The refund will be issued to your original payment method within 5 working days of the pickup. Please note that groceries, perishables, personal care, and innerwear are non-returnable for hygiene reasons. Refunds are issued to the source account only and bank settlement takes 3-5 working days after the pickup scan."
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "cacheTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1640
+              }
+            ],
+            "cachedContentTokenCount": 1640,
+            "candidatesTokenCount": 89,
+            "promptTokenCount": 2019,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2019
+              }
+            ],
+            "totalTokenCount": 2108
+          },
+          "invocationId": "e-eb7f7d58-98c5-4e8e-a6e9-f833cda48460",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "5144b626-1e48-4de3-9f03-f9ef950ac602",
+          "timestamp": 1792248508.151701
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "get_company_info",
+            "args": {
+              "topic": "returns"
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "get_company_info",
+            "response": {
+              "status": "ok",
+              "topic": "returns",
+              "info": {
+                "brand": "Apex Hyperstore",
+                "topic": "returns",
+                "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+                "policies": {
+                  "returns": "14-day return window from delivery for non-perishable items. Refund to the original payment method within 5 working days of pickup. Grocery/perishables, personal care and innerwear are non-returnable for hygiene reasons.",
+                  "refunds": "Refunds are issued to the source account only - no cash refunds at the store. Bank settlement takes 3-5 working days after pickup scan.",
+                  "cancellation": "Free cancellation any time before the order moves to 'out for delivery'. After that, refuse at doorstep or return under the 14-day policy."
+                }
+              }
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "authors": [
+          "apex_concierge"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 3994,
+        "final_text": "At Apex Hyperstore, we offer a 14-day return window from delivery for non-perishable items. The refund will be issued to your original payment method within 5 working days of the pickup. Please note that groceries, perishables, personal care, and innerwear are non-returnable for hygiene reasons. Refunds are issued to the source account only and bank settlement takes 3-5 working days after the pickup scan.",
+        "state_delta": {},
+        "n_events": 3
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 6.06,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /14[- ]day|14 days/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called get_company_info",
+      "ok": true,
+      "detail": "tools called: ['get_company_info']"
+    },
+    {
+      "check": "tool_args get_company_info",
+      "ok": true,
+      "detail": "calls: [{'tool': 'get_company_info', 'args': {'topic': 'returns'}, 'author': 'apex_concierge'}]"
+    },
+    {
+      "check": "max_tool_calls",
+      "ok": true,
+      "detail": "1 calls"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

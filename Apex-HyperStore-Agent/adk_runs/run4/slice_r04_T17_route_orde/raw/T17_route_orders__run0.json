@@ -1,0 +1,393 @@
+{
+  "test_id": "T17_route_orders",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "orders_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "lookup_order",
+        "args": {
+          "order_id": "APX-ORD-2026-041940"
+        },
+        "author": "orders_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "lookup_order",
+        "response": {
+          "status": "ok",
+          "found": true,
+          "verified": true,
+          "order": {
+            "order_id": "APX-ORD-2026-041940",
+            "status": "delayed",
+            "placed_at": "2026-10-15T21:52:00",
+            "delivery_slot": "2026-10-17T12:00:00 to 15:00",
+            "total_inr": 11499.0,
+            "item_count": 1,
+            "payment_mode": "Net Banking",
+            "warehouse": "WH-BLR-01",
+            "items": [
+              {
+                "order_id": "APX-ORD-2026-041940",
+                "sku": "APX-SKU-100512",
+                "name": "Apex PureLife RO Water Purifier",
+                "qty": 1,
+                "unit_price_inr": 11499.0
+              }
+            ]
+          },
+          "message": "Order APX-ORD-2026-041940 is delayed."
+        },
+        "author": "orders_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "orders_agent"
+    ],
+    "texts": [
+      {
+        "author": "orders_agent",
+        "text": "Order APX-ORD-2026-041940 is for an Apex PureLife RO Water Purifier and the total comes to \u20b911,499. \n\nThe order is currently delayed, and since it has not been cancelled or returned yet, no refund is due at this moment. Could you please confirm your registered email address so we can look into speeding up your delivery or discuss next steps?"
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "orders_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 7195,
+    "final_text": "Order APX-ORD-2026-041940 is for an Apex PureLife RO Water Purifier and the total comes to \u20b911,499. \n\nThe order is currently delayed, and since it has not been cancelled or returned yet, no refund is due at this moment. Could you please confirm your registered email address so we can look into speeding up your delivery or discuss next steps?",
+    "state_delta": {},
+    "n_events": 5,
+    "http_error": ""
+  },
+  "session_id": "T17_route_orders-0-452350",
+  "turns": [
+    {
+      "user": "How much was order APX-ORD-2026-041940 and is a refund due yet?",
+      "status": 200,
+      "latency_s": 8.73,
+      "events": [
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_2997683",
+                  "args": {
+                    "agent_name": "orders_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EmAKXgFpFH0TLys0bx6SPLbcja5DgDroAUm9Fyxxleblui-up47tre8Bd_qi28rlYL_Yd0S73M--E5nmCpslg2X-QN51K2qC-o3OxIhjguLVTHbhRrCjZwBnT2aMvxlorgE="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 22,
+            "promptTokenCount": 1879,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1879
+              }
+            ],
+            "totalTokenCount": 1901
+          },
+          "invocationId": "e-be0185b3-8226-444c-a822-6403dff8b393",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "7771a54c-6dcc-4db8-9d56-35f7a48a8751",
+          "timestamp": 1792251624.0757565
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_2997683",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-be0185b3-8226-444c-a822-6403dff8b393",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "orders_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "496b1f11-774a-4c5e-9431-6ba260bfd5e9",
+          "timestamp": 1792251627.495316
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3926612",
+                  "args": {
+                    "order_id": "APX-ORD-2026-041940"
+                  },
+                  "name": "lookup_order"
+                },
+                "thoughtSignature": "EmAKXgFpFH0T82i_f_Oi8wWencNOrG3DFWCS7O5e-0mTk5wTX9jH1xLU2ILPvJ4N6xNyMtBMZNRjD7LgdM3tYzts5M5Ic4ti_K0N1ZHaoAmNhPsUdKcmPdaUZZm1_q9YQHI="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 33,
+            "promptTokenCount": 2446,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2446
+              }
+            ],
+            "totalTokenCount": 2479
+          },
+          "invocationId": "e-be0185b3-8226-444c-a822-6403dff8b393",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "25adfd8b-cf2e-4ae0-ba3c-d7fafde63d71",
+          "timestamp": 1792251627.524662
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3926612",
+                  "name": "lookup_order",
+                  "response": {
+                    "status": "ok",
+                    "found": true,
+                    "verified": true,
+                    "order": {
+                      "order_id": "APX-ORD-2026-041940",
+                      "status": "delayed",
+                      "placed_at": "2026-10-15T21:52:00",
+                      "delivery_slot": "2026-10-17T12:00:00 to 15:00",
+                      "total_inr": 11499.0,
+                      "item_count": 1,
+                      "payment_mode": "Net Banking",
+                      "warehouse": "WH-BLR-01",
+                      "items": [
+                        {
+                          "order_id": "APX-ORD-2026-041940",
+                          "sku": "APX-SKU-100512",
+                          "name": "Apex PureLife RO Water Purifier",
+                          "qty": 1,
+                          "unit_price_inr": 11499.0
+                        }
+                      ]
+                    },
+                    "message": "Order APX-ORD-2026-041940 is delayed."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-be0185b3-8226-444c-a822-6403dff8b393",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "id": "1af19c10-51a4-4edc-8940-7211e529c487",
+          "timestamp": 1792251630.6394265
+        },
+        {
+          "modelVersion": "gemini-3.5-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "Order APX-ORD-2026-041940 is for an Apex PureLife RO Water Purifier and the total comes to \u20b911,499. \n\nThe order is currently delayed, and since it has not been cancelled or returned yet, no refund is due at this moment. Could you please confirm your registered email address so we can look into speeding up your delivery or discuss next steps?",
+                "thoughtSignature": "EmAKXgFpFH0TZo7AAuAazAA5XyVmPFXO4oG-EVfF77ew5HsTd-y7HEXiJvjg0VAtHZgIZ4JgzY5gyU4QQ1C55AWMORGk5vh7GuVfAnaX9rrIz4_MZlO35zLmqFcbJ0kHQGQ="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 89,
+            "promptTokenCount": 2726,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2726
+              }
+            ],
+            "totalTokenCount": 2815
+          },
+          "invocationId": "e-be0185b3-8226-444c-a822-6403dff8b393",
+          "author": "orders_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/orders_agent@1"
+          },
+          "id": "d1f90dca-719c-45eb-807b-e140c662a9f0",
+          "timestamp": 1792251630.6616595
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "orders_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "lookup_order",
+            "args": {
+              "order_id": "APX-ORD-2026-041940"
+            },
+            "author": "orders_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "lookup_order",
+            "response": {
+              "status": "ok",
+              "found": true,
+              "verified": true,
+              "order": {
+                "order_id": "APX-ORD-2026-041940",
+                "status": "delayed",
+                "placed_at": "2026-10-15T21:52:00",
+                "delivery_slot": "2026-10-17T12:00:00 to 15:00",
+                "total_inr": 11499.0,
+                "item_count": 1,
+                "payment_mode": "Net Banking",
+                "warehouse": "WH-BLR-01",
+                "items": [
+                  {
+                    "order_id": "APX-ORD-2026-041940",
+                    "sku": "APX-SKU-100512",
+                    "name": "Apex PureLife RO Water Purifier",
+                    "qty": 1,
+                    "unit_price_inr": 11499.0
+                  }
+                ]
+              },
+              "message": "Order APX-ORD-2026-041940 is delayed."
+            },
+            "author": "orders_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "orders_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "orders_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 7195,
+        "final_text": "Order APX-ORD-2026-041940 is for an Apex PureLife RO Water Purifier and the total comes to \u20b911,499. \n\nThe order is currently delayed, and since it has not been cancelled or returned yet, no refund is due at this moment. Could you please confirm your registered email address so we can look into speeding up your delivery or discuss next steps?",
+        "state_delta": {},
+        "n_events": 5
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 8.73,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called lookup_order",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'lookup_order']"
+    },
+    {
+      "check": "agent_involved orders_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'orders_agent'] transfers=['orders_agent']"
+    },
+    {
+      "check": "agent_excluded support_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'orders_agent']"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

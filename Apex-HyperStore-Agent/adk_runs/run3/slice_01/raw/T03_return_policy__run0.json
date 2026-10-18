@@ -1,0 +1,259 @@
+{
+  "test_id": "T03_return_policy",
+  "run": {
+    "calls": [
+      {
+        "tool": "get_company_info",
+        "args": {
+          "topic": "returns"
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "get_company_info",
+        "response": {
+          "status": "ok",
+          "topic": "returns",
+          "info": {
+            "brand": "Apex Hyperstore",
+            "topic": "returns",
+            "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+            "policies": {
+              "returns": "14-day return window from delivery for non-perishable items. Refund to the original payment method within 5 working days of pickup. Grocery/perishables, personal care and innerwear are non-returnable for hygiene reasons.",
+              "refunds": "Refunds are issued to the source account only - no cash refunds at the store. Bank settlement takes 3-5 working days after pickup scan.",
+              "cancellation": "Free cancellation any time before the order moves to 'out for delivery'. After that, refuse at doorstep or return under the 14-day policy."
+            }
+          }
+        },
+        "author": "apex_concierge"
+      }
+    ],
+    "authors": [
+      "apex_concierge"
+    ],
+    "texts": [
+      {
+        "author": "apex_concierge",
+        "text": "Here is our return and refund policy at Apex Hyperstore:\n\n* **Return Window:** Non-perishable items can be returned within **14 days** of delivery.\n* **Non-Returnable Items:** Groceries, perishables, personal care products, and innerwear cannot be returned for hygiene and safety reasons.\n* **Cancellations:** You can cancel an order for free anytime before it is marked *out for delivery*. After that, you may refuse delivery at the doorstep.\n* **Refunds:** Refunds are issued directly to your original payment method within **3 to 5 working days** after the item is picked up and scanned. We do not offer cash refunds.\n\nIf you need help returning a specific order, just share your order ID and we will be happy to assist you!"
+      }
+    ],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 4505,
+    "final_text": "Here is our return and refund policy at Apex Hyperstore:\n\n* **Return Window:** Non-perishable items can be returned within **14 days** of delivery.\n* **Non-Returnable Items:** Groceries, perishables, personal care products, and innerwear cannot be returned for hygiene and safety reasons.\n* **Cancellations:** You can cancel an order for free anytime before it is marked *out for delivery*. After that, you may refuse delivery at the doorstep.\n* **Refunds:** Refunds are issued directly to your original payment method within **3 to 5 working days** after the item is picked up and scanned. We do not offer cash refunds.\n\nIf you need help returning a specific order, just share your order ID and we will be happy to assist you!",
+    "state_delta": {},
+    "n_events": 3,
+    "http_error": ""
+  },
+  "session_id": "T03_return_policy-0-125059",
+  "turns": [
+    {
+      "user": "What is your return and refund policy?",
+      "status": 200,
+      "latency_s": 12.32,
+      "events": [
+        {
+          "modelVersion": "gemini-3.8-flash",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3005047",
+                  "args": {
+                    "topic": "returns"
+                  },
+                  "name": "get_company_info"
+                },
+                "thoughtSignature": "EqIFCp8FAWkUfROawLzvTRH_2D5dB2Y0a8LVbd1E2wT2Q-vRVMsGWw3LfJpQ5ZaLEMK6m8loj7mADkkWV6Jht-YhkA7l9dsbTtJb8xEip3uk5OIWqIoO8QESxfpJN_d5ajbZMtJU5UgroRYnWR7XvVohHuW4o1_6ER6GgYRLWEN4Ke2y3NGIc9Q-TEtdAo5mgtUe1Ki1BFgN_-xZOGVtyMGXeXBWBm1cwVDrRWa21MARRSu2su8VUjtmqT-nxMXj3efwpcTQ3aipbmWq1AlXvpHCKIx2z13AiCx0sUajTPbRHhzBKMP9lVobVnvqryB1NpC0XIPJpBGHhvmJqqerFpJSlSQ49O-KrNNaoJbnde2jP9E2SiIPj8TcvRGMfYaxFWbvl-JqBymLm2ujnyQiTUUD7x42Vkx38M0iGZhFMBoRKJ8afCFrEdbWOQsHoM6d3ZhCBEs9STsWfoY5TYxr5qJ3ZW-U6s8gwYeDZUs42oP88KF1t-NYEExx6mJ9cHKCNxHGgAkNEUJP-usx6SFMbaOlTncDQzkFMuantmWAkFtQWMVRVlybx-KTLs8tYMjl8N8HAx-YaJytQ-zUB-KOog_u15cVtzbl1SIcorapWa6lL6srVQWIxSZXro3tW-0HAHix7eLAwR_8IfqpixAeMB-H_fzIuODHfrwsDvWBSUixxdNwFXW9ea0ijRuKcf3_Oqn_BNIAPjX9ky1fYPWOpRARzmleQ_VTFTBPPg0wr5u4jhdjutcGpan7BV1XquSvR5LByaBst0d4Q_fat7HAIXJPXSxOozOaGWsuEGlAPc0lL0vtx7QGtnxWAF23giD-AgwDR31HkDb3WbmmPO6IuZsqKSvpYzV-vQa7ozZobyiKpUymWj4UTm2In5oYKeCZqmOOu2A="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 18,
+            "promptTokenCount": 1860,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1860
+              }
+            ],
+            "thoughtsTokenCount": 129,
+            "totalTokenCount": 2007
+          },
+          "invocationId": "e-208b053f-dad1-4d2c-9e52-356f63c8c5c4",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "871f53fe-1b91-43ee-8539-e7c7108dde4f",
+          "timestamp": 1792249801.501866
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3005047",
+                  "name": "get_company_info",
+                  "response": {
+                    "status": "ok",
+                    "topic": "returns",
+                    "info": {
+                      "brand": "Apex Hyperstore",
+                      "topic": "returns",
+                      "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+                      "policies": {
+                        "returns": "14-day return window from delivery for non-perishable items. Refund to the original payment method within 5 working days of pickup. Grocery/perishables, personal care and innerwear are non-returnable for hygiene reasons.",
+                        "refunds": "Refunds are issued to the source account only - no cash refunds at the store. Bank settlement takes 3-5 working days after pickup scan.",
+                        "cancellation": "Free cancellation any time before the order moves to 'out for delivery'. After that, refuse at doorstep or return under the 14-day policy."
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-208b053f-dad1-4d2c-9e52-356f63c8c5c4",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "c655880a-62f9-4108-8b09-2cf0478c5b8e",
+          "timestamp": 1792249809.6843913
+        },
+        {
+          "modelVersion": "gemini-3.8-flash",
+          "content": {
+            "parts": [
+              {
+                "text": "Here is our return and refund policy at Apex Hyperstore:\n\n* **Return Window:** Non-perishable items can be returned within **14 days** of delivery.\n* **Non-Returnable Items:** Groceries, perishables, personal care products, and innerwear cannot be returned for hygiene and safety reasons.\n* **Cancellations:** You can cancel an order for free anytime before it is marked *out for delivery*. After that, you may refuse delivery at the doorstep.\n* **Refunds:** Refunds are issued directly to your original payment method within **3 to 5 working days** after the item is picked up and scanned. We do not offer cash refunds.\n\nIf you need help returning a specific order, just share your order ID and we will be happy to assist you!",
+                "thoughtSignature": "ErEFCq4FAWkUfRMMILfGufz8vC2tEF68La1tqKYeR067GrqrLK6s1_JZawJRTxw-2eDs6JaXPaOItH56GpBbwi7BociF694Gu5eiU8IbIq66piDkr47JX2RBU_yGuIGDhG7agBPlwneHE2l_SZh9ogl6JIE8o-pH3eMsVVrdhDM19Xrz5qDLqKZ3OwXluUuQczoanurb5ZWkitudtwKpfF4gG-TcXV1SfNEueDjAjeEm-12BeExhfLJe3yaZ_7XUN8PfBKDI3kuBk6waybAm7HOoTgh9QnABSvveagXbwiiWGEjFm3SEyvWbIS4wkqa3nFtCCTF0xGyZym19gT0toYeyQZl72F5ns8-fWbUxq9YkT97RqQ2zIdhZ_-MeET2V6Pd5usrZYp4-XAZ4l12mR9ip9xSFuVRGbEWqwD6xpb44-WTPTDwlzS5BILI9FBCOOlAhEsyLNsMyr_wcUQrtI59ZV7503mmb0QG4OE-RkJQNurPCq5UgFek6-sNnI5VzinW77khbm6cf11A5bR5OZdVqdjxjos1MikO5IbNL8szt_55IWC1_011CzPmqNtap8zwrk5RMNnForCTB3OBcn7edKcZbr0bXRuzAPCSckSCz42BmFS4o8jsFvg9r-xPXfbaoeO10hKhvUKH53g8ofLva2eiEEbrqb4enCRbueC_wKzKLzef6WnVpKsybzM0aVGHm352GcgATtMO2myYtz3zqARPDZWpZlhwaeyN3QkvGdY3u8dM8mNQtqhdDA1Wh-mQx0Pf3I6MwIMk-q46DtcF-uPzq4XhxgzoKHEyDaiMMzi8izb4OLb8_V684nrfCs8c-5aRcA-UYYbIbf6MkAdBWybqtqy1m34lhm-CdcEfAmUk1E7qRSe9d_A4UmmY1YpwSNTE9KqKsa3FouXO2qaGa8jw="
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 165,
+            "promptTokenCount": 2205,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2205
+              }
+            ],
+            "thoughtsTokenCount": 128,
+            "totalTokenCount": 2498
+          },
+          "invocationId": "e-208b053f-dad1-4d2c-9e52-356f63c8c5c4",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "89aa722b-a59e-465d-8086-ed90562cbb0d",
+          "timestamp": 1792249809.7066252
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "get_company_info",
+            "args": {
+              "topic": "returns"
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "get_company_info",
+            "response": {
+              "status": "ok",
+              "topic": "returns",
+              "info": {
+                "brand": "Apex Hyperstore",
+                "topic": "returns",
+                "disclaimer": "Apex Hyperstore is a fictional company created for this demo. All contact details, order IDs, prices and policies are synthetic.",
+                "policies": {
+                  "returns": "14-day return window from delivery for non-perishable items. Refund to the original payment method within 5 working days of pickup. Grocery/perishables, personal care and innerwear are non-returnable for hygiene reasons.",
+                  "refunds": "Refunds are issued to the source account only - no cash refunds at the store. Bank settlement takes 3-5 working days after pickup scan.",
+                  "cancellation": "Free cancellation any time before the order moves to 'out for delivery'. After that, refuse at doorstep or return under the 14-day policy."
+                }
+              }
+            },
+            "author": "apex_concierge"
+          }
+        ],
+        "authors": [
+          "apex_concierge"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 4505,
+        "final_text": "Here is our return and refund policy at Apex Hyperstore:\n\n* **Return Window:** Non-perishable items can be returned within **14 days** of delivery.\n* **Non-Returnable Items:** Groceries, perishables, personal care products, and innerwear cannot be returned for hygiene and safety reasons.\n* **Cancellations:** You can cancel an order for free anytime before it is marked *out for delivery*. After that, you may refuse delivery at the doorstep.\n* **Refunds:** Refunds are issued directly to your original payment method within **3 to 5 working days** after the item is picked up and scanned. We do not offer cash refunds.\n\nIf you need help returning a specific order, just share your order ID and we will be happy to assist you!",
+        "state_delta": {},
+        "n_events": 3
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 12.32,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /14[- ]day|14 days/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called get_company_info",
+      "ok": true,
+      "detail": "tools called: ['get_company_info']"
+    },
+    {
+      "check": "tool_args get_company_info",
+      "ok": true,
+      "detail": "calls: [{'tool': 'get_company_info', 'args': {'topic': 'returns'}, 'author': 'apex_concierge'}]"
+    },
+    {
+      "check": "max_tool_calls",
+      "ok": true,
+      "detail": "1 calls"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

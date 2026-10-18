@@ -1,0 +1,1183 @@
+{
+  "test_id": "T27_multi_turn_memory",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "service_request_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_service_catalog",
+        "args": {},
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "check_request_readiness",
+        "args": {
+          "full_name": "Ananya Iyer",
+          "email": "ananya.iyer@example.com",
+          "request_type": "billing"
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "create_support_request",
+        "args": {
+          "full_name": "Ananya Iyer",
+          "request_type": "billing",
+          "email": "ananya.iyer@example.com",
+          "phone": "9845002241",
+          "issue_summary": "I was charged for a NutriBox subscription twice in October."
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_service_catalog",
+        "response": {
+          "status": "ok",
+          "request_types": [
+            {
+              "value": "order_issue",
+              "label": "A problem with an order"
+            },
+            {
+              "value": "delivery_delay",
+              "label": "Delivery running late or not arriving"
+            },
+            {
+              "value": "return_exchange",
+              "label": "Return or exchange of an item"
+            },
+            {
+              "value": "refund",
+              "label": "Refund not received or wrong amount"
+            },
+            {
+              "value": "product_defect",
+              "label": "Item defective, damaged or wrong"
+            },
+            {
+              "value": "billing",
+              "label": "Charges, invoice or coupon problem"
+            },
+            {
+              "value": "account_access",
+              "label": "Login, OTP or profile access"
+            },
+            {
+              "value": "loyalty",
+              "label": "Prime membership, points or coupons"
+            },
+            {
+              "value": "feedback",
+              "label": "Compliment, complaint or suggestion"
+            },
+            {
+              "value": "emergency",
+              "label": "Something urgent that needs the response desk now"
+            },
+            {
+              "value": "other",
+              "label": "Something not covered above"
+            }
+          ],
+          "urgency_levels": [
+            {
+              "value": "emergency",
+              "respond_within": "15 minutes"
+            },
+            {
+              "value": "high",
+              "respond_within": "120 minutes"
+            },
+            {
+              "value": "normal",
+              "respond_within": "24 hours"
+            },
+            {
+              "value": "low",
+              "respond_within": "72 hours"
+            }
+          ],
+          "emergency_types": [
+            {
+              "value": "none",
+              "label": "Not an emergency"
+            },
+            {
+              "value": "safety_hazard",
+              "label": "Safety hazard - electrical, fire or structural risk"
+            },
+            {
+              "value": "food_safety",
+              "label": "Food safety - spoiled, contaminated or wrong temperature"
+            },
+            {
+              "value": "payment_fraud",
+              "label": "Payment fraud - unauthorised debit or duplicate charge"
+            },
+            {
+              "value": "medical_allergy",
+              "label": "Medical or allergy reaction to a delivered product"
+            },
+            {
+              "value": "damaged_goods",
+              "label": "Damaged goods - leaking, broken or hazardous packaging"
+            },
+            {
+              "value": "access_blocked",
+              "label": "Access blocked - locked gate, no water or electricity supply"
+            },
+            {
+              "value": "no_delivery_aged",
+              "label": "No delivery and the customer is elderly, disabled or dependants alone"
+            }
+          ],
+          "channels": [
+            "web_chat",
+            "whatsapp",
+            "phone",
+            "email",
+            "store_counter"
+          ],
+          "mandatory_fields": [
+            "full_name",
+            "email",
+            "phone",
+            "request_type",
+            "issue_summary"
+          ],
+          "optional_fields": [
+            "urgency (default normal)",
+            "emergency_type (default none)",
+            "scheduled_for (default asap)",
+            "order_id"
+          ],
+          "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+          "message": "Collect all mandatory fields before calling create_support_request."
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "check_request_readiness",
+        "response": {
+          "status": "ok",
+          "ready": false,
+          "checks": [
+            {
+              "field": "full_name",
+              "ok": true,
+              "detail": "'Ananya Iyer' accepted"
+            },
+            {
+              "field": "email",
+              "ok": true,
+              "detail": "'ananya.iyer@example.com' accepted"
+            },
+            {
+              "field": "phone",
+              "ok": false,
+              "detail": "not provided yet - ask the customer for it"
+            },
+            {
+              "field": "request_type",
+              "ok": true,
+              "detail": "'billing' is valid"
+            },
+            {
+              "field": "issue_summary",
+              "ok": false,
+              "detail": "needs at least 12 characters describing the problem in the customer's words"
+            }
+          ],
+          "missing": [
+            "phone",
+            "issue_summary"
+          ],
+          "message": "Still needed: phone, issue_summary"
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "create_support_request",
+        "response": {
+          "status": "ok",
+          "reference_id": "APX-SR-2026-FECA3L",
+          "request_status": "open",
+          "request_type": "billing",
+          "urgency": "normal",
+          "emergency_type": "none",
+          "full_name": "Ananya Iyer",
+          "email": "ananya.iyer@example.com",
+          "phone": "+919845002241",
+          "scheduled_for": "asap",
+          "order_id": "",
+          "assigned_team": "Payments Recovery Desk",
+          "target_response_at": "2026-10-18 21:19 IST",
+          "created_at": "2026-10-17T21:19:59.948879+05:30",
+          "channel": "web_chat",
+          "next_step": "Payments Recovery Desk will contact Ananya Iyer at +919845002241 by 2026-10-18 21:19 IST.",
+          "message": "Payments Recovery Desk will contact Ananya Iyer at +919845002241 by 2026-10-18 21:19 IST."
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "service_request_agent"
+    ],
+    "texts": [
+      {
+        "author": "service_request_agent",
+        "text": "I am sorry to hear you are having trouble with your billing. I can certainly help you raise a request for this.\n\nTo get started, could you please provide your full name?"
+      },
+      {
+        "author": "service_request_agent",
+        "text": "Thank you, Ananya. Could you please provide your phone number and a brief description of the billing issue you are experiencing?"
+      },
+      {
+        "author": "service_request_agent",
+        "text": "Thank you, Ananya. I have successfully filed your request regarding the double charge for your NutriBox subscription.\n\nYour reference ID is **APX-SR-2026-FECA3L**. The Payments Recovery Desk owns this request, and they will contact you at +919845002241 by 2026-10-18 21:19 IST."
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "service_request_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 23913,
+    "final_text": "Thank you, Ananya. I have successfully filed your request regarding the double charge for your NutriBox subscription.\n\nYour reference ID is **APX-SR-2026-FECA3L**. The Payments Recovery Desk owns this request, and they will contact you at +919845002241 by 2026-10-18 21:19 IST.",
+    "state_delta": {},
+    "n_events": 11,
+    "http_error": ""
+  },
+  "session_id": "T27_multi_turn_memory-0-046c36",
+  "turns": [
+    {
+      "user": "I need to raise a request about a billing problem.",
+      "status": 200,
+      "latency_s": 9.51,
+      "events": [
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3007391",
+                  "args": {
+                    "agent_name": "service_request_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EnMKcQFpFH0TfQ6kurL2hWygnk7W2nP9lst80blACgkAymO6fHQ8W5NTT2mPJszdxVe0bNFjeWGTl2bIceNgIKg7xRzmm3QV0hrZ5FRzKo_gT1n8M4sDZqw95rqAMzPs1XGeYziq408Q-NFl3xcj5-5fBoZp"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 24,
+            "promptTokenCount": 1863,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1863
+              }
+            ],
+            "totalTokenCount": 1887
+          },
+          "invocationId": "e-c84f6f1b-c6ff-453b-9dee-7693c5d88b57",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "af03cd6b-bf08-4ca4-917c-418b5937e38f",
+          "timestamp": 1792252184.4582748
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3007391",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-c84f6f1b-c6ff-453b-9dee-7693c5d88b57",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "service_request_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "8932dcb8-265d-44f8-af88-fc728068a875",
+          "timestamp": 1792252188.6543362
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_2525187",
+                  "args": {},
+                  "name": "list_service_catalog"
+                },
+                "thoughtSignature": "EnMKcQFpFH0T63hTpg2omozeh5yhhZ4lAoAYDFQsgvdzWG4_63HH1PrEWUPEqu0Uhk8W-5nAP42zSMgu5405iOi-F1q2N07lF4nuGI4z8U2hLZCwZJ7yXZhJy2jXrgR5PXNPg9DuaWrFd_JqhUjozgElo4lQ"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 12,
+            "promptTokenCount": 2870,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2870
+              }
+            ],
+            "totalTokenCount": 2882
+          },
+          "invocationId": "e-c84f6f1b-c6ff-453b-9dee-7693c5d88b57",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "f07dce6f-a969-4415-8715-f179fe874381",
+          "timestamp": 1792252188.6782737
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_2525187",
+                  "name": "list_service_catalog",
+                  "response": {
+                    "status": "ok",
+                    "request_types": [
+                      {
+                        "value": "order_issue",
+                        "label": "A problem with an order"
+                      },
+                      {
+                        "value": "delivery_delay",
+                        "label": "Delivery running late or not arriving"
+                      },
+                      {
+                        "value": "return_exchange",
+                        "label": "Return or exchange of an item"
+                      },
+                      {
+                        "value": "refund",
+                        "label": "Refund not received or wrong amount"
+                      },
+                      {
+                        "value": "product_defect",
+                        "label": "Item defective, damaged or wrong"
+                      },
+                      {
+                        "value": "billing",
+                        "label": "Charges, invoice or coupon problem"
+                      },
+                      {
+                        "value": "account_access",
+                        "label": "Login, OTP or profile access"
+                      },
+                      {
+                        "value": "loyalty",
+                        "label": "Prime membership, points or coupons"
+                      },
+                      {
+                        "value": "feedback",
+                        "label": "Compliment, complaint or suggestion"
+                      },
+                      {
+                        "value": "emergency",
+                        "label": "Something urgent that needs the response desk now"
+                      },
+                      {
+                        "value": "other",
+                        "label": "Something not covered above"
+                      }
+                    ],
+                    "urgency_levels": [
+                      {
+                        "value": "emergency",
+                        "respond_within": "15 minutes"
+                      },
+                      {
+                        "value": "high",
+                        "respond_within": "120 minutes"
+                      },
+                      {
+                        "value": "normal",
+                        "respond_within": "24 hours"
+                      },
+                      {
+                        "value": "low",
+                        "respond_within": "72 hours"
+                      }
+                    ],
+                    "emergency_types": [
+                      {
+                        "value": "none",
+                        "label": "Not an emergency"
+                      },
+                      {
+                        "value": "safety_hazard",
+                        "label": "Safety hazard - electrical, fire or structural risk"
+                      },
+                      {
+                        "value": "food_safety",
+                        "label": "Food safety - spoiled, contaminated or wrong temperature"
+                      },
+                      {
+                        "value": "payment_fraud",
+                        "label": "Payment fraud - unauthorised debit or duplicate charge"
+                      },
+                      {
+                        "value": "medical_allergy",
+                        "label": "Medical or allergy reaction to a delivered product"
+                      },
+                      {
+                        "value": "damaged_goods",
+                        "label": "Damaged goods - leaking, broken or hazardous packaging"
+                      },
+                      {
+                        "value": "access_blocked",
+                        "label": "Access blocked - locked gate, no water or electricity supply"
+                      },
+                      {
+                        "value": "no_delivery_aged",
+                        "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                      }
+                    ],
+                    "channels": [
+                      "web_chat",
+                      "whatsapp",
+                      "phone",
+                      "email",
+                      "store_counter"
+                    ],
+                    "mandatory_fields": [
+                      "full_name",
+                      "email",
+                      "phone",
+                      "request_type",
+                      "issue_summary"
+                    ],
+                    "optional_fields": [
+                      "urgency (default normal)",
+                      "emergency_type (default none)",
+                      "scheduled_for (default asap)",
+                      "order_id"
+                    ],
+                    "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+                    "message": "Collect all mandatory fields before calling create_support_request."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-c84f6f1b-c6ff-453b-9dee-7693c5d88b57",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "019847c9-5165-4aca-8bd2-8a659d3e1950",
+          "timestamp": 1792252191.7690384
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "I am sorry to hear you are having trouble with your billing. I can certainly help you raise a request for this.\n\nTo get started, could you please provide your full name?",
+                "thoughtSignature": "EnMKcQFpFH0TdEGEtLZhT5wiD4YyelBy0JPDQirwB5Zi1P9ZbMOa_VTEQBCIa1ssKLkhuFbhioEikkNNaOXeC0UPqG4hSHB8OIKmg2R6P3Xy1664eBr-C-0oV5xvYdKPynhnzBiRdha5w5bH--XG1voY5j4C"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 37,
+            "promptTokenCount": 3494,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3494
+              }
+            ],
+            "totalTokenCount": 3531
+          },
+          "invocationId": "e-c84f6f1b-c6ff-453b-9dee-7693c5d88b57",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "80d0cafb-a908-4691-b4dd-3d28dc0faff6",
+          "timestamp": 1792252191.7925663
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "service_request_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_service_catalog",
+            "args": {},
+            "author": "service_request_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_service_catalog",
+            "response": {
+              "status": "ok",
+              "request_types": [
+                {
+                  "value": "order_issue",
+                  "label": "A problem with an order"
+                },
+                {
+                  "value": "delivery_delay",
+                  "label": "Delivery running late or not arriving"
+                },
+                {
+                  "value": "return_exchange",
+                  "label": "Return or exchange of an item"
+                },
+                {
+                  "value": "refund",
+                  "label": "Refund not received or wrong amount"
+                },
+                {
+                  "value": "product_defect",
+                  "label": "Item defective, damaged or wrong"
+                },
+                {
+                  "value": "billing",
+                  "label": "Charges, invoice or coupon problem"
+                },
+                {
+                  "value": "account_access",
+                  "label": "Login, OTP or profile access"
+                },
+                {
+                  "value": "loyalty",
+                  "label": "Prime membership, points or coupons"
+                },
+                {
+                  "value": "feedback",
+                  "label": "Compliment, complaint or suggestion"
+                },
+                {
+                  "value": "emergency",
+                  "label": "Something urgent that needs the response desk now"
+                },
+                {
+                  "value": "other",
+                  "label": "Something not covered above"
+                }
+              ],
+              "urgency_levels": [
+                {
+                  "value": "emergency",
+                  "respond_within": "15 minutes"
+                },
+                {
+                  "value": "high",
+                  "respond_within": "120 minutes"
+                },
+                {
+                  "value": "normal",
+                  "respond_within": "24 hours"
+                },
+                {
+                  "value": "low",
+                  "respond_within": "72 hours"
+                }
+              ],
+              "emergency_types": [
+                {
+                  "value": "none",
+                  "label": "Not an emergency"
+                },
+                {
+                  "value": "safety_hazard",
+                  "label": "Safety hazard - electrical, fire or structural risk"
+                },
+                {
+                  "value": "food_safety",
+                  "label": "Food safety - spoiled, contaminated or wrong temperature"
+                },
+                {
+                  "value": "payment_fraud",
+                  "label": "Payment fraud - unauthorised debit or duplicate charge"
+                },
+                {
+                  "value": "medical_allergy",
+                  "label": "Medical or allergy reaction to a delivered product"
+                },
+                {
+                  "value": "damaged_goods",
+                  "label": "Damaged goods - leaking, broken or hazardous packaging"
+                },
+                {
+                  "value": "access_blocked",
+                  "label": "Access blocked - locked gate, no water or electricity supply"
+                },
+                {
+                  "value": "no_delivery_aged",
+                  "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                }
+              ],
+              "channels": [
+                "web_chat",
+                "whatsapp",
+                "phone",
+                "email",
+                "store_counter"
+              ],
+              "mandatory_fields": [
+                "full_name",
+                "email",
+                "phone",
+                "request_type",
+                "issue_summary"
+              ],
+              "optional_fields": [
+                "urgency (default normal)",
+                "emergency_type (default none)",
+                "scheduled_for (default asap)",
+                "order_id"
+              ],
+              "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+              "message": "Collect all mandatory fields before calling create_support_request."
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "service_request_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "service_request_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 8300,
+        "final_text": "I am sorry to hear you are having trouble with your billing. I can certainly help you raise a request for this.\n\nTo get started, could you please provide your full name?",
+        "state_delta": {},
+        "n_events": 5
+      }
+    },
+    {
+      "user": "I am Ananya Iyer and my email is ananya.iyer@example.com.",
+      "status": 200,
+      "latency_s": 4.03,
+      "events": [
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_1209040",
+                  "args": {
+                    "full_name": "Ananya Iyer",
+                    "email": "ananya.iyer@example.com",
+                    "request_type": "billing"
+                  },
+                  "name": "check_request_readiness"
+                },
+                "thoughtSignature": "EnMKcQFpFH0TLzRoou-y_uABV66ZCLuwJLLCMs9NU9xYIC1yodYboZ5biSY6-Fw_VXaDnhRWjx9uXo00Rg2MB4PYfgB3kN-l6F8o7GpmrsMaqwy0mFkQ1dhnaxJmY8hordbsPPUF5Hvys8_FcUhowViQtRAu"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 45,
+            "promptTokenCount": 3552,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3552
+              }
+            ],
+            "totalTokenCount": 3597
+          },
+          "invocationId": "e-eef43b20-ce9a-488d-b683-2b1f118d2c36",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "c58dbd2b-dda4-4c98-9d21-1c8c4d2bcb92",
+          "timestamp": 1792252193.5044184
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_1209040",
+                  "name": "check_request_readiness",
+                  "response": {
+                    "status": "ok",
+                    "ready": false,
+                    "checks": [
+                      {
+                        "field": "full_name",
+                        "ok": true,
+                        "detail": "'Ananya Iyer' accepted"
+                      },
+                      {
+                        "field": "email",
+                        "ok": true,
+                        "detail": "'ananya.iyer@example.com' accepted"
+                      },
+                      {
+                        "field": "phone",
+                        "ok": false,
+                        "detail": "not provided yet - ask the customer for it"
+                      },
+                      {
+                        "field": "request_type",
+                        "ok": true,
+                        "detail": "'billing' is valid"
+                      },
+                      {
+                        "field": "issue_summary",
+                        "ok": false,
+                        "detail": "needs at least 12 characters describing the problem in the customer's words"
+                      }
+                    ],
+                    "missing": [
+                      "phone",
+                      "issue_summary"
+                    ],
+                    "message": "Still needed: phone, issue_summary"
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-eef43b20-ce9a-488d-b683-2b1f118d2c36",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "eb579bc8-f9fc-4f8d-984e-fdb3093234c9",
+          "timestamp": 1792252196.30036
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "Thank you, Ananya. Could you please provide your phone number and a brief description of the billing issue you are experiencing?",
+                "thoughtSignature": "EnMKcQFpFH0ThP302jHacVjKbDJm690PuGlTrgvhTX86FLtiWC8i-PiQimf1EXGRfI92KI0VDD_Sp6sPbcv_09N0aiMwXzZEvnGaHDyY9mO6-uA6tVJJRLxYiBNaJoy1W1vk8hJVXQAkxzaer9OtxFHowk9O"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 25,
+            "promptTokenCount": 3775,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3775
+              }
+            ],
+            "totalTokenCount": 3800
+          },
+          "invocationId": "e-eef43b20-ce9a-488d-b683-2b1f118d2c36",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "5d025782-a7a4-4a11-a390-d7333f7d2888",
+          "timestamp": 1792252196.319995
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "check_request_readiness",
+            "args": {
+              "full_name": "Ananya Iyer",
+              "email": "ananya.iyer@example.com",
+              "request_type": "billing"
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "check_request_readiness",
+            "response": {
+              "status": "ok",
+              "ready": false,
+              "checks": [
+                {
+                  "field": "full_name",
+                  "ok": true,
+                  "detail": "'Ananya Iyer' accepted"
+                },
+                {
+                  "field": "email",
+                  "ok": true,
+                  "detail": "'ananya.iyer@example.com' accepted"
+                },
+                {
+                  "field": "phone",
+                  "ok": false,
+                  "detail": "not provided yet - ask the customer for it"
+                },
+                {
+                  "field": "request_type",
+                  "ok": true,
+                  "detail": "'billing' is valid"
+                },
+                {
+                  "field": "issue_summary",
+                  "ok": false,
+                  "detail": "needs at least 12 characters describing the problem in the customer's words"
+                }
+              ],
+              "missing": [
+                "phone",
+                "issue_summary"
+              ],
+              "message": "Still needed: phone, issue_summary"
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "authors": [
+          "service_request_agent"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 7397,
+        "final_text": "Thank you, Ananya. Could you please provide your phone number and a brief description of the billing issue you are experiencing?",
+        "state_delta": {},
+        "n_events": 3
+      }
+    },
+    {
+      "user": "My phone number is 9845002241. I was charged for a NutriBox subscription twice in October.",
+      "status": 200,
+      "latency_s": 29.53,
+      "events": [
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_1311316",
+                  "args": {
+                    "full_name": "Ananya Iyer",
+                    "request_type": "billing",
+                    "email": "ananya.iyer@example.com",
+                    "phone": "9845002241",
+                    "issue_summary": "I was charged for a NutriBox subscription twice in October."
+                  },
+                  "name": "create_support_request"
+                },
+                "thoughtSignature": "EnMKcQFpFH0ThAKudzvyJh7HyKkAhK-mNipTze7ieQRNmilAqppXmjKO6tJx13xougi9xm7aDbNpce3ZovxB8P8lUC2c7hf7NTryix06nYW_D3q4G_sRNIrECR_sU282vBgwEWKtvKvpkkQdfT4HmeQF4iNW"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 79,
+            "promptTokenCount": 3831,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3831
+              }
+            ],
+            "totalTokenCount": 3910
+          },
+          "invocationId": "e-84b430dc-38ed-4b2c-9c2e-335a6c7237cd",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "e8362f77-f486-40a1-b56e-59fe6d583c54",
+          "timestamp": 1792252197.4165173
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_1311316",
+                  "name": "create_support_request",
+                  "response": {
+                    "status": "ok",
+                    "reference_id": "APX-SR-2026-FECA3L",
+                    "request_status": "open",
+                    "request_type": "billing",
+                    "urgency": "normal",
+                    "emergency_type": "none",
+                    "full_name": "Ananya Iyer",
+                    "email": "ananya.iyer@example.com",
+                    "phone": "+919845002241",
+                    "scheduled_for": "asap",
+                    "order_id": "",
+                    "assigned_team": "Payments Recovery Desk",
+                    "target_response_at": "2026-10-18 21:19 IST",
+                    "created_at": "2026-10-17T21:19:59.948879+05:30",
+                    "channel": "web_chat",
+                    "next_step": "Payments Recovery Desk will contact Ananya Iyer at +919845002241 by 2026-10-18 21:19 IST.",
+                    "message": "Payments Recovery Desk will contact Ananya Iyer at +919845002241 by 2026-10-18 21:19 IST."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-84b430dc-38ed-4b2c-9c2e-335a6c7237cd",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "4be77cb7-c31f-49b0-a61c-34a06cb7af8d",
+          "timestamp": 1792252199.9589393
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "Thank you, Ananya. I have successfully filed your request regarding the double charge for your NutriBox subscription.\n\nYour reference ID is **APX-SR-2026-FECA3L**. The Payments Recovery Desk owns this request, and they will contact you at +919845002241 by 2026-10-18 21:19 IST.",
+                "thoughtSignature": "EnMKcQFpFH0TOaRicmGOWp6OV4BSEgAVaDFCCp0XG1x7Qn5DITn1uNS2AbLP9LOJIuEcaBmZV-TQvsAmyzRDu9GKbbyUwb2cXFQ_-P0CZObxpziV4AxbGfCWje1J8gMvjFNbCVOrqWQUk9AJrIcsVL9VtknQ"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 91,
+            "promptTokenCount": 4215,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 4215
+              }
+            ],
+            "totalTokenCount": 4306
+          },
+          "invocationId": "e-84b430dc-38ed-4b2c-9c2e-335a6c7237cd",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "876eeb5f-e103-4a67-b406-1c44fc261e51",
+          "timestamp": 1792252199.982233
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "create_support_request",
+            "args": {
+              "full_name": "Ananya Iyer",
+              "request_type": "billing",
+              "email": "ananya.iyer@example.com",
+              "phone": "9845002241",
+              "issue_summary": "I was charged for a NutriBox subscription twice in October."
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "create_support_request",
+            "response": {
+              "status": "ok",
+              "reference_id": "APX-SR-2026-FECA3L",
+              "request_status": "open",
+              "request_type": "billing",
+              "urgency": "normal",
+              "emergency_type": "none",
+              "full_name": "Ananya Iyer",
+              "email": "ananya.iyer@example.com",
+              "phone": "+919845002241",
+              "scheduled_for": "asap",
+              "order_id": "",
+              "assigned_team": "Payments Recovery Desk",
+              "target_response_at": "2026-10-18 21:19 IST",
+              "created_at": "2026-10-17T21:19:59.948879+05:30",
+              "channel": "web_chat",
+              "next_step": "Payments Recovery Desk will contact Ananya Iyer at +919845002241 by 2026-10-18 21:19 IST.",
+              "message": "Payments Recovery Desk will contact Ananya Iyer at +919845002241 by 2026-10-18 21:19 IST."
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "authors": [
+          "service_request_agent"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 8216,
+        "final_text": "Thank you, Ananya. I have successfully filed your request regarding the double charge for your NutriBox subscription.\n\nYour reference ID is **APX-SR-2026-FECA3L**. The Payments Recovery Desk owns this request, and they will contact you at +919845002241 by 2026-10-18 21:19 IST.",
+        "state_delta": {},
+        "n_events": 3
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 43.07,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /APX-SR-2026-[A-Z0-9]{6}/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called create_support_request",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'list_service_catalog', 'check_request_readiness', 'create_support_request']"
+    },
+    {
+      "check": "tool_args create_support_request",
+      "ok": true,
+      "detail": "calls: [{'tool': 'transfer_to_agent', 'args': {'agent_name': 'service_request_agent'}, 'author': 'apex_concierge'}, {'tool': 'list_service_catalog', 'args': {}, 'author': 'service_request_agent'}, {'tool': 'check_request_readiness', 'args': {'full_name': 'Ananya Iyer', 'email': 'ananya.iyer@example.com', 'request_type': 'billing'}, 'author': 'service_request_agent'}, {'tool': 'create_support_request', 'args': {'full_name': 'Ananya Iyer', 'request_type': 'billing', 'email': 'ananya.iyer@example.com', 'phone': '9845002241', 'issue_summary': 'I was charged for a NutriBox subscription twice in October.'}, 'author': 'service_request_agent'}]"
+    },
+    {
+      "check": "max_latency_s",
+      "ok": true,
+      "detail": "43.1s"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

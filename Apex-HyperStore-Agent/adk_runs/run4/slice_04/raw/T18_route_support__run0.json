@@ -1,0 +1,54 @@
+{
+  "test_id": "T18_route_support",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T18_route_support-0-41a62c",
+  "turns": [
+    {
+      "user": "The Apex app crashes with a blank screen every time I open My Orders on Android.",
+      "status": 500,
+      "latency_s": 2.1,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 2.1,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "tool_called search_knowledge_base",
+      "ok": false,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "agent_involved support_agent",
+      "ok": false,
+      "detail": "authors=[] transfers=[]"
+    },
+    {
+      "check": "agent_excluded orders_agent",
+      "ok": true,
+      "detail": "authors=[]"
+    }
+  ],
+  "passed": false,
+  "failure_class": "AGENT_RUNTIME_ERROR"
+}

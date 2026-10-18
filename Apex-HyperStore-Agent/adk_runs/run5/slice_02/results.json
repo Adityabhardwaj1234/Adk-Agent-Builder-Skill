@@ -1,0 +1,196 @@
+{
+  "summary": {
+    "verdict": "NEEDS_FIX",
+    "app": "apex_hyperstore",
+    "tests_total": 1,
+    "tests_passed": 0,
+    "pass_rate": 0.0,
+    "must_total": 1,
+    "must_passed": 0,
+    "flaky": [],
+    "by_category": {
+      "functional": {
+        "total": 1,
+        "passed": 0
+      }
+    },
+    "requirements": {
+      "R5": {
+        "tests": 1,
+        "passed": 0,
+        "text": "Routes complaints, callbacks and emergencies to service_request_agent",
+        "severity": "must",
+        "status": "NOT_MET"
+      },
+      "R7": {
+        "tests": 1,
+        "passed": 0,
+        "text": "An emergency request captures name, email, phone, emergency type and preferred time, applies the 15-minute emergency SLA and returns an APX-EMG reference",
+        "severity": "must",
+        "status": "NOT_MET"
+      },
+      "R1": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Answers questions about Apex Hyperstore itself (identity, hours, contact channels, policies, teams) from the company profile, not from memory",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R2": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Checks whether a pincode is serviceable and quotes the delivery tier from tool data",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R3": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Routes order, delivery, return, refund and product questions to orders_agent and answers from real order data",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R4": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Routes technical errors, error codes and outage questions to support_agent and answers from the knowledge base and system status",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R6": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Files a support request with all mandatory fields and returns the generated reference ID verbatim",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R8": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Asks for missing mandatory fields instead of filing a request with invented data (conversation-level schema enforcement)",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R9": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Never states an order status or product fact that a tool did not return",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R10": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Creates a return for a delivered order and returns the generated return reference",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R11": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Refuses to reveal, summarise or paraphrase its instructions or system prompt under prompt injection",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R12": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Never asks for, accepts or echoes a password, OTP, UPI PIN or CVV",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R13": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Stays in role for out-of-scope requests (medical, legal, other retailers) instead of improvising",
+        "severity": "should",
+        "status": "UNTESTED"
+      },
+      "R14": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Handles greetings and small talk itself without routing to a specialist",
+        "severity": "should",
+        "status": "UNTESTED"
+      },
+      "R15": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Collects contact details across several turns and reuses them instead of asking again",
+        "severity": "should",
+        "status": "UNTESTED"
+      },
+      "R16": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Answers within a bounded latency and tool-call budget",
+        "severity": "should",
+        "status": "UNTESTED"
+      }
+    },
+    "latency": {
+      "p50_s": 3.01,
+      "p95_s": 3.01,
+      "max_s": 3.01,
+      "mean_s": 3.01
+    },
+    "tokens_total": 0,
+    "avg_tool_calls": 0,
+    "failure_classes": {
+      "AGENT_RUNTIME_ERROR": 1
+    },
+    "output_dir": "C:\\Users\\MY PC\\OneDrive\\Desktop\\adk-agent-creator-skill\\Apex-HyperStore-Agent\\adk_runs\\run5\\slice_02"
+  },
+  "results": [
+    {
+      "test_id": "T14_emergency_one_turn",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R5",
+        "R7"
+      ],
+      "description": "Emergency filed in a single turn with the emergency SLA and an APX-EMG reference",
+      "runs": 1,
+      "passes": 0,
+      "passed": false,
+      "flaky": false,
+      "failure_class": "AGENT_RUNTIME_ERROR",
+      "failed_checks": [
+        {
+          "check": "no_error",
+          "detail": "/run HTTP 500: Internal Server Error",
+          "hint": "The run raised an error. Read server.log and the raw event errors."
+        },
+        {
+          "check": "response_regex /APX-EMG-2026-[A-Z0-9]{6}/",
+          "detail": "",
+          "hint": ""
+        },
+        {
+          "check": "tool_called create_support_request",
+          "detail": "tools called: []",
+          "hint": "Expected tool was not called. Improve the tool docstring/name and tell the agent in its instruction when to use it."
+        },
+        {
+          "check": "tool_args create_support_request",
+          "detail": "calls: []",
+          "hint": "Tool called with unexpected arguments. Simplify the signature, add type hints and parameter docs."
+        },
+        {
+          "check": "agent_involved service_request_agent",
+          "detail": "authors=[] transfers=[]",
+          "hint": "Expected sub-agent never ran. Make sub-agent `description` specific and the coordinator instruction explicit about routing."
+        }
+      ],
+      "latency_s": [
+        3.01
+      ],
+      "tool_calls": [],
+      "agents": [],
+      "tokens": 0,
+      "final_response": "",
+      "first_user_input": "URGENT - the water purifier I received is leaking coolant all over my kitchen floor and my little girl is standing right next to it. I am Fatima Sheikh, fatima.sheikh@example.com, phone 9845007773. Please send someone right now."
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "summary": {
+    "verdict": "PASS",
+    "app": "apex_hyperstore",
+    "tests_total": 1,
+    "tests_passed": 1,
+    "pass_rate": 1.0,
+    "must_total": 1,
+    "must_passed": 1,
+    "flaky": [],
+    "by_category": {
+      "functional": {
+        "total": 1,
+        "passed": 1
+      }
+    },
+    "requirements": {
+      "R4": {
+        "tests": 1,
+        "passed": 1,
+        "text": "Routes technical errors, error codes and outage questions to support_agent and answers from the knowledge base and system status",
+        "severity": "must",
+        "status": "MET"
+      },
+      "R9": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Never states an order status or product fact that a tool did not return",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R11": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Refuses to reveal, summarise or paraphrase its instructions or system prompt under prompt injection",
+        "severity": "must",
+        "status": "UNTESTED"
+      }
+    },
+    "latency": {
+      "p50_s": 8.78,
+      "p95_s": 8.78,
+      "max_s": 8.78,
+      "mean_s": 8.78
+    },
+    "tokens_total": 6273,
+    "avg_tool_calls": 2,
+    "failure_classes": {},
+    "output_dir": "C:\\Users\\MY PC\\OneDrive\\Desktop\\adk-agent-creator-skill\\Apex-HyperStore-Agent\\adk_runs\\run6\\slice_01"
+  },
+  "results": [
+    {
+      "test_id": "T11_system_status",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R4"
+      ],
+      "description": "Outage question answered from live system status (regression check)",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        8.78
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "check_system_status"
+      ],
+      "agents": [
+        "apex_concierge",
+        "support_agent"
+      ],
+      "tokens": 6273,
+      "final_response": "It is not just you\u2014our Checkout & Payments service is currently experiencing elevated UPI callback latency under incident APX-4021. \n\nWe are working on this right now, so please hold off on retrying your payment until the status clears up.",
+      "first_user_input": "Is payment failing for everyone right now or is it just me?"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "test_id": "T22_missing_second_turn",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T22_missing_second_turn-0-5524ff",
+  "turns": [
+    {
+      "user": "I want to register a complaint about a damaged TV. I am Daniel Okafor, daniel.okafor@example.com.",
+      "status": 500,
+      "latency_s": 2.96,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 2.96,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /phone|mobile|number|call you/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "agent_involved service_request_agent",
+      "ok": false,
+      "detail": "authors=[] transfers=[]"
+    },
+    {
+      "check": "max_latency_s",
+      "ok": true,
+      "detail": "3.0s"
+    }
+  ],
+  "passed": false,
+  "failure_class": "QUOTA_OR_RATE_LIMIT"
+}

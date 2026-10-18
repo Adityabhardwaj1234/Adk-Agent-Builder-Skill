@@ -1,0 +1,6 @@
+# Apex Hyperstore support agent - extra packages on top of google-adk
+# The agent itself needs only google-adk; these are the extras the skill's
+# testing harness uses (DatabaseSessionService needs an async driver).
+google-adk[db,mcp]
+python-dotenv>=1.0
+pydantic>=2.10

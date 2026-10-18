@@ -1,0 +1,54 @@
+{
+  "test_id": "T09_product_price",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T09_product_price-0-ca6783",
+  "turns": [
+    {
+      "user": "Do you have the Apex PureLife RO water purifier in stock? What does it cost?",
+      "status": 500,
+      "latency_s": 2.47,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 2.47,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /11[,.]?499|purelife|in stock|stock/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_called search_products",
+      "ok": false,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "agent_involved orders_agent",
+      "ok": false,
+      "detail": "authors=[] transfers=[]"
+    }
+  ],
+  "passed": false,
+  "failure_class": "QUOTA_OR_RATE_LIMIT"
+}

@@ -1,0 +1,858 @@
+{
+  "test_id": "T14_emergency_one_turn",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "service_request_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_service_catalog",
+        "args": {},
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "create_support_request",
+        "args": {
+          "issue_summary": "Water purifier is leaking coolant on the kitchen floor with a child nearby.",
+          "emergency_type": "safety_hazard",
+          "email": "fatima.sheikh@example.com",
+          "phone": "9845007773",
+          "request_type": "emergency",
+          "full_name": "Fatima Sheikh",
+          "urgency": "emergency"
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_service_catalog",
+        "response": {
+          "status": "ok",
+          "request_types": [
+            {
+              "value": "order_issue",
+              "label": "A problem with an order"
+            },
+            {
+              "value": "delivery_delay",
+              "label": "Delivery running late or not arriving"
+            },
+            {
+              "value": "return_exchange",
+              "label": "Return or exchange of an item"
+            },
+            {
+              "value": "refund",
+              "label": "Refund not received or wrong amount"
+            },
+            {
+              "value": "product_defect",
+              "label": "Item defective, damaged or wrong"
+            },
+            {
+              "value": "billing",
+              "label": "Charges, invoice or coupon problem"
+            },
+            {
+              "value": "account_access",
+              "label": "Login, OTP or profile access"
+            },
+            {
+              "value": "loyalty",
+              "label": "Prime membership, points or coupons"
+            },
+            {
+              "value": "feedback",
+              "label": "Compliment, complaint or suggestion"
+            },
+            {
+              "value": "emergency",
+              "label": "Something urgent that needs the response desk now"
+            },
+            {
+              "value": "other",
+              "label": "Something not covered above"
+            }
+          ],
+          "urgency_levels": [
+            {
+              "value": "emergency",
+              "respond_within": "15 minutes"
+            },
+            {
+              "value": "high",
+              "respond_within": "120 minutes"
+            },
+            {
+              "value": "normal",
+              "respond_within": "24 hours"
+            },
+            {
+              "value": "low",
+              "respond_within": "72 hours"
+            }
+          ],
+          "emergency_types": [
+            {
+              "value": "none",
+              "label": "Not an emergency"
+            },
+            {
+              "value": "safety_hazard",
+              "label": "Safety hazard - electrical, fire or structural risk"
+            },
+            {
+              "value": "food_safety",
+              "label": "Food safety - spoiled, contaminated or wrong temperature"
+            },
+            {
+              "value": "payment_fraud",
+              "label": "Payment fraud - unauthorised debit or duplicate charge"
+            },
+            {
+              "value": "medical_allergy",
+              "label": "Medical or allergy reaction to a delivered product"
+            },
+            {
+              "value": "damaged_goods",
+              "label": "Damaged goods - leaking, broken or hazardous packaging"
+            },
+            {
+              "value": "access_blocked",
+              "label": "Access blocked - locked gate, no water or electricity supply"
+            },
+            {
+              "value": "no_delivery_aged",
+              "label": "No delivery and the customer is elderly, disabled or dependants alone"
+            }
+          ],
+          "channels": [
+            "web_chat",
+            "whatsapp",
+            "phone",
+            "email",
+            "store_counter"
+          ],
+          "mandatory_fields": [
+            "full_name",
+            "email",
+            "phone",
+            "request_type",
+            "issue_summary"
+          ],
+          "optional_fields": [
+            "urgency (default normal)",
+            "emergency_type (default none)",
+            "scheduled_for (default asap)",
+            "order_id"
+          ],
+          "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+          "message": "Collect all mandatory fields before calling create_support_request."
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "create_support_request",
+        "response": {
+          "status": "ok",
+          "reference_id": "APX-EMG-2026-N7O1H1",
+          "request_status": "open",
+          "request_type": "emergency",
+          "urgency": "emergency",
+          "emergency_type": "safety_hazard",
+          "full_name": "Fatima Sheikh",
+          "email": "fatima.sheikh@example.com",
+          "phone": "+919845007773",
+          "scheduled_for": "asap",
+          "order_id": "",
+          "assigned_team": "Emergency Response Desk",
+          "target_response_at": "2026-10-17 21:41 IST",
+          "created_at": "2026-10-17T21:26:49.077701+05:30",
+          "channel": "web_chat",
+          "next_step": "Emergency Response Desk will contact Fatima Sheikh at +919845007773 by 2026-10-17 21:41 IST.",
+          "message": "Emergency Response Desk will contact Fatima Sheikh at +919845007773 by 2026-10-17 21:41 IST."
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "service_request_agent"
+    ],
+    "texts": [
+      {
+        "author": "service_request_agent",
+        "text": "I am very sorry to hear about this dangerous situation. I have escalated this as an emergency.\n\nYour reference ID is **APX-EMG-2026-N7O1H1**. Our Emergency Response Desk has been notified and will contact you at 9845007773 within 15 minutes. Please ensure your child is moved away from the area immediately."
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "service_request_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 12547,
+    "final_text": "I am very sorry to hear about this dangerous situation. I have escalated this as an emergency.\n\nYour reference ID is **APX-EMG-2026-N7O1H1**. Our Emergency Response Desk has been notified and will contact you at 9845007773 within 15 minutes. Please ensure your child is moved away from the area immediately.",
+    "state_delta": {},
+    "n_events": 7,
+    "http_error": ""
+  },
+  "session_id": "T14_emergency_one_turn-0-b576f6",
+  "turns": [
+    {
+      "user": "URGENT - the water purifier I received is leaking coolant all over my kitchen floor and my little girl is standing right next to it. I am Fatima Sheikh, fatima.sheikh@example.com, phone 9845007773. Please send someone right now.",
+      "status": 200,
+      "latency_s": 8.87,
+      "events": [
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_223835",
+                  "args": {
+                    "agent_name": "service_request_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EnMKcQFpFH0TcjoUTG71KhLsI_AZy3PnCT_AJPU9RdyyAhPIiMX2GWxPiOMhr0v73S5D-3BofiT0oREvjK-da9AgJgPfSDg1aV6SqdvePwRNwWP47-j2NF8P3JS4dJBQFRJwj2ZWsL8_mjhyWAM7f9ZWRsCp"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 24,
+            "promptTokenCount": 1914,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1914
+              }
+            ],
+            "totalTokenCount": 1938
+          },
+          "invocationId": "e-80735da2-928b-4d8b-b3bd-d2195c45f44c",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "53f615d5-5bbd-4bda-a920-a63b1435efb6",
+          "timestamp": 1792252601.836739
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_223835",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-80735da2-928b-4d8b-b3bd-d2195c45f44c",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "service_request_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "9caaadcd-5b47-4451-8705-618ad7767d35",
+          "timestamp": 1792252605.2567291
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_223889",
+                  "args": {},
+                  "name": "list_service_catalog"
+                },
+                "thoughtSignature": "EnMKcQFpFH0TJUya434xuC6YAPMspnYUYBCcYudAHZcl_FSK5tdHvLyf0_YpLIVm5lW5oaUEaUA5KBpW7E2xGcdmmjqMdw17YdVCAiK_NjhYDNHHFYh9WrN6-mbsxfnY4F0en26Ty2h4cOg8WmcGLBBE-Zg6"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 12,
+            "promptTokenCount": 2921,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2921
+              }
+            ],
+            "totalTokenCount": 2933
+          },
+          "invocationId": "e-80735da2-928b-4d8b-b3bd-d2195c45f44c",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "d7ec3011-67ab-442b-8522-06cfc6a566b5",
+          "timestamp": 1792252605.2720547
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_223889",
+                  "name": "list_service_catalog",
+                  "response": {
+                    "status": "ok",
+                    "request_types": [
+                      {
+                        "value": "order_issue",
+                        "label": "A problem with an order"
+                      },
+                      {
+                        "value": "delivery_delay",
+                        "label": "Delivery running late or not arriving"
+                      },
+                      {
+                        "value": "return_exchange",
+                        "label": "Return or exchange of an item"
+                      },
+                      {
+                        "value": "refund",
+                        "label": "Refund not received or wrong amount"
+                      },
+                      {
+                        "value": "product_defect",
+                        "label": "Item defective, damaged or wrong"
+                      },
+                      {
+                        "value": "billing",
+                        "label": "Charges, invoice or coupon problem"
+                      },
+                      {
+                        "value": "account_access",
+                        "label": "Login, OTP or profile access"
+                      },
+                      {
+                        "value": "loyalty",
+                        "label": "Prime membership, points or coupons"
+                      },
+                      {
+                        "value": "feedback",
+                        "label": "Compliment, complaint or suggestion"
+                      },
+                      {
+                        "value": "emergency",
+                        "label": "Something urgent that needs the response desk now"
+                      },
+                      {
+                        "value": "other",
+                        "label": "Something not covered above"
+                      }
+                    ],
+                    "urgency_levels": [
+                      {
+                        "value": "emergency",
+                        "respond_within": "15 minutes"
+                      },
+                      {
+                        "value": "high",
+                        "respond_within": "120 minutes"
+                      },
+                      {
+                        "value": "normal",
+                        "respond_within": "24 hours"
+                      },
+                      {
+                        "value": "low",
+                        "respond_within": "72 hours"
+                      }
+                    ],
+                    "emergency_types": [
+                      {
+                        "value": "none",
+                        "label": "Not an emergency"
+                      },
+                      {
+                        "value": "safety_hazard",
+                        "label": "Safety hazard - electrical, fire or structural risk"
+                      },
+                      {
+                        "value": "food_safety",
+                        "label": "Food safety - spoiled, contaminated or wrong temperature"
+                      },
+                      {
+                        "value": "payment_fraud",
+                        "label": "Payment fraud - unauthorised debit or duplicate charge"
+                      },
+                      {
+                        "value": "medical_allergy",
+                        "label": "Medical or allergy reaction to a delivered product"
+                      },
+                      {
+                        "value": "damaged_goods",
+                        "label": "Damaged goods - leaking, broken or hazardous packaging"
+                      },
+                      {
+                        "value": "access_blocked",
+                        "label": "Access blocked - locked gate, no water or electricity supply"
+                      },
+                      {
+                        "value": "no_delivery_aged",
+                        "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                      }
+                    ],
+                    "channels": [
+                      "web_chat",
+                      "whatsapp",
+                      "phone",
+                      "email",
+                      "store_counter"
+                    ],
+                    "mandatory_fields": [
+                      "full_name",
+                      "email",
+                      "phone",
+                      "request_type",
+                      "issue_summary"
+                    ],
+                    "optional_fields": [
+                      "urgency (default normal)",
+                      "emergency_type (default none)",
+                      "scheduled_for (default asap)",
+                      "order_id"
+                    ],
+                    "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+                    "message": "Collect all mandatory fields before calling create_support_request."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-80735da2-928b-4d8b-b3bd-d2195c45f44c",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "f6e4591e-24c8-44dc-b5a9-43d0e75e95b5",
+          "timestamp": 1792252608.013435
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_4774875",
+                  "args": {
+                    "issue_summary": "Water purifier is leaking coolant on the kitchen floor with a child nearby.",
+                    "emergency_type": "safety_hazard",
+                    "email": "fatima.sheikh@example.com",
+                    "phone": "9845007773",
+                    "request_type": "emergency",
+                    "full_name": "Fatima Sheikh",
+                    "urgency": "emergency"
+                  },
+                  "name": "create_support_request"
+                },
+                "thoughtSignature": "EnMKcQFpFH0To5v-91Jfw0M3zTNI1r3zgLwpch82C3WgRU6umaN7ehKPxeRED2Hs1RxcH4JSlDNLTKWX5OV4lK1VPzYR3rBRaa9H0xVnv-qQwdIeFGNRIvgEIozTAg5OQ-VqSMl17utdvmHocjSbIcDP1e_U"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 97,
+            "promptTokenCount": 3545,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3545
+              }
+            ],
+            "totalTokenCount": 3642
+          },
+          "invocationId": "e-80735da2-928b-4d8b-b3bd-d2195c45f44c",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "b05b703c-2ab5-4f19-8e7f-3b2eda94aa76",
+          "timestamp": 1792252608.0350938
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_4774875",
+                  "name": "create_support_request",
+                  "response": {
+                    "status": "ok",
+                    "reference_id": "APX-EMG-2026-N7O1H1",
+                    "request_status": "open",
+                    "request_type": "emergency",
+                    "urgency": "emergency",
+                    "emergency_type": "safety_hazard",
+                    "full_name": "Fatima Sheikh",
+                    "email": "fatima.sheikh@example.com",
+                    "phone": "+919845007773",
+                    "scheduled_for": "asap",
+                    "order_id": "",
+                    "assigned_team": "Emergency Response Desk",
+                    "target_response_at": "2026-10-17 21:41 IST",
+                    "created_at": "2026-10-17T21:26:49.077701+05:30",
+                    "channel": "web_chat",
+                    "next_step": "Emergency Response Desk will contact Fatima Sheikh at +919845007773 by 2026-10-17 21:41 IST.",
+                    "message": "Emergency Response Desk will contact Fatima Sheikh at +919845007773 by 2026-10-17 21:41 IST."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-80735da2-928b-4d8b-b3bd-d2195c45f44c",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "926ab186-1b18-409b-83be-32b10bb6feb5",
+          "timestamp": 1792252609.0853426
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "I am very sorry to hear about this dangerous situation. I have escalated this as an emergency.\n\nYour reference ID is **APX-EMG-2026-N7O1H1**. Our Emergency Response Desk has been notified and will contact you at 9845007773 within 15 minutes. Please ensure your child is moved away from the area immediately.",
+                "thoughtSignature": "EnMKcQFpFH0TbcC5-ijfH4hxi-zo2L9J1RPcQjDhTAYnYLrsXFsK5l-JM37R5TKCCjgxPN1paKb8vw-yaIDYjvUEswz2WK7sxWs5T5Ee93Zrmao8zZELnE5MgKg0KzuWEdQAdzQpIQiwFeybVcPIgWl5hjKq"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 84,
+            "promptTokenCount": 3950,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3950
+              }
+            ],
+            "totalTokenCount": 4034
+          },
+          "invocationId": "e-80735da2-928b-4d8b-b3bd-d2195c45f44c",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "cffaf460-fd9d-4cfd-b863-68e8a8fd41ab",
+          "timestamp": 1792252609.1046886
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "service_request_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_service_catalog",
+            "args": {},
+            "author": "service_request_agent"
+          },
+          {
+            "tool": "create_support_request",
+            "args": {
+              "issue_summary": "Water purifier is leaking coolant on the kitchen floor with a child nearby.",
+              "emergency_type": "safety_hazard",
+              "email": "fatima.sheikh@example.com",
+              "phone": "9845007773",
+              "request_type": "emergency",
+              "full_name": "Fatima Sheikh",
+              "urgency": "emergency"
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_service_catalog",
+            "response": {
+              "status": "ok",
+              "request_types": [
+                {
+                  "value": "order_issue",
+                  "label": "A problem with an order"
+                },
+                {
+                  "value": "delivery_delay",
+                  "label": "Delivery running late or not arriving"
+                },
+                {
+                  "value": "return_exchange",
+                  "label": "Return or exchange of an item"
+                },
+                {
+                  "value": "refund",
+                  "label": "Refund not received or wrong amount"
+                },
+                {
+                  "value": "product_defect",
+                  "label": "Item defective, damaged or wrong"
+                },
+                {
+                  "value": "billing",
+                  "label": "Charges, invoice or coupon problem"
+                },
+                {
+                  "value": "account_access",
+                  "label": "Login, OTP or profile access"
+                },
+                {
+                  "value": "loyalty",
+                  "label": "Prime membership, points or coupons"
+                },
+                {
+                  "value": "feedback",
+                  "label": "Compliment, complaint or suggestion"
+                },
+                {
+                  "value": "emergency",
+                  "label": "Something urgent that needs the response desk now"
+                },
+                {
+                  "value": "other",
+                  "label": "Something not covered above"
+                }
+              ],
+              "urgency_levels": [
+                {
+                  "value": "emergency",
+                  "respond_within": "15 minutes"
+                },
+                {
+                  "value": "high",
+                  "respond_within": "120 minutes"
+                },
+                {
+                  "value": "normal",
+                  "respond_within": "24 hours"
+                },
+                {
+                  "value": "low",
+                  "respond_within": "72 hours"
+                }
+              ],
+              "emergency_types": [
+                {
+                  "value": "none",
+                  "label": "Not an emergency"
+                },
+                {
+                  "value": "safety_hazard",
+                  "label": "Safety hazard - electrical, fire or structural risk"
+                },
+                {
+                  "value": "food_safety",
+                  "label": "Food safety - spoiled, contaminated or wrong temperature"
+                },
+                {
+                  "value": "payment_fraud",
+                  "label": "Payment fraud - unauthorised debit or duplicate charge"
+                },
+                {
+                  "value": "medical_allergy",
+                  "label": "Medical or allergy reaction to a delivered product"
+                },
+                {
+                  "value": "damaged_goods",
+                  "label": "Damaged goods - leaking, broken or hazardous packaging"
+                },
+                {
+                  "value": "access_blocked",
+                  "label": "Access blocked - locked gate, no water or electricity supply"
+                },
+                {
+                  "value": "no_delivery_aged",
+                  "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                }
+              ],
+              "channels": [
+                "web_chat",
+                "whatsapp",
+                "phone",
+                "email",
+                "store_counter"
+              ],
+              "mandatory_fields": [
+                "full_name",
+                "email",
+                "phone",
+                "request_type",
+                "issue_summary"
+              ],
+              "optional_fields": [
+                "urgency (default normal)",
+                "emergency_type (default none)",
+                "scheduled_for (default asap)",
+                "order_id"
+              ],
+              "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+              "message": "Collect all mandatory fields before calling create_support_request."
+            },
+            "author": "service_request_agent"
+          },
+          {
+            "tool": "create_support_request",
+            "response": {
+              "status": "ok",
+              "reference_id": "APX-EMG-2026-N7O1H1",
+              "request_status": "open",
+              "request_type": "emergency",
+              "urgency": "emergency",
+              "emergency_type": "safety_hazard",
+              "full_name": "Fatima Sheikh",
+              "email": "fatima.sheikh@example.com",
+              "phone": "+919845007773",
+              "scheduled_for": "asap",
+              "order_id": "",
+              "assigned_team": "Emergency Response Desk",
+              "target_response_at": "2026-10-17 21:41 IST",
+              "created_at": "2026-10-17T21:26:49.077701+05:30",
+              "channel": "web_chat",
+              "next_step": "Emergency Response Desk will contact Fatima Sheikh at +919845007773 by 2026-10-17 21:41 IST.",
+              "message": "Emergency Response Desk will contact Fatima Sheikh at +919845007773 by 2026-10-17 21:41 IST."
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "service_request_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "service_request_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 12547,
+        "final_text": "I am very sorry to hear about this dangerous situation. I have escalated this as an emergency.\n\nYour reference ID is **APX-EMG-2026-N7O1H1**. Our Emergency Response Desk has been notified and will contact you at 9845007773 within 15 minutes. Please ensure your child is moved away from the area immediately.",
+        "state_delta": {},
+        "n_events": 7
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 8.87,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /APX-EMG-2026-[A-Z0-9]{6}/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called create_support_request",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'list_service_catalog', 'create_support_request']"
+    },
+    {
+      "check": "tool_args create_support_request",
+      "ok": true,
+      "detail": "calls: [{'tool': 'transfer_to_agent', 'args': {'agent_name': 'service_request_agent'}, 'author': 'apex_concierge'}, {'tool': 'list_service_catalog', 'args': {}, 'author': 'service_request_agent'}, {'tool': 'create_support_request', 'args': {'issue_summary': 'Water purifier is leaking coolant on the kitchen floor with a child nearby.', 'emergency_type': 'safety_hazard', 'email': 'fatima.sheikh@example.com', 'phone': '9845007773', 'request_type': 'emergency', 'full_name': 'Fatima Sheikh', 'urgency': 'emergency'}, 'author': 'service_request_agent'}]"
+    },
+    {
+      "check": "agent_involved service_request_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'service_request_agent'] transfers=['service_request_agent']"
+    },
+    {
+      "check": "max_latency_s",
+      "ok": true,
+      "detail": "8.9s"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

@@ -1,0 +1,1141 @@
+{
+  "test_id": "T15_standard_request",
+  "run": {
+    "calls": [
+      {
+        "tool": "transfer_to_agent",
+        "args": {
+          "agent_name": "service_request_agent"
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_service_catalog",
+        "args": {},
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "check_request_readiness",
+        "args": {
+          "phone": "9845005518",
+          "request_type": "delivery_delay",
+          "full_name": "Rohit Malhotra",
+          "email": "rohit.malhotra@example.com",
+          "issue_summary": "Order APX-ORD-2026-041940 was due yesterday morning and still has not arrived.",
+          "order_id": "APX-ORD-2026-041940"
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "create_support_request",
+        "args": {
+          "full_name": "Rohit Malhotra",
+          "phone": "9845005518",
+          "email": "rohit.malhotra@example.com",
+          "order_id": "APX-ORD-2026-041940",
+          "request_type": "delivery_delay",
+          "issue_summary": "Order APX-ORD-2026-041940 was due yesterday morning and still has not arrived."
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "responses": [
+      {
+        "tool": "transfer_to_agent",
+        "response": {
+          "result": null
+        },
+        "author": "apex_concierge"
+      },
+      {
+        "tool": "list_service_catalog",
+        "response": {
+          "status": "ok",
+          "request_types": [
+            {
+              "value": "order_issue",
+              "label": "A problem with an order"
+            },
+            {
+              "value": "delivery_delay",
+              "label": "Delivery running late or not arriving"
+            },
+            {
+              "value": "return_exchange",
+              "label": "Return or exchange of an item"
+            },
+            {
+              "value": "refund",
+              "label": "Refund not received or wrong amount"
+            },
+            {
+              "value": "product_defect",
+              "label": "Item defective, damaged or wrong"
+            },
+            {
+              "value": "billing",
+              "label": "Charges, invoice or coupon problem"
+            },
+            {
+              "value": "account_access",
+              "label": "Login, OTP or profile access"
+            },
+            {
+              "value": "loyalty",
+              "label": "Prime membership, points or coupons"
+            },
+            {
+              "value": "feedback",
+              "label": "Compliment, complaint or suggestion"
+            },
+            {
+              "value": "emergency",
+              "label": "Something urgent that needs the response desk now"
+            },
+            {
+              "value": "other",
+              "label": "Something not covered above"
+            }
+          ],
+          "urgency_levels": [
+            {
+              "value": "emergency",
+              "respond_within": "15 minutes"
+            },
+            {
+              "value": "high",
+              "respond_within": "120 minutes"
+            },
+            {
+              "value": "normal",
+              "respond_within": "24 hours"
+            },
+            {
+              "value": "low",
+              "respond_within": "72 hours"
+            }
+          ],
+          "emergency_types": [
+            {
+              "value": "none",
+              "label": "Not an emergency"
+            },
+            {
+              "value": "safety_hazard",
+              "label": "Safety hazard - electrical, fire or structural risk"
+            },
+            {
+              "value": "food_safety",
+              "label": "Food safety - spoiled, contaminated or wrong temperature"
+            },
+            {
+              "value": "payment_fraud",
+              "label": "Payment fraud - unauthorised debit or duplicate charge"
+            },
+            {
+              "value": "medical_allergy",
+              "label": "Medical or allergy reaction to a delivered product"
+            },
+            {
+              "value": "damaged_goods",
+              "label": "Damaged goods - leaking, broken or hazardous packaging"
+            },
+            {
+              "value": "access_blocked",
+              "label": "Access blocked - locked gate, no water or electricity supply"
+            },
+            {
+              "value": "no_delivery_aged",
+              "label": "No delivery and the customer is elderly, disabled or dependants alone"
+            }
+          ],
+          "channels": [
+            "web_chat",
+            "whatsapp",
+            "phone",
+            "email",
+            "store_counter"
+          ],
+          "mandatory_fields": [
+            "full_name",
+            "email",
+            "phone",
+            "request_type",
+            "issue_summary"
+          ],
+          "optional_fields": [
+            "urgency (default normal)",
+            "emergency_type (default none)",
+            "scheduled_for (default asap)",
+            "order_id"
+          ],
+          "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+          "message": "Collect all mandatory fields before calling create_support_request."
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "check_request_readiness",
+        "response": {
+          "status": "ok",
+          "ready": true,
+          "checks": [
+            {
+              "field": "full_name",
+              "ok": true,
+              "detail": "'Rohit Malhotra' accepted"
+            },
+            {
+              "field": "email",
+              "ok": true,
+              "detail": "'rohit.malhotra@example.com' accepted"
+            },
+            {
+              "field": "phone",
+              "ok": true,
+              "detail": "'9845005518' accepted"
+            },
+            {
+              "field": "request_type",
+              "ok": true,
+              "detail": "'delivery_delay' is valid"
+            },
+            {
+              "field": "issue_summary",
+              "ok": true,
+              "detail": "detailed enough"
+            },
+            {
+              "field": "order_id",
+              "ok": true,
+              "detail": "looks like a valid order ID"
+            }
+          ],
+          "missing": [],
+          "message": "All mandatory details are present - call create_support_request now."
+        },
+        "author": "service_request_agent"
+      },
+      {
+        "tool": "create_support_request",
+        "response": {
+          "status": "ok",
+          "reference_id": "APX-SR-2026-78IT8T",
+          "request_status": "open",
+          "request_type": "delivery_delay",
+          "urgency": "normal",
+          "emergency_type": "none",
+          "full_name": "Rohit Malhotra",
+          "email": "rohit.malhotra@example.com",
+          "phone": "+919845005518",
+          "scheduled_for": "asap",
+          "order_id": "APX-ORD-2026-041940",
+          "assigned_team": "Last Mile Operations",
+          "target_response_at": "2026-10-18 21:29 IST",
+          "created_at": "2026-10-17T21:29:24.843531+05:30",
+          "channel": "web_chat",
+          "next_step": "Last Mile Operations will contact Rohit Malhotra at +919845005518 by 2026-10-18 21:29 IST.",
+          "message": "Last Mile Operations will contact Rohit Malhotra at +919845005518 by 2026-10-18 21:29 IST."
+        },
+        "author": "service_request_agent"
+      }
+    ],
+    "authors": [
+      "apex_concierge",
+      "service_request_agent"
+    ],
+    "texts": [
+      {
+        "author": "service_request_agent",
+        "text": "I am sorry to hear about the delay with your delivery. I can certainly help you file a complaint about this.\n\nTo get started, could you please provide your full name?"
+      },
+      {
+        "author": "service_request_agent",
+        "text": "Thank you for providing those details, Rohit. I have successfully filed your complaint regarding the delayed delivery of order APX-ORD-2026-041940.\n\nYour reference ID is **APX-SR-2026-78IT8T**. The Last Mile Operations team has been assigned to your request and they will contact you at +919845005518 by 2026-10-18 21:29 IST."
+      }
+    ],
+    "outputs": [],
+    "transfers": [
+      "service_request_agent"
+    ],
+    "routes": [],
+    "errors": [],
+    "tokens": 20465,
+    "final_text": "Thank you for providing those details, Rohit. I have successfully filed your complaint regarding the delayed delivery of order APX-ORD-2026-041940.\n\nYour reference ID is **APX-SR-2026-78IT8T**. The Last Mile Operations team has been assigned to your request and they will contact you at +919845005518 by 2026-10-18 21:29 IST.",
+    "state_delta": {},
+    "n_events": 10,
+    "http_error": ""
+  },
+  "session_id": "T15_standard_request-0-7b8c50",
+  "turns": [
+    {
+      "user": "I want to raise a complaint about a delayed delivery.",
+      "status": 200,
+      "latency_s": 7.01,
+      "events": [
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3684515",
+                  "args": {
+                    "agent_name": "service_request_agent"
+                  },
+                  "name": "transfer_to_agent"
+                },
+                "thoughtSignature": "EnMKcQFpFH0T2PmJdeEIOal0R1y5hN7QK4DUl1rVNbHNze7XkBOtfnefsdUTrsdB_sdZQ8d6obYudU351aA3Saf-i95-vsOG3gXs8CyaMZOAPG8issra9AktvjiG3V6ZL74AzVqEITC5LLj2jPsIhgHjHBUJ"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 24,
+            "promptTokenCount": 1863,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 1863
+              }
+            ],
+            "totalTokenCount": 1887
+          },
+          "invocationId": "e-c5851f35-e85f-45fb-aa3b-55de6f44fa52",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "longRunningToolIds": [],
+          "id": "e499c880-1c81-4a5e-95b7-748cb948750f",
+          "timestamp": 1792252752.745405
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3684515",
+                  "name": "transfer_to_agent",
+                  "response": {
+                    "result": null
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-c5851f35-e85f-45fb-aa3b-55de6f44fa52",
+          "author": "apex_concierge",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "transferToAgent": "service_request_agent",
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1"
+          },
+          "id": "98e6fb81-e2fb-4170-9f26-db2a3acdfef3",
+          "timestamp": 1792252755.9749372
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_3854773",
+                  "args": {},
+                  "name": "list_service_catalog"
+                },
+                "thoughtSignature": "EnMKcQFpFH0TsPm5g-3bbVcs3ZUJIiiTSriN3aNNNR2ylTbCGeWrrCBPg8N2KllQP5yCvlfQE6BBb91wNJyEDbjQVJSz8BasA98nNFFhfwg-Ge3ezX51hPTVaTQ5GzUSjYZDyHgZNE5L7KpBfAvRa59bo-Wt"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 12,
+            "promptTokenCount": 2870,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 2870
+              }
+            ],
+            "totalTokenCount": 2882
+          },
+          "invocationId": "e-c5851f35-e85f-45fb-aa3b-55de6f44fa52",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "87285293-a06e-4991-b77a-3566b0a94237",
+          "timestamp": 1792252755.9963567
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_3854773",
+                  "name": "list_service_catalog",
+                  "response": {
+                    "status": "ok",
+                    "request_types": [
+                      {
+                        "value": "order_issue",
+                        "label": "A problem with an order"
+                      },
+                      {
+                        "value": "delivery_delay",
+                        "label": "Delivery running late or not arriving"
+                      },
+                      {
+                        "value": "return_exchange",
+                        "label": "Return or exchange of an item"
+                      },
+                      {
+                        "value": "refund",
+                        "label": "Refund not received or wrong amount"
+                      },
+                      {
+                        "value": "product_defect",
+                        "label": "Item defective, damaged or wrong"
+                      },
+                      {
+                        "value": "billing",
+                        "label": "Charges, invoice or coupon problem"
+                      },
+                      {
+                        "value": "account_access",
+                        "label": "Login, OTP or profile access"
+                      },
+                      {
+                        "value": "loyalty",
+                        "label": "Prime membership, points or coupons"
+                      },
+                      {
+                        "value": "feedback",
+                        "label": "Compliment, complaint or suggestion"
+                      },
+                      {
+                        "value": "emergency",
+                        "label": "Something urgent that needs the response desk now"
+                      },
+                      {
+                        "value": "other",
+                        "label": "Something not covered above"
+                      }
+                    ],
+                    "urgency_levels": [
+                      {
+                        "value": "emergency",
+                        "respond_within": "15 minutes"
+                      },
+                      {
+                        "value": "high",
+                        "respond_within": "120 minutes"
+                      },
+                      {
+                        "value": "normal",
+                        "respond_within": "24 hours"
+                      },
+                      {
+                        "value": "low",
+                        "respond_within": "72 hours"
+                      }
+                    ],
+                    "emergency_types": [
+                      {
+                        "value": "none",
+                        "label": "Not an emergency"
+                      },
+                      {
+                        "value": "safety_hazard",
+                        "label": "Safety hazard - electrical, fire or structural risk"
+                      },
+                      {
+                        "value": "food_safety",
+                        "label": "Food safety - spoiled, contaminated or wrong temperature"
+                      },
+                      {
+                        "value": "payment_fraud",
+                        "label": "Payment fraud - unauthorised debit or duplicate charge"
+                      },
+                      {
+                        "value": "medical_allergy",
+                        "label": "Medical or allergy reaction to a delivered product"
+                      },
+                      {
+                        "value": "damaged_goods",
+                        "label": "Damaged goods - leaking, broken or hazardous packaging"
+                      },
+                      {
+                        "value": "access_blocked",
+                        "label": "Access blocked - locked gate, no water or electricity supply"
+                      },
+                      {
+                        "value": "no_delivery_aged",
+                        "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                      }
+                    ],
+                    "channels": [
+                      "web_chat",
+                      "whatsapp",
+                      "phone",
+                      "email",
+                      "store_counter"
+                    ],
+                    "mandatory_fields": [
+                      "full_name",
+                      "email",
+                      "phone",
+                      "request_type",
+                      "issue_summary"
+                    ],
+                    "optional_fields": [
+                      "urgency (default normal)",
+                      "emergency_type (default none)",
+                      "scheduled_for (default asap)",
+                      "order_id"
+                    ],
+                    "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+                    "message": "Collect all mandatory fields before calling create_support_request."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-c5851f35-e85f-45fb-aa3b-55de6f44fa52",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "bf22700f-8c43-4dfe-84c3-ab7847f5354e",
+          "timestamp": 1792252758.672388
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "I am sorry to hear about the delay with your delivery. I can certainly help you file a complaint about this.\n\nTo get started, could you please provide your full name?",
+                "thoughtSignature": "EnMKcQFpFH0T1s81SNrIt8zIL6L6xYAjJYqxvavCddY0v0StaQgEFUt6Oz2-PG7K_Y8nu7QJv3MfVjuqGdDUaZ22EdOZAvlfr0nPZuRL9vVXyLI6Yfm1YHRa5K-0zIaHbStW5OveRmED7Kn_YKub1bBdHxID"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 36,
+            "promptTokenCount": 3494,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3494
+              }
+            ],
+            "totalTokenCount": 3530
+          },
+          "invocationId": "e-c5851f35-e85f-45fb-aa3b-55de6f44fa52",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "6b1d9bef-6c11-4f5f-8190-a70297687975",
+          "timestamp": 1792252758.6923501
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "transfer_to_agent",
+            "args": {
+              "agent_name": "service_request_agent"
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_service_catalog",
+            "args": {},
+            "author": "service_request_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "transfer_to_agent",
+            "response": {
+              "result": null
+            },
+            "author": "apex_concierge"
+          },
+          {
+            "tool": "list_service_catalog",
+            "response": {
+              "status": "ok",
+              "request_types": [
+                {
+                  "value": "order_issue",
+                  "label": "A problem with an order"
+                },
+                {
+                  "value": "delivery_delay",
+                  "label": "Delivery running late or not arriving"
+                },
+                {
+                  "value": "return_exchange",
+                  "label": "Return or exchange of an item"
+                },
+                {
+                  "value": "refund",
+                  "label": "Refund not received or wrong amount"
+                },
+                {
+                  "value": "product_defect",
+                  "label": "Item defective, damaged or wrong"
+                },
+                {
+                  "value": "billing",
+                  "label": "Charges, invoice or coupon problem"
+                },
+                {
+                  "value": "account_access",
+                  "label": "Login, OTP or profile access"
+                },
+                {
+                  "value": "loyalty",
+                  "label": "Prime membership, points or coupons"
+                },
+                {
+                  "value": "feedback",
+                  "label": "Compliment, complaint or suggestion"
+                },
+                {
+                  "value": "emergency",
+                  "label": "Something urgent that needs the response desk now"
+                },
+                {
+                  "value": "other",
+                  "label": "Something not covered above"
+                }
+              ],
+              "urgency_levels": [
+                {
+                  "value": "emergency",
+                  "respond_within": "15 minutes"
+                },
+                {
+                  "value": "high",
+                  "respond_within": "120 minutes"
+                },
+                {
+                  "value": "normal",
+                  "respond_within": "24 hours"
+                },
+                {
+                  "value": "low",
+                  "respond_within": "72 hours"
+                }
+              ],
+              "emergency_types": [
+                {
+                  "value": "none",
+                  "label": "Not an emergency"
+                },
+                {
+                  "value": "safety_hazard",
+                  "label": "Safety hazard - electrical, fire or structural risk"
+                },
+                {
+                  "value": "food_safety",
+                  "label": "Food safety - spoiled, contaminated or wrong temperature"
+                },
+                {
+                  "value": "payment_fraud",
+                  "label": "Payment fraud - unauthorised debit or duplicate charge"
+                },
+                {
+                  "value": "medical_allergy",
+                  "label": "Medical or allergy reaction to a delivered product"
+                },
+                {
+                  "value": "damaged_goods",
+                  "label": "Damaged goods - leaking, broken or hazardous packaging"
+                },
+                {
+                  "value": "access_blocked",
+                  "label": "Access blocked - locked gate, no water or electricity supply"
+                },
+                {
+                  "value": "no_delivery_aged",
+                  "label": "No delivery and the customer is elderly, disabled or dependants alone"
+                }
+              ],
+              "channels": [
+                "web_chat",
+                "whatsapp",
+                "phone",
+                "email",
+                "store_counter"
+              ],
+              "mandatory_fields": [
+                "full_name",
+                "email",
+                "phone",
+                "request_type",
+                "issue_summary"
+              ],
+              "optional_fields": [
+                "urgency (default normal)",
+                "emergency_type (default none)",
+                "scheduled_for (default asap)",
+                "order_id"
+              ],
+              "reference_format": "APX-SR-YYYY-XXXXXX, or APX-EMG-YYYY-XXXXXX for emergencies",
+              "message": "Collect all mandatory fields before calling create_support_request."
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "authors": [
+          "apex_concierge",
+          "service_request_agent"
+        ],
+        "outputs": [],
+        "transfers": [
+          "service_request_agent"
+        ],
+        "routes": [],
+        "errors": [],
+        "tokens": 8299,
+        "final_text": "I am sorry to hear about the delay with your delivery. I can certainly help you file a complaint about this.\n\nTo get started, could you please provide your full name?",
+        "state_delta": {},
+        "n_events": 5
+      }
+    },
+    {
+      "user": "My details are Rohit Malhotra, rohit.malhotra@example.com, 9845005518. Order APX-ORD-2026-041940 was due yesterday morning and still has not arrived.",
+      "status": 200,
+      "latency_s": 6.71,
+      "events": [
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_690966",
+                  "args": {
+                    "phone": "9845005518",
+                    "request_type": "delivery_delay",
+                    "full_name": "Rohit Malhotra",
+                    "email": "rohit.malhotra@example.com",
+                    "issue_summary": "Order APX-ORD-2026-041940 was due yesterday morning and still has not arrived.",
+                    "order_id": "APX-ORD-2026-041940"
+                  },
+                  "name": "check_request_readiness"
+                },
+                "thoughtSignature": "EnMKcQFpFH0TdXWvYo_At70ExoNSZDn2ay9zysa_trPAXrw0pV6PmzPSJLNE4nuD2AC65aB-HVkpXR9RxOj9k4yhoXS2vbP1JBLwyAXlyVKZlIjhtiayda2IKSy3gsixpXfHu3ntAruLl7sRIHHb7FXc2wxb"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 119,
+            "promptTokenCount": 3587,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3587
+              }
+            ],
+            "totalTokenCount": 3706
+          },
+          "invocationId": "e-bd5fdf65-5418-427a-81c3-4f40be755007",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "c49f15a3-e9a0-4b10-bafd-4279738cf210",
+          "timestamp": 1792252759.7389438
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_690966",
+                  "name": "check_request_readiness",
+                  "response": {
+                    "status": "ok",
+                    "ready": true,
+                    "checks": [
+                      {
+                        "field": "full_name",
+                        "ok": true,
+                        "detail": "'Rohit Malhotra' accepted"
+                      },
+                      {
+                        "field": "email",
+                        "ok": true,
+                        "detail": "'rohit.malhotra@example.com' accepted"
+                      },
+                      {
+                        "field": "phone",
+                        "ok": true,
+                        "detail": "'9845005518' accepted"
+                      },
+                      {
+                        "field": "request_type",
+                        "ok": true,
+                        "detail": "'delivery_delay' is valid"
+                      },
+                      {
+                        "field": "issue_summary",
+                        "ok": true,
+                        "detail": "detailed enough"
+                      },
+                      {
+                        "field": "order_id",
+                        "ok": true,
+                        "detail": "looks like a valid order ID"
+                      }
+                    ],
+                    "missing": [],
+                    "message": "All mandatory details are present - call create_support_request now."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-bd5fdf65-5418-427a-81c3-4f40be755007",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "30d43d3f-9c36-4254-96ba-d958bc37252a",
+          "timestamp": 1792252763.2789283
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "functionCall": {
+                  "id": "call_4992481",
+                  "args": {
+                    "full_name": "Rohit Malhotra",
+                    "phone": "9845005518",
+                    "email": "rohit.malhotra@example.com",
+                    "order_id": "APX-ORD-2026-041940",
+                    "request_type": "delivery_delay",
+                    "issue_summary": "Order APX-ORD-2026-041940 was due yesterday morning and still has not arrived."
+                  },
+                  "name": "create_support_request"
+                },
+                "thoughtSignature": "EnMKcQFpFH0TeG7ImsNEHvh5S3yNM7lSxK6R_EvwBRJ4Xeg99gQ7ZE6iljPwXkb1TR6I5LtB_V1en_VyEJFQCMub2s3GqhR5A02mdv4iRsIXMZN278ISvM9GZw0U8cKCi9Y2E5q3qXeWw4fHVzKvmSrvmJVM"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 118,
+            "promptTokenCount": 3896,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 3896
+              }
+            ],
+            "totalTokenCount": 4014
+          },
+          "invocationId": "e-bd5fdf65-5418-427a-81c3-4f40be755007",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "longRunningToolIds": [],
+          "id": "0aa26bbf-0582-4971-96f7-48939c17e10d",
+          "timestamp": 1792252763.30138
+        },
+        {
+          "content": {
+            "parts": [
+              {
+                "functionResponse": {
+                  "id": "call_4992481",
+                  "name": "create_support_request",
+                  "response": {
+                    "status": "ok",
+                    "reference_id": "APX-SR-2026-78IT8T",
+                    "request_status": "open",
+                    "request_type": "delivery_delay",
+                    "urgency": "normal",
+                    "emergency_type": "none",
+                    "full_name": "Rohit Malhotra",
+                    "email": "rohit.malhotra@example.com",
+                    "phone": "+919845005518",
+                    "scheduled_for": "asap",
+                    "order_id": "APX-ORD-2026-041940",
+                    "assigned_team": "Last Mile Operations",
+                    "target_response_at": "2026-10-18 21:29 IST",
+                    "created_at": "2026-10-17T21:29:24.843531+05:30",
+                    "channel": "web_chat",
+                    "next_step": "Last Mile Operations will contact Rohit Malhotra at +919845005518 by 2026-10-18 21:29 IST.",
+                    "message": "Last Mile Operations will contact Rohit Malhotra at +919845005518 by 2026-10-18 21:29 IST."
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "invocationId": "e-bd5fdf65-5418-427a-81c3-4f40be755007",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "ca42c669-9cdb-468a-be0f-23179dbfc2fc",
+          "timestamp": 1792252764.8530731
+        },
+        {
+          "modelVersion": "gemini-3.1-flash-lite",
+          "content": {
+            "parts": [
+              {
+                "text": "Thank you for providing those details, Rohit. I have successfully filed your complaint regarding the delayed delivery of order APX-ORD-2026-041940.\n\nYour reference ID is **APX-SR-2026-78IT8T**. The Last Mile Operations team has been assigned to your request and they will contact you at +919845005518 by 2026-10-18 21:29 IST.",
+                "thoughtSignature": "EnMKcQFpFH0TIWrnLiEL2A_bVyJWdskIoC6ac0v5eYIcaIxYDOivd0mPaY4Ii0_y7Ib15gbgv_GNKE2n0rK5YULuRmHp3LXeMsHBKiHDuPU1kanhuld13TC1QZhuGpqKkiRJExLE2OuyBeTIpK3DZJ5YZ0Zh"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "usageMetadata": {
+            "candidatesTokenCount": 110,
+            "promptTokenCount": 4336,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 4336
+              }
+            ],
+            "totalTokenCount": 4446
+          },
+          "invocationId": "e-bd5fdf65-5418-427a-81c3-4f40be755007",
+          "author": "service_request_agent",
+          "actions": {
+            "stateDelta": {},
+            "artifactDelta": {},
+            "requestedAuthConfigs": {},
+            "requestedToolConfirmations": {}
+          },
+          "nodeInfo": {
+            "path": "apex_concierge@1/service_request_agent@1"
+          },
+          "id": "6270914a-343d-4f3e-bcf4-6bd7acf6065c",
+          "timestamp": 1792252764.8718915
+        }
+      ],
+      "parsed": {
+        "calls": [
+          {
+            "tool": "check_request_readiness",
+            "args": {
+              "phone": "9845005518",
+              "request_type": "delivery_delay",
+              "full_name": "Rohit Malhotra",
+              "email": "rohit.malhotra@example.com",
+              "issue_summary": "Order APX-ORD-2026-041940 was due yesterday morning and still has not arrived.",
+              "order_id": "APX-ORD-2026-041940"
+            },
+            "author": "service_request_agent"
+          },
+          {
+            "tool": "create_support_request",
+            "args": {
+              "full_name": "Rohit Malhotra",
+              "phone": "9845005518",
+              "email": "rohit.malhotra@example.com",
+              "order_id": "APX-ORD-2026-041940",
+              "request_type": "delivery_delay",
+              "issue_summary": "Order APX-ORD-2026-041940 was due yesterday morning and still has not arrived."
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "responses": [
+          {
+            "tool": "check_request_readiness",
+            "response": {
+              "status": "ok",
+              "ready": true,
+              "checks": [
+                {
+                  "field": "full_name",
+                  "ok": true,
+                  "detail": "'Rohit Malhotra' accepted"
+                },
+                {
+                  "field": "email",
+                  "ok": true,
+                  "detail": "'rohit.malhotra@example.com' accepted"
+                },
+                {
+                  "field": "phone",
+                  "ok": true,
+                  "detail": "'9845005518' accepted"
+                },
+                {
+                  "field": "request_type",
+                  "ok": true,
+                  "detail": "'delivery_delay' is valid"
+                },
+                {
+                  "field": "issue_summary",
+                  "ok": true,
+                  "detail": "detailed enough"
+                },
+                {
+                  "field": "order_id",
+                  "ok": true,
+                  "detail": "looks like a valid order ID"
+                }
+              ],
+              "missing": [],
+              "message": "All mandatory details are present - call create_support_request now."
+            },
+            "author": "service_request_agent"
+          },
+          {
+            "tool": "create_support_request",
+            "response": {
+              "status": "ok",
+              "reference_id": "APX-SR-2026-78IT8T",
+              "request_status": "open",
+              "request_type": "delivery_delay",
+              "urgency": "normal",
+              "emergency_type": "none",
+              "full_name": "Rohit Malhotra",
+              "email": "rohit.malhotra@example.com",
+              "phone": "+919845005518",
+              "scheduled_for": "asap",
+              "order_id": "APX-ORD-2026-041940",
+              "assigned_team": "Last Mile Operations",
+              "target_response_at": "2026-10-18 21:29 IST",
+              "created_at": "2026-10-17T21:29:24.843531+05:30",
+              "channel": "web_chat",
+              "next_step": "Last Mile Operations will contact Rohit Malhotra at +919845005518 by 2026-10-18 21:29 IST.",
+              "message": "Last Mile Operations will contact Rohit Malhotra at +919845005518 by 2026-10-18 21:29 IST."
+            },
+            "author": "service_request_agent"
+          }
+        ],
+        "authors": [
+          "service_request_agent"
+        ],
+        "outputs": [],
+        "transfers": [],
+        "routes": [],
+        "errors": [],
+        "tokens": 12166,
+        "final_text": "Thank you for providing those details, Rohit. I have successfully filed your complaint regarding the delayed delivery of order APX-ORD-2026-041940.\n\nYour reference ID is **APX-SR-2026-78IT8T**. The Last Mile Operations team has been assigned to your request and they will contact you at +919845005518 by 2026-10-18 21:29 IST.",
+        "state_delta": {},
+        "n_events": 5
+      }
+    }
+  ],
+  "http_error": "",
+  "state": {},
+  "latency_total": 13.72,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "response_regex /APX-SR-2026-[A-Z0-9]{6}/",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tool_called create_support_request",
+      "ok": true,
+      "detail": "tools called: ['transfer_to_agent', 'list_service_catalog', 'check_request_readiness', 'create_support_request']"
+    },
+    {
+      "check": "tool_args create_support_request",
+      "ok": true,
+      "detail": "calls: [{'tool': 'transfer_to_agent', 'args': {'agent_name': 'service_request_agent'}, 'author': 'apex_concierge'}, {'tool': 'list_service_catalog', 'args': {}, 'author': 'service_request_agent'}, {'tool': 'check_request_readiness', 'args': {'phone': '9845005518', 'request_type': 'delivery_delay', 'full_name': 'Rohit Malhotra', 'email': 'rohit.malhotra@example.com', 'issue_summary': 'Order APX-ORD-2026-041940 was due yesterday morning and still has not arrived.', 'order_id': 'APX-ORD-2026-041940'}, 'author': 'service_request_agent'}, {'tool': 'create_support_request', 'args': {'full_name': 'Rohit Malhotra', 'phone': '9845005518', 'email': 'rohit.malhotra@example.com', 'order_id': 'APX-ORD-2026-041940', 'request_type': 'delivery_delay', 'issue_summary': 'Order APX-ORD-2026-041940 was due yesterday morning and still has not arrived.'}, 'author': 'service_request_agent'}]"
+    },
+    {
+      "check": "agent_involved service_request_agent",
+      "ok": true,
+      "detail": "authors=['apex_concierge', 'service_request_agent'] transfers=['service_request_agent']"
+    },
+    {
+      "check": "max_latency_s",
+      "ok": true,
+      "detail": "13.7s"
+    }
+  ],
+  "passed": true,
+  "failure_class": null
+}

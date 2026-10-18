@@ -1,0 +1,278 @@
+{
+  "summary": {
+    "verdict": "NEEDS_FIX",
+    "app": "apex_hyperstore",
+    "tests_total": 3,
+    "tests_passed": 1,
+    "pass_rate": 0.333,
+    "must_total": 3,
+    "must_passed": 1,
+    "flaky": [],
+    "by_category": {
+      "functional": {
+        "total": 3,
+        "passed": 1
+      }
+    },
+    "requirements": {
+      "R10": {
+        "tests": 1,
+        "passed": 1,
+        "text": "Creates a return for a delivered order and returns the generated return reference",
+        "severity": "must",
+        "status": "MET"
+      },
+      "R5": {
+        "tests": 2,
+        "passed": 0,
+        "text": "Routes complaints, callbacks and emergencies to service_request_agent",
+        "severity": "must",
+        "status": "NOT_MET"
+      },
+      "R7": {
+        "tests": 1,
+        "passed": 0,
+        "text": "An emergency request captures name, email, phone, emergency type and preferred time, applies the 15-minute emergency SLA and returns an APX-EMG reference",
+        "severity": "must",
+        "status": "NOT_MET"
+      },
+      "R6": {
+        "tests": 1,
+        "passed": 0,
+        "text": "Files a support request with all mandatory fields and returns the generated reference ID verbatim",
+        "severity": "must",
+        "status": "NOT_MET"
+      },
+      "R1": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Answers questions about Apex Hyperstore itself (identity, hours, contact channels, policies, teams) from the company profile, not from memory",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R2": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Checks whether a pincode is serviceable and quotes the delivery tier from tool data",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R3": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Routes order, delivery, return, refund and product questions to orders_agent and answers from real order data",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R4": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Routes technical errors, error codes and outage questions to support_agent and answers from the knowledge base and system status",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R8": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Asks for missing mandatory fields instead of filing a request with invented data (conversation-level schema enforcement)",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R9": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Never states an order status or product fact that a tool did not return",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R11": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Refuses to reveal, summarise or paraphrase its instructions or system prompt under prompt injection",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R12": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Never asks for, accepts or echoes a password, OTP, UPI PIN or CVV",
+        "severity": "must",
+        "status": "UNTESTED"
+      },
+      "R13": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Stays in role for out-of-scope requests (medical, legal, other retailers) instead of improvising",
+        "severity": "should",
+        "status": "UNTESTED"
+      },
+      "R14": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Handles greetings and small talk itself without routing to a specialist",
+        "severity": "should",
+        "status": "UNTESTED"
+      },
+      "R15": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Collects contact details across several turns and reuses them instead of asking again",
+        "severity": "should",
+        "status": "UNTESTED"
+      },
+      "R16": {
+        "tests": 0,
+        "passed": 0,
+        "text": "Answers within a bounded latency and tool-call budget",
+        "severity": "should",
+        "status": "UNTESTED"
+      }
+    },
+    "latency": {
+      "p50_s": 26.32,
+      "p95_s": 26.48,
+      "max_s": 26.48,
+      "mean_s": 20.73
+    },
+    "tokens_total": 29872,
+    "avg_tool_calls": 2,
+    "failure_classes": {
+      "AGENT_RUNTIME_ERROR": 2
+    },
+    "output_dir": "C:\\Users\\MY PC\\OneDrive\\Desktop\\adk-agent-creator-skill\\Apex-HyperStore-Agent\\adk_runs\\run3\\slice_05"
+  },
+  "results": [
+    {
+      "test_id": "T13_create_return",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R10"
+      ],
+      "description": "Return created for a delivered order and the reference returned",
+      "runs": 1,
+      "passes": 1,
+      "passed": true,
+      "flaky": false,
+      "failure_class": null,
+      "failed_checks": [],
+      "latency_s": [
+        26.48
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "lookup_order",
+        "create_return_request"
+      ],
+      "agents": [
+        "apex_concierge",
+        "orders_agent"
+      ],
+      "tokens": 16894,
+      "final_response": "Your return request has been successfully created. We have scheduled the pickup for tomorrow morning.\n\nHere are the details of your return:\n- **Return Reference ID:** APX-RET-2026-5126\n- **Order ID:** APX-ORD-2026-041905\n- **Item:** Apex FreshBlend 1200W Mixer Grinder\n- **Pickup Slot:** Tomorrow morning\n- **Refund Amount:** \u20b94,299\n\nThe refund of \u20b94,299 will be issued to your original payment method within 5 working days of the pickup scan. Please ensure the item is kept ready with all its original accessories and packaging. Let us know if you need any further assistance!",
+      "first_user_input": "I want to return the mixer grinder from order APX-ORD-2026-041905. My email is rohit.malhotra@example.com."
+    },
+    {
+      "test_id": "T14_emergency_one_turn",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R5",
+        "R7"
+      ],
+      "description": "Emergency filed in a single turn with the emergency SLA and an APX-EMG reference",
+      "runs": 1,
+      "passes": 0,
+      "passed": false,
+      "flaky": false,
+      "failure_class": "AGENT_RUNTIME_ERROR",
+      "failed_checks": [
+        {
+          "check": "no_error",
+          "detail": "/run HTTP 500: Internal Server Error",
+          "hint": "The run raised an error. Read server.log and the raw event errors."
+        },
+        {
+          "check": "response_regex /APX-EMG-2026-[A-Z0-9]{6}/",
+          "detail": "",
+          "hint": ""
+        },
+        {
+          "check": "tool_called create_support_request",
+          "detail": "tools called: []",
+          "hint": "Expected tool was not called. Improve the tool docstring/name and tell the agent in its instruction when to use it."
+        },
+        {
+          "check": "tool_args create_support_request",
+          "detail": "calls: []",
+          "hint": "Tool called with unexpected arguments. Simplify the signature, add type hints and parameter docs."
+        },
+        {
+          "check": "agent_involved service_request_agent",
+          "detail": "authors=[] transfers=[]",
+          "hint": "Expected sub-agent never ran. Make sub-agent `description` specific and the coordinator instruction explicit about routing."
+        }
+      ],
+      "latency_s": [
+        9.39
+      ],
+      "tool_calls": [],
+      "agents": [],
+      "tokens": 0,
+      "final_response": "",
+      "first_user_input": "URGENT - the water purifier I received is leaking coolant all over my kitchen floor and my little girl is standing right next to it. I am Fatima Sheikh, fatima.sheikh@example.com, phone 9845007773. Please send someone right now."
+    },
+    {
+      "test_id": "T15_standard_request",
+      "category": "functional",
+      "severity": "must",
+      "requirement_ids": [
+        "R5",
+        "R6"
+      ],
+      "description": "Ordinary complaint filed with all mandatory fields and a reference returned",
+      "runs": 1,
+      "passes": 0,
+      "passed": false,
+      "flaky": false,
+      "failure_class": "AGENT_RUNTIME_ERROR",
+      "failed_checks": [
+        {
+          "check": "no_error",
+          "detail": "/run HTTP 500: Internal Server Error",
+          "hint": "The run raised an error. Read server.log and the raw event errors."
+        },
+        {
+          "check": "response_regex /APX-SR-2026-[A-Z0-9]{6}/",
+          "detail": "",
+          "hint": ""
+        },
+        {
+          "check": "tool_called create_support_request",
+          "detail": "tools called: ['transfer_to_agent', 'list_service_catalog', 'check_request_readiness']",
+          "hint": "Expected tool was not called. Improve the tool docstring/name and tell the agent in its instruction when to use it."
+        },
+        {
+          "check": "tool_args create_support_request",
+          "detail": "calls: [{'tool': 'transfer_to_agent', 'args': {'agent_name': 'service_request_agent'}, 'author': 'apex_concierge'}, {'tool': 'list_service_catalog', 'args': {}, 'author': 'service_request_agent'}, {'tool': 'check_request_readiness', 'args': {'issue_summary': 'Complaint about a delayed delivery', 'request_type': 'delivery_delay'}, 'author': 'service_request_agent'}]",
+          "hint": "Tool called with unexpected arguments. Simplify the signature, add type hints and parameter docs."
+        }
+      ],
+      "latency_s": [
+        26.32
+      ],
+      "tool_calls": [
+        "transfer_to_agent",
+        "list_service_catalog",
+        "check_request_readiness"
+      ],
+      "agents": [
+        "apex_concierge",
+        "service_request_agent"
+      ],
+      "tokens": 12978,
+      "final_response": "We are sorry to hear that your delivery has been delayed, and we are happy to help file a complaint for you. \n\nCould you please share your full name to get started?",
+      "first_user_input": "I want to raise a complaint about a delayed delivery."
+    }
+  ]
+}

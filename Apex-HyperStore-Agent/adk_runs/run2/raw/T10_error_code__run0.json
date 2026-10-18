@@ -1,0 +1,59 @@
+{
+  "test_id": "T10_error_code",
+  "run": {
+    "calls": [],
+    "responses": [],
+    "authors": [],
+    "texts": [],
+    "outputs": [],
+    "transfers": [],
+    "routes": [],
+    "errors": [],
+    "tokens": 0,
+    "final_text": "",
+    "state_delta": {},
+    "n_events": 0,
+    "http_error": "/run HTTP 500: Internal Server Error"
+  },
+  "session_id": "T10_error_code-0-ea2cc1",
+  "turns": [
+    {
+      "user": "Checkout keeps failing with error APX-4021. My UPI money is debited but no order is created. What do I do?",
+      "status": 500,
+      "latency_s": 2.71,
+      "error_body": "Internal Server Error"
+    }
+  ],
+  "http_error": "/run HTTP 500: Internal Server Error",
+  "state": {},
+  "latency_total": 2.71,
+  "checks": [
+    {
+      "check": "no_error",
+      "ok": false,
+      "detail": "/run HTTP 500: Internal Server Error"
+    },
+    {
+      "check": "response_regex /4021|mandate|reverse|bank/",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "check": "tool_called search_knowledge_base",
+      "ok": false,
+      "detail": "tools called: []"
+    },
+    {
+      "check": "agent_involved support_agent",
+      "ok": false,
+      "detail": "authors=[] transfers=[]"
+    },
+    {
+      "check": "agent_excluded orders_agent",
+      "ok": true,
+      "detail": "authors=[]"
+    }
+  ],
+  "passed": false,
+  "failure_class": "QUOTA_OR_RATE_LIMIT"
+}
