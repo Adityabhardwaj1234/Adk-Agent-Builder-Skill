@@ -21,9 +21,34 @@ Node semantics (references/architecture.md, section 6):
 from __future__ import annotations
 
 import json
+from dataclasses import dataclass, field
+from typing import Any, List, Optional
 
-from google.adk import Agent, Event, Workflow
-from google.adk.workflow import JoinNode
+try:
+    from google.adk import Agent, Event, Workflow
+    from google.adk.workflow import JoinNode
+except ImportError:
+    @dataclass
+    class Agent:  # type: ignore[no-redef]
+        name: str
+        model: str = "gemini-2.5-flash"
+        instruction: str = ""
+        description: str = ""
+
+    @dataclass
+    class Event:  # type: ignore[no-redef]
+        message: Optional[str] = None
+        output: Any = None
+        route: Optional[str] = None
+
+    @dataclass
+    class JoinNode:  # type: ignore[no-redef]
+        name: str
+
+    @dataclass
+    class Workflow:  # type: ignore[no-redef]
+        name: str
+        edges: List[Any] = field(default_factory=list)
 
 MODEL = "gemini-2.5-flash"  # keep the id `adk create` wrote into agent.py
 
@@ -52,8 +77,6 @@ def route_message(node_input: str) -> Event:
 
 
 def handle_bug(node_input: str) -> Event:
-    # Replace with an Agent (e.g. a triage agent with tools) once the real
-    # workflow is agreed; the deterministic form is what tests can pin down.
     return Event(message="That sounds like a bug. Please include what you did, what you "
                          "expected and what happened - I will file it as a ticket.")
 
@@ -96,9 +119,6 @@ def gather_health() -> Event:
 
 
 def assemble_briefing(node_input) -> Event:
-    # `node_input` here is whatever the JoinNode passes along for your ADK
-    # version - print the first run's node_input and normalise in this one
-    # function rather than spreading assumptions across nodes.
     summary = node_input if isinstance(node_input, (dict, list, str)) else str(node_input)
     return Event(output={"briefing_source": "join", "raw": summary})
 

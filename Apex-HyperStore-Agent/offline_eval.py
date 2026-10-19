@@ -94,10 +94,15 @@ check(G, "get_product_details returns SKU",
       ok_of("product")(tools.get_product_details("APX-SKU-100512")))
 check(G, "get_product_details rejects unknown SKU",
       err_has("no product")(tools.get_product_details("APX-SKU-000000")))
+
+future_date_str = (schemas.now_ist() + timedelta(days=1)).strftime("%Y-%m-%d")
+future_slot_10 = f"{future_date_str} 10:00"
+future_slot_11 = f"{future_date_str} 11:00"
+
 check(G, "returns: delivered order accepted",
       ok_of("return_id")(tools.create_return_request(
           "APX-ORD-2026-041905", "rohit.malhotra@example.com",
-          "Motor is making a grinding noise", "2026-10-18 10:00")))
+          "Motor is making a grinding noise", future_slot_10)))
 check(G, "returns: wrong email refused",
       err_has("does not match")(tools.create_return_request(
           "APX-ORD-2026-041905", "wrong@example.com", "Grinding noise from motor")))
@@ -172,7 +177,7 @@ check(G, "readiness flags malformed order ID", "order_id" in r["missing"])
 normal = tools.create_support_request(
     "Rohit Malhotra", "rohit.malhotra@example.com", "9845005518", "refund",
     "Refund for the mixer grinder was credited to my card but not to my bank account",
-    urgency="high", scheduled_for="2026-10-18 11:00", order_id="APX-ORD-2026-041905",
+    urgency="high", scheduled_for=future_slot_11, order_id="APX-ORD-2026-041905",
     channel="whatsapp")
 check(G, "standard request filed", ok_of("reference_id")(normal), json.dumps(normal)[:200])
 check(G, "standard request uses APX-SR prefix",
@@ -184,7 +189,7 @@ check(G, "high urgency gets a 2-hour SLA",
            - schemas.parse_ts(normal["target_response_at"])).total_seconds()) < 90,
       f"{normal['created_at']} -> {normal['target_response_at']}")
 check(G, "scheduled_for normalised to IST",
-      normal["scheduled_for"] == "2026-10-18 11:00 IST", normal["scheduled_for"])
+      normal["scheduled_for"] == f"{future_slot_11} IST", normal["scheduled_for"])
 check(G, "phone normalised to +91 E.164", normal["phone"] == "+919845005518", normal["phone"])
 check(G, "email normalised to lowercase", normal["email"] == "rohit.malhotra@example.com")
 

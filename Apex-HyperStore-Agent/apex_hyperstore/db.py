@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import os
 import sqlite3
+import tempfile
 import threading
 from pathlib import Path
 
@@ -18,10 +19,9 @@ DEFAULT_DB_PATH = APP_DIR.parent / "data" / "apex_hyperstore.db"
 
 _INIT_LOCK = threading.Lock()
 _INITIALISED: set[str] = set()
+_RESOLVED_FALLBACK_PATH: Path | None = None
 
 SCHEMA = """
-PRAGMA journal_mode=WAL;
-
 CREATE TABLE IF NOT EXISTS customers (
     customer_id    TEXT PRIMARY KEY,
     full_name      TEXT NOT NULL,
@@ -124,16 +124,36 @@ CREATE TABLE IF NOT EXISTS returns (
 
 
 def db_path() -> Path:
-    return Path(os.environ.get("APEX_DB_PATH", str(DEFAULT_DB_PATH)))
+    global _RESOLVED_FALLBACK_PATH
+    if "APEX_DB_PATH" in os.environ:
+        return Path(os.environ["APEX_DB_PATH"])
+    if _RESOLVED_FALLBACK_PATH is not None:
+        return _RESOLVED_FALLBACK_PATH
+    return DEFAULT_DB_PATH
 
 
-def connect() -> sqlite3.Connection:
-    """Open a connection with the schema guaranteed to exist."""
-    path = db_path()
+def _open_with_schema(path: Path) -> sqlite3.Connection:
     path.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(str(path), timeout=15)
     conn.row_factory = sqlite3.Row
+    try:
+        conn.execute("PRAGMA journal_mode=WAL")
+    except sqlite3.OperationalError:
+        conn.execute("PRAGMA journal_mode=MEMORY")
     conn.executescript(SCHEMA)
+    return conn
+
+
+def connect() -> sqlite3.Connection:
+    """Open a connection with the schema guaranteed to exist (falling back to tempdir if mount rejects locks)."""
+    global _RESOLVED_FALLBACK_PATH
+    path = db_path()
+    try:
+        conn = _open_with_schema(path)
+    except sqlite3.OperationalError:
+        _RESOLVED_FALLBACK_PATH = Path(tempfile.gettempdir()) / "apex_hyperstore" / "apex_hyperstore.db"
+        path = _RESOLVED_FALLBACK_PATH
+        conn = _open_with_schema(path)
     if str(path) not in _INITIALISED:
         with _INIT_LOCK:
             if str(path) not in _INITIALISED:

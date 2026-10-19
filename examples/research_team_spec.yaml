@@ -1,0 +1,27 @@
+project_name: parallel_research_team
+business_objective: Run parallel domain research and compliance verification branches concurrently and synthesize findings.
+user_types:
+  - analyst
+functional_requirements:
+  - id: FR-001
+    category: orchestration
+    description: Execute independent research and verification branches in parallel using ParallelAgent.
+    priority: hard
+expected_tools:
+  - custom_function_tool
+  - google_search
+preferred_provider: gemini
+preferred_model: gemini-2.5-flash
+deployment_target: agent_runtime
+observability_backends:
+  - opentelemetry
+  - bigquery_agent_analytics
+acceptance_criteria:
+  - id: AC-001
+    description: Tool trajectory match score.
+    metric_name: tool_trajectory_avg_score
+    threshold: 1.0
+  - id: AC-002
+    description: Response match score.
+    metric_name: response_match_score
+    threshold: 0.8

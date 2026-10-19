@@ -22,10 +22,26 @@ and seed a demo database:
 from __future__ import annotations
 
 import os
+import re
 import sqlite3
+import tempfile
 from pathlib import Path
 
 from pydantic import BaseModel, Field, ValidationError
+
+try:
+    from pydantic import field_validator as _field_validator
+    _PYDANTIC_V2 = True
+except ImportError:
+    from pydantic import validator as _validator
+    _PYDANTIC_V2 = False
+
+
+def _email_validator(field_name: str):
+    if _PYDANTIC_V2:
+        return _field_validator(field_name)
+    return _validator(field_name, allow_reuse=True)
+
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS orders (
@@ -42,38 +58,69 @@ CREATE TABLE IF NOT EXISTS requests (
 );
 """
 
+_FALLBACK_DB_PATH: Path | None = None
+_EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+
 
 def db_path() -> Path:
     """Resolve the database path: APP_DB_PATH from the environment, else <app>/data/app.db."""
+    global _FALLBACK_DB_PATH
     configured = os.environ.get("APP_DB_PATH", "").strip()
     if configured:
         return Path(configured).expanduser().resolve()
+    if _FALLBACK_DB_PATH is not None:
+        return _FALLBACK_DB_PATH
     return Path(__file__).resolve().parent / "data" / "app.db"
 
 
 def connect() -> sqlite3.Connection:
     """Open a short-lived connection with row access by name and FK checks on."""
+    global _FALLBACK_DB_PATH
     path = db_path()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(path)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA foreign_keys = ON")
-    return conn
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        conn = sqlite3.connect(str(path))
+        conn.row_factory = sqlite3.Row
+        conn.execute("PRAGMA foreign_keys = ON")
+        return conn
+    except sqlite3.OperationalError:
+        _FALLBACK_DB_PATH = Path(tempfile.gettempdir()) / "adk_sqlite_tools" / "app.db"
+        _FALLBACK_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+        conn = sqlite3.connect(str(_FALLBACK_DB_PATH))
+        conn.row_factory = sqlite3.Row
+        conn.execute("PRAGMA foreign_keys = ON")
+        return conn
 
 
 def init_db() -> dict:
     """Create the tables and seed demo rows (idempotent)."""
-    with connect() as conn:
-        conn.executescript(_SCHEMA)
-        conn.execute(
-            "INSERT OR IGNORE INTO orders (order_id, status, eta, carrier) VALUES (?, ?, ?, ?)",
-            ("A100", "shipped", "Tuesday", "DHL"),
-        )
-        conn.execute(
-            "INSERT OR IGNORE INTO orders (order_id, status, eta, carrier) VALUES (?, ?, ?, ?)",
-            ("B200", "processing", "next Monday", None),
-        )
-        row = conn.execute("SELECT COUNT(*) AS n FROM orders").fetchone()
+    global _FALLBACK_DB_PATH
+    try:
+        with connect() as conn:
+            conn.executescript(_SCHEMA)
+            conn.execute(
+                "INSERT OR IGNORE INTO orders (order_id, status, eta, carrier) VALUES (?, ?, ?, ?)",
+                ("A100", "shipped", "Tuesday", "DHL"),
+            )
+            conn.execute(
+                "INSERT OR IGNORE INTO orders (order_id, status, eta, carrier) VALUES (?, ?, ?, ?)",
+                ("B200", "processing", "next Monday", None),
+            )
+            row = conn.execute("SELECT COUNT(*) AS n FROM orders").fetchone()
+    except sqlite3.OperationalError:
+        _FALLBACK_DB_PATH = Path(tempfile.gettempdir()) / "adk_sqlite_tools" / "app.db"
+        os.environ["APP_DB_PATH"] = str(_FALLBACK_DB_PATH)
+        with connect() as conn:
+            conn.executescript(_SCHEMA)
+            conn.execute(
+                "INSERT OR IGNORE INTO orders (order_id, status, eta, carrier) VALUES (?, ?, ?, ?)",
+                ("A100", "shipped", "Tuesday", "DHL"),
+            )
+            conn.execute(
+                "INSERT OR IGNORE INTO orders (order_id, status, eta, carrier) VALUES (?, ?, ?, ?)",
+                ("B200", "processing", "next Monday", None),
+            )
+            row = conn.execute("SELECT COUNT(*) AS n FROM orders").fetchone()
     return {"status": "success", "db": str(db_path()), "orders": row["n"]}
 
 
@@ -97,8 +144,6 @@ def lookup_order(order_id: str) -> dict:
     if row is None:
         return {"status": "error",
                 "error": f"No order {order_id!r} found. Ask the customer to re-check the id; never invent one."}
-    # `status` is reserved for the tool outcome (success/error); the order's own
-    # lifecycle column is returned as `order_status` so the keys cannot collide.
     record = dict(row)
     order_status = record.pop("status", None)
     return {"status": "success", "order_status": order_status, **record}
@@ -109,8 +154,15 @@ def lookup_order(order_id: str) -> dict:
 class RequestInput(BaseModel):
     """Validated shape of a support request before it is stored."""
 
-    customer_email: str = Field(min_length=3, max_length=254, pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+    customer_email: str = Field(min_length=3, max_length=254)
     summary: str = Field(min_length=5, max_length=1000)
+
+    @_email_validator("customer_email")
+    @classmethod
+    def _validate_email_pattern(cls, v: str) -> str:
+        if not _EMAIL_RE.match((v or "").strip()):
+            raise ValueError("customer_email must be a valid email address")
+        return v
 
 
 def create_request(customer_email: str, summary: str) -> dict:

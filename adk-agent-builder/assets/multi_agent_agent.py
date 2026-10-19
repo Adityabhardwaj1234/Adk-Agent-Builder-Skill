@@ -16,7 +16,22 @@ Pattern (references/architecture.md, sections 3 and 10):
 Replace the sample data structures with real lookups (a database accessed
 through tools - see assets/sqlite_tools.py for that pattern).
 """
-from google.adk.agents import Agent
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any, Callable, List
+
+try:
+    from google.adk.agents import Agent
+except ImportError:
+    @dataclass
+    class Agent:  # type: ignore[no-redef]
+        name: str
+        model: str = "gemini-2.5-flash"
+        description: str = ""
+        instruction: str = ""
+        tools: List[Callable[..., Any]] = field(default_factory=list)
+        sub_agents: List["Agent"] = field(default_factory=list)
 
 MODEL = "gemini-2.5-flash"  # keep the id `adk create` wrote into agent.py
 

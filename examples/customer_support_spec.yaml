@@ -1,0 +1,35 @@
+project_name: customer_support_agent
+business_objective: Resolve customer order status inquiries and verify refund policy compliance using custom tools.
+user_types:
+  - customer
+  - support_specialist
+user_stories:
+  - As a customer, I want to check my order status by ID.
+  - As a support specialist, I want refund eligibility verified against policy rules.
+functional_requirements:
+  - id: FR-001
+    category: lookup
+    description: Look up order status using execute_domain_lookup tool.
+    priority: hard
+  - id: FR-002
+    category: compliance
+    description: Verify refund policy rules sequentially before responding.
+    priority: hard
+expected_tools:
+  - custom_function_tool
+preferred_provider: gemini
+preferred_model: gemini-2.5-flash
+fallback_model: gemini-2.5-pro
+deployment_target: cloud_run
+observability_backends:
+  - opentelemetry
+  - cloud_trace
+acceptance_criteria:
+  - id: AC-001
+    description: Exact tool call trajectory match.
+    metric_name: tool_trajectory_avg_score
+    threshold: 1.0
+  - id: AC-002
+    description: Response lexical similarity threshold.
+    metric_name: response_match_score
+    threshold: 0.8

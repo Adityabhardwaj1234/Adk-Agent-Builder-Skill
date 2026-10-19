@@ -1,0 +1,90 @@
+[build-system]
+requires = ["setuptools>=66.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adk-agent-builder"
+version = "2.0.0"
+description = "Complete Google ADK Agent Creation, Validation, Testing, Evaluation, and Deployment Engineering Suite"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.11"
+authors = [
+    {name = "Aditya Bhardwaj"}
+]
+keywords = [
+    "google-adk",
+    "agents",
+    "llm",
+    "a2a",
+    "mcp",
+    "agent-skills",
+    "evaluation",
+    "deployment"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Testing"
+]
+dependencies = [
+    "PyYAML>=6.0",
+    "pydantic>=1.10.4,<3.0.0",
+]
+
+[project.optional-dependencies]
+adk = [
+    "google-adk>=2.10.0",
+]
+agents-cli = [
+    "google-agents-cli>=0.1.0",
+]
+openai = [
+    "google-adk[openai]>=2.10.0",
+    "openai>=1.40.0",
+]
+anthropic = [
+    "anthropic>=0.34.0",
+]
+litellm = [
+    "litellm>=1.45.0",
+]
+mcp = [
+    "mcp>=1.1.0,<3.0.0",
+]
+a2a = [
+    "a2a-sdk>=0.2.0",
+    "uvicorn>=0.17.0",
+    "fastapi>=0.92.0",
+]
+observability = [
+    "opentelemetry-api>=1.20.0",
+    "opentelemetry-sdk>=1.20.0",
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.5.0",
+    "mypy>=1.10.0",
+]
+
+[project.scripts]
+adk-agent-builder = "adk_agent_builder.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

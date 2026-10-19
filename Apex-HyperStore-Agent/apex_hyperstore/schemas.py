@@ -5,6 +5,9 @@ creates or reads a record. The LLM never writes to the database directly: it
 hands values to a tool, the tool validates them here, and a reference ID is
 only minted once validation passes. That is what stops half-filled requests,
 typo'd phone numbers and invented order IDs from entering the system.
+
+Supports both Pydantic v2 (`field_validator`, `model_dump`) and Pydantic v1
+(`validator`, `dict`) so offline evaluations run seamlessly across environments.
 """
 from __future__ import annotations
 
@@ -12,9 +15,30 @@ import random
 import re
 import string
 from datetime import datetime, timedelta, timezone
-from typing import Literal, Optional
+from typing import Any, Dict, Literal, Optional
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel as _PydanticBaseModel, Field
+
+try:
+    from pydantic import field_validator as _field_validator
+    _PYDANTIC_V2 = True
+except ImportError:
+    from pydantic import validator as _validator
+    _PYDANTIC_V2 = False
+
+
+def field_validator(*fields: str, **kwargs: Any):
+    if _PYDANTIC_V2:
+        return _field_validator(*fields, **kwargs)
+    return _validator(*fields, allow_reuse=True)
+
+
+class BaseModel(_PydanticBaseModel):
+    def model_dump(self, *args: Any, **kwargs: Any) -> Dict[str, Any]:
+        if hasattr(super(), "model_dump"):
+            return super().model_dump(*args, **kwargs)  # type: ignore[misc]
+        return self.dict(*args, **kwargs)
+
 
 IST = timezone(timedelta(hours=5, minutes=30))
 
@@ -72,8 +96,6 @@ REQUEST_TYPE_TEAM = {
 }
 
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s.]+\.[a-zA-Z]{2,}$")
-# A customer may write a number in any of the shapes humans actually use, so the
-# check works on digits and normalises rather than rejecting the formatting.
 PHONE_HINT = re.compile(r"^[+\d][\d\s\-()]{5,20}$")
 ORDER_ID_RE = re.compile(r"^APX-ORD-\d{4}-\d{6}$", re.I)
 REFERENCE_ID_RE = re.compile(r"^APX-(?:SR|EMG)-\d{4}-[A-Z0-9]{6}$", re.I)
@@ -82,18 +104,14 @@ ASAP_WORDS = {"asap", "as soon as possible", "immediately", "now", "right away",
 
 
 def normalise_phone(raw: str) -> str:
-    """Turn any of the shapes people write into +91XXXXXXXXXX.
-
-    Accepts 9845005518, +91 98450 05518, +919845005518, 09845005518 and
-    landlines with an area code, so nobody is blocked by punctuation.
-    """
+    """Turn any of the shapes people write into +91XXXXXXXXXX."""
     if not PHONE_HINT.match((raw or "").strip()):
         raise ValueError("phone must be a 10-digit Indian mobile (6-9 start) or a landline")
     d = re.sub(r"\D", "", raw)
     if len(d) == 12 and d.startswith("91"):
         d = d[2:]
     if len(d) == 11 and d.startswith("0"):
-        d = d[1:]  # trunk prefix on a mobile, or area code on a landline
+        d = d[1:]
     if len(d) == 10 and d[0] in "6789":
         return "+91" + d
     if 10 <= len(d) <= 11:
@@ -317,11 +335,7 @@ def now_ist() -> datetime:
 
 
 def parse_ts(value: str) -> datetime:
-    """Parse a stored or displayed timestamp into an IST-aware datetime.
-
-    Handles both the ISO form written to the database and the human-readable
-    "2026-10-18 09:30 IST" form that tools hand back to the agent and the customer.
-    """
+    """Parse a stored or displayed timestamp into an IST-aware datetime."""
     text = str(value).strip().replace(" IST", "").replace("IST", "")
     dt = datetime.fromisoformat(text)
     return dt.replace(tzinfo=IST) if dt.tzinfo is None else dt.astimezone(IST)

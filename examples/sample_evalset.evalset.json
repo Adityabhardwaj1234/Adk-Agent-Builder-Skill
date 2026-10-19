@@ -1,0 +1,48 @@
+{
+  "description": "Sample ADK evaluation dataset demonstrating trajectory and response scoring.",
+  "eval_cases": [
+    {
+      "conversation": [
+        {
+          "final_response": {
+            "parts": [
+              {
+                "text": "Verified domain lookup result for: check status of item 101"
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "intermediate_responses": [],
+            "tool_uses": [
+              {
+                "args": {
+                  "query": "check status of item 101"
+                },
+                "id": null,
+                "name": "execute_domain_lookup"
+              }
+            ]
+          },
+          "invocation_id": "inv-sample-001",
+          "user_content": {
+            "parts": [
+              {
+                "text": "check status of item 101"
+              }
+            ],
+            "role": "user"
+          }
+        }
+      ],
+      "eval_id": "case_01_lookup",
+      "session_input": {
+        "app_name": "customer_support_agent",
+        "state": {},
+        "user_id": "sample_user"
+      }
+    }
+  ],
+  "eval_set_id": "sample_customer_support_eval_set",
+  "name": "Sample Customer Support EvalSet"
+}

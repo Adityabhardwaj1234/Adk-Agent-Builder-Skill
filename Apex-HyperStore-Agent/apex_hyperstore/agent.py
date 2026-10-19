@@ -12,11 +12,45 @@ from __future__ import annotations
 
 import logging
 import os
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any, Callable, List, Optional
 
-from dotenv import load_dotenv
-from google.adk.agents import Agent
-from google.genai import types
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    def load_dotenv(*_args: Any, **_kwargs: Any) -> bool:
+        return False
+
+try:
+    from google.adk.agents import Agent
+    from google.genai import types
+    ADK_AVAILABLE = True
+except ImportError:
+    ADK_AVAILABLE = False
+
+    @dataclass
+    class _FallbackGenerateContentConfig:
+        temperature: float = 0.2
+
+    class _FallbackTypes:
+        GenerateContentConfig = _FallbackGenerateContentConfig
+
+    types = _FallbackTypes()  # type: ignore[assignment]
+
+    @dataclass
+    class Agent:  # type: ignore[no-redef]
+        name: str
+        model: str = "gemini-2.5-flash"
+        description: str = ""
+        instruction: str = ""
+        tools: List[Callable[..., Any]] = field(default_factory=list)
+        sub_agents: List["Agent"] = field(default_factory=list)
+        before_tool_callback: Optional[Callable[..., Any]] = None
+        generate_content_config: Any = None
+        input_schema: Any = None
+        output_schema: Any = None
+        output_key: Optional[str] = None
 
 from . import tools
 
@@ -86,13 +120,7 @@ FRAMEWORK_TOOLS = {"transfer_to_agent", "transfer_to_sub_agent"}
 
 
 def _guard(tool, args, _ctx=None):
-    """before_tool_callback: only the declared Apex tools may ever run.
-
-    ADK hands the callback the tool object, not its name, so the name is read off
-    the object. ADK already exposes just these tools, so this is belt-and-braces
-    against a prompt injection that tries to steer the model into some other
-    function, and a cheap place to log every call for later auditing.
-    """
+    """before_tool_callback: only the declared Apex tools may ever run."""
     name = getattr(tool, "name", None) or getattr(tool, "__name__", None) or type(tool).__name__
     if name in ALLOWED_TOOLS or name in FRAMEWORK_TOOLS:
         logger.info("tool %s args=%s", name,
@@ -106,7 +134,6 @@ def _guard(tool, args, _ctx=None):
 ALLOWED_TOOLS = {t.__name__ for t in tools.CONCIERGE_TOOLS + tools.SUPPORT_TOOLS
                  + tools.ORDERS_TOOLS + tools.REQUEST_TOOLS}
 
-# temperature 0.2 keeps factual answers stable across runs; the tests assert on facts, not wording.
 TEMP = types.GenerateContentConfig(temperature=0.2)
 
 orders_agent = Agent(
@@ -123,19 +150,15 @@ has bought and where it is.
 How to work:
 1. Find the order before you describe it. If the customer gave an order ID like APX-ORD-2026-041882,
    call lookup_order. If they just said "my order", ask for their email and call list_customer_orders
-   to find the right one. If they gave a product name instead, use search_products.
-2. Verify before you share. Pass the email to lookup_order whenever you have it. If the result comes
-   back unverified, ask the customer to confirm the registered email - do not reveal status, address
-   or items until they do.
-3. Answer from the tool result, not from memory: status, delivery slot, items, total, tracking note.
-
-Returns and exchanges:
-- create_return_request handles a delivered item inside the 14-day window. Get the order first so you
-  know it is delivered, then file the return with the reason the customer gives.
-- The tool refuses returns on undelivered orders and on orders older than 14 days. When it does, read
-  its message and offer the right alternative - a refund for an undelivered order, or a
-  service_request_agent product_defect request for something defective.
-- Never promise a refund date of your own. Quote the refund the tool returns.
+   to find it.
+2. When lookup_order returns status='unverified', the email did not match. Do not reveal the items,
+   address or total - ask the customer to confirm the email registered on the order.
+3. For product, price, discount or stock questions, call search_products first and then
+   get_product_details for the SKU if the customer wants specifics.
+4. For a return or exchange on a delivered order within 14 days, call create_return_request (it needs
+   order_id, the registered email, and a short reason) and read back the return ID and pickup slot.
+   If the order is not delivered yet, explain that returns apply after delivery and offer to file a
+   refund or cancellation service request instead.
 
 When the order is late, lost or damaged and the customer wants someone to act, transfer to
 service_request_agent and pass on the order ID and what the customer told you. Do not create the
